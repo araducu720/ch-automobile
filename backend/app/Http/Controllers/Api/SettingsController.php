@@ -20,7 +20,9 @@ class SettingsController extends Controller
         $locale = $request->get('locale', 'de');
         app()->setLocale($locale);
 
-        $settings = CompanySetting::instance();
+        $settings = cache()->remember('company_settings', 3600, function () {
+            return CompanySetting::instance();
+        });
 
         return response()->json([
             'data' => [

@@ -442,7 +442,9 @@
     "themeSwitchToSystem": "Switch to system mode",
     "themeSwitchToLight": "Switch to light mode",
     "themeCurrent": "Toggle color scheme (current: {theme})",
-    "homeLogo": "C-H Automobile – Homepage"
+    "homeLogo": "C-H Automobile – Homepage",
+    "zoomIn": "Zoom in",
+    "zoomOut": "Zoom out"
   },
   "errors": {
     "404": {

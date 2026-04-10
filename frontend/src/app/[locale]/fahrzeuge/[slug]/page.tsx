@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation';
 import { Link } from '@/i18n/navigation';
 import { getVehicle } from '@/lib/api';
 import type { Vehicle, ApiResponse } from '@/types';
+import { SafeHtml } from '@/components/ui/safe-html';
 import { formatPrice, formatMileage, formatDate } from '@/lib/utils';
 import { VehicleGallery } from '@/components/vehicles/vehicle-gallery';
 import { VehicleActions } from '@/components/vehicles/vehicle-actions';
@@ -228,13 +229,11 @@ export default async function VehicleDetailPage({ params }: VehicleDetailPagePro
             {vehicle.description && (
               <div className="rounded-xl border border-[var(--border-primary)] bg-[var(--bg-secondary)] p-6">
                 <h2 className="mb-4 text-lg font-semibold text-[var(--text-primary)]">{t('description')}</h2>
-                <div
+                <SafeHtml
                   className="prose prose-sm max-w-none text-[var(--text-secondary)] dark:prose-invert"
-                  dangerouslySetInnerHTML={{
-                    __html: typeof vehicle.description === 'string'
-                      ? vehicle.description
-                      : (vehicle.description as Record<string, string>)?.de || '',
-                  }}
+                  html={typeof vehicle.description === 'string'
+                    ? vehicle.description
+                    : (vehicle.description as Record<string, string>)?.de || ''}
                 />
               </div>
             )}

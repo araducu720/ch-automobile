@@ -442,7 +442,9 @@
     "themeSwitchToSystem": "Zu Systemmodus wechseln",
     "themeSwitchToLight": "Zu Hellmodus wechseln",
     "themeCurrent": "Farbschema umschalten (aktuell: {theme})",
-    "homeLogo": "C-H Automobile – Startseite"
+    "homeLogo": "C-H Automobile – Startseite",
+    "zoomIn": "Hineinzoomen",
+    "zoomOut": "Herauszoomen"
   },
   "errors": {
     "404": {

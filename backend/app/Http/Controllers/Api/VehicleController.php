@@ -31,7 +31,7 @@ class VehicleController extends Controller
         }
 
         if ($request->filled('search')) {
-            $search = $request->get('search');
+            $search = str_replace(['%', '_'], ['\\%', '\\_'], $request->get('search'));
             $query->where(function ($q) use ($search) {
                 $q->where('brand', 'like', "%{$search}%")
                   ->orWhere('model', 'like', "%{$search}%")
@@ -102,12 +102,14 @@ class VehicleController extends Controller
 
     public function brands(): JsonResponse
     {
-        $brands = Vehicle::published()
-            ->select('brand')
-            ->selectRaw('COUNT(*) as count')
-            ->groupBy('brand')
-            ->orderBy('brand')
-            ->get();
+        $brands = cache()->remember('vehicle_brands', 300, function () {
+            return Vehicle::published()
+                ->select('brand')
+                ->selectRaw('COUNT(*) as count')
+                ->groupBy('brand')
+                ->orderBy('brand')
+                ->get();
+        });
 
         return response()->json(['data' => $brands]);
     }

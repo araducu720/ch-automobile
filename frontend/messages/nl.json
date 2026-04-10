@@ -329,7 +329,9 @@
     "nextImage": "Volgende afbeelding",
     "imageOf": "Afbeelding {current} van {total}",
     "loading": "Inhoud laden",
-    "externalLink": "Externe link (opent in nieuw tabblad)"
+    "externalLink": "Externe link (opent in nieuw tabblad)",
+    "zoomIn": "Inzoomen",
+    "zoomOut": "Uitzoomen"
   },
   "errors": {
     "404": {

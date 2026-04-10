@@ -29,7 +29,6 @@ const localeStorage = new AsyncLocalStorage<string>();
 
 /** Set the locale for subsequent API calls (call from server components / layouts) */
 export function setApiLocale(locale: string) {
-  // Store in AsyncLocalStorage for SSR safety
   (localeStorage as { enterWith(val: string): void }).enterWith(locale);
 }
 
@@ -46,8 +45,16 @@ function withLocale(params: string): string {
 }
 
 /* ============================================
-   HTTP Client
+   HTTP Client with retry logic
    ============================================ */
+
+const MAX_RETRIES = 2;
+const RETRY_BASE_DELAY = 500; // ms
+const RETRYABLE_STATUS_CODES = new Set([408, 429, 500, 502, 503, 504]);
+
+async function sleep(ms: number) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
 
 class ApiClient {
   private baseUrl: string;
@@ -61,24 +68,42 @@ class ApiClient {
     options: RequestInit = {},
   ): Promise<T> {
     const url = `${this.baseUrl}${endpoint}`;
+    let lastError: Error | undefined;
 
-    const response = await fetch(url, {
-      ...options,
-      headers: {
-        'Content-Type': 'application/json',
-        Accept: 'application/json',
-        ...options.headers,
-      },
-    });
+    for (let attempt = 0; attempt <= MAX_RETRIES; attempt++) {
+      try {
+        const response = await fetch(url, {
+          ...options,
+          headers: {
+            'Content-Type': 'application/json',
+            Accept: 'application/json',
+            ...options.headers,
+          },
+        });
 
-    if (!response.ok) {
-      const error = await response.json().catch(() => ({
-        message: 'An unexpected error occurred',
-      }));
-      throw new ApiError(response.status, error.message, error.errors);
+        if (!response.ok) {
+          if (attempt < MAX_RETRIES && RETRYABLE_STATUS_CODES.has(response.status)) {
+            await sleep(RETRY_BASE_DELAY * Math.pow(2, attempt));
+            continue;
+          }
+          const error = await response.json().catch(() => ({
+            message: 'An unexpected error occurred',
+          }));
+          throw new ApiError(response.status, error.message, error.errors);
+        }
+
+        return response.json();
+      } catch (e) {
+        lastError = e instanceof Error ? e : new Error(String(e));
+        if (e instanceof ApiError) throw e;
+        if (attempt < MAX_RETRIES) {
+          await sleep(RETRY_BASE_DELAY * Math.pow(2, attempt));
+          continue;
+        }
+      }
     }
 
-    return response.json();
+    throw lastError ?? new Error('Request failed after retries');
   }
 
   async get<T>(endpoint: string, options?: RequestInit): Promise<T> {

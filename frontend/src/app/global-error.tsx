@@ -13,10 +13,13 @@ export default function GlobalError({
         <div style={{ display: 'flex', minHeight: '100vh', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '1rem', textAlign: 'center' }}>
           <h1 style={{ fontSize: '4rem', fontWeight: 900, color: '#c0272d', margin: 0 }}>500</h1>
           <h2 style={{ fontSize: '1.5rem', fontWeight: 600, marginTop: '1rem' }}>
-            Ein Fehler ist aufgetreten
+            Ein Fehler ist aufgetreten / An error occurred
           </h2>
           <p style={{ marginTop: '0.5rem', maxWidth: '28rem', color: '#a1a1aa' }}>
             Wir entschuldigen uns für die Unannehmlichkeiten. Bitte versuchen Sie es erneut.
+          </p>
+          <p style={{ marginTop: '0.25rem', maxWidth: '28rem', color: '#71717a', fontSize: '0.875rem' }}>
+            We apologize for the inconvenience. Please try again.
           </p>
           <div style={{ marginTop: '2rem', display: 'flex', gap: '1rem' }}>
             <button
@@ -32,7 +35,7 @@ export default function GlobalError({
                 fontSize: '0.875rem',
               }}
             >
-              Erneut versuchen
+              Erneut versuchen / Retry
             </button>
             <a
               href="/"
@@ -47,12 +50,12 @@ export default function GlobalError({
                 fontSize: '0.875rem',
               }}
             >
-              Zur Startseite
+              Startseite / Home
             </a>
           </div>
           {error.digest && (
             <p style={{ marginTop: '2rem', fontSize: '0.75rem', color: '#71717a' }}>
-              Fehler-ID: {error.digest}
+              Error ID: {error.digest}
             </p>
           )}
         </div>

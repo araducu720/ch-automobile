@@ -23,7 +23,7 @@ class BlogController extends Controller
             $query->whereHas('category', fn ($q) => $q->where('slug', $request->category));
         }
 
-        $posts = $query->paginate($request->integer('per_page', 9));
+        $posts = $query->paginate(min($request->integer('per_page', 9), 50));
 
         return response()->json([
             'data' => BlogPostResource::collection($posts),

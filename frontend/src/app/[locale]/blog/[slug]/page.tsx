@@ -4,6 +4,7 @@ import Image from 'next/image';
 import { Link } from '@/i18n/navigation';
 import { getBlogPost } from '@/lib/api';
 import { formatDate } from '@/lib/utils';
+import { SafeHtml } from '@/components/ui/safe-html';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
@@ -174,7 +175,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
               )}
 
               {/* Article body */}
-              <div
+              <SafeHtml
                 className="prose prose-lg max-w-none text-[var(--text-primary)] dark:prose-invert
                   prose-headings:font-bold prose-headings:tracking-tight
                   prose-a:text-[var(--text-link)] prose-a:no-underline hover:prose-a:underline
@@ -182,7 +183,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                   prose-strong:text-[var(--text-primary)]
                   prose-p:leading-relaxed
                   prose-li:leading-relaxed"
-                dangerouslySetInnerHTML={{ __html: post.content }}
+                html={post.content}
               />
 
               {/* Share / Back */}

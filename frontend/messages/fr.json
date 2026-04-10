@@ -329,7 +329,9 @@
     "nextImage": "Image suivante",
     "imageOf": "Image {current} sur {total}",
     "loading": "Chargement du contenu",
-    "externalLink": "Lien externe (ouvre un nouvel onglet)"
+    "externalLink": "Lien externe (ouvre un nouvel onglet)",
+    "zoomIn": "Zoom avant",
+    "zoomOut": "Zoom arrière"
   },
   "errors": {
     "404": {

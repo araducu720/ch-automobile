@@ -443,7 +443,7 @@ export function VehicleGallery({ images, vehicleName }: VehicleGalleryProps) {
                   'rounded-full p-2 transition-colors',
                   zoom <= 1 ? 'text-white/30' : 'text-white hover:bg-white/10',
                 )}
-                aria-label="Herauszoomen"
+                aria-label={t('zoomOut')}
               >
                 <ZoomOut className="h-5 w-5" />
               </button>
@@ -457,7 +457,7 @@ export function VehicleGallery({ images, vehicleName }: VehicleGalleryProps) {
                   'rounded-full p-2 transition-colors',
                   zoom >= 4 ? 'text-white/30' : 'text-white hover:bg-white/10',
                 )}
-                aria-label="Hineinzoomen"
+                aria-label={t('zoomIn')}
               >
                 <ZoomIn className="h-5 w-5" />
               </button>

@@ -32,7 +32,7 @@ Route::prefix('v1')->group(function () {
     Route::post('/reservations', [ReservationController::class, 'store'])
         ->middleware('throttle:5,1');
     Route::get('/reservations/{reference}', [ReservationController::class, 'show'])
-        ->middleware('throttle:30,1');
+        ->middleware('throttle:10,1');
     Route::post('/reservations/{reference}/confirm-invoice', [ReservationController::class, 'confirmInvoice'])
         ->middleware('throttle:10,1');
     Route::get('/reservations/{reference}/contract', [ReservationController::class, 'downloadContract'])

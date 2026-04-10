@@ -255,7 +255,7 @@ export default async function AboutPage() {
             {/* Map */}
             <div className="h-[400px] rounded-xl bg-[var(--bg-tertiary)] overflow-hidden shadow-lg">
               <iframe
-                src={`https://www.google.com/maps/embed/v1/place?key=${process.env.NEXT_PUBLIC_GOOGLE_MAPS_KEY || ''}&q=${encodeURIComponent(`${COMPANY_INFO.street}, ${COMPANY_INFO.zip} ${COMPANY_INFO.city}`)}&zoom=15`}
+                src={`https://www.openstreetmap.org/export/embed.html?bbox=${COMPANY_INFO.coordinates.lng - 0.01}%2C${COMPANY_INFO.coordinates.lat - 0.005}%2C${COMPANY_INFO.coordinates.lng + 0.01}%2C${COMPANY_INFO.coordinates.lat + 0.005}&layer=mapnik&marker=${COMPANY_INFO.coordinates.lat}%2C${COMPANY_INFO.coordinates.lng}`}
                 width="100%"
                 height="100%"
                 style={{ border: 0 }}

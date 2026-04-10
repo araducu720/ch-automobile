@@ -38,3 +38,4 @@ frontend/.env.local
 frontend/.env.production
 frontend/.next/
 frontend/out/
+.github/workflows/

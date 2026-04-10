@@ -25,7 +25,7 @@ class Vehicle extends Model implements HasMedia
         'engine_displacement', 'color', 'interior_color', 'body_type',
         'doors', 'seats', 'vin', 'registration_date', 'condition',
         'description', 'features', 'equipment', 'status', 'is_featured',
-        'mobile_de_id', 'autoscout_id', 'slug', 'emission_class',
+        'mobile_de_id', 'autoscout_id', 'image_urls', 'slug', 'emission_class',
         'emission_sticker', 'co2_emissions', 'fuel_consumption_combined',
         'fuel_consumption_urban', 'fuel_consumption_extra_urban',
         'previous_owners', 'accident_free', 'non_smoker', 'garage_kept',
@@ -44,6 +44,7 @@ class Vehicle extends Model implements HasMedia
         'year' => 'integer',
         'features' => 'array',
         'equipment' => 'array',
+        'image_urls' => 'array',
         'is_featured' => 'boolean',
         'co2_emissions' => 'decimal:2',
         'fuel_consumption_combined' => 'decimal:1',
@@ -216,12 +217,48 @@ class Vehicle extends Model implements HasMedia
     public function getMainImageUrlAttribute(): ?string
     {
         $media = $this->getFirstMedia('images');
-        return $media?->getUrl('medium');
+        if ($media) {
+            return $media->getUrl('medium');
+        }
+        $urls = $this->image_urls;
+        return $urls[0] ?? null;
     }
 
     public function getThumbnailUrlAttribute(): ?string
     {
         $media = $this->getFirstMedia('images');
-        return $media?->getUrl('thumbnail');
+        if ($media) {
+            return $media->getUrl('thumbnail');
+        }
+        $urls = $this->image_urls;
+        if (!empty($urls[0])) {
+            return str_replace('/1280x960.webp', '/400x300.webp', $urls[0]);
+        }
+        return null;
+    }
+
+    public function getImageGalleryAttribute(): array
+    {
+        $spatieMedia = $this->getMedia('images');
+        if ($spatieMedia->isNotEmpty()) {
+            return $spatieMedia->map(fn ($media) => [
+                'id' => $media->id,
+                'thumbnail' => $media->getUrl('thumbnail'),
+                'medium' => $media->getUrl('medium'),
+                'large' => $media->getUrl('large'),
+                'original' => $media->getUrl(),
+                'alt' => "{$this->brand} {$this->model} {$this->year} - Foto",
+            ])->toArray();
+        }
+
+        $urls = $this->image_urls ?? [];
+        return collect($urls)->values()->map(fn ($url, $i) => [
+            'id' => $i + 1,
+            'thumbnail' => str_replace('/1280x960.webp', '/400x300.webp', $url),
+            'medium' => str_replace('/1280x960.webp', '/800x600.webp', $url),
+            'large' => $url,
+            'original' => $url,
+            'alt' => "{$this->brand} {$this->model} {$this->year} - Foto " . ($i + 1),
+        ])->toArray();
     }
 }

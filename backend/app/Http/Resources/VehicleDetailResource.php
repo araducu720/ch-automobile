@@ -35,14 +35,7 @@ class VehicleDetailResource extends JsonResource
             'garage_kept' => $this->garage_kept,
             'tuv_until' => $this->tuv_until?->format('Y-m-d'),
             'warranty' => $this->warranty,
-            'images' => $this->getMedia('images')->map(fn ($media) => [
-                'id' => $media->id,
-                'thumbnail' => $media->getUrl('thumbnail'),
-                'medium' => $media->getUrl('medium'),
-                'large' => $media->getUrl('large'),
-                'original' => $media->getUrl(),
-                'alt' => "{$this->brand} {$this->model} {$this->year} - Foto",
-            ]),
+            'images' => $this->image_gallery,
         ]);
     }
 }

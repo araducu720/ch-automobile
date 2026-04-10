@@ -32,7 +32,7 @@ class VehicleResource extends JsonResource
             'slug' => $this->slug,
             'thumbnail' => $this->thumbnail_url,
             'main_image' => $this->main_image_url,
-            'images_count' => $this->media->where('collection_name', 'images')->count(),
+            'images_count' => count($this->image_gallery),
         ];
     }
 }

@@ -8,6 +8,7 @@ use Filament\Resources\Pages\EditRecord;
 
 class EditBlogCategory extends EditRecord
 {
+    use EditRecord\Concerns\Translatable;
     protected static string $resource = BlogCategoryResource::class;
 
     protected function getHeaderActions(): array

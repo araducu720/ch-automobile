@@ -5,11 +5,11 @@ namespace App\Filament\Resources\CompanySettingResource\Pages;
 use App\Filament\Resources\CompanySettingResource;
 use App\Models\CompanySetting;
 use Filament\Actions;
-use Filament\Resources\Pages\ManageRecords;
 use Filament\Resources\Pages\EditRecord;
 
 class ManageCompanySetting extends EditRecord
 {
+    use EditRecord\Concerns\Translatable;
     protected static string $resource = CompanySettingResource::class;
 
     /**

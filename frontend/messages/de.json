@@ -1,0 +1,656 @@
+{
+  "meta": {
+    "title": "C-H Automobile & Exclusive Cars | Ihr Premium-Fahrzeughändler in Friedberg",
+    "description": "Exklusive Premium- und Sportwagen in Friedberg. Persönliche Beratung, erstklassiger Service und faire Preise."
+  },
+  "nav": {
+    "home": "Startseite",
+    "vehicles": "Fahrzeuge",
+    "about": "Über uns",
+    "services": "Leistungen",
+    "tradeIn": "Inzahlungnahme",
+    "blog": "Blog",
+    "reviews": "Bewertungen",
+    "contact": "Kontakt",
+    "imprint": "Impressum",
+    "privacy": "Datenschutz",
+    "terms": "AGB"
+  },
+  "common": {
+    "readMore": "Mehr erfahren",
+    "viewAll": "Alle anzeigen",
+    "loading": "Wird geladen…",
+    "error": "Ein Fehler ist aufgetreten",
+    "retry": "Erneut versuchen",
+    "back": "Zurück",
+    "next": "Weiter",
+    "previous": "Zurück",
+    "close": "Schließen",
+    "open": "Öffnen",
+    "save": "Speichern",
+    "cancel": "Abbrechen",
+    "send": "Absenden",
+    "search": "Suchen",
+    "filter": "Filtern",
+    "sort": "Sortieren",
+    "reset": "Zurücksetzen",
+    "noResults": "Keine Ergebnisse gefunden",
+    "showMore": "Mehr anzeigen",
+    "showLess": "Weniger anzeigen",
+    "required": "Pflichtfeld",
+    "optional": "Optional",
+    "yes": "Ja",
+    "no": "Nein",
+    "or": "oder",
+    "and": "und",
+    "phone": "Telefon",
+    "email": "E-Mail",
+    "address": "Adresse",
+    "openingHours": "Öffnungszeiten",
+    "monday": "Montag",
+    "tuesday": "Dienstag",
+    "wednesday": "Mittwoch",
+    "thursday": "Donnerstag",
+    "friday": "Freitag",
+    "saturday": "Samstag",
+    "sunday": "Sonntag",
+    "weekdays": "Mo–Fr",
+    "closed": "Geschlossen",
+    "mapTitle": "Standort auf Google Maps"
+  },
+  "hero": {
+    "title": "Exklusive Fahrzeuge für besondere Ansprüche",
+    "subtitle": "Ihr Premium-Fahrzeughändler in Friedberg – persönliche Beratung, handverlesene Auswahl und erstklassiger Service.",
+    "cta": "Fahrzeuge entdecken",
+    "ctaSecondary": "Kontakt aufnehmen"
+  },
+  "vehicles": {
+    "title": "Unsere Fahrzeuge",
+    "subtitle": "Entdecken Sie unsere handverlesene Auswahl an Premium- und Sportfahrzeugen",
+    "featured": "Ausgewählte Fahrzeuge",
+    "available": "Verfügbar",
+    "reserved": "Reserviert",
+    "sold": "Verkauft",
+    "new": "Neu",
+    "used": "Gebraucht",
+    "certifiedPreOwned": "Zertifiziert",
+    "classic": "Oldtimer",
+    "price": "Preis",
+    "priceOnRequest": "Preis auf Anfrage",
+    "mileage": "Kilometerstand",
+    "year": "Baujahr",
+    "fuelType": "Kraftstoff",
+    "transmission": "Getriebe",
+    "bodyType": "Karosserie",
+    "brand": "Marke",
+    "power": "Leistung",
+    "color": "Farbe",
+    "exteriorColor": "Außenfarbe",
+    "interiorColor": "Innenfarbe",
+    "doors": "Türen",
+    "seats": "Sitze",
+    "driveType": "Antrieb",
+    "engineSize": "Hubraum",
+    "emissionClass": "Schadstoffklasse",
+    "co2": "CO₂-Emissionen",
+    "consumption": "Verbrauch",
+    "consumptionCombined": "Kombiniert",
+    "consumptionCity": "Innerorts",
+    "consumptionHighway": "Außerorts",
+    "firstRegistration": "Erstzulassung",
+    "generalInspection": "HU/AU",
+    "previousOwners": "Vorbesitzer",
+    "vin": "FIN",
+    "warranty": "Garantie",
+    "features": "Ausstattung",
+    "equipment": "Sonderausstattung",
+    "description": "Beschreibung",
+    "relatedVehicles": "Ähnliche Fahrzeuge",
+    "testDrive": "Probefahrt vereinbaren",
+    "priceInquiry": "Preisanfrage",
+    "reserve": "Fahrzeug reservieren",
+    "share": "Teilen",
+    "print": "Drucken",
+    "images": "Bilder",
+    "details": "Fahrzeugdaten",
+    "filterBy": "Filtern nach",
+    "allBrands": "Alle Marken",
+    "allModels": "Alle Modelle",
+    "priceRange": "Preisbereich",
+    "yearRange": "Baujahr",
+    "maxMileage": "Max. Kilometerstand",
+    "minPower": "Min. Leistung",
+    "sortBy": "Sortieren nach",
+    "resultsCount": "{count} Fahrzeuge gefunden",
+    "noVehicles": "Keine Fahrzeuge gefunden. Bitte passen Sie Ihre Filterkriterien an.",
+    "resetFilters": "Filter zurücksetzen",
+    "petrol": "Benzin",
+    "diesel": "Diesel",
+    "electric": "Elektro",
+    "hybrid": "Hybrid",
+    "pluginHybrid": "Plug-in-Hybrid",
+    "plug_in_hybrid": "Plug-in-Hybrid",
+    "automatic": "Automatik",
+    "manual": "Schaltgetriebe",
+    "sedan": "Limousine",
+    "suv": "SUV",
+    "coupe": "Coupé",
+    "convertible": "Cabrio",
+    "cabrio": "Cabrio",
+    "wagon": "Kombi",
+    "kombi": "Kombi",
+    "hatchback": "Schrägheck",
+    "hp": "PS",
+    "kw": "kW",
+    "notFound": "Fahrzeug nicht gefunden",
+    "technicalData": "Technische Daten",
+    "environmentConsumption": "Umwelt & Verbrauch",
+    "accessories": "Zubehör",
+    "accidentFree": "Unfallfrei",
+    "nonSmoker": "Nichtraucher",
+    "garagedKept": "Garagenwagen",
+    "inspectionUntil": "HU/AU bis",
+    "quickContact": "Schnellkontakt",
+    "sendInquiry": "Anfrage senden",
+    "whatsappMessage": "Ich interessiere mich für {vehicle}",
+    "backToOverview": "Zurück zur Übersicht",
+    "searchPlaceholder": "Fahrzeug suchen…",
+    "vehiclesCount": "{count} Fahrzeuge",
+    "allFuelTypes": "Alle",
+    "allTransmissions": "Alle",
+    "allBodyTypes": "Alle",
+    "priceFrom": "Preis ab",
+    "priceTo": "Preis bis",
+    "yearFrom": "Baujahr ab",
+    "yearTo": "Baujahr bis",
+    "newestFirst": "Neueste zuerst",
+    "oldestFirst": "Älteste zuerst",
+    "priceAsc": "Preis aufsteigend",
+    "priceDesc": "Preis absteigend",
+    "mileageAsc": "Kilometerstand aufsteigend",
+    "mileageDesc": "Kilometerstand absteigend",
+    "yearDesc": "Baujahr absteigend",
+    "yearAsc": "Baujahr aufsteigend",
+    "van": "Van",
+    "pickup": "Pick-up",
+    "roadster": "Roadster",
+    "other": "Sonstige",
+    "semiAutomatic": "Halbautomatik",
+    "semi_automatic": "Halbautomatik",
+    "hydrogen": "Wasserstoff",
+    "lpg": "LPG",
+    "cng": "CNG",
+    "newCar": "Neuwagen",
+    "usedCar": "Gebrauchtwagen",
+    "demoVehicle": "Vorführwagen",
+    "condition": "Zustand",
+    "ccm": "ccm",
+    "breadcrumbHome": "Start",
+    "buyThisVehicle": "Dieses Fahrzeug kaufen",
+    "buyThisVehicleDesc": "Starten Sie den Kaufprozess – sicher, schnell und bequem online.",
+    "buyNowButton": "Jetzt kaufen",
+    "fuel": "Kraftstoff"
+  },
+  "contact": {
+    "title": "Kontakt",
+    "subtitle": "Haben Sie Fragen? Wir beraten Sie gerne persönlich.",
+    "form": {
+      "firstName": "Vorname",
+      "lastName": "Nachname",
+      "email": "E-Mail-Adresse",
+      "phone": "Telefonnummer",
+      "message": "Ihre Nachricht",
+      "subject": "Betreff",
+      "preferredDate": "Wunschtermin",
+      "preferredTime": "Wunschzeit",
+      "submit": "Nachricht senden",
+      "sending": "Wird gesendet…",
+      "success": "Ihre Nachricht wurde erfolgreich gesendet. Wir melden uns in Kürze bei Ihnen.",
+      "error": "Beim Senden ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut.",
+      "privacy": "Ich habe die {link} gelesen und bin einverstanden.",
+      "privacyLink": "Datenschutzerklärung",
+      "inquiryType": "Art der Anfrage",
+      "generalInquiry": "Allgemeine Anfrage",
+      "testDriveRequest": "Probefahrt vereinbaren",
+      "priceInquiry": "Preisanfrage",
+      "financingRequest": "Finanzierungsanfrage"
+    },
+    "info": {
+      "title": "So erreichen Sie uns",
+      "visitUs": "Besuchen Sie uns",
+      "callUs": "Rufen Sie uns an",
+      "emailUs": "Schreiben Sie uns"
+    }
+  },
+  "tradeIn": {
+    "title": "Inzahlungnahme",
+    "subtitle": "Geben Sie Ihr aktuelles Fahrzeug in Zahlung – wir erstellen Ihnen ein faires Angebot.",
+    "form": {
+      "vehicleBrand": "Marke Ihres Fahrzeugs",
+      "vehicleModel": "Modell",
+      "vehicleYear": "Baujahr",
+      "vehicleMileage": "Kilometerstand",
+      "vehicleFuelType": "Kraftstoff",
+      "vehicleTransmission": "Getriebe",
+      "vehicleCondition": "Zustand",
+      "vehicleDescription": "Beschreibung des Fahrzeugs",
+      "photos": "Fotos Ihres Fahrzeugs",
+      "photosHint": "Laden Sie bis zu 10 Fotos hoch (max. 10 MB pro Bild)",
+      "submit": "Anfrage senden",
+      "conditionExcellent": "Ausgezeichnet",
+      "conditionGood": "Gut",
+      "conditionFair": "Befriedigend",
+      "conditionPoor": "Mangelhaft",
+      "contactData": "Ihre Kontaktdaten",
+      "vehicleData": "Ihr Fahrzeug",
+      "brandPlaceholder": "z.B. BMW, Mercedes, Audi",
+      "modelPlaceholder": "z.B. 320d, C200, A4",
+      "photoUploadHint": "Fotos hochladen (max. 10, je 5 MB)",
+      "descriptionPlaceholder": "Beschreiben Sie den Zustand, besondere Ausstattung etc.",
+      "damageDescription": "Schadensbeschreibung",
+      "damagePlaceholder": "Gibt es Schäden? Bitte beschreiben Sie diese hier.",
+      "sending": "Wird gesendet…",
+      "privacy": "Ich habe die <link>Datenschutzerklärung</link> gelesen und bin einverstanden."
+    }
+  },
+  "purchase": {
+    "metaTitle": "Fahrzeug kaufen",
+    "breadcrumb": "Kaufen",
+    "unavailableTitle": "Fahrzeug nicht verfügbar",
+    "unavailableDescription": "Dieses Fahrzeug ist leider nicht mehr zum Kauf verfügbar.",
+    "backToVehicle": "Zurück zum Fahrzeug",
+    "secureTitle": "Sicherer Kaufprozess",
+    "secureDescription": "Ihre Daten werden verschlüsselt übertragen. Sie erhalten alle Unterlagen per E-Mail."
+  },
+  "reservation": {
+    "title": "Fahrzeug reservieren",
+    "subtitle": "Reservieren Sie Ihr Wunschfahrzeug mit einer Anzahlung per Banküberweisung.",
+    "deposit": "Anzahlung",
+    "depositInfo": "Die Anzahlung beträgt 10% des Fahrzeugpreises (mind. 500 €).",
+    "bankTransfer": "Banküberweisung",
+    "bankDetails": "Bankverbindung",
+    "reference": "Verwendungszweck",
+    "expiresAt": "Gültig bis",
+    "success": "Ihre Reservierung wurde erstellt. Bitte überweisen Sie die Anzahlung innerhalb von 7 Tagen.",
+    "vehicle": "Fahrzeug",
+    "paymentInfo": "Zahlungsinformationen",
+    "amount": "Betrag",
+    "accountHolder": "Kontoinhaber",
+    "bank": "Bank",
+    "importantNote": "Wichtig: Bitte überweisen Sie den Betrag innerhalb von 7 Tagen.",
+    "expiresOn": "Die Reservierung läuft am {date} ab.",
+    "reserveVehicle": "Fahrzeug reservieren",
+    "deposit10Percent": "Kaution: 10% des Fahrzeugpreises (min. 500 €)",
+    "personalData": "Persönliche Daten",
+    "billingAddress": "Rechnungsadresse (optional)",
+    "street": "Straße & Hausnr.",
+    "zip": "PLZ",
+    "city": "Ort",
+    "processing": "Wird verarbeitet...",
+    "submitBinding": "Jetzt verbindlich reservieren",
+    "afterReservation": "Nach der Reservierung erhalten Sie die Bankdaten für die Kaution per E-Mail.",
+    "privacyAndTerms": "Ich habe die <privacyLink>Datenschutzerklärung</privacyLink> und die <termsLink>AGB</termsLink> gelesen und akzeptiert.",
+    "successTitle": "Reservierung erfolgreich!",
+    "form": {
+      "submit": "Reservierung abschließen"
+    },
+    "wizard": {
+      "title": "Fahrzeug kaufen",
+      "stepDetails": "Persönliche Daten",
+      "stepInvoice": "Rechnung",
+      "stepSignature": "Vertrag",
+      "stepPayment": "Zahlung",
+      "step": "Schritt {current} von {total}",
+      "invoiceTitle": "Rechnung & Zahlungsdaten",
+      "invoiceSubtitle": "Bitte überprüfen Sie die Rechnungsdaten und fahren Sie fort.",
+      "invoiceFor": "Rechnung für",
+      "vehicleDetails": "Fahrzeugdaten",
+      "depositRequired": "Erforderliche Anzahlung",
+      "totalPrice": "Gesamtpreis",
+      "paymentMethod": "Zahlungsart: Banküberweisung",
+      "confirmInvoice": "Rechnung bestätigen & fortfahren",
+      "signatureTitle": "Unterschrift hochladen",
+      "signatureSubtitle": "Bitte laden Sie ein Bild Ihrer Unterschrift hoch, um den Kauf zu bestätigen.",
+      "signatureHint": "Akzeptierte Formate: PNG, JPG, WEBP (max. 5 MB)",
+      "chooseFile": "Datei auswählen",
+      "noFileChosen": "Keine Datei ausgewählt",
+      "uploadSignature": "Unterschrift hochladen",
+      "paymentTitle": "Zahlungsnachweis hochladen",
+      "paymentSubtitle": "Bitte laden Sie einen Beleg Ihrer Überweisung hoch (Screenshot oder PDF).",
+      "paymentHint": "Akzeptierte Formate: PNG, JPG, WEBP, PDF (max. 10 MB)",
+      "uploadPayment": "Zahlungsnachweis hochladen",
+      "completedTitle": "Kauf abgeschlossen!",
+      "completedSubtitle": "Vielen Dank für Ihren Kauf! Wir werden Ihre Unterlagen prüfen und uns zeitnah bei Ihnen melden.",
+      "completedRef": "Ihre Referenznummer: {reference}",
+      "completedContact": "Bei Fragen kontaktieren Sie uns gerne.",
+      "uploading": "Wird hochgeladen...",
+      "back": "Zurück",
+      "next": "Weiter",
+      "dragOrClick": "Datei hierher ziehen oder klicken zum Auswählen",
+      "fileSelected": "Datei ausgewählt: {name}",
+      "contractTitle": "Kaufvertrag",
+      "contractSubtitle": "Laden Sie Ihren Kaufvertrag herunter, unterschreiben Sie ihn und laden Sie das unterschriebene Dokument hoch.",
+      "downloadContractTitle": "Kaufvertrag herunterladen",
+      "downloadContractDesc": "Klicken Sie auf die Schaltfläche unten, um Ihren personalisierten Kaufvertrag als PDF herunterzuladen. Dieser enthält alle Vertragsdetails, Garantie- und Versicherungsinformationen.",
+      "downloadContract": "Kaufvertrag herunterladen",
+      "generatingContract": "Vertrag wird generiert...",
+      "contractDownloaded": "Vertrag heruntergeladen ✓",
+      "contractDownloadedHint": "Vertrag wurde erfolgreich heruntergeladen. Bitte drucken und unterschreiben Sie das Dokument.",
+      "uploadSignedTitle": "Unterschriebenen Vertrag hochladen",
+      "uploadSignedDesc": "Bitte laden Sie den unterschriebenen Vertrag als PDF oder Foto hoch.",
+      "signedContractHint": "Akzeptierte Formate: PNG, JPG, WEBP, PDF (max. 15 MB)",
+      "uploadSignedContract": "Unterschriebenen Vertrag hochladen",
+      "adminConfirmTitle": "Bestätigung durch unser Team ausstehend",
+      "adminConfirmDesc": "Unser Team wird Ihre Dokumente prüfen und den Kauf bestätigen. Sie erhalten eine Bestätigungs-E-Mail, sobald alles abgeschlossen ist."
+    }
+  },
+  "blog": {
+    "title": "Blog",
+    "subtitle": "Neuigkeiten, Tipps und Einblicke rund um Premium-Fahrzeuge",
+    "allPosts": "Alle Beiträge",
+    "categories": "Kategorien",
+    "readTime": "{minutes} Min. Lesezeit",
+    "publishedAt": "Veröffentlicht am {date}",
+    "by": "von",
+    "relatedPosts": "Ähnliche Beiträge",
+    "noPosts": "Keine Beiträge vorhanden.",
+    "notFound": "Beitrag nicht gefunden",
+    "backToBlog": "Zurück zum Blog",
+    "readingTimeUnit": "Min. Lesezeit",
+    "views": "Aufrufe",
+    "author": "Autor",
+    "lookingForVehicle": "Fahrzeug gesucht?",
+    "discoverPremium": "Entdecken Sie unsere aktuellen Premium-Fahrzeuge.",
+    "viewVehicles": "Fahrzeuge ansehen"
+  },
+  "reviews": {
+    "title": "Kundenbewertungen",
+    "subtitle": "Erfahren Sie, was unsere Kunden über uns sagen",
+    "averageRating": "Durchschnitt",
+    "totalReviews": "{count} Bewertungen",
+    "writeReview": "Bewertung schreiben",
+    "form": {
+      "name": "Ihr Name",
+      "email": "Ihre E-Mail-Adresse",
+      "rating": "Bewertung",
+      "title": "Titel",
+      "content": "Ihre Erfahrung",
+      "submit": "Bewertung absenden",
+      "success": "Vielen Dank! Ihre Bewertung wird nach Prüfung veröffentlicht.",
+      "moderationNote": "Alle Bewertungen werden vor der Veröffentlichung geprüft.",
+      "emailHint": "Wird nicht veröffentlicht",
+      "titlePlaceholder": "z.B. Hervorragender Service!",
+      "contentPlaceholder": "Erzählen Sie von Ihrer Erfahrung mit C-H Automobile… (mind. 20 Zeichen)",
+      "sending": "Wird gesendet…",
+      "privacy": "Ich habe die <link>Datenschutzerklärung</link> gelesen und bin einverstanden."
+    },
+    "stars": "{count} Sterne",
+    "vehiclePrefix": "Fahrzeug: {vehicle}"
+  },
+  "newsletter": {
+    "title": "Newsletter",
+    "subtitle": "Verpassen Sie keine Neuigkeiten und exklusiven Angebote.",
+    "emailPlaceholder": "Ihre E-Mail-Adresse",
+    "subscribe": "Anmelden",
+    "success": "Vielen Dank! Bitte bestätigen Sie Ihre E-Mail-Adresse.",
+    "privacy": "Mit der Anmeldung akzeptieren Sie unsere <link>Datenschutzerklärung</link>.",
+    "subscribing": "Wird...",
+    "successMessage": "Erfolgreich angemeldet! Bitte bestätigen Sie Ihre E-Mail.",
+    "privacyAgree": "Ich stimme der <link>Datenschutzerklärung</link> zu.",
+    "confirmed": {
+      "metaTitle": "Newsletter bestätigt",
+      "metaDescription": "Newsletter-Bestätigungsseite",
+      "success": "E-Mail erfolgreich bestätigt!",
+      "successMessage": "Vielen Dank! Ihre E-Mail-Adresse wurde bestätigt. Sie erhalten ab sofort unseren Newsletter mit den neuesten Fahrzeugen und Angeboten.",
+      "failed": "Bestätigung fehlgeschlagen",
+      "failedMessage": "Der Bestätigungslink ist ungültig oder wurde bereits verwendet. Bitte melden Sie sich erneut für den Newsletter an.",
+      "backHome": "Zur Startseite"
+    }
+  },
+  "footer": {
+    "about": "Ihr exklusiver Fahrzeughändler in Friedberg – Premium & Sportwagen, persönliche Beratung, erstklassiger Service.",
+    "quickLinks": "Schnelllinks",
+    "legal": "Rechtliches",
+    "followUs": "Folgen Sie uns",
+    "copyright": "© {year} C-H Automobile & Exclusive Cars. Alle Rechte vorbehalten."
+  },
+  "accessibility": {
+    "skipToContent": "Zum Inhalt springen",
+    "mainNavigation": "Hauptnavigation",
+    "openMenu": "Menü öffnen",
+    "closeMenu": "Menü schließen",
+    "toggleTheme": "Farbschema umschalten",
+    "selectLanguage": "Sprache wählen",
+    "imageGallery": "Bildergalerie",
+    "previousImage": "Vorheriges Bild",
+    "nextImage": "Nächstes Bild",
+    "imageOf": "Bild {current} von {total}",
+    "loading": "Inhalt wird geladen",
+    "externalLink": "Externer Link (öffnet in neuem Tab)",
+    "noImages": "Keine Bilder verfügbar",
+    "fullscreenOpen": "Vollbild öffnen",
+    "fullscreenClose": "Vollbild schließen",
+    "showImage": "Bild {number} anzeigen",
+    "scrollToTop": "Nach oben scrollen",
+    "close": "Schließen",
+    "themeToggle": "Farbschema umschalten",
+    "themeSelect": "Farbschema wählen",
+    "themeLight": "Hell",
+    "themeDark": "Dunkel",
+    "themeSystem": "System",
+    "themeSwitchToDark": "Zu Dunkelmodus wechseln",
+    "themeSwitchToSystem": "Zu Systemmodus wechseln",
+    "themeSwitchToLight": "Zu Hellmodus wechseln",
+    "themeCurrent": "Farbschema umschalten (aktuell: {theme})",
+    "homeLogo": "C-H Automobile – Startseite"
+  },
+  "errors": {
+    "404": {
+      "title": "Seite nicht gefunden",
+      "description": "Die angeforderte Seite existiert nicht oder wurde verschoben. Überprüfen Sie die URL oder kehren Sie zur Startseite zurück.",
+      "backHome": "Zur Startseite",
+      "searchVehicles": "Fahrzeuge durchsuchen"
+    },
+    "500": {
+      "title": "Serverfehler",
+      "description": "Ein unerwarteter Fehler ist aufgetreten. Bitte versuchen Sie es später erneut."
+    },
+    "generic": {
+      "label": "Fehler",
+      "title": "Etwas ist schiefgelaufen",
+      "description": "Ein unerwarteter Fehler ist aufgetreten. Bitte versuchen Sie es erneut.",
+      "retry": "Erneut versuchen",
+      "backHome": "Zur Startseite"
+    }
+  },
+  "home": {
+    "badge": "Premium-Fahrzeughändler in Friedberg",
+    "stats": {
+      "customers": "Zufriedene Kunden",
+      "vehicles": "Premium-Fahrzeuge",
+      "experience": "Jahre Erfahrung"
+    },
+    "featured": {
+      "title": "Ausgewählte Fahrzeuge",
+      "subtitle": "Entdecken Sie unsere handverlesene Auswahl an Premium-Fahrzeugen",
+      "viewAll": "Alle Fahrzeuge",
+      "viewAllMobile": "Alle Fahrzeuge anzeigen",
+      "noVehicles": "Aktuell keine ausgewählten Fahrzeuge verfügbar.",
+      "loadError": "Fahrzeuge konnten nicht geladen werden."
+    },
+    "services": {
+      "title": "Unsere Leistungen",
+      "subtitle": "Wir bieten Ihnen einen umfassenden Service rund um den Fahrzeugkauf",
+      "premium": {
+        "title": "Premium-Fahrzeuge",
+        "description": "Handverlesene Auswahl an exklusiven Premium- und Sportwagen renommierter Marken."
+      },
+      "quality": {
+        "title": "Geprüfte Qualität",
+        "description": "Jedes Fahrzeug wird gründlich geprüft und aufbereitet, bevor es zum Verkauf steht."
+      },
+      "consulting": {
+        "title": "Persönliche Beratung",
+        "description": "Individuelle und kompetente Beratung für Ihr Traumfahrzeug – ohne Druck."
+      },
+      "tradeIn": {
+        "title": "Inzahlungnahme",
+        "description": "Geben Sie Ihr aktuelles Fahrzeug in Zahlung – wir erstellen Ihnen ein faires Angebot."
+      },
+      "financing": {
+        "title": "Finanzierung",
+        "description": "Flexible Finanzierungslösungen, individuell auf Ihre Bedürfnisse zugeschnitten."
+      },
+      "euService": {
+        "title": "EU-weiter Service",
+        "description": "Wir betreuen Kunden aus ganz Europa – mehrsprachig und professionell."
+      }
+    },
+    "whyUs": {
+      "title": "Warum C-H Automobile?",
+      "description": "Seit über 15 Jahren sind wir Ihr verlässlicher Partner für exklusive Fahrzeuge in Friedberg und der gesamten Rhein-Main-Region. Unsere Philosophie: Qualität statt Quantität, persönliche Beratung statt anonymem Verkauf.",
+      "benefits": [
+        "Jedes Fahrzeug wird gründlich geprüft und aufbereitet",
+        "Transparente Preise ohne versteckte Kosten",
+        "Persönliche Betreuung von Anfang bis Ende",
+        "Flexible Finanzierung und Inzahlungnahme",
+        "EU-weiter Service auf Deutsch, Englisch und mehr"
+      ],
+      "contactNow": "Jetzt Kontakt aufnehmen",
+      "visitUs": "Besuchen Sie uns",
+      "mapTitle": "Standort auf Google Maps"
+    },
+    "cta": {
+      "title": "Bereit für Ihr nächstes Traumfahrzeug?",
+      "description": "Kontaktieren Sie uns noch heute für eine persönliche Beratung. Wir finden das perfekte Fahrzeug für Sie.",
+      "explore": "Fahrzeuge entdecken"
+    }
+  },
+  "about": {
+    "badge": "Seit über 15 Jahren",
+    "title": "Über C-H Automobile",
+    "subtitle": "Wir sind mehr als nur ein Autohaus. Wir sind Ihr persönlicher Partner auf dem Weg zu Ihrem Traumfahrzeug – mit Kompetenz, Leidenschaft und Vertrauen.",
+    "story": {
+      "title": "Unsere Geschichte",
+      "p1": "C-H Automobile wurde 2009 in Friedberg gegründet – mit einer klaren Vision: exklusive Fahrzeuge mit einem persönlichen, ehrlichen Service zu verbinden. Was als kleine Leidenschaft begann, ist heute ein angesehener Name in der Premium-Fahrzeugbranche der Rhein-Main-Region.",
+      "p2": "Unser Gründer erkannte früh, dass der Kauf eines Premium-Fahrzeugs mehr als nur eine Transaktion ist – es ist ein Erlebnis. Deshalb setzen wir auf persönliche Beratung, handverlesene Qualität und einen Service, der über den Kauf hinausgeht."
+    },
+    "promise": {
+      "title": "Unser Versprechen",
+      "quote": "Wir verkaufen nicht einfach Autos. Wir erfüllen Träume und schaffen Vertrauen – bei jedem einzelnen Kunden.",
+      "author": "Geschäftsführung, C-H Automobile"
+    },
+    "milestones": {
+      "title": "Unsere Meilensteine",
+      "subtitle": "Der Weg von der Gründung zum führenden Premium-Fahrzeughändler der Region"
+    },
+    "timeline": {
+      "2009": {
+        "title": "Gründung",
+        "description": "C-H Automobile wird in Friedberg gegründet – mit der Vision, exklusive Fahrzeuge mit persönlichem Service zu verbinden."
+      },
+      "2013": {
+        "title": "Expansion",
+        "description": "Erweiterung des Showrooms an der Straßheimer Straße und Aufbau eines breiteren Markenportfolios."
+      },
+      "2018": {
+        "title": "Digitalisierung",
+        "description": "Launch der Online-Plattform für eine nahtlose digitale Fahrzeugsuche und Kundenbetreuung."
+      },
+      "2021": {
+        "title": "EU-weiter Service",
+        "description": "Ausweitung auf internationale Kunden mit mehrsprachigem Service in 24 Sprachen."
+      },
+      "2024": {
+        "title": "Neue Ära",
+        "description": "Modernisierung des gesamten Erlebnisses – digital und vor Ort – für noch mehr Kundennähe."
+      }
+    },
+    "values": {
+      "title": "Unsere Werte",
+      "subtitle": "Was uns antreibt und von anderen unterscheidet",
+      "passion": {
+        "title": "Leidenschaft",
+        "description": "Automobile sind unsere Leidenschaft. Jedes Fahrzeug, das wir anbieten, haben wir selbst ausgewählt."
+      },
+      "trust": {
+        "title": "Vertrauen",
+        "description": "Transparenz und Ehrlichkeit stehen bei uns an erster Stelle. Keine versteckten Kosten, keine Überraschungen."
+      },
+      "excellence": {
+        "title": "Exzellenz",
+        "description": "Wir streben nach dem Besten – bei der Fahrzeugauswahl, im Service und in der Beratung."
+      },
+      "personality": {
+        "title": "Persönlichkeit",
+        "description": "Jeder Kunde ist einzigartig. Wir nehmen uns die Zeit, Ihre Wünsche genau zu verstehen."
+      }
+    },
+    "visitCta": {
+      "title": "Besuchen Sie uns",
+      "description": "Unser Showroom in Friedberg erwartet Sie. Kommen Sie vorbei für eine persönliche Beratung und erleben Sie unsere Fahrzeuge hautnah."
+    },
+    "cta": {
+      "title": "Lassen Sie uns gemeinsam Ihr Traumfahrzeug finden",
+      "description": "Ob persönlich vor Ort oder digital – wir sind für Sie da.",
+      "viewVehicles": "Fahrzeuge ansehen"
+    }
+  },
+  "tradeInPage": {
+    "badge": "Inzahlungnahme",
+    "title": "Ihr Fahrzeug in Zahlung geben",
+    "subtitle": "Sie möchten Ihr aktuelles Fahrzeug verkaufen oder in Zahlung geben? Wir erstellen Ihnen ein faires und marktgerechtes Angebot.",
+    "fairEvaluation": {
+      "title": "Faire Bewertung",
+      "description": "Transparente und marktgerechte Einschätzung Ihres Fahrzeugs."
+    },
+    "quickProcess": {
+      "title": "Schnelle Abwicklung",
+      "description": "Von der Anfrage bis zum Angebot in wenigen Stunden."
+    },
+    "safeEasy": {
+      "title": "Sicher & einfach",
+      "description": "Wir kümmern uns um die gesamte Abwicklung."
+    },
+    "formTitle": "Fahrzeugdaten eingeben"
+  },
+  "pagination": {
+    "page": "Seite {current} von {total}",
+    "previous": "Zurück",
+    "next": "Weiter"
+  },
+  "vehicleCard": {
+    "draft": "Entwurf",
+    "premium": "Premium",
+    "buyNow": "Jetzt kaufen"
+  },
+  "validation": {
+    "checkInputs": "Bitte überprüfen Sie Ihre Eingaben.",
+    "genericError": "Ein Fehler ist aufgetreten.",
+    "minChars": "Mindestens {count} Zeichen",
+    "invalidEmail": "Ungültige E-Mail-Adresse",
+    "invalidPhone": "Ungültige Telefonnummer",
+    "ratingRequired": "Bewertung erforderlich",
+    "privacyRequired": "Bitte akzeptieren Sie die Datenschutzerklärung",
+    "required": "Pflichtfeld"
+  },
+  "actions": {
+    "contactSuccess": "Ihre Nachricht wurde erfolgreich gesendet. Wir melden uns in Kürze bei Ihnen.",
+    "tradeInSuccess": "Ihre Anfrage wurde erfolgreich gesendet. Wir erstellen Ihnen in Kürze ein Angebot.",
+    "reservationSuccess": "Ihre Reservierung wurde erstellt. Bitte überweisen Sie die Anzahlung innerhalb von 7 Tagen.",
+    "reviewSuccess": "Vielen Dank! Ihre Bewertung wird nach Prüfung veröffentlicht.",
+    "newsletterSuccess": "Vielen Dank! Bitte bestätigen Sie Ihre E-Mail-Adresse."
+  },
+  "cookie": {
+    "title": "Cookie-Einstellungen",
+    "description": "Wir verwenden Cookies, um Ihnen die bestmögliche Erfahrung auf unserer Website zu bieten. Technisch notwendige Cookies sind für die Grundfunktionen erforderlich. Weitere Informationen finden Sie in unserer <link>Datenschutzerklärung</link>.",
+    "acceptAll": "Alle akzeptieren",
+    "essentialOnly": "Nur notwendige"
+  },
+  "whatsapp": {
+    "defaultMessage": "Hallo! Ich interessiere mich für ein Fahrzeug bei C-H Automobile. Können Sie mir weitere Informationen geben?",
+    "ariaLabel": "Kontakt über WhatsApp",
+    "tooltip": "Schreiben Sie uns auf WhatsApp"
+  },
+  "mapTitle": "Standort auf Google Maps"
+}

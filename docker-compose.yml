@@ -1,0 +1,80 @@
+services:
+  # MySQL 8
+  mysql:
+    image: mysql:8.0
+    container_name: ch-auto-mysql
+    restart: unless-stopped
+    ports:
+      - '3306:3306'
+    environment:
+      MYSQL_ROOT_PASSWORD: '${DB_PASSWORD:-secret}'
+      MYSQL_DATABASE: '${DB_DATABASE:-ch_automobile}'
+      MYSQL_USER: '${DB_USERNAME:-ch_auto}'
+      MYSQL_PASSWORD: '${DB_PASSWORD:-secret}'
+    volumes:
+      - mysql-data:/var/lib/mysql
+    healthcheck:
+      test: ['CMD', 'mysqladmin', 'ping', '-h', 'localhost']
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Redis
+  redis:
+    image: redis:7-alpine
+    container_name: ch-auto-redis
+    restart: unless-stopped
+    ports:
+      - '6379:6379'
+    volumes:
+      - redis-data:/data
+    healthcheck:
+      test: ['CMD', 'redis-cli', 'ping']
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Meilisearch
+  meilisearch:
+    image: getmeili/meilisearch:v1.6
+    container_name: ch-auto-meilisearch
+    restart: unless-stopped
+    ports:
+      - '7700:7700'
+    environment:
+      MEILI_MASTER_KEY: '${MEILISEARCH_KEY:-masterKey123}'
+      MEILI_NO_ANALYTICS: 'true'
+    volumes:
+      - meilisearch-data:/meili_data
+
+  # Mailpit (local email testing)
+  mailpit:
+    image: axllent/mailpit:latest
+    container_name: ch-auto-mailpit
+    restart: unless-stopped
+    ports:
+      - '1025:1025'  # SMTP
+      - '8025:8025'  # Web UI
+    environment:
+      MP_MAX_MESSAGES: 500
+      MP_SMTP_AUTH_ACCEPT_ANY: 1
+      MP_SMTP_AUTH_ALLOW_INSECURE: 1
+
+  # phpMyAdmin (optional)
+  phpmyadmin:
+    image: phpmyadmin:latest
+    container_name: ch-auto-pma
+    restart: unless-stopped
+    ports:
+      - '8080:80'
+    environment:
+      PMA_HOST: mysql
+      PMA_USER: '${DB_USERNAME:-ch_auto}'
+      PMA_PASSWORD: '${DB_PASSWORD:-secret}'
+    depends_on:
+      - mysql
+
+volumes:
+  mysql-data:
+  redis-data:
+  meilisearch-data:

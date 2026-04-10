@@ -1,0 +1,656 @@
+{
+  "meta": {
+    "title": "C-H Automobile & Exclusive Cars | Your Premium Car Dealer in Friedberg",
+    "description": "Exclusive premium and sports cars in Friedberg, Germany. Personal consultation, first-class service and fair prices."
+  },
+  "nav": {
+    "home": "Home",
+    "vehicles": "Vehicles",
+    "about": "About Us",
+    "services": "Services",
+    "tradeIn": "Trade-In",
+    "blog": "Blog",
+    "reviews": "Reviews",
+    "contact": "Contact",
+    "imprint": "Imprint",
+    "privacy": "Privacy Policy",
+    "terms": "Terms & Conditions"
+  },
+  "common": {
+    "readMore": "Read more",
+    "viewAll": "View all",
+    "loading": "Loading…",
+    "error": "An error occurred",
+    "retry": "Try again",
+    "back": "Back",
+    "next": "Next",
+    "previous": "Previous",
+    "close": "Close",
+    "open": "Open",
+    "save": "Save",
+    "cancel": "Cancel",
+    "send": "Send",
+    "search": "Search",
+    "filter": "Filter",
+    "sort": "Sort",
+    "reset": "Reset",
+    "noResults": "No results found",
+    "showMore": "Show more",
+    "showLess": "Show less",
+    "required": "Required",
+    "optional": "Optional",
+    "yes": "Yes",
+    "no": "No",
+    "or": "or",
+    "and": "and",
+    "phone": "Phone",
+    "email": "Email",
+    "address": "Address",
+    "openingHours": "Opening Hours",
+    "monday": "Monday",
+    "tuesday": "Tuesday",
+    "wednesday": "Wednesday",
+    "thursday": "Thursday",
+    "friday": "Friday",
+    "saturday": "Saturday",
+    "sunday": "Sunday",
+    "weekdays": "Mon–Fri",
+    "closed": "Closed",
+    "mapTitle": "Location on Google Maps"
+  },
+  "hero": {
+    "title": "Exclusive Vehicles for Exceptional Taste",
+    "subtitle": "Your premium car dealer in Friedberg – personal consultation, handpicked selection and first-class service.",
+    "cta": "Explore Vehicles",
+    "ctaSecondary": "Contact Us"
+  },
+  "vehicles": {
+    "title": "Our Vehicles",
+    "subtitle": "Discover our handpicked selection of premium and sports vehicles",
+    "featured": "Featured Vehicles",
+    "available": "Available",
+    "reserved": "Reserved",
+    "sold": "Sold",
+    "new": "New",
+    "used": "Used",
+    "certifiedPreOwned": "Certified",
+    "classic": "Classic",
+    "price": "Price",
+    "priceOnRequest": "Price on request",
+    "mileage": "Mileage",
+    "year": "Year",
+    "fuelType": "Fuel Type",
+    "transmission": "Transmission",
+    "bodyType": "Body Type",
+    "brand": "Brand",
+    "power": "Power",
+    "color": "Color",
+    "exteriorColor": "Exterior Color",
+    "interiorColor": "Interior Color",
+    "doors": "Doors",
+    "seats": "Seats",
+    "driveType": "Drive Type",
+    "engineSize": "Engine Size",
+    "emissionClass": "Emission Class",
+    "co2": "CO₂ Emissions",
+    "consumption": "Fuel Consumption",
+    "consumptionCombined": "Combined",
+    "consumptionCity": "City",
+    "consumptionHighway": "Highway",
+    "firstRegistration": "First Registration",
+    "generalInspection": "General Inspection",
+    "previousOwners": "Previous Owners",
+    "vin": "VIN",
+    "warranty": "Warranty",
+    "features": "Features",
+    "equipment": "Optional Equipment",
+    "description": "Description",
+    "relatedVehicles": "Similar Vehicles",
+    "testDrive": "Book Test Drive",
+    "priceInquiry": "Price Inquiry",
+    "reserve": "Reserve Vehicle",
+    "share": "Share",
+    "print": "Print",
+    "images": "Images",
+    "details": "Vehicle Details",
+    "filterBy": "Filter by",
+    "allBrands": "All Brands",
+    "allModels": "All Models",
+    "priceRange": "Price Range",
+    "yearRange": "Year",
+    "maxMileage": "Max Mileage",
+    "minPower": "Min Power",
+    "sortBy": "Sort by",
+    "resultsCount": "{count} vehicles found",
+    "noVehicles": "No vehicles found. Please adjust your filter criteria.",
+    "resetFilters": "Reset Filters",
+    "petrol": "Petrol",
+    "diesel": "Diesel",
+    "electric": "Electric",
+    "hybrid": "Hybrid",
+    "pluginHybrid": "Plug-in Hybrid",
+    "plug_in_hybrid": "Plug-in Hybrid",
+    "automatic": "Automatic",
+    "manual": "Manual",
+    "sedan": "Sedan",
+    "suv": "SUV",
+    "coupe": "Coupé",
+    "convertible": "Convertible",
+    "cabrio": "Convertible",
+    "wagon": "Estate",
+    "kombi": "Estate",
+    "hatchback": "Hatchback",
+    "hp": "hp",
+    "kw": "kW",
+    "notFound": "Vehicle not found",
+    "technicalData": "Technical Specifications",
+    "environmentConsumption": "Environment & Consumption",
+    "accessories": "Accessories",
+    "accidentFree": "Accident-free",
+    "nonSmoker": "Non-smoker",
+    "garagedKept": "Garage-kept",
+    "inspectionUntil": "MOT until",
+    "quickContact": "Quick Contact",
+    "sendInquiry": "Send Inquiry",
+    "whatsappMessage": "I am interested in {vehicle}",
+    "backToOverview": "Back to Overview",
+    "searchPlaceholder": "Search vehicles…",
+    "vehiclesCount": "{count} vehicles",
+    "allFuelTypes": "All",
+    "allTransmissions": "All",
+    "allBodyTypes": "All",
+    "priceFrom": "Price from",
+    "priceTo": "Price to",
+    "yearFrom": "Year from",
+    "yearTo": "Year to",
+    "newestFirst": "Newest first",
+    "oldestFirst": "Oldest first",
+    "priceAsc": "Price ascending",
+    "priceDesc": "Price descending",
+    "mileageAsc": "Mileage ascending",
+    "mileageDesc": "Mileage descending",
+    "yearDesc": "Year descending",
+    "yearAsc": "Year ascending",
+    "van": "Van",
+    "pickup": "Pick-up",
+    "roadster": "Roadster",
+    "other": "Other",
+    "semiAutomatic": "Semi-automatic",
+    "semi_automatic": "Semi-automatic",
+    "hydrogen": "Hydrogen",
+    "lpg": "LPG",
+    "cng": "CNG",
+    "newCar": "New",
+    "usedCar": "Used",
+    "demoVehicle": "Demo Vehicle",
+    "condition": "Condition",
+    "ccm": "cc",
+    "breadcrumbHome": "Home",
+    "buyThisVehicle": "Buy This Vehicle",
+    "buyThisVehicleDesc": "Start the purchase process – secure, fast and convenient online.",
+    "buyNowButton": "Buy Now",
+    "fuel": "Fuel"
+  },
+  "contact": {
+    "title": "Contact",
+    "subtitle": "Have questions? We're happy to help.",
+    "form": {
+      "firstName": "First Name",
+      "lastName": "Last Name",
+      "email": "Email Address",
+      "phone": "Phone Number",
+      "message": "Your Message",
+      "subject": "Subject",
+      "preferredDate": "Preferred Date",
+      "preferredTime": "Preferred Time",
+      "submit": "Send Message",
+      "sending": "Sending…",
+      "success": "Your message has been sent successfully. We will get back to you shortly.",
+      "error": "An error occurred while sending. Please try again.",
+      "privacy": "I have read and accept the <link>Privacy Policy</link>.",
+      "privacyLink": "Privacy Policy",
+      "inquiryType": "Type of Inquiry",
+      "generalInquiry": "General Inquiry",
+      "testDriveRequest": "Book Test Drive",
+      "priceInquiry": "Price Inquiry",
+      "financingRequest": "Financing Request"
+    },
+    "info": {
+      "title": "How to reach us",
+      "visitUs": "Visit us",
+      "callUs": "Call us",
+      "emailUs": "Email us"
+    }
+  },
+  "tradeIn": {
+    "title": "Trade-In",
+    "subtitle": "Trade in your current vehicle – we'll make you a fair offer.",
+    "form": {
+      "vehicleBrand": "Your Vehicle Brand",
+      "vehicleModel": "Model",
+      "vehicleYear": "Year",
+      "vehicleMileage": "Mileage",
+      "vehicleFuelType": "Fuel Type",
+      "vehicleTransmission": "Transmission",
+      "vehicleCondition": "Condition",
+      "vehicleDescription": "Vehicle Description",
+      "photos": "Vehicle Photos",
+      "photosHint": "Upload up to 10 photos (max 10 MB each)",
+      "submit": "Submit Request",
+      "conditionExcellent": "Excellent",
+      "conditionGood": "Good",
+      "conditionFair": "Fair",
+      "conditionPoor": "Poor",
+      "contactData": "Your Contact Details",
+      "vehicleData": "Your Vehicle",
+      "brandPlaceholder": "e.g. BMW, Mercedes, Audi",
+      "modelPlaceholder": "e.g. 320d, C200, A4",
+      "photoUploadHint": "Upload photos (max. 10, 5 MB each)",
+      "descriptionPlaceholder": "Describe the condition, special features etc.",
+      "damageDescription": "Damage Description",
+      "damagePlaceholder": "Are there any damages? Please describe them here.",
+      "sending": "Sending…",
+      "privacy": "I have read and accept the <link>Privacy Policy</link>."
+    }
+  },
+  "purchase": {
+    "metaTitle": "Purchase Vehicle",
+    "breadcrumb": "Purchase",
+    "unavailableTitle": "Vehicle Unavailable",
+    "unavailableDescription": "This vehicle is no longer available for purchase.",
+    "backToVehicle": "Back to Vehicle",
+    "secureTitle": "Secure Purchase Process",
+    "secureDescription": "Your data is transmitted securely. You will receive all documents by email."
+  },
+  "reservation": {
+    "title": "Reserve Vehicle",
+    "subtitle": "Reserve your dream vehicle with a deposit via bank transfer.",
+    "deposit": "Deposit",
+    "depositInfo": "The deposit is 10% of the vehicle price (min. €500).",
+    "bankTransfer": "Bank Transfer",
+    "bankDetails": "Bank Details",
+    "reference": "Payment Reference",
+    "expiresAt": "Valid until",
+    "success": "Your reservation has been created. Please transfer the deposit within 7 days.",
+    "vehicle": "Vehicle",
+    "paymentInfo": "Payment Information",
+    "amount": "Amount",
+    "accountHolder": "Account Holder",
+    "bank": "Bank",
+    "importantNote": "Important: Please transfer the amount within 7 days.",
+    "expiresOn": "The reservation expires on {date}.",
+    "reserveVehicle": "Reserve Vehicle",
+    "deposit10Percent": "Deposit: 10% of the vehicle price (min. €500)",
+    "personalData": "Personal Details",
+    "billingAddress": "Billing Address (optional)",
+    "street": "Street & Number",
+    "zip": "Postal Code",
+    "city": "City",
+    "processing": "Processing...",
+    "submitBinding": "Reserve Now (binding)",
+    "afterReservation": "After reservation, you will receive the bank details for the deposit via email.",
+    "privacyAndTerms": "I have read and accept the <privacyLink>Privacy Policy</privacyLink> and <termsLink>Terms & Conditions</termsLink>.",
+    "successTitle": "Reservation Successful!",
+    "form": {
+      "submit": "Complete Reservation"
+    },
+    "wizard": {
+      "title": "Purchase Vehicle",
+      "stepDetails": "Personal Details",
+      "stepInvoice": "Invoice",
+      "stepSignature": "Contract",
+      "stepPayment": "Payment",
+      "step": "Step {current} of {total}",
+      "invoiceTitle": "Invoice & Payment Details",
+      "invoiceSubtitle": "Please review the invoice details and proceed.",
+      "invoiceFor": "Invoice for",
+      "vehicleDetails": "Vehicle Details",
+      "depositRequired": "Deposit Required",
+      "totalPrice": "Total Price",
+      "paymentMethod": "Payment Method: Bank Transfer",
+      "confirmInvoice": "Confirm Invoice & Continue",
+      "signatureTitle": "Upload Signature",
+      "signatureSubtitle": "Please upload an image of your signature to confirm the purchase.",
+      "signatureHint": "Accepted formats: PNG, JPG, WEBP (max. 5 MB)",
+      "chooseFile": "Choose File",
+      "noFileChosen": "No file chosen",
+      "uploadSignature": "Upload Signature",
+      "paymentTitle": "Upload Payment Proof",
+      "paymentSubtitle": "Please upload proof of your bank transfer (screenshot or PDF).",
+      "paymentHint": "Accepted formats: PNG, JPG, WEBP, PDF (max. 10 MB)",
+      "uploadPayment": "Upload Payment Proof",
+      "completedTitle": "Purchase Completed!",
+      "completedSubtitle": "Thank you for your purchase! We will review your documents and contact you shortly.",
+      "completedRef": "Your reference number: {reference}",
+      "completedContact": "Feel free to contact us with any questions.",
+      "uploading": "Uploading...",
+      "back": "Back",
+      "next": "Continue",
+      "dragOrClick": "Drag a file here or click to select",
+      "fileSelected": "File selected: {name}",
+      "contractTitle": "Purchase Contract",
+      "contractSubtitle": "Download your purchase contract, sign it, and upload the signed document.",
+      "downloadContractTitle": "Download Purchase Contract",
+      "downloadContractDesc": "Click the button below to download your personalized purchase contract as a PDF. It contains all contract details, warranty and insurance information.",
+      "downloadContract": "Download Purchase Contract",
+      "generatingContract": "Generating contract...",
+      "contractDownloaded": "Contract downloaded ✓",
+      "contractDownloadedHint": "Contract downloaded successfully. Please print and sign the document.",
+      "uploadSignedTitle": "Upload Signed Contract",
+      "uploadSignedDesc": "Please upload the signed contract as a PDF or photo.",
+      "signedContractHint": "Accepted formats: PNG, JPG, WEBP, PDF (max. 15 MB)",
+      "uploadSignedContract": "Upload Signed Contract",
+      "adminConfirmTitle": "Team confirmation pending",
+      "adminConfirmDesc": "Our team will review your documents and confirm the purchase. You will receive a confirmation email once everything is completed."
+    }
+  },
+  "blog": {
+    "title": "Blog",
+    "subtitle": "News, tips and insights about premium vehicles",
+    "allPosts": "All Posts",
+    "categories": "Categories",
+    "readTime": "{minutes} min read",
+    "publishedAt": "Published on {date}",
+    "by": "by",
+    "relatedPosts": "Related Posts",
+    "noPosts": "No posts available.",
+    "notFound": "Post not found",
+    "backToBlog": "Back to Blog",
+    "readingTimeUnit": "min read",
+    "views": "views",
+    "author": "Author",
+    "lookingForVehicle": "Looking for a vehicle?",
+    "discoverPremium": "Discover our current premium vehicles.",
+    "viewVehicles": "View Vehicles"
+  },
+  "reviews": {
+    "title": "Customer Reviews",
+    "subtitle": "See what our customers say about us",
+    "averageRating": "Average",
+    "totalReviews": "{count} reviews",
+    "writeReview": "Write a Review",
+    "form": {
+      "name": "Your Name",
+      "email": "Your Email",
+      "rating": "Rating",
+      "title": "Title",
+      "content": "Your Experience",
+      "submit": "Submit Review",
+      "success": "Thank you! Your review will be published after moderation.",
+      "moderationNote": "All reviews are moderated before publication.",
+      "emailHint": "Will not be published",
+      "titlePlaceholder": "e.g. Excellent service!",
+      "contentPlaceholder": "Tell us about your experience with C-H Automobile… (min. 20 characters)",
+      "sending": "Sending…",
+      "privacy": "I have read and accept the <link>Privacy Policy</link>."
+    },
+    "stars": "{count} Stars",
+    "vehiclePrefix": "Vehicle: {vehicle}"
+  },
+  "newsletter": {
+    "title": "Newsletter",
+    "subtitle": "Don't miss any news and exclusive offers.",
+    "emailPlaceholder": "Your email address",
+    "subscribe": "Subscribe",
+    "success": "Thank you! Please confirm your email address.",
+    "privacy": "By subscribing, you accept our <link>Privacy Policy</link>.",
+    "subscribing": "...",
+    "successMessage": "Successfully subscribed! Please confirm your email.",
+    "privacyAgree": "I agree to the <link>Privacy Policy</link>.",
+    "confirmed": {
+      "metaTitle": "Newsletter Confirmed",
+      "metaDescription": "Newsletter confirmation page",
+      "success": "Email Successfully Confirmed!",
+      "successMessage": "Thank you! Your email address has been confirmed. You will now receive our newsletter with the latest vehicles and offers.",
+      "failed": "Confirmation Failed",
+      "failedMessage": "The confirmation link is invalid or has already been used. Please subscribe to the newsletter again.",
+      "backHome": "Back to Home"
+    }
+  },
+  "footer": {
+    "about": "Your exclusive car dealer in Friedberg – premium & sports cars, personal consultation, first-class service.",
+    "quickLinks": "Quick Links",
+    "legal": "Legal",
+    "followUs": "Follow Us",
+    "copyright": "© {year} C-H Automobile & Exclusive Cars. All rights reserved."
+  },
+  "accessibility": {
+    "skipToContent": "Skip to content",
+    "mainNavigation": "Main navigation",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu",
+    "toggleTheme": "Toggle color scheme",
+    "selectLanguage": "Select language",
+    "imageGallery": "Image gallery",
+    "previousImage": "Previous image",
+    "nextImage": "Next image",
+    "imageOf": "Image {current} of {total}",
+    "loading": "Loading content",
+    "externalLink": "External link (opens in new tab)",
+    "noImages": "No images available",
+    "fullscreenOpen": "Open fullscreen",
+    "fullscreenClose": "Close fullscreen",
+    "showImage": "Show image {number}",
+    "scrollToTop": "Scroll to top",
+    "close": "Close",
+    "themeToggle": "Toggle color scheme",
+    "themeSelect": "Select color scheme",
+    "themeLight": "Light",
+    "themeDark": "Dark",
+    "themeSystem": "System",
+    "themeSwitchToDark": "Switch to dark mode",
+    "themeSwitchToSystem": "Switch to system mode",
+    "themeSwitchToLight": "Switch to light mode",
+    "themeCurrent": "Toggle color scheme (current: {theme})",
+    "homeLogo": "C-H Automobile – Homepage"
+  },
+  "errors": {
+    "404": {
+      "title": "Page not found",
+      "description": "The page you're looking for doesn't exist or has been moved. Please check the URL or go back to the homepage.",
+      "backHome": "Back to Home",
+      "searchVehicles": "Browse Vehicles"
+    },
+    "500": {
+      "title": "Server Error",
+      "description": "An unexpected error occurred. Please try again later."
+    },
+    "generic": {
+      "label": "Error",
+      "title": "Something went wrong",
+      "description": "An unexpected error occurred. Please try again.",
+      "retry": "Try again",
+      "backHome": "Back to Home"
+    }
+  },
+  "home": {
+    "badge": "Premium Car Dealer in Friedberg",
+    "stats": {
+      "customers": "Happy Customers",
+      "vehicles": "Premium Vehicles",
+      "experience": "Years of Experience"
+    },
+    "featured": {
+      "title": "Featured Vehicles",
+      "subtitle": "Discover our handpicked selection of premium vehicles",
+      "viewAll": "All Vehicles",
+      "viewAllMobile": "View All Vehicles",
+      "noVehicles": "No featured vehicles available at this time.",
+      "loadError": "Unable to load vehicles."
+    },
+    "services": {
+      "title": "Our Services",
+      "subtitle": "We offer a comprehensive service for your vehicle purchase",
+      "premium": {
+        "title": "Premium Vehicles",
+        "description": "A handpicked selection of exclusive premium and sports cars from prestigious brands."
+      },
+      "quality": {
+        "title": "Certified Quality",
+        "description": "Every vehicle is thoroughly inspected and prepared before it goes on sale."
+      },
+      "consulting": {
+        "title": "Personal Consultation",
+        "description": "Individual and competent advice for your dream vehicle – no pressure."
+      },
+      "tradeIn": {
+        "title": "Trade-In",
+        "description": "Trade in your current vehicle – we'll make you a fair offer."
+      },
+      "financing": {
+        "title": "Financing",
+        "description": "Flexible financing solutions, individually tailored to your needs."
+      },
+      "euService": {
+        "title": "EU-wide Service",
+        "description": "We serve customers across Europe – multilingual and professional."
+      }
+    },
+    "whyUs": {
+      "title": "Why C-H Automobile?",
+      "description": "For over 15 years, we have been your reliable partner for exclusive vehicles in Friedberg and the entire Rhine-Main region. Our philosophy: quality over quantity, personal advice over anonymous sales.",
+      "benefits": [
+        "Every vehicle is thoroughly inspected and prepared",
+        "Transparent prices with no hidden costs",
+        "Personal care from start to finish",
+        "Flexible financing and trade-in options",
+        "EU-wide service in German, English and more"
+      ],
+      "contactNow": "Contact Us Now",
+      "visitUs": "Visit Us",
+      "mapTitle": "Location on Google Maps"
+    },
+    "cta": {
+      "title": "Ready for your next dream car?",
+      "description": "Contact us today for a personal consultation. We'll find the perfect vehicle for you.",
+      "explore": "Explore Vehicles"
+    }
+  },
+  "about": {
+    "badge": "Over 15 Years",
+    "title": "About C-H Automobile",
+    "subtitle": "We are more than just a dealership. We are your personal partner on the road to your dream vehicle – with expertise, passion and trust.",
+    "story": {
+      "title": "Our Story",
+      "p1": "C-H Automobile was founded in Friedberg in 2009 – with a clear vision: to combine exclusive vehicles with a personal, honest service. What started as a small passion is now a respected name in the premium vehicle industry in the Rhine-Main region.",
+      "p2": "Our founder recognized early on that buying a premium vehicle is more than just a transaction – it's an experience. That's why we focus on personal consultation, handpicked quality and a service that goes beyond the purchase."
+    },
+    "promise": {
+      "title": "Our Promise",
+      "quote": "We don't just sell cars. We fulfil dreams and build trust – with every single customer.",
+      "author": "Management, C-H Automobile"
+    },
+    "milestones": {
+      "title": "Our Milestones",
+      "subtitle": "The journey from founding to the leading premium car dealer in the region"
+    },
+    "timeline": {
+      "2009": {
+        "title": "Founded",
+        "description": "C-H Automobile is founded in Friedberg – with the vision of combining exclusive vehicles with personal service."
+      },
+      "2013": {
+        "title": "Expansion",
+        "description": "Expansion of the showroom on Straßheimer Straße and building a broader brand portfolio."
+      },
+      "2018": {
+        "title": "Digitalisation",
+        "description": "Launch of the online platform for seamless digital vehicle search and customer support."
+      },
+      "2021": {
+        "title": "EU-wide Service",
+        "description": "Expansion to international customers with multilingual service in 24 languages."
+      },
+      "2024": {
+        "title": "New Era",
+        "description": "Modernisation of the entire experience – digital and on-site – for even more customer proximity."
+      }
+    },
+    "values": {
+      "title": "Our Values",
+      "subtitle": "What drives us and sets us apart",
+      "passion": {
+        "title": "Passion",
+        "description": "Cars are our passion. Every vehicle we offer has been personally selected by us."
+      },
+      "trust": {
+        "title": "Trust",
+        "description": "Transparency and honesty come first. No hidden costs, no surprises."
+      },
+      "excellence": {
+        "title": "Excellence",
+        "description": "We strive for the best – in vehicle selection, service and consultation."
+      },
+      "personality": {
+        "title": "Personality",
+        "description": "Every customer is unique. We take the time to understand your wishes."
+      }
+    },
+    "visitCta": {
+      "title": "Visit Us",
+      "description": "Our showroom in Friedberg awaits you. Come by for a personal consultation and experience our vehicles up close."
+    },
+    "cta": {
+      "title": "Let's find your dream car together",
+      "description": "Whether in person or online – we are here for you.",
+      "viewVehicles": "View Vehicles"
+    }
+  },
+  "tradeInPage": {
+    "badge": "Trade-In",
+    "title": "Trade In Your Vehicle",
+    "subtitle": "Looking to sell or trade in your current vehicle? We'll make you a fair and market-appropriate offer.",
+    "fairEvaluation": {
+      "title": "Fair Evaluation",
+      "description": "Transparent and market-appropriate assessment of your vehicle."
+    },
+    "quickProcess": {
+      "title": "Quick Processing",
+      "description": "From enquiry to offer in just a few hours."
+    },
+    "safeEasy": {
+      "title": "Safe & Easy",
+      "description": "We take care of the entire process for you."
+    },
+    "formTitle": "Enter Vehicle Details"
+  },
+  "pagination": {
+    "page": "Page {current} of {total}",
+    "previous": "Previous",
+    "next": "Next"
+  },
+  "vehicleCard": {
+    "draft": "Draft",
+    "premium": "Premium",
+    "buyNow": "Buy Now"
+  },
+  "validation": {
+    "checkInputs": "Please check your inputs.",
+    "genericError": "An error occurred.",
+    "minChars": "At least {count} characters",
+    "invalidEmail": "Invalid email address",
+    "invalidPhone": "Invalid phone number",
+    "ratingRequired": "Rating required",
+    "privacyRequired": "Please accept the privacy policy",
+    "required": "Required"
+  },
+  "actions": {
+    "contactSuccess": "Your message has been sent successfully. We will get back to you shortly.",
+    "tradeInSuccess": "Your request has been sent successfully. We will prepare an offer for you shortly.",
+    "reservationSuccess": "Your reservation has been created. Please transfer the deposit within 7 days.",
+    "reviewSuccess": "Thank you! Your review will be published after moderation.",
+    "newsletterSuccess": "Thank you! Please confirm your email address."
+  },
+  "cookie": {
+    "title": "Cookie Settings",
+    "description": "We use cookies to provide you with the best possible experience on our website. Technically necessary cookies are required for basic functions. More information can be found in our <link>Privacy Policy</link>.",
+    "acceptAll": "Accept All",
+    "essentialOnly": "Essential Only"
+  },
+  "whatsapp": {
+    "defaultMessage": "Hello! I am interested in a vehicle at C-H Automobile. Can you provide me with more information?",
+    "ariaLabel": "Contact via WhatsApp",
+    "tooltip": "Message us on WhatsApp"
+  },
+  "mapTitle": "Location on Google Maps"
+}

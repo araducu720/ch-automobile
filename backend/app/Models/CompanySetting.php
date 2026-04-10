@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Translatable\HasTranslations;
@@ -34,6 +35,27 @@ class CompanySetting extends Model
     public static function instance(): static
     {
         return static::firstOrCreate(['id' => 1]);
+    }
+
+    /**
+     * Ensure opening_hours values are always flat strings for Filament KeyValue.
+     */
+    protected function openingHours(): Attribute
+    {
+        return Attribute::make(
+            get: function ($value) {
+                $hours = json_decode($value, true);
+                if (! is_array($hours)) {
+                    return $hours;
+                }
+                return array_map(function ($v) {
+                    if (is_array($v)) {
+                        return implode(' - ', $v);
+                    }
+                    return $v ?? 'Geschlossen';
+                }, $hours);
+            },
+        );
     }
 
     public function getFullAddressAttribute(): string

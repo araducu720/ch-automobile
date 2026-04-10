@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 40" fill="none">
+  <circle cx="20" cy="20" r="16" fill="#FFC220"/>
+  <path d="M20 8l3 7h-6l3-7z" fill="#0071CE"/>
+  <path d="M20 32l-3-7h6l-3 7z" fill="#0071CE"/>
+  <path d="M8 20l7-3v6l-7-3z" fill="#0071CE"/>
+  <path d="M32 20l-7 3v-6l7 3z" fill="#0071CE"/>
+  <text x="42" y="25" font-family="Arial,sans-serif" font-weight="bold" font-size="16" fill="#0071CE">Walmart</text>
+</svg>

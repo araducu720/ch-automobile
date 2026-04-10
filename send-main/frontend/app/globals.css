@@ -1,0 +1,1052 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ===== GLOBAL RESET ===== */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ===== CSS CUSTOM PROPERTIES (BRAND SYSTEM) ===== */
+:root {
+  --brand-primary: #0071CE;
+  --brand-secondary: #FFC220;
+  --brand-accent: #FFC220;
+  --brand-text: #2E2F32;
+  --brand-text-secondary: #6D6E71;
+  --brand-bg: #F2F8FD;
+  --brand-border: #E6E7E8;
+  --brand-input-border: #CBCBCB;
+  --brand-input-focus: #0071CE;
+  --brand-radius: 4px;
+  --brand-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  --brand-success: #2A8703;
+  --brand-error: #DE1C24;
+}
+
+/* ===== WALMART BRAND OVERRIDES ===== */
+[data-brand="walmart"] {
+  --brand-primary: #0071CE;
+  --brand-secondary: #FFC220;
+  --brand-accent: #FFC220;
+  --brand-text: #2E2F32;
+  --brand-text-secondary: #6D6E71;
+  --brand-bg: #F2F8FD;
+  --brand-border: #E6E7E8;
+  --brand-input-border: #CBCBCB;
+  --brand-input-focus: #0071CE;
+  --brand-radius: 4px;
+  --brand-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  --brand-success: #2A8703;
+  --brand-error: #DE1C24;
+}
+
+/* ===== AMAZON BRAND OVERRIDES ===== */
+[data-brand="amazon"] {
+  --brand-primary: #232F3E;
+  --brand-secondary: #FF9900;
+  --brand-accent: #FF9900;
+  --brand-text: #0F1111;
+  --brand-text-secondary: #565959;
+  --brand-bg: #EAEDED;
+  --brand-border: #D5D9D9;
+  --brand-input-border: #888C8C;
+  --brand-input-focus: #E77600;
+  --brand-radius: 8px;
+  --brand-shadow: 0 2px 5px 0 rgba(213,217,217,.5);
+  --brand-success: #067D62;
+  --brand-error: #CC0C39;
+}
+
+/* ===== DPD BRAND OVERRIDES ===== */
+[data-brand="dpd"] {
+  --brand-primary: #DC0032;
+  --brand-secondary: #414042;
+  --brand-accent: #DC0032;
+  --brand-text: #414042;
+  --brand-text-secondary: #6D6E71;
+  --brand-bg: #FAFAFA;
+  --brand-border: #E0E0E0;
+  --brand-input-border: #BDBDBD;
+  --brand-input-focus: #DC0032;
+  --brand-radius: 6px;
+  --brand-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  --brand-success: #4CAF50;
+  --brand-error: #DC0032;
+}
+
+/* ===== DHL BRAND OVERRIDES ===== */
+[data-brand="dhl"] {
+  --brand-primary: #FFCC00;
+  --brand-secondary: #D40511;
+  --brand-accent: #D40511;
+  --brand-text: #333333;
+  --brand-text-secondary: #666666;
+  --brand-bg: #FFFBEB;
+  --brand-border: #E0D5B3;
+  --brand-input-border: #999999;
+  --brand-input-focus: #D40511;
+  --brand-radius: 0px;
+  --brand-shadow: 0 4px 16px rgba(0,0,0,0.08);
+  --brand-success: #69B826;
+  --brand-error: #D40511;
+}
+
+/* ===== SHARED KYC FORM STYLES ===== */
+.kyc-card {
+  background: #FFFFFF;
+  border: 1px solid var(--brand-border);
+  border-radius: var(--brand-radius);
+  box-shadow: var(--brand-shadow);
+  padding: 2rem;
+}
+
+.kyc-input {
+  width: 100%;
+  padding: 0.625rem 0.875rem;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: var(--brand-text);
+  background-color: #FFFFFF;
+  border: 1px solid var(--brand-input-border);
+  border-radius: var(--brand-radius);
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  outline: none;
+}
+
+.kyc-input:focus {
+  border-color: var(--brand-input-focus);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--brand-input-focus) 20%, transparent);
+}
+
+.kyc-input::placeholder {
+  color: var(--brand-text-secondary);
+  opacity: 0.7;
+}
+
+.kyc-label {
+  display: block;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--brand-text);
+  margin-bottom: 0.375rem;
+}
+
+.kyc-btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.625rem 1.5rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #FFFFFF;
+  background-color: var(--brand-primary);
+  border: none;
+  border-radius: var(--brand-radius);
+  cursor: pointer;
+  transition: all 0.15s ease-in-out;
+}
+
+.kyc-btn-primary:hover {
+  filter: brightness(0.9);
+}
+
+.kyc-btn-primary:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.kyc-btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.625rem 1.5rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--brand-text);
+  background-color: transparent;
+  border: 1px solid var(--brand-border);
+  border-radius: var(--brand-radius);
+  cursor: pointer;
+  transition: all 0.15s ease-in-out;
+}
+
+.kyc-btn-secondary:hover {
+  background-color: var(--brand-bg);
+}
+
+/* ===== AMAZON SPECIFIC BUTTON ===== */
+[data-brand="amazon"] .kyc-btn-primary {
+  background: linear-gradient(to bottom, #F7DFA5, #F0C14B);
+  color: #0F1111;
+  border: 1px solid #A88734;
+  border-radius: 8px;
+}
+
+[data-brand="amazon"] .kyc-btn-primary:hover {
+  background: linear-gradient(to bottom, #F5D78E, #EEB933);
+  filter: none;
+}
+
+/* ===== DHL SPECIFIC BUTTON ===== */
+[data-brand="dhl"] .kyc-btn-primary {
+  background-color: #D40511;
+  color: #FFFFFF;
+  border-radius: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 700;
+}
+
+/* ===== DPD SPECIFIC BUTTON ===== */
+[data-brand="dpd"] .kyc-btn-primary {
+  background-color: #DC0032;
+  color: #FFFFFF;
+  border-radius: 6px;
+}
+
+/* ===== WALMART SPECIFIC BUTTON ===== */
+[data-brand="walmart"] .kyc-btn-primary {
+  background-color: #0071CE;
+  color: #FFFFFF;
+  border-radius: 20px;
+}
+
+/* ===== DOCUMENT UPLOAD ZONE ===== */
+.upload-zone {
+  border: 2px dashed var(--brand-input-border);
+  border-radius: var(--brand-radius);
+  padding: 2rem;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background-color: var(--brand-bg);
+}
+
+.upload-zone:hover {
+  border-color: var(--brand-input-focus);
+  background-color: color-mix(in srgb, var(--brand-input-focus) 5%, var(--brand-bg));
+}
+
+.upload-zone.active {
+  border-color: var(--brand-input-focus);
+  border-style: solid;
+  background-color: color-mix(in srgb, var(--brand-input-focus) 10%, var(--brand-bg));
+}
+
+/* ===== STATUS BADGES ===== */
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.25rem 0.75rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  border-radius: 9999px;
+}
+
+.status-badge--pending {
+  background-color: #FEF3C7;
+  color: #92400E;
+}
+
+.status-badge--in-review {
+  background-color: #DBEAFE;
+  color: #1E40AF;
+}
+
+.status-badge--approved {
+  background-color: #D1FAE5;
+  color: #065F46;
+}
+
+.status-badge--rejected {
+  background-color: #FEE2E2;
+  color: #991B1B;
+}
+
+/* ===== STEP INDICATOR ===== */
+.step-connector {
+  position: relative;
+  flex: 1;
+  height: 2px;
+  background-color: #E5E7EB;
+  margin: 0 0.5rem;
+  top: 0;
+}
+
+.step-connector.active {
+  background-color: var(--brand-primary);
+}
+
+/* ===== LOADING SPINNER ===== */
+@keyframes kyc-spin {
+  to { transform: rotate(360deg); }
+}
+
+.kyc-spinner {
+  width: 1.25rem;
+  height: 1.25rem;
+  border: 2px solid var(--brand-border);
+  border-top-color: var(--brand-primary);
+  border-radius: 50%;
+  animation: kyc-spin 0.6s linear infinite;
+}
+
+/* ===== LIVE NOTIFICATION PULSE ===== */
+@keyframes kyc-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+.live-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: var(--brand-success);
+  animation: kyc-pulse 2s ease-in-out infinite;
+}
+
+/* ===== CARD VERIFICATION OTP ===== */
+.otp-container {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+  margin: 1.5rem 0;
+}
+
+.otp-input {
+  width: 3rem;
+  height: 3.5rem;
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--brand-text);
+  background: #FFFFFF;
+  border: 2px solid var(--brand-input-border);
+  border-radius: var(--brand-radius);
+  outline: none;
+  transition: all 0.15s ease-in-out;
+  caret-color: var(--brand-primary);
+}
+
+.otp-input:focus {
+  border-color: var(--brand-input-focus);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--brand-input-focus) 20%, transparent);
+}
+
+.otp-input.filled {
+  border-color: var(--brand-primary);
+  background-color: color-mix(in srgb, var(--brand-primary) 4%, #FFFFFF);
+}
+
+/* ===== CARD DISPLAY ===== */
+.card-preview {
+  position: relative;
+  width: 100%;
+  max-width: 380px;
+  aspect-ratio: 1.586 / 1;
+  border-radius: 12px;
+  padding: 1.5rem;
+  color: #FFFFFF;
+  overflow: hidden;
+  background: linear-gradient(135deg, var(--brand-primary) 0%, color-mix(in srgb, var(--brand-primary) 60%, #000) 100%);
+  box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+}
+
+.card-preview::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -30%;
+  width: 80%;
+  height: 160%;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.08);
+}
+
+.card-preview .card-number {
+  font-size: 1.25rem;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  margin-top: auto;
+  font-variant-numeric: tabular-nums;
+}
+
+.card-preview .card-meta {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-top: 0.75rem;
+  opacity: 0.85;
+}
+
+/* ===== WALMART ORIGINAL THEME ===== */
+[data-brand="walmart"] {
+  font-family: 'Bogle', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+[data-brand="walmart"] .kyc-card {
+  border-radius: 8px;
+  border: 1px solid #E6E7E8;
+  box-shadow: 0 1px 3px rgba(0,113,206,0.06);
+}
+
+[data-brand="walmart"] .kyc-card:hover {
+  box-shadow: 0 2px 8px rgba(0,113,206,0.12);
+}
+
+[data-brand="walmart"] .kyc-input {
+  border-radius: 20px;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+[data-brand="walmart"] .kyc-input:focus {
+  box-shadow: 0 0 0 3px rgba(0,113,206,0.15);
+}
+
+[data-brand="walmart"] .kyc-btn-secondary {
+  border-radius: 20px;
+  border-color: #0071CE;
+  color: #0071CE;
+}
+
+[data-brand="walmart"] .kyc-btn-secondary:hover {
+  background-color: #F2F8FD;
+}
+
+[data-brand="walmart"] .upload-zone {
+  border-radius: 12px;
+  background-color: #F2F8FD;
+  border-color: #B3D4F0;
+}
+
+[data-brand="walmart"] .upload-zone:hover {
+  background-color: #E5F0FA;
+  border-color: #0071CE;
+}
+
+[data-brand="walmart"] .status-badge {
+  font-weight: 700;
+  text-transform: capitalize;
+}
+
+[data-brand="walmart"] .otp-input {
+  border-radius: 12px;
+  border-color: #B3D4F0;
+}
+
+[data-brand="walmart"] .otp-input:focus {
+  box-shadow: 0 0 0 3px rgba(0,113,206,0.2);
+}
+
+[data-brand="walmart"] .card-preview {
+  border-radius: 16px;
+  background: linear-gradient(135deg, #0071CE 0%, #004F91 50%, #003A6B 100%);
+}
+
+[data-brand="walmart"] .step-connector.active {
+  background: linear-gradient(90deg, #0071CE, #FFC220);
+}
+
+/* Walmart spark accent dots */
+[data-brand="walmart"] .status-badge--approved::before {
+  content: '✦';
+  color: #FFC220;
+  margin-right: 2px;
+}
+
+/* ===== AMAZON ORIGINAL THEME ===== */
+[data-brand="amazon"] {
+  font-family: 'Amazon Ember', Arial, sans-serif;
+}
+
+[data-brand="amazon"] .kyc-card {
+  border-radius: 8px;
+  border: 1px solid #D5D9D9;
+  box-shadow: 0 2px 5px 0 rgba(213,217,217,.5);
+}
+
+[data-brand="amazon"] .kyc-input {
+  border-radius: 4px;
+  border-color: #888C8C;
+}
+
+[data-brand="amazon"] .kyc-input:focus {
+  border-color: #E77600;
+  box-shadow: 0 0 0 3px rgba(228,121,17,0.5);
+}
+
+[data-brand="amazon"] .kyc-label {
+  font-size: 0.8125rem;
+  font-weight: 700;
+  color: #0F1111;
+}
+
+[data-brand="amazon"] .kyc-btn-secondary {
+  border: 1px solid #D5D9D9;
+  border-radius: 8px;
+  background: linear-gradient(to bottom, #F7F8FA, #E7E9EC);
+  color: #0F1111;
+  box-shadow: 0 2px 5px 0 rgba(213,217,217,.5);
+}
+
+[data-brand="amazon"] .kyc-btn-secondary:hover {
+  background: linear-gradient(to bottom, #E7E9EC, #D5D9D9);
+}
+
+[data-brand="amazon"] .upload-zone {
+  border-radius: 8px;
+  border-style: dashed;
+  border-color: #888C8C;
+  background: #F7F8FA;
+}
+
+[data-brand="amazon"] .upload-zone:hover {
+  border-color: #E77600;
+  background: #FFF8F0;
+}
+
+[data-brand="amazon"] .otp-input {
+  border-radius: 4px;
+  border-color: #888C8C;
+}
+
+[data-brand="amazon"] .otp-input:focus {
+  border-color: #E77600;
+  box-shadow: 0 0 0 3px rgba(228,121,17,0.5);
+}
+
+[data-brand="amazon"] .card-preview {
+  border-radius: 12px;
+  background: linear-gradient(135deg, #232F3E 0%, #131921 60%, #0F1111 100%);
+}
+
+[data-brand="amazon"] .card-preview .card-number {
+  font-family: 'Amazon Ember', monospace;
+}
+
+[data-brand="amazon"] .status-badge {
+  border-radius: 4px;
+  font-weight: 700;
+  text-transform: capitalize;
+}
+
+[data-brand="amazon"] .status-badge--approved {
+  background: #F0FCF5;
+  color: #067D62;
+  border: 1px solid #067D62;
+}
+
+[data-brand="amazon"] .status-badge--rejected {
+  background: #FFF0F3;
+  color: #CC0C39;
+  border: 1px solid #CC0C39;
+}
+
+[data-brand="amazon"] .step-connector.active {
+  background: linear-gradient(90deg, #232F3E, #FF9900);
+}
+
+/* Amazon link text style */
+[data-brand="amazon"] a:not([class]) {
+  color: #007185;
+  text-decoration: none;
+}
+
+[data-brand="amazon"] a:not([class]):hover {
+  color: #C7511F;
+  text-decoration: underline;
+}
+
+/* ===== DPD ORIGINAL THEME ===== */
+[data-brand="dpd"] {
+  font-family: 'PlutoSans', 'Source Sans Pro', -apple-system, sans-serif;
+}
+
+[data-brand="dpd"] .kyc-card {
+  border-radius: 8px;
+  border: none;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+}
+
+[data-brand="dpd"] .kyc-card:hover {
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+}
+
+[data-brand="dpd"] .kyc-input {
+  border-radius: 6px;
+  border-color: #BDBDBD;
+  background: #FAFAFA;
+}
+
+[data-brand="dpd"] .kyc-input:focus {
+  background: #FFFFFF;
+  border-color: #DC0032;
+  box-shadow: 0 0 0 3px rgba(220,0,50,0.15);
+}
+
+[data-brand="dpd"] .kyc-label {
+  text-transform: uppercase;
+  font-size: 0.6875rem;
+  letter-spacing: 0.06em;
+  color: #6D6E71;
+}
+
+[data-brand="dpd"] .kyc-btn-secondary {
+  border: 2px solid #DC0032;
+  color: #DC0032;
+  border-radius: 6px;
+  font-weight: 700;
+}
+
+[data-brand="dpd"] .kyc-btn-secondary:hover {
+  background-color: #FFF0F3;
+}
+
+[data-brand="dpd"] .upload-zone {
+  border-radius: 8px;
+  border: 2px dashed #DC0032;
+  background: #FFF8F9;
+}
+
+[data-brand="dpd"] .upload-zone:hover {
+  background: #FFE8EC;
+  border-style: solid;
+}
+
+[data-brand="dpd"] .otp-input {
+  border-radius: 6px;
+  border-width: 2px;
+  font-weight: 800;
+}
+
+[data-brand="dpd"] .otp-input:focus {
+  border-color: #DC0032;
+  box-shadow: 0 0 0 3px rgba(220,0,50,0.15);
+}
+
+[data-brand="dpd"] .card-preview {
+  border-radius: 10px;
+  background: linear-gradient(135deg, #DC0032 0%, #A3002A 50%, #7A0020 100%);
+}
+
+[data-brand="dpd"] .status-badge {
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 0.6875rem;
+  letter-spacing: 0.04em;
+}
+
+[data-brand="dpd"] .step-connector.active {
+  background: #DC0032;
+  height: 3px;
+}
+
+/* DPD red accent bar on cards */
+[data-brand="dpd"] .kyc-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #DC0032, #FF1A56);
+  border-radius: 8px 8px 0 0;
+}
+
+[data-brand="dpd"] .kyc-card {
+  position: relative;
+  overflow: hidden;
+}
+
+/* ===== DHL ORIGINAL THEME ===== */
+[data-brand="dhl"] {
+  font-family: 'Delivery', 'Frutiger', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+[data-brand="dhl"] .kyc-card {
+  border-radius: 0;
+  border: 1px solid #E0D5B3;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+  border-top: 4px solid #FFCC00;
+}
+
+[data-brand="dhl"] .kyc-input {
+  border-radius: 0;
+  border-color: #999999;
+  padding: 0.75rem 1rem;
+  font-size: 0.9375rem;
+}
+
+[data-brand="dhl"] .kyc-input:focus {
+  border-color: #D40511;
+  box-shadow: 0 0 0 2px rgba(212,5,17,0.2);
+}
+
+[data-brand="dhl"] .kyc-label {
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: #333333;
+}
+
+[data-brand="dhl"] .kyc-btn-secondary {
+  border: 2px solid #D40511;
+  color: #D40511;
+  border-radius: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 700;
+}
+
+[data-brand="dhl"] .kyc-btn-secondary:hover {
+  background-color: #FFF0F0;
+}
+
+[data-brand="dhl"] .upload-zone {
+  border-radius: 0;
+  border: 2px dashed #999999;
+  background: #FFFBEB;
+}
+
+[data-brand="dhl"] .upload-zone:hover {
+  border-color: #D40511;
+  background: #FFFADD;
+}
+
+[data-brand="dhl"] .otp-input {
+  border-radius: 0;
+  border-width: 2px;
+  border-color: #999999;
+  font-weight: 800;
+}
+
+[data-brand="dhl"] .otp-input:focus {
+  border-color: #D40511;
+  box-shadow: 0 0 0 2px rgba(212,5,17,0.2);
+}
+
+[data-brand="dhl"] .card-preview {
+  border-radius: 0;
+  background: linear-gradient(135deg, #FFCC00 0%, #E6B800 40%, #D40511 100%);
+}
+
+[data-brand="dhl"] .card-preview .card-number {
+  color: #333333;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+}
+
+[data-brand="dhl"] .status-badge {
+  border-radius: 0;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 0.6875rem;
+  letter-spacing: 0.08em;
+}
+
+[data-brand="dhl"] .step-connector.active {
+  background: linear-gradient(90deg, #FFCC00, #D40511);
+  height: 3px;
+}
+
+/* DHL yellow accent bar */
+[data-brand="dhl"] .status-badge--pending {
+  background-color: #FFFBEB;
+  color: #92400E;
+  border-left: 3px solid #FFCC00;
+  border-radius: 0;
+}
+
+[data-brand="dhl"] .status-badge--approved {
+  background-color: #D1FAE5;
+  color: #065F46;
+  border-left: 3px solid #69B826;
+  border-radius: 0;
+}
+
+[data-brand="dhl"] .status-badge--rejected {
+  background-color: #FEE2E2;
+  color: #991B1B;
+  border-left: 3px solid #D40511;
+  border-radius: 0;
+}
+
+/* ===== PROGRESS BAR ===== */
+.progress-bar {
+  width: 100%;
+  height: 4px;
+  background-color: var(--brand-border);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.progress-bar-fill {
+  height: 100%;
+  background-color: var(--brand-primary);
+  border-radius: 2px;
+  transition: width 0.5s ease;
+}
+
+[data-brand="dhl"] .progress-bar,
+[data-brand="dhl"] .progress-bar-fill {
+  border-radius: 0;
+}
+
+/* ===== VERIFICATION TIMER ===== */
+.verification-timer {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  color: var(--brand-text-secondary);
+  font-variant-numeric: tabular-nums;
+}
+
+.verification-timer .timer-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--brand-error);
+  animation: kyc-pulse 1s ease-in-out infinite;
+}
+
+/* ===== TOAST NOTIFICATION ===== */
+.toast {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  padding: 0.875rem 1.25rem;
+  border-radius: var(--brand-radius);
+  background: #FFFFFF;
+  border: 1px solid var(--brand-border);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.12);
+  z-index: 1000;
+  transform: translateY(0);
+  opacity: 1;
+  transition: all 0.3s ease;
+  max-width: 360px;
+}
+
+.toast--success {
+  border-left: 4px solid var(--brand-success);
+}
+
+.toast--error {
+  border-left: 4px solid var(--brand-error);
+}
+
+.toast--info {
+  border-left: 4px solid var(--brand-primary);
+}
+
+.toast-enter {
+  transform: translateY(20px);
+  opacity: 0;
+}
+
+[data-brand="dhl"] .toast {
+  border-radius: 0;
+}
+
+/* ===== SKELETON LOADING ===== */
+@keyframes kyc-shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.skeleton {
+  background: linear-gradient(90deg, var(--brand-border) 25%, #f0f0f0 50%, var(--brand-border) 75%);
+  background-size: 200% 100%;
+  animation: kyc-shimmer 1.5s ease-in-out infinite;
+  border-radius: var(--brand-radius);
+}
+
+.skeleton-text {
+  height: 0.875rem;
+  margin-bottom: 0.5rem;
+}
+
+.skeleton-title {
+  height: 1.5rem;
+  width: 60%;
+  margin-bottom: 1rem;
+}
+
+.skeleton-input {
+  height: 2.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.skeleton-button {
+  height: 2.5rem;
+  width: 120px;
+}
+
+.skeleton-avatar {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+}
+
+/* ===== FADE IN ANIMATION ===== */
+@keyframes kyc-fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fadeIn {
+  animation: kyc-fadeIn 0.3s ease forwards;
+}
+
+@keyframes kyc-slideUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-slideUp {
+  animation: kyc-slideUp 0.4s ease forwards;
+}
+
+@keyframes kyc-scaleIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.animate-scaleIn {
+  animation: kyc-scaleIn 0.2s ease forwards;
+}
+
+/* Staggered card reveals */
+.stagger-1 { animation-delay: 0ms; }
+.stagger-2 { animation-delay: 100ms; }
+.stagger-3 { animation-delay: 200ms; }
+.stagger-4 { animation-delay: 300ms; }
+.stagger-5 { animation-delay: 400ms; }
+
+/* ===== TOOLTIP ===== */
+.tooltip {
+  position: relative;
+}
+
+.tooltip::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--brand-text);
+  color: #FFFFFF;
+  padding: 0.375rem 0.75rem;
+  border-radius: var(--brand-radius);
+  font-size: 0.75rem;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.15s ease;
+  z-index: 100;
+}
+
+.tooltip:hover::after {
+  opacity: 1;
+}
+
+/* ===== BRAND-SPECIFIC FOCUS RINGS ===== */
+[data-brand="walmart"] *:focus-visible {
+  outline: 2px solid #0071CE;
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+[data-brand="amazon"] *:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(228,121,17,0.5);
+}
+
+[data-brand="dpd"] *:focus-visible {
+  outline: 2px solid #DC0032;
+  outline-offset: 2px;
+}
+
+[data-brand="dhl"] *:focus-visible {
+  outline: 2px solid #D40511;
+  outline-offset: 2px;
+}
+
+/* ===== RESPONSIVE UTILITIES ===== */
+@media (max-width: 640px) {
+  .kyc-card {
+    padding: 1.25rem;
+    border-radius: 0;
+    border-left: none;
+    border-right: none;
+  }
+
+  .otp-container {
+    gap: 0.375rem;
+  }
+
+  .otp-input {
+    width: 2.5rem;
+    height: 3rem;
+    font-size: 1.25rem;
+  }
+
+  .card-preview {
+    max-width: 100%;
+    padding: 1.25rem;
+  }
+
+  .toast {
+    left: 1rem;
+    right: 1rem;
+    bottom: 1rem;
+    max-width: none;
+  }
+}
+
+@media (max-width: 380px) {
+  .otp-input {
+    width: 2rem;
+    height: 2.5rem;
+    font-size: 1rem;
+  }
+}
+
+/* ===== PRINT STYLES ===== */
+@media print {
+  .kyc-card {
+    box-shadow: none;
+    border: 1px solid #ccc;
+  }
+
+  .kyc-btn-primary,
+  .kyc-btn-secondary,
+  .toast,
+  .kyc-spinner {
+    display: none;
+  }
+
+  .status-badge {
+    border: 1px solid currentColor;
+  }
+}

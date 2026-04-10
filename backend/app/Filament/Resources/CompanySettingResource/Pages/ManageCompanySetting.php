@@ -6,10 +6,11 @@ use App\Filament\Resources\CompanySettingResource;
 use App\Models\CompanySetting;
 use Filament\Actions;
 use Filament\Resources\Pages\EditRecord;
+use Filament\Resources\Pages\EditRecord\Concerns\Translatable;
 
 class ManageCompanySetting extends EditRecord
 {
-    use EditRecord\Concerns\Translatable;
+    use Translatable;
     protected static string $resource = CompanySettingResource::class;
 
     /**

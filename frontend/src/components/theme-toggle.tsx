@@ -18,7 +18,7 @@ export function ThemeToggle() {
   if (!mounted) {
     return (
       <button
-        className="relative flex h-9 w-9 items-center justify-center rounded-lg border border-[var(--border-primary)] bg-[var(--bg-secondary)] transition-colors"
+        className="relative flex h-9 w-9 items-center justify-center rounded-lg border border-border bg-secondary transition-colors"
         aria-label={t('themeToggle')}
       >
         <span className="h-4 w-4" />
@@ -39,10 +39,10 @@ export function ThemeToggle() {
       onClick={cycleTheme}
       className={cn(
         'relative flex h-9 w-9 items-center justify-center rounded-lg',
-        'border border-[var(--border-primary)] bg-[var(--bg-secondary)]',
+        'border border-border bg-secondary',
         'transition-all duration-200',
-        'hover:bg-[var(--bg-tertiary)] hover:border-[var(--border-secondary)]',
-        'focus-visible:outline-2 focus-visible:outline-[var(--border-focus)] focus-visible:outline-offset-2',
+        'hover:bg-tertiary hover:border-border-secondary',
+        'focus-visible:outline-2 focus-visible:outline-border-focus focus-visible:outline-offset-2',
       )}
       aria-label={t('themeCurrent', { theme: themeLabel })}
       title={
@@ -54,11 +54,11 @@ export function ThemeToggle() {
       }
     >
       {theme === 'system' ? (
-        <Monitor className="h-4 w-4 text-[var(--text-secondary)]" />
+        <Monitor className="h-4 w-4 text-muted" />
       ) : resolvedTheme === 'dark' ? (
-        <Moon className="h-4 w-4 text-[var(--brand-accent)]" />
+        <Moon className="h-4 w-4 text-accent" />
       ) : (
-        <Sun className="h-4 w-4 text-[var(--brand-accent)]" />
+        <Sun className="h-4 w-4 text-accent" />
       )}
     </button>
   );
@@ -91,21 +91,21 @@ export function ThemeToggleDropdown() {
         onClick={() => setOpen(!open)}
         className={cn(
           'flex h-9 w-9 items-center justify-center rounded-lg',
-          'border border-[var(--border-primary)] bg-[var(--bg-secondary)]',
+          'border border-border bg-secondary',
           'transition-all duration-200',
-          'hover:bg-[var(--bg-tertiary)]',
-          'focus-visible:outline-2 focus-visible:outline-[var(--border-focus)] focus-visible:outline-offset-2',
+          'hover:bg-tertiary',
+          'focus-visible:outline-2 focus-visible:outline-border-focus focus-visible:outline-offset-2',
         )}
         aria-label={t('themeSelect')}
         aria-expanded={open}
         aria-haspopup="listbox"
       >
         {theme === 'dark' ? (
-          <Moon className="h-4 w-4 text-[var(--brand-accent)]" />
+          <Moon className="h-4 w-4 text-accent" />
         ) : theme === 'system' ? (
-          <Monitor className="h-4 w-4 text-[var(--text-secondary)]" />
+          <Monitor className="h-4 w-4 text-muted" />
         ) : (
-          <Sun className="h-4 w-4 text-[var(--brand-accent)]" />
+          <Sun className="h-4 w-4 text-accent" />
         )}
       </button>
 
@@ -119,7 +119,7 @@ export function ThemeToggleDropdown() {
           <div
             className={cn(
               'absolute right-0 top-full z-50 mt-2 w-36',
-              'rounded-lg border border-[var(--border-primary)] bg-[var(--bg-elevated)]',
+              'rounded-lg border border-border bg-card',
               'shadow-lg',
               'animate-in fade-in-0 zoom-in-95',
             )}
@@ -139,8 +139,8 @@ export function ThemeToggleDropdown() {
                   'flex w-full items-center gap-2 px-3 py-2 text-sm transition-colors',
                   'first:rounded-t-lg last:rounded-b-lg',
                   theme === value
-                    ? 'bg-[var(--brand-primary-light)] text-[var(--brand-primary)] font-medium'
-                    : 'text-[var(--text-secondary)] hover:bg-[var(--bg-tertiary)] hover:text-[var(--text-primary)]',
+                    ? 'bg-brand-light text-brand font-medium'
+                    : 'text-muted hover:bg-tertiary hover:text-foreground',
                 )}
               >
                 <Icon className="h-4 w-4" />

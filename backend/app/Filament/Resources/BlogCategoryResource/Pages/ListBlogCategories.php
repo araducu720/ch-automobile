@@ -10,6 +10,7 @@ use Filament\Resources\Pages\ListRecords\Concerns\Translatable;
 class ListBlogCategories extends ListRecords
 {
     use Translatable;
+
     protected static string $resource = BlogCategoryResource::class;
 
     protected function getHeaderActions(): array

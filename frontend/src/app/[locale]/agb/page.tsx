@@ -11,7 +11,7 @@ export default function AGBPage() {
   return (
     <div className="py-8 lg:py-12">
       <div className="container-main max-w-3xl">
-        <h1 className="text-3xl font-bold text-[var(--text-primary)] mb-8">
+        <h1 className="text-3xl font-bold text-foreground mb-8">
           Allgemeine Geschäftsbedingungen
         </h1>
 
@@ -79,7 +79,7 @@ export default function AGBPage() {
             <h2>§ 7 Datenschutz</h2>
             <p>
               Informationen zur Verarbeitung personenbezogener Daten finden Sie in unserer{' '}
-              <Link href="/datenschutz" className="text-[var(--brand-primary)] hover:underline">Datenschutzerklärung</Link>.
+              <Link href="/datenschutz" className="text-brand hover:underline">Datenschutzerklärung</Link>.
             </p>
           </section>
 

@@ -24,7 +24,7 @@ class NewsletterConfirmationNotification extends Notification implements ShouldQ
     public function toMail(object $notifiable): MailMessage
     {
         $confirmUrl = config('app.frontend_url', 'http://localhost:3000')
-            . '/newsletter/bestaetigt?token=' . $this->subscriber->confirmation_token;
+            .'/newsletter/bestaetigt?token='.$this->subscriber->confirmation_token;
 
         return (new MailMessage)
             ->subject('Bitte bestätigen Sie Ihre Newsletter-Anmeldung')

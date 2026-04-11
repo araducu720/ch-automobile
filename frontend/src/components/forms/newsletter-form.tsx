@@ -16,7 +16,7 @@ export function NewsletterForm() {
 
   if (state?.success) {
     return (
-      <div className="flex items-center gap-2 text-[var(--status-success)]">
+      <div className="flex items-center gap-2 text-success">
         <CheckCircle className="h-5 w-5 shrink-0" />
         <p className="text-sm">{t('successMessage')}</p>
       </div>
@@ -27,14 +27,14 @@ export function NewsletterForm() {
     <form action={formAction} className="space-y-3">
       <div className="flex gap-2">
         <div className="relative flex-1">
-          <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[var(--text-tertiary)]" />
+          <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
           <input
             type="email"
             name="email"
             placeholder={t('emailPlaceholder')}
             required
             aria-label={t('emailPlaceholder')}
-            className="w-full rounded-lg border-2 border-[var(--border-input)] bg-[var(--input-bg)] px-3 py-2 pl-9 text-sm text-[var(--text-primary)] placeholder:text-[var(--text-tertiary)] shadow-[var(--input-shadow)] focus:outline-none focus:ring-2 focus:ring-[var(--brand-primary)] focus:border-[var(--border-focus)] transition-all duration-200"
+            className="w-full rounded-lg border-2 border-input-border bg-input px-3 py-2 pl-9 text-sm text-foreground placeholder:text-muted-foreground shadow-[var(--input-shadow)] focus:outline-none focus:ring-2 focus:ring-brand focus:border-border-focus transition-all duration-200"
           />
         </div>
         <Button type="submit" size="sm" disabled={isPending}>
@@ -48,12 +48,12 @@ export function NewsletterForm() {
           name="privacy_accepted"
           value="true"
           required
-          className="mt-0.5 h-3.5 w-3.5 rounded border-2 border-[var(--border-input)] accent-[var(--brand-primary)]"
+          className="mt-0.5 h-3.5 w-3.5 rounded border-2 border-input-border accent-brand"
         />
-        <label htmlFor="newsletter_privacy" className="text-xs text-[var(--text-tertiary)]">
+        <label htmlFor="newsletter_privacy" className="text-xs text-muted-foreground">
           {t.rich('privacyAgree', {
             link: (chunks) => (
-              <Link href="/datenschutz" className="text-[var(--text-link)] hover:underline">
+              <Link href="/datenschutz" className="text-link hover:underline">
                 {chunks}
               </Link>
             ),
@@ -61,10 +61,10 @@ export function NewsletterForm() {
         </label>
       </div>
       {state?.errors?.email && (
-        <p className="text-xs text-[var(--status-error)]">{state.errors.email}</p>
+        <p className="text-xs text-error">{state.errors.email}</p>
       )}
       {state && !state.success && state.message && (
-        <p className="text-xs text-[var(--status-error)]">{state.message}</p>
+        <p className="text-xs text-error">{state.message}</p>
       )}
     </form>
   );

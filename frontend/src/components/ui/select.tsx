@@ -18,10 +18,10 @@ const Select = forwardRef<HTMLSelectElement, SelectProps>(
         {label && (
           <label
             htmlFor={selectId}
-            className="block text-sm font-semibold text-[var(--text-primary)]"
+            className="block text-sm font-semibold text-foreground"
           >
             {label}
-            {props.required && <span className="ml-1 text-[var(--status-error)]">*</span>}
+            {props.required && <span className="ml-1 text-error">*</span>}
           </label>
         )}
         <div className="relative">
@@ -29,13 +29,13 @@ const Select = forwardRef<HTMLSelectElement, SelectProps>(
             id={selectId}
             className={cn(
               'flex h-11 w-full appearance-none rounded-lg border-2 px-3.5 py-2.5 pr-8 text-sm transition-all duration-200',
-              'bg-[var(--input-bg)] text-[var(--text-primary)]',
+              'bg-input text-foreground',
               'shadow-[var(--input-shadow)]',
-              'focus:outline-none focus:ring-2 focus:ring-[var(--ring-color)] focus:border-[var(--border-focus)] focus:shadow-[0_0_0_3px_rgba(30,64,175,0.12)]',
+              'focus:outline-none focus:ring-2 focus:ring-ring focus:border-border-focus focus:shadow-[0_0_0_3px_rgba(30,64,175,0.12)]',
               'disabled:cursor-not-allowed disabled:opacity-50',
               error
-                ? 'border-[var(--status-error)] focus:ring-[var(--status-error)]'
-                : 'border-[var(--border-input)]',
+                ? 'border-error focus:ring-error'
+                : 'border-input-border',
               className,
             )}
             ref={ref}
@@ -54,15 +54,15 @@ const Select = forwardRef<HTMLSelectElement, SelectProps>(
               </option>
             ))}
           </select>
-          <ChevronDown className="pointer-events-none absolute right-2.5 top-1/2 h-4 w-4 -translate-y-1/2 text-[var(--text-tertiary)]" />
+          <ChevronDown className="pointer-events-none absolute right-2.5 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
         </div>
         {hint && !error && (
-          <p id={`${selectId}-hint`} className="text-xs text-[var(--text-tertiary)]">
+          <p id={`${selectId}-hint`} className="text-xs text-muted-foreground">
             {hint}
           </p>
         )}
         {error && (
-          <p id={`${selectId}-error`} className="text-xs text-[var(--status-error)]" role="alert">
+          <p id={`${selectId}-error`} className="text-xs text-error" role="alert">
             {error}
           </p>
         )}

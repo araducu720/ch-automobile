@@ -20,13 +20,13 @@ export default function ErrorPage({ error, reset }: ErrorPageProps) {
 
   return (
     <div className="flex min-h-[60vh] flex-col items-center justify-center text-center px-4">
-      <div className="text-6xl font-black text-[var(--status-error)] opacity-30 select-none">
+      <div className="text-6xl font-black text-error opacity-30 select-none">
         {t('label')}
       </div>
-      <h1 className="mt-4 text-2xl font-bold text-[var(--text-primary)]">
+      <h1 className="mt-4 text-2xl font-bold text-foreground">
         {t('title')}
       </h1>
-      <p className="mt-2 text-[var(--text-secondary)] max-w-md">
+      <p className="mt-2 text-muted max-w-md">
         {t('description')}
       </p>
       <div className="mt-8 flex flex-col gap-3 sm:flex-row">

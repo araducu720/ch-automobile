@@ -3,12 +3,11 @@
 namespace App\Filament\Resources\ReservationResource\Pages;
 
 use App\Filament\Resources\ReservationResource;
-use App\Models\Reservation;
 use Filament\Actions;
 use Filament\Infolists\Components;
 use Filament\Infolists\Infolist;
-use Filament\Resources\Pages\ViewRecord;
 use Filament\Notifications\Notification as FilamentNotification;
+use Filament\Resources\Pages\ViewRecord;
 use Illuminate\Support\Facades\Storage;
 
 class ViewReservation extends ViewRecord
@@ -45,8 +44,7 @@ class ViewReservation extends ViewRecord
                         ->send();
                     $this->redirect(static::getResource()::getUrl('view', ['record' => $record]));
                 })
-                ->visible(fn () =>
-                    $this->getRecord()->purchase_step === 'completed'
+                ->visible(fn () => $this->getRecord()->purchase_step === 'completed'
                     && $this->getRecord()->isPending()
                     && empty($this->getRecord()->admin_confirmed_at)
                 ),
@@ -116,8 +114,10 @@ class ViewReservation extends ViewRecord
                     ->formatStateUsing(function ($state, $record) {
                         if ($state && Storage::disk('public')->exists($state)) {
                             $date = $record->contract_generated_at?->format('d.m.Y H:i') ?? '';
+
                             return "✅ Generiert {$date}";
                         }
+
                         return '⏳ Nicht generiert';
                     })
                     ->url(fn ($record) => $record->contract_path

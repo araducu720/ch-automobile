@@ -6,7 +6,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { VehicleCardSkeleton } from '@/components/ui/skeleton';
 import { COMPANY_INFO } from '@/lib/constants';
-import { LocalBusinessJsonLd } from '@/components/seo/json-ld';
+
 import {
   Car,
   Shield,
@@ -34,15 +34,15 @@ const serviceKeys = ['premium', 'quality', 'consulting', 'tradeIn', 'financing',
 export default async function HomePage() {
   const t = await getTranslations('home');
   const th = await getTranslations('hero');
-  const tc = await getTranslations('common');
+
 
   return (
     <>
       {/* ===== HERO ===== */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-[var(--bg-primary)] via-[var(--bg-secondary)] to-[var(--brand-primary-light)] py-24 lg:py-36">
+      <section className="relative overflow-hidden bg-gradient-to-br from-background via-secondary to-brand-light py-24 lg:py-36">
         {/* Decorative blobs */}
-        <div className="absolute -top-32 -right-32 h-96 w-96 rounded-full bg-[var(--brand-primary)] opacity-[0.06] blur-3xl animate-float" />
-        <div className="absolute -bottom-24 -left-24 h-72 w-72 rounded-full bg-[var(--brand-accent)] opacity-[0.08] blur-3xl animate-float-delayed" />
+        <div className="absolute -top-32 -right-32 h-96 w-96 rounded-full bg-brand opacity-[0.06] blur-3xl animate-float" />
+        <div className="absolute -bottom-24 -left-24 h-72 w-72 rounded-full bg-accent opacity-[0.08] blur-3xl animate-float-delayed" />
 
         <div className="container-main relative z-10">
           <div className="max-w-3xl">
@@ -51,11 +51,11 @@ export default async function HomePage() {
               {t('badge')}
             </Badge>
 
-            <h1 className="text-4xl font-extrabold tracking-tight text-[var(--text-primary)] sm:text-5xl lg:text-6xl xl:text-7xl hero-entrance hero-entrance-delay-1">
+            <h1 className="text-4xl font-extrabold tracking-tight text-foreground sm:text-5xl lg:text-6xl xl:text-7xl hero-entrance hero-entrance-delay-1">
               {th('title')}
             </h1>
 
-            <p className="mt-6 text-lg lg:text-xl text-[var(--text-secondary)] max-w-2xl leading-relaxed hero-entrance hero-entrance-delay-2">
+            <p className="mt-6 text-lg lg:text-xl text-muted max-w-2xl leading-relaxed hero-entrance hero-entrance-delay-2">
               {th('subtitle')}
             </p>
 
@@ -85,26 +85,26 @@ export default async function HomePage() {
 
         {/* Gradient overlay right */}
         <div className="absolute right-0 top-0 h-full w-1/2 opacity-10 pointer-events-none">
-          <div className="absolute inset-0 bg-gradient-to-l from-[var(--brand-primary)] to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-l from-brand to-transparent" />
         </div>
       </section>
 
       {/* ===== FEATURED VEHICLES ===== */}
-      <section className="py-16 lg:py-24 bg-[var(--bg-primary)]">
+      <section className="py-16 lg:py-24 bg-background">
         <div className="container-main">
           <RevealSection>
             <div className="flex items-end justify-between mb-10">
               <div>
-                <h2 className="text-3xl font-bold text-[var(--text-primary)]">
+                <h2 className="text-3xl font-bold text-foreground">
                   {t('featured.title')}
                 </h2>
-                <p className="mt-2 text-[var(--text-secondary)]">
+                <p className="mt-2 text-muted">
                   {t('featured.subtitle')}
                 </p>
               </div>
               <Link
                 href="/fahrzeuge"
-                className="hidden sm:flex items-center gap-1 text-sm font-medium text-[var(--brand-primary)] hover:underline"
+                className="hidden sm:flex items-center gap-1 text-sm font-medium text-brand hover:underline"
               >
                 {t('featured.viewAll')}
                 <ChevronRight className="h-4 w-4" />
@@ -136,12 +136,12 @@ export default async function HomePage() {
       </section>
 
       {/* ===== SERVICES ===== */}
-      <section className="py-16 lg:py-24 bg-[var(--bg-secondary)]">
+      <section className="py-16 lg:py-24 bg-secondary">
         <div className="container-main">
           <RevealSection>
             <div className="text-center max-w-2xl mx-auto mb-12">
-              <h2 className="text-3xl font-bold text-[var(--text-primary)]">{t('services.title')}</h2>
-              <p className="mt-3 text-[var(--text-secondary)]">
+              <h2 className="text-3xl font-bold text-foreground">{t('services.title')}</h2>
+              <p className="mt-3 text-muted">
                 {t('services.subtitle')}
               </p>
             </div>
@@ -154,13 +154,13 @@ export default async function HomePage() {
                 <div key={key} className="reveal">
                   <Card className="card-hover h-full">
                     <CardContent className="p-6">
-                      <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-[var(--brand-primary-light)] mb-4">
-                        <Icon className="h-6 w-6 text-[var(--brand-primary)]" />
+                      <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-brand-light mb-4">
+                        <Icon className="h-6 w-6 text-brand" />
                       </div>
-                      <h3 className="text-lg font-semibold text-[var(--text-primary)] mb-2">
+                      <h3 className="text-lg font-semibold text-foreground mb-2">
                         {t(`services.${key}.title`)}
                       </h3>
-                      <p className="text-sm text-[var(--text-secondary)] leading-relaxed">
+                      <p className="text-sm text-muted leading-relaxed">
                         {t(`services.${key}.description`)}
                       </p>
                     </CardContent>
@@ -173,20 +173,20 @@ export default async function HomePage() {
       </section>
 
       {/* ===== WHY CHOOSE US ===== */}
-      <section className="py-16 lg:py-24 bg-[var(--bg-primary)]">
+      <section className="py-16 lg:py-24 bg-background">
         <div className="container-main">
           <div className="grid grid-cols-1 gap-12 lg:grid-cols-2 items-center">
             <RevealSection direction="left">
-              <h2 className="text-3xl font-bold text-[var(--text-primary)]">
+              <h2 className="text-3xl font-bold text-foreground">
                 {t('whyUs.title')}
               </h2>
-              <p className="mt-4 text-[var(--text-secondary)] leading-relaxed">
+              <p className="mt-4 text-muted leading-relaxed">
                 {t('whyUs.description')}
               </p>
               <ul className="mt-6 space-y-4">
                 {[0, 1, 2, 3, 4].map((idx) => (
-                  <li key={idx} className="flex items-start gap-3 text-sm text-[var(--text-secondary)]">
-                    <CheckCircle className="h-5 w-5 shrink-0 text-[var(--status-success)] mt-0.5" />
+                  <li key={idx} className="flex items-start gap-3 text-sm text-muted">
+                    <CheckCircle className="h-5 w-5 shrink-0 text-success mt-0.5" />
                     {t(`whyUs.benefits.${idx}`)}
                   </li>
                 ))}
@@ -199,34 +199,34 @@ export default async function HomePage() {
             </RevealSection>
 
             <RevealSection direction="right">
-              <Card className="bg-[var(--bg-secondary)]">
+              <Card className="bg-secondary">
                 <CardContent className="p-8 space-y-6">
-                  <h3 className="text-xl font-semibold text-[var(--text-primary)]">
+                  <h3 className="text-xl font-semibold text-foreground">
                     {t('whyUs.visitUs')}
                   </h3>
                   <div className="space-y-4">
                     <div className="flex items-start gap-3">
-                      <MapPin className="h-5 w-5 text-[var(--brand-primary)] shrink-0 mt-0.5" />
+                      <MapPin className="h-5 w-5 text-brand shrink-0 mt-0.5" />
                       <div>
-                        <p className="font-medium text-[var(--text-primary)]">{COMPANY_INFO.name}</p>
-                        <p className="text-sm text-[var(--text-secondary)]">
+                        <p className="font-medium text-foreground">{COMPANY_INFO.name}</p>
+                        <p className="text-sm text-muted">
                           {COMPANY_INFO.street}<br />
                           {COMPANY_INFO.zip} {COMPANY_INFO.city}
                         </p>
                       </div>
                     </div>
                     <div className="flex items-center gap-3">
-                      <Phone className="h-5 w-5 text-[var(--brand-primary)] shrink-0" />
+                      <Phone className="h-5 w-5 text-brand shrink-0" />
                       <a
                         href={`tel:${COMPANY_INFO.phone}`}
-                        className="text-sm text-[var(--text-secondary)] hover:text-[var(--brand-primary)] transition-colors"
+                        className="text-sm text-muted hover:text-brand transition-colors"
                       >
                         {COMPANY_INFO.phone}
                       </a>
                     </div>
                     <div className="flex items-start gap-3">
-                      <Clock className="h-5 w-5 text-[var(--brand-primary)] shrink-0 mt-0.5" />
-                      <div className="text-sm text-[var(--text-secondary)]">
+                      <Clock className="h-5 w-5 text-brand shrink-0 mt-0.5" />
+                      <div className="text-sm text-muted">
                         <p>Mo–Fr: {COMPANY_INFO.hours.weekdays}</p>
                         <p>Sa: {COMPANY_INFO.hours.saturday}</p>
                         <p>So: {COMPANY_INFO.hours.sunday}</p>
@@ -234,12 +234,12 @@ export default async function HomePage() {
                     </div>
                   </div>
 
-                  <div className="h-48 rounded-lg bg-[var(--bg-tertiary)] overflow-hidden">
+                  <div className="h-48 rounded-lg bg-tertiary overflow-hidden">
                     <iframe
                       src={`https://www.openstreetmap.org/export/embed.html?bbox=${COMPANY_INFO.coordinates.lng - 0.01}%2C${COMPANY_INFO.coordinates.lat - 0.005}%2C${COMPANY_INFO.coordinates.lng + 0.01}%2C${COMPANY_INFO.coordinates.lat + 0.005}&layer=mapnik&marker=${COMPANY_INFO.coordinates.lat}%2C${COMPANY_INFO.coordinates.lng}`}
                       width="100%"
                       height="100%"
-                      style={{ border: 0 }}
+                      className="border-0"
                       allowFullScreen
                       loading="lazy"
                       referrerPolicy="no-referrer-when-downgrade"
@@ -255,10 +255,8 @@ export default async function HomePage() {
 
       {/* ===== CTA ===== */}
       <section className="relative py-20 lg:py-24 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-[var(--brand-primary)] via-[#1e3a8a] to-[#0f172a]" />
-        <div className="absolute inset-0 opacity-10" style={{
-          backgroundImage: 'radial-gradient(circle at 20% 80%, rgba(245,158,11,0.3) 0%, transparent 50%), radial-gradient(circle at 80% 20%, rgba(96,165,250,0.3) 0%, transparent 50%)',
-        }} />
+        <div className="absolute inset-0 bg-gradient-to-br from-brand via-[#1e3a8a] to-[#0f172a]" />
+        <div className="absolute inset-0 opacity-10 cta-radial-bg" />
 
         <div className="container-main relative z-10 text-center">
           <RevealSection>

@@ -2,8 +2,8 @@
 
 namespace App\Http\Requests;
 
-use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
+use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
 
 class StoreTradeInRequest extends FormRequest
@@ -22,7 +22,7 @@ class StoreTradeInRequest extends FormRequest
             'preferred_contact_method' => 'nullable|in:email,phone,whatsapp',
             'trade_brand' => 'required|string|max:100',
             'trade_model' => 'required|string|max:100',
-            'trade_year' => 'required|integer|min:1960|max:' . (2026),
+            'trade_year' => 'required|integer|min:1960|max:'.(2026),
             'trade_mileage' => 'required|integer|min:0|max:999999',
             'trade_condition' => 'required|in:excellent,good,fair,poor',
             'trade_description' => 'nullable|string|max:5000',

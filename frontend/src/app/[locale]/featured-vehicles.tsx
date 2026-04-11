@@ -11,7 +11,7 @@ export async function FeaturedVehicles() {
     if (!vehicles.length) {
       return (
         <div className="text-center py-12">
-          <p className="text-[var(--text-secondary)]">
+          <p className="text-muted">
             {t('noVehicles')}
           </p>
         </div>
@@ -32,7 +32,7 @@ export async function FeaturedVehicles() {
   } catch {
     return (
       <div className="text-center py-12">
-        <p className="text-[var(--text-secondary)]">
+        <p className="text-muted">
           {t('loadError')}
         </p>
       </div>

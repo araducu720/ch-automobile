@@ -43,8 +43,8 @@ export function LanguageSwitcher() {
         onClick={() => setOpen(!open)}
         className={cn(
           'flex items-center gap-1.5 rounded-lg px-2.5 py-1.5 text-sm',
-          'hover:bg-[var(--bg-secondary)] transition-colors',
-          'text-[var(--text-secondary)] hover:text-[var(--text-primary)]',
+          'hover:bg-secondary transition-colors',
+          'text-muted hover:text-foreground',
         )}
         aria-label={t('selectLanguage')}
         aria-expanded={open}
@@ -54,7 +54,7 @@ export function LanguageSwitcher() {
       </button>
 
       {open && (
-        <div className="absolute right-0 top-full mt-1 z-50 w-48 max-h-80 overflow-y-auto rounded-xl border border-[var(--border-primary)] bg-[var(--bg-elevated)] shadow-lg">
+        <div className="absolute right-0 top-full mt-1 z-50 w-48 max-h-80 overflow-y-auto rounded-xl border border-border bg-card shadow-lg">
           {/* Popular languages */}
           <div className="p-1">
             {popularLocales.map((l) => (
@@ -63,20 +63,20 @@ export function LanguageSwitcher() {
                 onClick={() => handleChange(l)}
                 className={cn(
                   'w-full flex items-center gap-2 rounded-lg px-3 py-2 text-sm text-left',
-                  'hover:bg-[var(--bg-secondary)] transition-colors',
+                  'hover:bg-secondary transition-colors',
                   l === locale
-                    ? 'bg-[var(--brand-primary-light)] text-[var(--brand-primary)] font-medium'
-                    : 'text-[var(--text-primary)]',
+                    ? 'bg-brand-light text-brand font-medium'
+                    : 'text-foreground',
                 )}
               >
-                <span className="uppercase text-xs w-5 text-[var(--text-tertiary)]">{l}</span>
+                <span className="uppercase text-xs w-5 text-muted-foreground">{l}</span>
                 {LOCALE_NAMES[l]}
               </button>
             ))}
           </div>
 
           {/* Divider */}
-          <div className="border-t border-[var(--border-primary)] mx-2" />
+          <div className="border-t border-border mx-2" />
 
           {/* Other languages */}
           <div className="p-1">
@@ -86,13 +86,13 @@ export function LanguageSwitcher() {
                 onClick={() => handleChange(l)}
                 className={cn(
                   'w-full flex items-center gap-2 rounded-lg px-3 py-2 text-sm text-left',
-                  'hover:bg-[var(--bg-secondary)] transition-colors',
+                  'hover:bg-secondary transition-colors',
                   l === locale
-                    ? 'bg-[var(--brand-primary-light)] text-[var(--brand-primary)] font-medium'
-                    : 'text-[var(--text-primary)]',
+                    ? 'bg-brand-light text-brand font-medium'
+                    : 'text-foreground',
                 )}
               >
-                <span className="uppercase text-xs w-5 text-[var(--text-tertiary)]">{l}</span>
+                <span className="uppercase text-xs w-5 text-muted-foreground">{l}</span>
                 {LOCALE_NAMES[l]}
               </button>
             ))}

@@ -32,7 +32,9 @@ vi.mock('next/link', () => ({
 // Mock next-intl with actual German messages
 const { getNestedValue, loadedMessages } = vi.hoisted(() => {
   // Use fs to load messages since require may not resolve relative paths in vi.hoisted
+  // eslint-disable-next-line @typescript-eslint/no-require-imports
   const fs = require('fs')
+  // eslint-disable-next-line @typescript-eslint/no-require-imports
   const path = require('path')
   const messagesPath = path.resolve(__dirname, '../../messages/de.json')
   const rawMessages = fs.readFileSync(messagesPath, 'utf8')

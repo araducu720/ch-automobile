@@ -34,7 +34,7 @@ export default async function ReviewsPage({ searchParams }: PageProps) {
     return (
       <div className="container-main py-16 text-center">
         <h1 className="text-2xl font-bold">{t('title')}</h1>
-        <p className="mt-4 text-[var(--text-secondary)]">{t('subtitle')}</p>
+        <p className="mt-4 text-muted">{t('subtitle')}</p>
       </div>
     );
   }
@@ -45,8 +45,8 @@ export default async function ReviewsPage({ searchParams }: PageProps) {
     <div className="py-8 lg:py-12">
       <div className="container-main">
         <div className="max-w-2xl mb-10">
-          <h1 className="text-3xl font-bold text-[var(--text-primary)]">{t('title')}</h1>
-          <p className="mt-2 text-[var(--text-secondary)]">
+          <h1 className="text-3xl font-bold text-foreground">{t('title')}</h1>
+          <p className="mt-2 text-muted">
             {t('subtitle')}
           </p>
         </div>
@@ -57,11 +57,11 @@ export default async function ReviewsPage({ searchParams }: PageProps) {
             <CardContent className="p-6">
               <div className="flex flex-col items-center gap-4 sm:flex-row sm:gap-8">
                 <div className="text-center">
-                  <div className="text-4xl font-extrabold text-[var(--brand-primary)]">
+                  <div className="text-4xl font-extrabold text-brand">
                     {aggregate.average_rating.toFixed(1)}
                   </div>
                   <StarRating rating={aggregate.average_rating} size="md" className="mt-1 justify-center" />
-                  <p className="mt-1 text-sm text-[var(--text-secondary)]">
+                  <p className="mt-1 text-sm text-muted">
                     {t('totalReviews', { count: aggregate.total_count })}
                   </p>
                 </div>
@@ -71,14 +71,14 @@ export default async function ReviewsPage({ searchParams }: PageProps) {
                     const percentage = aggregate.total_count > 0 ? (count / aggregate.total_count) * 100 : 0;
                     return (
                       <div key={star} className="flex items-center gap-2 text-sm">
-                        <span className="w-6 text-right text-[var(--text-tertiary)]">{star}★</span>
-                        <div className="flex-1 h-2 rounded-full bg-[var(--bg-tertiary)] overflow-hidden">
+                        <span className="w-6 text-right text-muted-foreground">{star}★</span>
+                        <div className="flex-1 h-2 rounded-full bg-tertiary overflow-hidden">
                           <div
-                            className="h-full rounded-full bg-[var(--brand-accent)]"
+                            className="h-full rounded-full bg-accent"
                             style={{ width: `${percentage}%` }}
                           />
                         </div>
-                        <span className="w-8 text-xs text-[var(--text-tertiary)]">{count}</span>
+                        <span className="w-8 text-xs text-muted-foreground">{count}</span>
                       </div>
                     );
                   })}
@@ -96,25 +96,25 @@ export default async function ReviewsPage({ searchParams }: PageProps) {
                 <Card key={review.id}>
                   <CardContent className="p-5">
                     <div className="flex items-start gap-4">
-                      <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[var(--brand-primary-light)] text-[var(--brand-primary)] font-semibold text-sm shrink-0">
+                      <div className="flex h-10 w-10 items-center justify-center rounded-full bg-brand-light text-brand font-semibold text-sm shrink-0">
                         {getInitials(review.customer_name)}
                       </div>
                       <div className="flex-1 min-w-0">
                         <div className="flex items-center justify-between gap-2">
-                          <h3 className="font-semibold text-[var(--text-primary)]">{review.customer_name}</h3>
-                          <span className="text-xs text-[var(--text-tertiary)] shrink-0">
+                          <h3 className="font-semibold text-foreground">{review.customer_name}</h3>
+                          <span className="text-xs text-muted-foreground shrink-0">
                             {formatDate(review.created_at)}
                           </span>
                         </div>
                         <StarRating rating={review.rating} size="sm" className="mt-1" />
                         {review.title && (
-                          <h4 className="mt-2 font-medium text-[var(--text-primary)]">{review.title}</h4>
+                          <h4 className="mt-2 font-medium text-foreground">{review.title}</h4>
                         )}
-                        <p className="mt-1 text-sm text-[var(--text-secondary)] leading-relaxed">
+                        <p className="mt-1 text-sm text-muted leading-relaxed">
                           {review.comment}
                         </p>
                         {review.vehicle && (
-                          <p className="mt-2 text-xs text-[var(--text-tertiary)]">
+                          <p className="mt-2 text-xs text-muted-foreground">
                             {t('vehiclePrefix', { vehicle: review.vehicle })}
                           </p>
                         )}
@@ -124,7 +124,7 @@ export default async function ReviewsPage({ searchParams }: PageProps) {
                 </Card>
               ))
             ) : (
-              <p className="text-[var(--text-secondary)] text-center py-8">
+              <p className="text-muted text-center py-8">
                 {t('subtitle')}
               </p>
             )}
@@ -139,7 +139,7 @@ export default async function ReviewsPage({ searchParams }: PageProps) {
                     </Link>
                   </Button>
                 )}
-                <span className="px-4 text-sm text-[var(--text-secondary)]">
+                <span className="px-4 text-sm text-muted">
                   {tp('page', { current: meta.current_page, total: meta.last_page })}
                 </span>
                 {meta.current_page < meta.last_page && (
@@ -157,11 +157,11 @@ export default async function ReviewsPage({ searchParams }: PageProps) {
           <div>
             <Card className="sticky top-24">
               <CardContent className="p-6">
-                <h2 className="text-lg font-semibold text-[var(--text-primary)] mb-1 flex items-center gap-2">
+                <h2 className="text-lg font-semibold text-foreground mb-1 flex items-center gap-2">
                   <MessageSquarePlus className="h-5 w-5" />
                   {t('writeReview')}
                 </h2>
-                <p className="text-sm text-[var(--text-secondary)] mb-6">
+                <p className="text-sm text-muted mb-6">
                   {t('subtitle')}
                 </p>
                 <ReviewForm />

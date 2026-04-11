@@ -61,7 +61,7 @@ class InquiryConfirmationNotification extends Notification implements ShouldQueu
         $body = $bodies[$locale] ?? $bodies['de'];
 
         $mail = (new MailMessage)
-            ->subject($subject . ' — ' . $this->inquiry->reference_number)
+            ->subject($subject.' — '.$this->inquiry->reference_number)
             ->greeting($greeting);
 
         foreach ($body as $line) {

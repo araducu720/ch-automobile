@@ -24,7 +24,7 @@ class NewReservationNotification extends Notification implements ShouldQueue
     public function toMail(object $notifiable): MailMessage
     {
         $vehicle = $this->reservation->vehicle;
-        $deposit = number_format($this->reservation->deposit_amount, 2, ',', '.') . ' €';
+        $deposit = number_format($this->reservation->deposit_amount, 2, ',', '.').' €';
 
         return (new MailMessage)
             ->subject("Neue Reservierung: {$vehicle->full_name} — {$this->reservation->payment_reference}")
@@ -37,7 +37,7 @@ class NewReservationNotification extends Notification implements ShouldQueue
             ->line("**Kaution:** {$deposit}")
             ->line("**Zahlungsreferenz:** {$this->reservation->payment_reference}")
             ->line("**Ablaufdatum:** {$this->reservation->reservation_expires_at->format('d.m.Y H:i')}")
-            ->action('Im Admin-Panel ansehen', url('/admin/reservations/' . $this->reservation->id . '/edit'))
+            ->action('Im Admin-Panel ansehen', url('/admin/reservations/'.$this->reservation->id.'/edit'))
             ->salutation('C-H Automobile & Exclusive Cars — System');
     }
 }

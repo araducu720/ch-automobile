@@ -5,7 +5,6 @@ namespace App\Console\Commands;
 use App\Models\Vehicle;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\File;
-use Illuminate\Support\Str;
 
 class ImportAutoScoutVehicles extends Command
 {
@@ -18,7 +17,9 @@ class ImportAutoScoutVehicles extends Command
     protected $description = 'Import vehicles from AutoScout24 scraped data (folders with details.json + photos)';
 
     private int $imported = 0;
+
     private int $skipped = 0;
+
     private int $failed = 0;
 
     private const FUEL_MAP = [
@@ -76,8 +77,9 @@ class ImportAutoScoutVehicles extends Command
         $skipImages = $this->option('skip-images');
         $dryRun = $this->option('dry-run');
 
-        if (!File::isDirectory($path)) {
+        if (! File::isDirectory($path)) {
             $this->error("Directory not found: {$path}");
+
             return 1;
         }
 
@@ -104,7 +106,7 @@ class ImportAutoScoutVehicles extends Command
             } catch (\Throwable $e) {
                 $this->failed++;
                 $this->newLine();
-                $this->error("Failed: " . basename($dir) . " - " . $e->getMessage());
+                $this->error('Failed: '.basename($dir).' - '.$e->getMessage());
             }
             $bar->advance();
         }
@@ -112,7 +114,7 @@ class ImportAutoScoutVehicles extends Command
         $bar->finish();
         $this->newLine(2);
 
-        $this->info("Import complete:");
+        $this->info('Import complete:');
         $this->info("  Imported: {$this->imported}");
         $this->info("  Skipped (duplicate): {$this->skipped}");
         $this->info("  Failed: {$this->failed}");
@@ -122,34 +124,39 @@ class ImportAutoScoutVehicles extends Command
 
     private function importVehicle(string $dir, bool $skipImages, bool $dryRun): void
     {
-        $detailsFile = $dir . '/details.json';
+        $detailsFile = $dir.'/details.json';
 
-        if (!File::exists($detailsFile)) {
+        if (! File::exists($detailsFile)) {
             $this->skipped++;
+
             return;
         }
 
         $raw = json_decode(File::get($detailsFile), true);
-        if (!$raw) {
+        if (! $raw) {
             $this->failed++;
+
             return;
         }
 
         $listing = $raw['props']['pageProps']['listingDetails'] ?? null;
-        if (!$listing) {
+        if (! $listing) {
             $this->failed++;
+
             return;
         }
 
         $autoscoutId = $listing['id'] ?? null;
-        if (!$autoscoutId) {
+        if (! $autoscoutId) {
             $this->failed++;
+
             return;
         }
 
         // Skip if already imported
         if (Vehicle::where('autoscout_id', $autoscoutId)->exists()) {
             $this->skipped++;
+
             return;
         }
 
@@ -160,13 +167,14 @@ class ImportAutoScoutVehicles extends Command
 
         if ($dryRun) {
             $this->imported++;
+
             return;
         }
 
         $record = Vehicle::create($data);
 
         // Import photos
-        if (!$skipImages) {
+        if (! $skipImages) {
             $this->importPhotos($record, $dir);
         }
 
@@ -256,14 +264,14 @@ class ImportAutoScoutVehicles extends Command
 
     private function importPhotos(Vehicle $record, string $dir): void
     {
-        $photosDir = $dir . '/photos';
-        if (!File::isDirectory($photosDir)) {
+        $photosDir = $dir.'/photos';
+        if (! File::isDirectory($photosDir)) {
             return;
         }
 
         $files = collect(File::files($photosDir))
-            ->filter(fn($f) => in_array(strtolower($f->getExtension()), ['jpg', 'jpeg', 'png', 'webp']))
-            ->sortBy(fn($f) => $f->getFilename())
+            ->filter(fn ($f) => in_array(strtolower($f->getExtension()), ['jpg', 'jpeg', 'png', 'webp']))
+            ->sortBy(fn ($f) => $f->getFilename())
             ->take(30); // max 30 per vehicle
 
         foreach ($files as $file) {

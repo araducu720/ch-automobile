@@ -5,7 +5,7 @@ function Skeleton({ className, ...props }: React.HTMLAttributes<HTMLDivElement>)
   return (
     <div
       className={cn(
-        'animate-pulse rounded-lg bg-[var(--bg-tertiary)]',
+        'animate-pulse rounded-lg bg-tertiary',
         className,
       )}
       role="status"
@@ -18,7 +18,7 @@ function Skeleton({ className, ...props }: React.HTMLAttributes<HTMLDivElement>)
 /* ---------- Vehicle Card Skeleton ---------- */
 function VehicleCardSkeleton() {
   return (
-    <div className="rounded-xl border border-[var(--border-primary)] bg-[var(--bg-elevated)] overflow-hidden">
+    <div className="rounded-xl border border-border bg-card overflow-hidden">
       <Skeleton className="h-48 w-full rounded-none" />
       <div className="p-4 space-y-3">
         <Skeleton className="h-5 w-3/4" />
@@ -40,7 +40,7 @@ function VehicleCardSkeleton() {
 /* ---------- Blog Card Skeleton ---------- */
 function BlogCardSkeleton() {
   return (
-    <div className="rounded-xl border border-[var(--border-primary)] bg-[var(--bg-elevated)] overflow-hidden">
+    <div className="rounded-xl border border-border bg-card overflow-hidden">
       <Skeleton className="h-48 w-full rounded-none" />
       <div className="p-5 space-y-3">
         <Skeleton className="h-3 w-24" />

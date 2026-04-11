@@ -41,17 +41,17 @@ export function CookieConsent() {
 
   return (
     <div className="fixed inset-x-0 bottom-0 z-50 p-4">
-      <div className="mx-auto max-w-4xl rounded-2xl border border-[var(--border-primary)] bg-[var(--bg-elevated)] p-6 shadow-2xl">
+      <div className="mx-auto max-w-4xl rounded-2xl border border-border bg-card p-6 shadow-2xl">
         <div className="flex items-start gap-4">
-          <Cookie className="mt-0.5 h-6 w-6 shrink-0 text-[var(--brand-primary)]" />
+          <Cookie className="mt-0.5 h-6 w-6 shrink-0 text-brand" />
           <div className="flex-1">
-            <h3 className="font-semibold text-[var(--text-primary)]">
+            <h3 className="font-semibold text-foreground">
               {t('title')}
             </h3>
-            <p className="mt-1 text-sm text-[var(--text-secondary)]">
+            <p className="mt-1 text-sm text-muted">
               {t.rich('description', {
                 link: (chunks) => (
-                  <Link href="/datenschutz" className="text-[var(--text-link)] underline hover:text-[var(--text-link-hover)]">
+                  <Link href="/datenschutz" className="text-link underline hover:text-link-hover">
                     {chunks}
                   </Link>
                 ),
@@ -71,7 +71,7 @@ export function CookieConsent() {
           </div>
           <button
             onClick={acceptEssential}
-            className="text-[var(--text-tertiary)] hover:text-[var(--text-primary)] transition-colors"
+            className="text-muted-foreground hover:text-foreground transition-colors"
             aria-label={tc('close')}
           >
             <X className="h-5 w-5" />

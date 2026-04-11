@@ -1,11 +1,11 @@
 <?php
 
-use App\Http\Controllers\Api\VehicleController;
+use App\Http\Controllers\Api\BlogController;
 use App\Http\Controllers\Api\InquiryController;
 use App\Http\Controllers\Api\ReservationController;
-use App\Http\Controllers\Api\BlogController;
 use App\Http\Controllers\Api\ReviewController;
 use App\Http\Controllers\Api\SettingsController;
+use App\Http\Controllers\Api\VehicleController;
 use Illuminate\Support\Facades\Route;
 
 /*

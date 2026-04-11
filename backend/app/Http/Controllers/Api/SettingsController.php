@@ -71,7 +71,7 @@ class SettingsController extends Controller
             default => null,
         };
 
-        if (!$content) {
+        if (! $content) {
             return response()->json(['error' => 'Not found'], 404);
         }
 
@@ -128,8 +128,8 @@ class SettingsController extends Controller
 
         $frontendUrl = config('app.frontend_url', 'http://localhost:3000');
 
-        if (!$subscriber) {
-            return redirect($frontendUrl . '/newsletter/bestaetigt?status=invalid');
+        if (! $subscriber) {
+            return redirect($frontendUrl.'/newsletter/bestaetigt?status=invalid');
         }
 
         $subscriber->update([
@@ -137,14 +137,14 @@ class SettingsController extends Controller
             'confirmation_token' => null,
         ]);
 
-        return redirect($frontendUrl . '/newsletter/bestaetigt?status=success');
+        return redirect($frontendUrl.'/newsletter/bestaetigt?status=success');
     }
 
     public function unsubscribeNewsletter(string $email): JsonResponse
     {
         $subscriber = NewsletterSubscriber::where('email', $email)->first();
 
-        if (!$subscriber) {
+        if (! $subscriber) {
             return response()->json([
                 'error' => 'E-Mail-Adresse nicht gefunden.',
             ], 404);

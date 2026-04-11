@@ -27,7 +27,7 @@ export default function Loading() {
         </div>
 
         {/* Photo upload */}
-        <div className="h-32 w-full rounded-xl border-2 border-dashed border-[var(--border-primary)] animate-shimmer mb-8" />
+        <div className="h-32 w-full rounded-xl border-2 border-dashed border-border animate-shimmer mb-8" />
 
         <div className="h-10 w-40 rounded-lg animate-shimmer" />
       </div>

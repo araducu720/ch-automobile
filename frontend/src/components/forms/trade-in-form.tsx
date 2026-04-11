@@ -41,7 +41,7 @@ export function TradeInForm() {
     <form ref={formRef} action={formAction} className="space-y-6">
       {/* Personal info */}
       <div>
-        <h3 className="text-lg font-semibold text-[var(--text-primary)] mb-4">{t('contactData')}</h3>
+        <h3 className="text-lg font-semibold text-foreground mb-4">{t('contactData')}</h3>
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
           <Input label="Name" name="name" required autoComplete="name" error={state?.errors?.name?.[0]} />
           <Input label={tc('email')} name="email" type="email" required autoComplete="email" error={state?.errors?.email?.[0]} />
@@ -51,7 +51,7 @@ export function TradeInForm() {
 
       {/* Vehicle info */}
       <div>
-        <h3 className="text-lg font-semibold text-[var(--text-primary)] mb-4">{t('vehicleData')}</h3>
+        <h3 className="text-lg font-semibold text-foreground mb-4">{t('vehicleData')}</h3>
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
           <Input label={t('vehicleBrand')} name="trade_brand" required placeholder={t('brandPlaceholder')} error={state?.errors?.trade_brand?.[0]} />
           <Input label={t('vehicleModel')} name="trade_model" required placeholder={t('modelPlaceholder')} error={state?.errors?.trade_model?.[0]} />
@@ -63,13 +63,13 @@ export function TradeInForm() {
 
       {/* Photos */}
       <div>
-        <label className="block text-sm font-medium text-[var(--text-primary)] mb-2">
+        <label className="block text-sm font-medium text-foreground mb-2">
           {t('photos')}
         </label>
         <div className="flex items-center justify-center w-full">
-          <label className="flex flex-col items-center justify-center w-full h-32 border-2 border-dashed border-[var(--border-secondary)] rounded-xl cursor-pointer bg-[var(--bg-secondary)] hover:bg-[var(--bg-tertiary)] transition-colors">
-            <Upload className="h-8 w-8 text-[var(--text-tertiary)] mb-2" />
-            <span className="text-sm text-[var(--text-secondary)]">{t('photoUploadHint')}</span>
+          <label className="flex flex-col items-center justify-center w-full h-32 border-2 border-dashed border-border-secondary rounded-xl cursor-pointer bg-secondary hover:bg-tertiary transition-colors">
+            <Upload className="h-8 w-8 text-muted-foreground mb-2" />
+            <span className="text-sm text-muted">{t('photoUploadHint')}</span>
             <input
               type="file"
               name="photos"
@@ -98,11 +98,11 @@ export function TradeInForm() {
 
       {/* Privacy */}
       <div className="flex items-start gap-2">
-        <input type="checkbox" id="trade_privacy" name="privacy_accepted" value="true" required className="mt-1 h-4 w-4 rounded border-2 border-[var(--border-input)] accent-[var(--brand-primary)]" />
-        <label htmlFor="trade_privacy" className="text-sm text-[var(--text-secondary)]">
+        <input type="checkbox" id="trade_privacy" name="privacy_accepted" value="true" required className="mt-1 h-4 w-4 rounded border-2 border-input-border accent-brand" />
+        <label htmlFor="trade_privacy" className="text-sm text-muted">
           {t.rich('privacy', {
             link: (chunks) => (
-              <Link href="/datenschutz" className="text-[var(--text-link)] hover:underline">{chunks}</Link>
+              <Link href="/datenschutz" className="text-link hover:underline">{chunks}</Link>
             ),
           })}
           {' *'}
@@ -111,7 +111,7 @@ export function TradeInForm() {
 
       {/* Inline validation errors */}
       {state && !state.success && state.errors && (
-        <div className="flex items-start gap-2 rounded-lg bg-[var(--status-error-bg)] p-4 text-sm text-[var(--status-error)]">
+        <div className="flex items-start gap-2 rounded-lg bg-error-bg p-4 text-sm text-error">
           <AlertCircle className="h-5 w-5 shrink-0" />
           {tv('checkInputs')}
         </div>

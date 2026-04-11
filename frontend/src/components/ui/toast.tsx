@@ -39,10 +39,10 @@ const iconMap: Record<ToastType, typeof CheckCircle> = {
 };
 
 const styleMap: Record<ToastType, string> = {
-  success: 'border-[var(--status-success)] bg-[var(--status-success-bg)] text-[var(--status-success)]',
-  error: 'border-[var(--status-error)] bg-[var(--status-error-bg)] text-[var(--status-error)]',
-  warning: 'border-[var(--status-warning)] bg-[var(--status-warning-bg)] text-[var(--status-warning)]',
-  info: 'border-[var(--status-info)] bg-[var(--status-info-bg)] text-[var(--status-info)]',
+  success: 'border-success bg-success-bg text-success',
+  error: 'border-error bg-error-bg text-error',
+  warning: 'border-warning bg-warning-bg text-warning',
+  info: 'border-info bg-info-bg text-info',
 };
 
 export function ToastProvider({ children }: { children: ReactNode }) {

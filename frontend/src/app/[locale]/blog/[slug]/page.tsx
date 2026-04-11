@@ -16,7 +16,6 @@ import {
   User,
   Eye,
   Clock,
-  Share2,
 } from 'lucide-react';
 
 interface BlogPostPageProps {
@@ -83,18 +82,18 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
       ]} />
 
       {/* Breadcrumb */}
-      <div className="border-b border-[var(--border-primary)] bg-[var(--bg-secondary)]">
+      <div className="border-b border-border bg-secondary">
         <div className="container-main py-4">
-          <nav className="flex items-center gap-2 text-sm text-[var(--text-tertiary)]">
-            <Link href="/" className="hover:text-[var(--text-primary)] transition-colors">
+          <nav className="flex items-center gap-2 text-sm text-muted-foreground">
+            <Link href="/" className="hover:text-foreground transition-colors">
               {tv('breadcrumbHome')}
             </Link>
             <span>/</span>
-            <Link href="/blog" className="hover:text-[var(--text-primary)] transition-colors">
+            <Link href="/blog" className="hover:text-foreground transition-colors">
               {t('title')}
             </Link>
             <span>/</span>
-            <span className="text-[var(--text-primary)] truncate max-w-[200px]">
+            <span className="text-foreground truncate max-w-[200px]">
               {post.title}
             </span>
           </nav>
@@ -106,7 +105,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
           {/* Back link */}
           <Link
             href="/blog"
-            className="mb-6 inline-flex items-center gap-1 text-sm text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors"
+            className="mb-6 inline-flex items-center gap-1 text-sm text-muted hover:text-foreground transition-colors"
           >
             <ChevronLeft className="h-4 w-4" />
             {t('backToBlog')}
@@ -125,18 +124,18 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                   </Link>
                 )}
 
-                <h1 className="text-3xl font-extrabold tracking-tight text-[var(--text-primary)] sm:text-4xl lg:text-5xl leading-tight">
+                <h1 className="text-3xl font-extrabold tracking-tight text-foreground sm:text-4xl lg:text-5xl leading-tight">
                   {post.title}
                 </h1>
 
                 {post.excerpt && (
-                  <p className="mt-4 text-lg text-[var(--text-secondary)] leading-relaxed">
+                  <p className="mt-4 text-lg text-muted leading-relaxed">
                     {post.excerpt}
                   </p>
                 )}
 
                 {/* Meta */}
-                <div className="mt-6 flex flex-wrap items-center gap-4 text-sm text-[var(--text-tertiary)] border-b border-[var(--border-primary)] pb-6">
+                <div className="mt-6 flex flex-wrap items-center gap-4 text-sm text-muted-foreground border-b border-border pb-6">
                   {post.published_at && (
                     <span className="flex items-center gap-1.5">
                       <Calendar className="h-4 w-4" />
@@ -162,7 +161,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
               {/* Featured image */}
               {post.featured_image && (
-                <div className="relative aspect-[16/9] mb-8 rounded-xl overflow-hidden bg-[var(--bg-tertiary)]">
+                <div className="relative aspect-[16/9] mb-8 rounded-xl overflow-hidden bg-tertiary">
                   <Image
                     src={post.featured_image}
                     alt={post.title}
@@ -176,18 +175,18 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
               {/* Article body */}
               <SafeHtml
-                className="prose prose-lg max-w-none text-[var(--text-primary)] dark:prose-invert
+                className="prose prose-lg max-w-none text-foreground dark:prose-invert
                   prose-headings:font-bold prose-headings:tracking-tight
-                  prose-a:text-[var(--text-link)] prose-a:no-underline hover:prose-a:underline
+                  prose-a:text-link prose-a:no-underline hover:prose-a:underline
                   prose-img:rounded-xl
-                  prose-strong:text-[var(--text-primary)]
+                  prose-strong:text-foreground
                   prose-p:leading-relaxed
                   prose-li:leading-relaxed"
                 html={post.content}
               />
 
               {/* Share / Back */}
-              <div className="mt-10 flex items-center justify-between border-t border-[var(--border-primary)] pt-6">
+              <div className="mt-10 flex items-center justify-between border-t border-border pt-6">
                 <Button variant="outline" size="sm" asChild>
                   <Link href="/blog">
                     <ChevronLeft className="h-4 w-4" />
@@ -202,18 +201,18 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
               {/* Author card */}
               <Card>
                 <CardContent className="p-5">
-                  <h3 className="text-sm font-semibold text-[var(--text-tertiary)] uppercase tracking-wider mb-3">
+                  <h3 className="text-sm font-semibold text-muted-foreground uppercase tracking-wider mb-3">
                     {t('author')}
                   </h3>
                   <div className="flex items-center gap-3">
-                    <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[var(--brand-primary-light)]">
-                      <User className="h-5 w-5 text-[var(--brand-primary)]" />
+                    <div className="flex h-10 w-10 items-center justify-center rounded-full bg-brand-light">
+                      <User className="h-5 w-5 text-brand" />
                     </div>
                     <div>
-                      <p className="text-sm font-semibold text-[var(--text-primary)]">
+                      <p className="text-sm font-semibold text-foreground">
                         {post.author}
                       </p>
-                      <p className="text-xs text-[var(--text-tertiary)]">C-H Automobile</p>
+                      <p className="text-xs text-muted-foreground">C-H Automobile</p>
                     </div>
                   </div>
                 </CardContent>
@@ -223,7 +222,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
               {post.related && post.related.length > 0 && (
                 <Card>
                   <CardContent className="p-5">
-                    <h3 className="text-sm font-semibold text-[var(--text-tertiary)] uppercase tracking-wider mb-4">
+                    <h3 className="text-sm font-semibold text-muted-foreground uppercase tracking-wider mb-4">
                       {t('relatedPosts')}
                     </h3>
                     <div className="space-y-4">
@@ -244,11 +243,11 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                               />
                             </div>
                           )}
-                          <h4 className="text-sm font-medium text-[var(--text-primary)] group-hover:text-[var(--brand-primary)] transition-colors line-clamp-2">
+                          <h4 className="text-sm font-medium text-foreground group-hover:text-brand transition-colors line-clamp-2">
                             {related.title}
                           </h4>
                           {related.published_at && (
-                            <p className="text-xs text-[var(--text-tertiary)] mt-1">
+                            <p className="text-xs text-muted-foreground mt-1">
                               {formatDate(related.published_at)}
                             </p>
                           )}
@@ -260,7 +259,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
               )}
 
               {/* CTA */}
-              <Card className="bg-gradient-to-br from-[var(--brand-primary)] to-[#1e3a8a] text-white">
+              <Card className="bg-gradient-to-br from-brand to-[#1e3a8a] text-white">
                 <CardContent className="p-5 text-center">
                   <h3 className="font-semibold mb-2">{t('lookingForVehicle')}</h3>
                   <p className="text-sm text-white/75 mb-4">

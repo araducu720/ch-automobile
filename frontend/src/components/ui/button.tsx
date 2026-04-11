@@ -5,24 +5,24 @@ import { cn } from '@/lib/utils';
 import { Loader2 } from 'lucide-react';
 
 const buttonVariants = cva(
-  'inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-lg text-sm font-medium transition-all duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--border-focus)] disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0',
+  'inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-lg text-sm font-medium transition-all duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-border-focus disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0',
   {
     variants: {
       variant: {
         primary:
-          'bg-[var(--brand-primary)] text-white hover:bg-[var(--brand-primary-hover)] shadow-sm hover:shadow-md active:scale-[0.98]',
+          'bg-brand text-white hover:bg-brand-hover shadow-sm hover:shadow-md active:scale-[0.98]',
         secondary:
-          'bg-[var(--bg-tertiary)] text-[var(--text-primary)] hover:bg-[var(--border-primary)] border border-[var(--border-primary)]',
+          'bg-tertiary text-foreground hover:bg-border border border-border',
         outline:
-          'border border-[var(--border-primary)] bg-transparent text-[var(--text-primary)] hover:bg-[var(--bg-secondary)] hover:border-[var(--border-secondary)]',
+          'border border-border bg-transparent text-foreground hover:bg-secondary hover:border-border-secondary',
         ghost:
-          'text-[var(--text-primary)] hover:bg-[var(--bg-secondary)]',
+          'text-foreground hover:bg-secondary',
         destructive:
-          'bg-[var(--status-error)] text-white hover:bg-red-700 shadow-sm',
+          'bg-error text-white hover:bg-red-700 shadow-sm',
         accent:
-          'bg-[var(--brand-accent)] text-[var(--brand-secondary)] hover:bg-[var(--brand-accent-hover)] shadow-sm font-semibold',
+          'bg-accent text-brand-secondary hover:bg-accent-hover shadow-sm font-semibold',
         link:
-          'text-[var(--text-link)] underline-offset-4 hover:underline p-0 h-auto',
+          'text-link underline-offset-4 hover:underline p-0 h-auto',
       },
       size: {
         sm: 'h-8 px-3 text-xs rounded-md',

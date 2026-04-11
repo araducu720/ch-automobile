@@ -59,72 +59,72 @@ export function ReservationForm({ vehicleId, vehicleName, vehiclePrice }: Reserv
     };
 
     return (
-      <div className="rounded-xl border border-[var(--status-success)] bg-[var(--status-success-bg)] p-6">
-        <div className="mb-4 flex items-center gap-2 text-[var(--status-success)]">
+      <div className="rounded-xl border border-success bg-success-bg p-6">
+        <div className="mb-4 flex items-center gap-2 text-success">
           <CheckCircle className="h-6 w-6" />
           <h3 className="text-lg font-semibold">{t('successTitle')}</h3>
         </div>
 
-        <p className="mb-6 text-sm text-[var(--status-success)]">
+        <p className="mb-6 text-sm text-success">
           {state.message}
         </p>
 
         <div className="space-y-4">
           {/* Vehicle info */}
-          <div className="rounded-lg bg-[var(--bg-elevated)] p-4">
-            <div className="flex items-center gap-2 text-sm font-medium text-[var(--text-secondary)]">
+          <div className="rounded-lg bg-card p-4">
+            <div className="flex items-center gap-2 text-sm font-medium text-muted">
               <Car className="h-4 w-4" />
               {t('vehicle')}
             </div>
-            <p className="mt-1 font-semibold text-[var(--text-primary)]">
+            <p className="mt-1 font-semibold text-foreground">
               {data.vehicle.brand} {data.vehicle.model} ({data.vehicle.year})
             </p>
-            <p className="text-sm text-[var(--text-secondary)]">{data.vehicle.price}</p>
+            <p className="text-sm text-muted">{data.vehicle.price}</p>
           </div>
 
           {/* Bank details */}
-          <div className="rounded-lg bg-[var(--bg-elevated)] p-4">
-            <div className="flex items-center gap-2 text-sm font-medium text-[var(--text-secondary)]">
+          <div className="rounded-lg bg-card p-4">
+            <div className="flex items-center gap-2 text-sm font-medium text-muted">
               <CreditCard className="h-4 w-4" />
               {t('paymentInfo')}
             </div>
             <div className="mt-3 space-y-2 text-sm">
               <div className="flex justify-between">
-                <span className="text-[var(--text-secondary)]">{t('amount')}:</span>
-                <span className="font-bold text-[var(--text-primary)]">{data.formatted_deposit}</span>
+                <span className="text-muted">{t('amount')}:</span>
+                <span className="font-bold text-foreground">{data.formatted_deposit}</span>
               </div>
               <div className="flex items-center justify-between">
-                <span className="text-[var(--text-secondary)]">{t('reference')}:</span>
+                <span className="text-muted">{t('reference')}:</span>
                 <button
                   onClick={() => copyReference(data.payment_reference)}
-                  className="flex items-center gap-1 font-mono font-bold text-[var(--brand-primary)] hover:text-[var(--brand-primary-hover)]"
+                  className="flex items-center gap-1 font-mono font-bold text-brand hover:text-brand-hover"
                 >
                   {data.payment_reference}
                   {copiedRef ? <Check className="h-3.5 w-3.5" /> : <Copy className="h-3.5 w-3.5" />}
                 </button>
               </div>
-              <hr className="border-[var(--border-primary)]" />
+              <hr className="border-border" />
               <div className="flex justify-between">
-                <span className="text-[var(--text-secondary)]">{t('accountHolder')}:</span>
-                <span className="text-[var(--text-primary)]">{data.bank_details.account_holder}</span>
+                <span className="text-muted">{t('accountHolder')}:</span>
+                <span className="text-foreground">{data.bank_details.account_holder}</span>
               </div>
               <div className="flex justify-between">
-                <span className="text-[var(--text-secondary)]">{t('bank')}:</span>
-                <span className="text-[var(--text-primary)]">{data.bank_details.bank_name}</span>
+                <span className="text-muted">{t('bank')}:</span>
+                <span className="text-foreground">{data.bank_details.bank_name}</span>
               </div>
               <div className="flex justify-between">
-                <span className="text-[var(--text-secondary)]">IBAN:</span>
-                <span className="font-mono text-[var(--text-primary)]">{data.bank_details.iban}</span>
+                <span className="text-muted">IBAN:</span>
+                <span className="font-mono text-foreground">{data.bank_details.iban}</span>
               </div>
               <div className="flex justify-between">
-                <span className="text-[var(--text-secondary)]">BIC:</span>
-                <span className="font-mono text-[var(--text-primary)]">{data.bank_details.bic}</span>
+                <span className="text-muted">BIC:</span>
+                <span className="font-mono text-foreground">{data.bank_details.bic}</span>
               </div>
             </div>
           </div>
 
           {/* Expiry notice */}
-          <div className="rounded-lg border border-[var(--status-warning)] bg-[var(--status-warning-bg)] p-3 text-sm text-[var(--status-warning)]">
+          <div className="rounded-lg border border-warning bg-warning-bg p-3 text-sm text-warning">
             <strong>{t('importantNote')}</strong>{' '}
             {t('expiresOn', {
               date: new Date(data.expires_at).toLocaleDateString('de-DE', {
@@ -144,14 +144,14 @@ export function ReservationForm({ vehicleId, vehicleName, vehiclePrice }: Reserv
   return (
     <div>
       {/* Vehicle summary */}
-      <div className="mb-6 rounded-lg bg-[var(--bg-secondary)] p-4">
-        <div className="flex items-center gap-2 text-sm font-medium text-[var(--text-secondary)]">
+      <div className="mb-6 rounded-lg bg-secondary p-4">
+        <div className="flex items-center gap-2 text-sm font-medium text-muted">
           <Car className="h-4 w-4" />
           {t('reserveVehicle')}
         </div>
-        <p className="mt-1 font-semibold text-[var(--text-primary)]">{vehicleName}</p>
-        <p className="text-sm text-[var(--text-secondary)]">{vehiclePrice}</p>
-        <p className="mt-2 text-xs text-[var(--text-tertiary)]">
+        <p className="mt-1 font-semibold text-foreground">{vehicleName}</p>
+        <p className="text-sm text-muted">{vehiclePrice}</p>
+        <p className="mt-2 text-xs text-muted-foreground">
           {t('deposit10Percent')}
         </p>
       </div>
@@ -160,13 +160,13 @@ export function ReservationForm({ vehicleId, vehicleName, vehiclePrice }: Reserv
         <input type="hidden" name="vehicle_id" value={vehicleId} />
 
         {state && !state.success && (
-          <div className="flex items-start gap-2 rounded-lg bg-[var(--status-error-bg)] p-3 text-sm text-[var(--status-error)]">
+          <div className="flex items-start gap-2 rounded-lg bg-error-bg p-3 text-sm text-error">
             <AlertCircle className="mt-0.5 h-4 w-4 shrink-0" />
             <span>{state.message}</span>
           </div>
         )}
 
-        <h4 className="font-medium text-[var(--text-primary)]">{t('personalData')}</h4>
+        <h4 className="font-medium text-foreground">{t('personalData')}</h4>
 
         <Input
           label="Name"
@@ -192,7 +192,7 @@ export function ReservationForm({ vehicleId, vehicleName, vehiclePrice }: Reserv
           />
         </div>
 
-        <h4 className="pt-2 font-medium text-[var(--text-primary)]">{t('billingAddress')}</h4>
+        <h4 className="pt-2 font-medium text-foreground">{t('billingAddress')}</h4>
 
         <Input
           label={t('street')}
@@ -216,13 +216,13 @@ export function ReservationForm({ vehicleId, vehicleName, vehiclePrice }: Reserv
         </div>
 
         {/* Privacy */}
-        <label className="flex items-start gap-2 text-sm text-[var(--text-secondary)]">
+        <label className="flex items-start gap-2 text-sm text-muted">
           <input
             type="checkbox"
             name="privacy_accepted"
             value="true"
             required
-            className="mt-1 h-4 w-4 rounded border-2 border-[var(--border-input)] accent-[var(--brand-primary)]"
+            className="mt-1 h-4 w-4 rounded border-2 border-input-border accent-brand"
           />
           <span>
             {t.rich('privacyAndTerms', {

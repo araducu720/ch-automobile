@@ -8,13 +8,13 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
-use Spatie\Translatable\HasTranslations;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
+use Spatie\Translatable\HasTranslations;
 
 class BlogPost extends Model implements HasMedia
 {
-    use HasFactory, InteractsWithMedia, HasTranslations, HasSlug;
+    use HasFactory, HasSlug, HasTranslations, InteractsWithMedia;
 
     protected $fillable = [
         'title', 'slug', 'content', 'excerpt', 'category_id', 'author_id',

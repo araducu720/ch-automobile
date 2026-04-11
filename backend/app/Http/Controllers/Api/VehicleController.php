@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\VehicleResource;
 use App\Http\Resources\VehicleDetailResource;
+use App\Http\Resources\VehicleResource;
 use App\Models\Vehicle;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -34,8 +34,8 @@ class VehicleController extends Controller
             $search = str_replace(['%', '_'], ['\\%', '\\_'], $request->get('search'));
             $query->where(function ($q) use ($search) {
                 $q->where('brand', 'like', "%{$search}%")
-                  ->orWhere('model', 'like', "%{$search}%")
-                  ->orWhere('variant', 'like', "%{$search}%");
+                    ->orWhere('model', 'like', "%{$search}%")
+                    ->orWhere('variant', 'like', "%{$search}%");
             });
         }
 

@@ -48,10 +48,12 @@ class CompanySetting extends Model
                 if (! is_array($hours)) {
                     return $hours;
                 }
+
                 return array_map(function ($v) {
                     if (is_array($v)) {
                         return implode(' - ', $v);
                     }
+
                     return $v ?? 'Geschlossen';
                 }, $hours);
             },

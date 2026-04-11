@@ -1,5 +1,7 @@
 'use client';
 
+/* eslint-disable @next/next/no-html-link-for-pages */
+
 export default function GlobalError({
   error,
   reset,

@@ -38,7 +38,7 @@ export default async function BlogPage({ searchParams }: PageProps) {
     return (
       <div className="container-main py-16 text-center">
         <h1 className="text-2xl font-bold">{t('title')}</h1>
-        <p className="mt-4 text-[var(--text-secondary)]">{t('noPosts')}</p>
+        <p className="mt-4 text-muted">{t('noPosts')}</p>
       </div>
     );
   }
@@ -47,8 +47,8 @@ export default async function BlogPage({ searchParams }: PageProps) {
     <div className="py-8 lg:py-12">
       <div className="container-main">
         <div className="max-w-2xl mb-10">
-          <h1 className="text-3xl font-bold text-[var(--text-primary)]">{t('title')}</h1>
-          <p className="mt-2 text-[var(--text-secondary)]">
+          <h1 className="text-3xl font-bold text-foreground">{t('title')}</h1>
+          <p className="mt-2 text-muted">
             {t('subtitle')}
           </p>
         </div>
@@ -98,15 +98,15 @@ export default async function BlogPage({ searchParams }: PageProps) {
                           {post.category.name || ''}
                         </Badge>
                       )}
-                      <h2 className="text-lg font-semibold text-[var(--text-primary)] line-clamp-2 group-hover:text-[var(--brand-primary)] transition-colors">
+                      <h2 className="text-lg font-semibold text-foreground line-clamp-2 group-hover:text-brand transition-colors">
                         {post.title || post.slug}
                       </h2>
                       {post.excerpt && (
-                        <p className="text-sm text-[var(--text-secondary)] line-clamp-3">
+                        <p className="text-sm text-muted line-clamp-3">
                           {post.excerpt}
                         </p>
                       )}
-                      <div className="flex items-center gap-4 text-xs text-[var(--text-tertiary)] pt-2">
+                      <div className="flex items-center gap-4 text-xs text-muted-foreground pt-2">
                         <span className="flex items-center gap-1">
                           <Calendar className="h-3.5 w-3.5" />
                           {post.published_at ? formatDate(post.published_at) : ''}
@@ -132,7 +132,7 @@ export default async function BlogPage({ searchParams }: PageProps) {
                     </Link>
                   </Button>
                 )}
-                <span className="px-4 text-sm text-[var(--text-secondary)]">
+                <span className="px-4 text-sm text-muted">
                   {tp('page', { current: posts.meta.current_page, total: posts.meta.last_page })}
                 </span>
                 {posts.meta.current_page < posts.meta.last_page && (
@@ -147,7 +147,7 @@ export default async function BlogPage({ searchParams }: PageProps) {
           </>
         ) : (
           <div className="text-center py-16">
-            <p className="text-[var(--text-secondary)]">{t('noPosts')}</p>
+            <p className="text-muted">{t('noPosts')}</p>
           </div>
         )}
       </div>

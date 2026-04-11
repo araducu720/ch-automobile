@@ -1,10 +1,24 @@
-import { describe, it, expect } from 'vitest'
+import { describe, it, expect, beforeEach, vi } from 'vitest'
 import { render, screen, fireEvent } from '@testing-library/react'
 import { CookieConsent } from '@/components/cookie-consent'
 
+// Mock localStorage
+const mockLocalStorage = {
+  getItem: vi.fn(),
+  setItem: vi.fn(),
+  removeItem: vi.fn(),
+  clear: vi.fn(),
+}
+
+Object.defineProperty(window, 'localStorage', {
+  value: mockLocalStorage,
+  writable: true,
+})
+
 describe('CookieConsent', () => {
   beforeEach(() => {
-    localStorage.clear()
+    vi.clearAllMocks()
+    mockLocalStorage.getItem.mockReturnValue(null)
   })
 
   it('shows banner when no consent is stored', () => {
@@ -15,7 +29,7 @@ describe('CookieConsent', () => {
   })
 
   it('hides banner when consent is already stored', () => {
-    localStorage.setItem('ch-auto-cookie-consent', 'accepted')
+    mockLocalStorage.getItem.mockReturnValue('accepted')
     render(<CookieConsent />)
     expect(screen.queryByText('Cookie-Einstellungen')).not.toBeInTheDocument()
   })
@@ -23,21 +37,21 @@ describe('CookieConsent', () => {
   it('stores accepted consent and hides banner', () => {
     render(<CookieConsent />)
     fireEvent.click(screen.getByText('Alle akzeptieren'))
-    expect(localStorage.getItem('ch-auto-cookie-consent')).toBe('accepted')
+    expect(mockLocalStorage.setItem).toHaveBeenCalledWith('ch-auto-cookie-consent', 'accepted')
     expect(screen.queryByText('Cookie-Einstellungen')).not.toBeInTheDocument()
   })
 
   it('stores essential-only consent and hides banner', () => {
     render(<CookieConsent />)
     fireEvent.click(screen.getByText('Nur notwendige'))
-    expect(localStorage.getItem('ch-auto-cookie-consent')).toBe('essential-only')
+    expect(mockLocalStorage.setItem).toHaveBeenCalledWith('ch-auto-cookie-consent', 'essential-only')
     expect(screen.queryByText('Cookie-Einstellungen')).not.toBeInTheDocument()
   })
 
   it('closes on X button with essential-only consent', () => {
     render(<CookieConsent />)
     fireEvent.click(screen.getByLabelText('Schließen'))
-    expect(localStorage.getItem('ch-auto-cookie-consent')).toBe('essential-only')
+    expect(mockLocalStorage.setItem).toHaveBeenCalledWith('ch-auto-cookie-consent', 'essential-only')
     expect(screen.queryByText('Cookie-Einstellungen')).not.toBeInTheDocument()
   })
 

@@ -22,7 +22,6 @@ export default async function NewsletterConfirmedPage({ searchParams }: Props) {
   const { status } = await searchParams;
   const isSuccess = status === 'success';
   const t = await getTranslations('newsletter.confirmed');
-  const tc = await getTranslations('common');
 
   return (
     <div className="py-16 lg:py-24">
@@ -32,10 +31,10 @@ export default async function NewsletterConfirmedPage({ searchParams }: Props) {
             <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-green-100 dark:bg-green-900/30">
               <CheckCircle className="h-8 w-8 text-green-600 dark:text-green-400" />
             </div>
-            <h1 className="mt-6 text-2xl font-bold text-[var(--text-primary)]">
+            <h1 className="mt-6 text-2xl font-bold text-foreground">
               {t('success')}
             </h1>
-            <p className="mt-3 text-[var(--text-secondary)]">
+            <p className="mt-3 text-muted">
               {t('successMessage')}
             </p>
           </>
@@ -44,10 +43,10 @@ export default async function NewsletterConfirmedPage({ searchParams }: Props) {
             <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-red-100 dark:bg-red-900/30">
               <XCircle className="h-8 w-8 text-red-600 dark:text-red-400" />
             </div>
-            <h1 className="mt-6 text-2xl font-bold text-[var(--text-primary)]">
+            <h1 className="mt-6 text-2xl font-bold text-foreground">
               {t('failed')}
             </h1>
-            <p className="mt-3 text-[var(--text-secondary)]">
+            <p className="mt-3 text-muted">
               {t('failedMessage')}
             </p>
           </>

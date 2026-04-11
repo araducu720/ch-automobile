@@ -13,7 +13,7 @@ export default function Loading() {
         </div>
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {Array.from({ length: 6 }).map((_, i) => (
-            <div key={i} className="rounded-xl border border-[var(--border-primary)] overflow-hidden">
+            <div key={i} className="rounded-xl border border-border overflow-hidden">
               <div className="aspect-[16/9] animate-shimmer" />
               <div className="p-5 space-y-3">
                 <div className="h-5 w-16 rounded-full animate-shimmer" />

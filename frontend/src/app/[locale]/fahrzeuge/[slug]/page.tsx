@@ -4,7 +4,7 @@ import { Link } from '@/i18n/navigation';
 import { getVehicle } from '@/lib/api';
 import type { Vehicle, ApiResponse } from '@/types';
 import { SafeHtml } from '@/components/ui/safe-html';
-import { formatPrice, formatMileage, formatDate } from '@/lib/utils';
+import { formatDate } from '@/lib/utils';
 import { VehicleGallery } from '@/components/vehicles/vehicle-gallery';
 import { VehicleActions } from '@/components/vehicles/vehicle-actions';
 import { VehicleCard } from '@/components/vehicles/vehicle-card';
@@ -16,7 +16,7 @@ import { VehicleJsonLd, BreadcrumbJsonLd } from '@/components/seo/json-ld';
 import {
   Calendar, Gauge, Fuel, Settings2, Car, Palette, Users,
   Shield, FileCheck, Phone, Mail, MessageCircle, ChevronLeft,
-  CheckCircle, XCircle, Droplets, Leaf,
+  CheckCircle, XCircle, Leaf,
 } from 'lucide-react';
 
 interface VehicleDetailPageProps {
@@ -30,6 +30,7 @@ export async function generateMetadata({ params }: VehicleDetailPageProps): Prom
     const { data: vehicle } = await getVehicle(slug);
     return {
       title: `${vehicle.full_name} — C-H Automobile`,
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       description: `${vehicle.full_name} • ${vehicle.formatted_price} • ${vehicle.formatted_mileage} • ${t(vehicle.fuel_type as any)}`,
       openGraph: {
         images: vehicle.main_image ? [vehicle.main_image] : [],
@@ -77,8 +78,11 @@ export default async function VehicleDetailPage({ params }: VehicleDetailPagePro
   const specs = [
     { icon: Calendar, label: t('firstRegistration'), value: vehicle.registration_date ? formatDate(vehicle.registration_date) : `${vehicle.year}` },
     { icon: Gauge, label: t('mileage'), value: vehicle.formatted_mileage },
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     { icon: Fuel, label: t('fuelType'), value: t(FUEL_KEY[vehicle.fuel_type] as any) || vehicle.fuel_type },
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     { icon: Settings2, label: t('transmission'), value: t(TRANS_KEY[vehicle.transmission] as any) || vehicle.transmission },
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     { icon: Car, label: t('bodyType'), value: t(BODY_KEY[vehicle.body_type] as any) || vehicle.body_type },
     { icon: Palette, label: t('color'), value: vehicle.color },
     vehicle.interior_color ? { icon: Palette, label: t('interiorColor'), value: vehicle.interior_color } : null,
@@ -89,6 +93,7 @@ export default async function VehicleDetailPage({ params }: VehicleDetailPagePro
     vehicle.previous_owners !== null && vehicle.previous_owners !== undefined
       ? { icon: Users, label: t('previousOwners'), value: `${vehicle.previous_owners}` }
       : null,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     { icon: Shield, label: t('condition'), value: t(COND_KEY[vehicle.condition] as any) || vehicle.condition },
     vehicle.tuv_until ? { icon: FileCheck, label: t('inspectionUntil'), value: formatDate(vehicle.tuv_until) } : null,
     vehicle.warranty ? { icon: Shield, label: t('warranty'), value: vehicle.warranty } : null,
@@ -109,7 +114,7 @@ export default async function VehicleDetailPage({ params }: VehicleDetailPagePro
   ];
 
   return (
-    <div className="bg-[var(--bg-primary)]">
+    <div className="bg-background">
       <VehicleJsonLd
         name={vehicle.full_name}
         description={typeof vehicle.description === 'string' ? vehicle.description : (vehicle.description?.[locale] || vehicle.description?.de || undefined)}
@@ -132,12 +137,12 @@ export default async function VehicleDetailPage({ params }: VehicleDetailPagePro
       ]} />
       {/* Breadcrumb */}
       <div className="container mx-auto px-4 py-4">
-        <nav className="flex items-center gap-2 text-sm text-[var(--text-tertiary)]">
-          <Link href="/" className="hover:text-[var(--text-primary)]">{t('breadcrumbHome')}</Link>
+        <nav className="flex items-center gap-2 text-sm text-muted-foreground">
+          <Link href="/" className="hover:text-foreground">{t('breadcrumbHome')}</Link>
           <span>/</span>
-          <Link href="/fahrzeuge" className="hover:text-[var(--text-primary)]">{tn('vehicles')}</Link>
+          <Link href="/fahrzeuge" className="hover:text-foreground">{tn('vehicles')}</Link>
           <span>/</span>
-          <span className="text-[var(--text-primary)]">{vehicle.full_name}</span>
+          <span className="text-foreground">{vehicle.full_name}</span>
         </nav>
       </div>
 
@@ -145,7 +150,7 @@ export default async function VehicleDetailPage({ params }: VehicleDetailPagePro
         {/* Back button */}
         <Link
           href="/fahrzeuge"
-          className="mb-6 inline-flex items-center gap-1 text-sm text-[var(--text-secondary)] hover:text-[var(--text-primary)]"
+          className="mb-6 inline-flex items-center gap-1 text-sm text-muted hover:text-foreground"
         >
           <ChevronLeft className="h-4 w-4" />
           {t('backToOverview')}
@@ -159,7 +164,7 @@ export default async function VehicleDetailPage({ params }: VehicleDetailPagePro
 
             {/* Title + Price (mobile) */}
             <div className="lg:hidden">
-              <h1 className="text-2xl font-bold text-[var(--text-primary)]">{vehicle.full_name}</h1>
+              <h1 className="text-2xl font-bold text-foreground">{vehicle.full_name}</h1>
               <div className="mt-2 flex items-baseline gap-2">
                 <span className="text-3xl font-bold text-primary-600">
                   {vehicle.price_on_request ? t('priceOnRequest') : vehicle.formatted_price}
@@ -173,15 +178,15 @@ export default async function VehicleDetailPage({ params }: VehicleDetailPagePro
             </div>
 
             {/* Key specs grid */}
-            <div className="rounded-xl border border-[var(--border-primary)] bg-[var(--bg-secondary)] p-6">
-              <h2 className="mb-4 text-lg font-semibold text-[var(--text-primary)]">{t('technicalData')}</h2>
+            <div className="rounded-xl border border-border bg-secondary p-6">
+              <h2 className="mb-4 text-lg font-semibold text-foreground">{t('technicalData')}</h2>
               <div className="grid grid-cols-2 gap-4 sm:grid-cols-3">
                 {specs.map((spec) => (
                   <div key={spec.label} className="flex items-start gap-3">
                     <spec.icon className="mt-0.5 h-4 w-4 shrink-0 text-primary-600" />
                     <div>
-                      <div className="text-xs text-[var(--text-tertiary)]">{spec.label}</div>
-                      <div className="text-sm font-medium text-[var(--text-primary)]">{spec.value || '—'}</div>
+                      <div className="text-xs text-muted-foreground">{spec.label}</div>
+                      <div className="text-sm font-medium text-foreground">{spec.value || '—'}</div>
                     </div>
                   </div>
                 ))}
@@ -200,7 +205,7 @@ export default async function VehicleDetailPage({ params }: VehicleDetailPagePro
                   ) : (
                     <XCircle className="h-4 w-4 text-gray-400" />
                   )}
-                  <span className={item.value ? 'text-[var(--text-primary)]' : 'text-[var(--text-tertiary)]'}>
+                  <span className={item.value ? 'text-foreground' : 'text-muted-foreground'}>
                     {item.label}
                   </span>
                 </div>
@@ -209,16 +214,16 @@ export default async function VehicleDetailPage({ params }: VehicleDetailPagePro
 
             {/* Environmental specs */}
             {envSpecs.length > 0 && (
-              <div className="rounded-xl border border-[var(--border-primary)] bg-[var(--bg-secondary)] p-6">
-                <h2 className="mb-4 flex items-center gap-2 text-lg font-semibold text-[var(--text-primary)]">
+              <div className="rounded-xl border border-border bg-secondary p-6">
+                <h2 className="mb-4 flex items-center gap-2 text-lg font-semibold text-foreground">
                   <Leaf className="h-5 w-5 text-green-600" />
                   {t('environmentConsumption')}
                 </h2>
                 <div className="grid grid-cols-2 gap-4 sm:grid-cols-3">
                   {envSpecs.map((spec) => (
                     <div key={spec.label}>
-                      <div className="text-xs text-[var(--text-tertiary)]">{spec.label}</div>
-                      <div className="text-sm font-medium text-[var(--text-primary)]">{spec.value}</div>
+                      <div className="text-xs text-muted-foreground">{spec.label}</div>
+                      <div className="text-sm font-medium text-foreground">{spec.value}</div>
                     </div>
                   ))}
                 </div>
@@ -227,10 +232,10 @@ export default async function VehicleDetailPage({ params }: VehicleDetailPagePro
 
             {/* Description */}
             {vehicle.description && (
-              <div className="rounded-xl border border-[var(--border-primary)] bg-[var(--bg-secondary)] p-6">
-                <h2 className="mb-4 text-lg font-semibold text-[var(--text-primary)]">{t('description')}</h2>
+              <div className="rounded-xl border border-border bg-secondary p-6">
+                <h2 className="mb-4 text-lg font-semibold text-foreground">{t('description')}</h2>
                 <SafeHtml
-                  className="prose prose-sm max-w-none text-[var(--text-secondary)] dark:prose-invert"
+                  className="prose prose-sm max-w-none text-muted dark:prose-invert"
                   html={typeof vehicle.description === 'string'
                     ? vehicle.description
                     : (vehicle.description as Record<string, string>)?.de || ''}
@@ -240,11 +245,11 @@ export default async function VehicleDetailPage({ params }: VehicleDetailPagePro
 
             {/* Features */}
             {vehicle.features && vehicle.features.length > 0 && (
-              <div className="rounded-xl border border-[var(--border-primary)] bg-[var(--bg-secondary)] p-6">
-                <h2 className="mb-4 text-lg font-semibold text-[var(--text-primary)]">{t('features')}</h2>
+              <div className="rounded-xl border border-border bg-secondary p-6">
+                <h2 className="mb-4 text-lg font-semibold text-foreground">{t('features')}</h2>
                 <ul className="grid grid-cols-2 gap-2 sm:grid-cols-3">
                   {vehicle.features.map((feature: string) => (
-                    <li key={feature} className="flex items-center gap-2 text-sm text-[var(--text-secondary)]">
+                    <li key={feature} className="flex items-center gap-2 text-sm text-muted">
                       <CheckCircle className="h-3.5 w-3.5 shrink-0 text-green-600" />
                       {feature}
                     </li>
@@ -255,11 +260,11 @@ export default async function VehicleDetailPage({ params }: VehicleDetailPagePro
 
             {/* Equipment */}
             {vehicle.equipment && vehicle.equipment.length > 0 && (
-              <div className="rounded-xl border border-[var(--border-primary)] bg-[var(--bg-secondary)] p-6">
-                <h2 className="mb-4 text-lg font-semibold text-[var(--text-primary)]">{t('accessories')}</h2>
+              <div className="rounded-xl border border-border bg-secondary p-6">
+                <h2 className="mb-4 text-lg font-semibold text-foreground">{t('accessories')}</h2>
                 <ul className="grid grid-cols-2 gap-2 sm:grid-cols-3">
                   {vehicle.equipment.map((item: string) => (
-                    <li key={item} className="flex items-center gap-2 text-sm text-[var(--text-secondary)]">
+                    <li key={item} className="flex items-center gap-2 text-sm text-muted">
                       <CheckCircle className="h-3.5 w-3.5 shrink-0 text-primary-600" />
                       {item}
                     </li>
@@ -273,7 +278,7 @@ export default async function VehicleDetailPage({ params }: VehicleDetailPagePro
           <div className="space-y-6">
             {/* Title + Price (desktop) */}
             <div className="hidden lg:block">
-              <h1 className="text-2xl font-bold text-[var(--text-primary)]">{vehicle.full_name}</h1>
+              <h1 className="text-2xl font-bold text-foreground">{vehicle.full_name}</h1>
               <div className="mt-2 flex items-baseline gap-2">
                 <span className="text-3xl font-bold text-primary-600">
                   {vehicle.price_on_request ? t('priceOnRequest') : vehicle.formatted_price}
@@ -292,19 +297,19 @@ export default async function VehicleDetailPage({ params }: VehicleDetailPagePro
             </div>
 
             {/* Quick contact */}
-            <div className="rounded-xl border-2 border-[var(--border-secondary)] bg-[var(--bg-secondary)] p-6 shadow-[var(--shadow-md)]">
-              <h3 className="mb-3 font-semibold text-[var(--text-primary)]">{t('quickContact')}</h3>
+            <div className="rounded-xl border-2 border-border-secondary bg-secondary p-6 shadow-[var(--shadow-md)]">
+              <h3 className="mb-3 font-semibold text-foreground">{t('quickContact')}</h3>
               <div className="space-y-2">
                 <a
                   href={`tel:${COMPANY_INFO.phone.replace(/\s/g, '')}`}
-                  className="flex items-center gap-2 text-sm text-[var(--text-secondary)] hover:text-primary-600"
+                  className="flex items-center gap-2 text-sm text-muted hover:text-primary-600"
                 >
                   <Phone className="h-4 w-4" />
                   {COMPANY_INFO.phone}
                 </a>
                 <a
                   href="mailto:info@ch-automobile.de"
-                  className="flex items-center gap-2 text-sm text-[var(--text-secondary)] hover:text-primary-600"
+                  className="flex items-center gap-2 text-sm text-muted hover:text-primary-600"
                 >
                   <Mail className="h-4 w-4" />
                   info@ch-automobile.de
@@ -323,9 +328,9 @@ export default async function VehicleDetailPage({ params }: VehicleDetailPagePro
 
             {/* Buy now CTA (only for available vehicles) */}
             {vehicle.status === 'available' && !vehicle.price_on_request && (
-              <div className="rounded-xl border-2 border-l-4 border-[var(--border-secondary)] border-l-[var(--brand-primary)] bg-[var(--bg-secondary)] p-6 shadow-[var(--shadow-md)]">
-                <h3 className="mb-2 text-lg font-bold text-[var(--text-primary)]">{t('buyThisVehicle')}</h3>
-                <p className="mb-4 text-sm text-[var(--text-secondary)]">{t('buyThisVehicleDesc')}</p>
+              <div className="rounded-xl border-2 border-l-4 border-border-secondary border-l-brand bg-secondary p-6 shadow-[var(--shadow-md)]">
+                <h3 className="mb-2 text-lg font-bold text-foreground">{t('buyThisVehicle')}</h3>
+                <p className="mb-4 text-sm text-muted">{t('buyThisVehicleDesc')}</p>
                 <Button variant="accent" size="lg" fullWidth asChild>
                   <Link href={`/fahrzeuge/${vehicle.slug}/kaufen`}>
                     {t('buyNowButton')}
@@ -335,8 +340,8 @@ export default async function VehicleDetailPage({ params }: VehicleDetailPagePro
             )}
 
             {/* Contact Form */}
-            <div className="rounded-xl border-2 border-l-4 border-[var(--border-secondary)] border-l-[var(--brand-primary)] bg-[var(--bg-secondary)] p-6 shadow-[var(--shadow-md)]">
-              <h3 className="mb-4 font-semibold text-[var(--text-primary)]">{t('sendInquiry')}</h3>
+            <div className="rounded-xl border-2 border-l-4 border-border-secondary border-l-brand bg-secondary p-6 shadow-[var(--shadow-md)]">
+              <h3 className="mb-4 font-semibold text-foreground">{t('sendInquiry')}</h3>
               <ContactForm vehicleId={vehicle.id} inquiryType="price_inquiry" />
             </div>
           </div>
@@ -345,7 +350,7 @@ export default async function VehicleDetailPage({ params }: VehicleDetailPagePro
         {/* Related vehicles */}
         {related && related.length > 0 && (
           <div className="mt-16">
-            <h2 className="mb-6 text-2xl font-bold text-[var(--text-primary)]">{t('relatedVehicles')}</h2>
+            <h2 className="mb-6 text-2xl font-bold text-foreground">{t('relatedVehicles')}</h2>
             <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
               {related.map((v: Vehicle) => (
                 <VehicleCard key={v.id} vehicle={v} />

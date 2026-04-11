@@ -15,10 +15,10 @@ export function StatCounter({ end, suffix, label }: StatCounterProps) {
 
   return (
     <div ref={ref as React.RefObject<HTMLDivElement>}>
-      <div className="text-3xl font-extrabold text-[var(--brand-primary)] number-counter">
+      <div className="text-3xl font-extrabold text-brand number-counter">
         {display}
       </div>
-      <div className="text-sm text-[var(--text-secondary)] mt-0.5">{label}</div>
+      <div className="text-sm text-muted mt-0.5">{label}</div>
     </div>
   );
 }

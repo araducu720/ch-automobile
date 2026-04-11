@@ -91,7 +91,7 @@ function StepIndicator({
   return (
     <div className="mb-6">
       {/* Step counter text */}
-      <p className="mb-3 text-center text-xs font-medium text-[var(--text-tertiary)]">
+      <p className="mb-3 text-center text-xs font-medium text-muted-foreground">
         {currentStep !== 'completed' &&
           t('wizard.step', { current: currentIdx + 1, total: 4 })}
       </p>
@@ -108,10 +108,10 @@ function StepIndicator({
               <div
                 className={`h-1.5 w-full rounded-full transition-all duration-500 ${
                   isCompleted
-                    ? 'bg-[var(--status-success)]'
+                    ? 'bg-success'
                     : isCurrent
-                      ? 'bg-[var(--brand-primary)]'
-                      : 'bg-[var(--border-primary)]'
+                      ? 'bg-brand'
+                      : 'bg-border'
                 }`}
               />
               {/* Label */}
@@ -119,10 +119,10 @@ function StepIndicator({
                 <span
                   className={`text-[10px] font-medium transition-colors ${
                     isCompleted
-                      ? 'text-[var(--status-success)]'
+                      ? 'text-success'
                       : isCurrent
-                        ? 'text-[var(--brand-primary)]'
-                        : 'text-[var(--text-tertiary)]'
+                        ? 'text-brand'
+                        : 'text-muted-foreground'
                   }`}
                 >
                   {isCompleted ? (
@@ -134,10 +134,10 @@ function StepIndicator({
                 <span
                   className={`hidden text-[10px] font-medium sm:inline ${
                     isCompleted
-                      ? 'text-[var(--status-success)]'
+                      ? 'text-success'
                       : isCurrent
-                        ? 'text-[var(--brand-primary)]'
-                        : 'text-[var(--text-tertiary)]'
+                        ? 'text-brand'
+                        : 'text-muted-foreground'
                   }`}
                 >
                   {stepLabels[step]}
@@ -184,27 +184,27 @@ function StepDetails({
   return (
     <div>
       {/* Vehicle summary */}
-      <div className="mb-5 rounded-lg bg-[var(--bg-secondary)] p-4">
-        <div className="flex items-center gap-2 text-sm font-medium text-[var(--text-secondary)]">
+      <div className="mb-5 rounded-lg bg-secondary p-4">
+        <div className="flex items-center gap-2 text-sm font-medium text-muted">
           <Car className="h-4 w-4" />
           {t('reserveVehicle')}
         </div>
-        <p className="mt-1 font-semibold text-[var(--text-primary)]">{vehicleName}</p>
-        <p className="text-sm text-[var(--text-secondary)]">{vehiclePrice}</p>
-        <p className="mt-2 text-xs text-[var(--text-tertiary)]">{t('deposit10Percent')}</p>
+        <p className="mt-1 font-semibold text-foreground">{vehicleName}</p>
+        <p className="text-sm text-muted">{vehiclePrice}</p>
+        <p className="mt-2 text-xs text-muted-foreground">{t('deposit10Percent')}</p>
       </div>
 
       <form action={formAction} className="space-y-4">
         <input type="hidden" name="vehicle_id" value={vehicleId} />
 
         {state && !state.success && (
-          <div className="flex items-start gap-2 rounded-lg bg-[var(--status-error-bg)] p-3 text-sm text-[var(--status-error)]">
+          <div className="flex items-start gap-2 rounded-lg bg-error-bg p-3 text-sm text-error">
             <AlertCircle className="mt-0.5 h-4 w-4 shrink-0" />
             <span>{state.message}</span>
           </div>
         )}
 
-        <h4 className="font-medium text-[var(--text-primary)]">{t('personalData')}</h4>
+        <h4 className="font-medium text-foreground">{t('personalData')}</h4>
 
         <Input
           label="Name"
@@ -230,7 +230,7 @@ function StepDetails({
           />
         </div>
 
-        <h4 className="pt-1 font-medium text-[var(--text-primary)]">{t('billingAddress')}</h4>
+        <h4 className="pt-1 font-medium text-foreground">{t('billingAddress')}</h4>
 
         <Input
           label={t('street')}
@@ -254,13 +254,13 @@ function StepDetails({
         </div>
 
         {/* Privacy */}
-        <label className="flex items-start gap-2 text-sm text-[var(--text-secondary)]">
+        <label className="flex items-start gap-2 text-sm text-muted">
           <input
             type="checkbox"
             name="privacy_accepted"
             value="true"
             required
-            className="mt-1 h-4 w-4 rounded border-2 border-[var(--border-input)] accent-[var(--brand-primary)]"
+            className="mt-1 h-4 w-4 rounded border-2 border-input-border accent-brand"
           />
           <span>
             {t.rich('privacyAndTerms', {
@@ -331,78 +331,78 @@ function StepInvoice({
   return (
     <div className="space-y-4">
       <div>
-        <h4 className="text-base font-semibold text-[var(--text-primary)]">
+        <h4 className="text-base font-semibold text-foreground">
           {t('wizard.invoiceTitle')}
         </h4>
-        <p className="mt-1 text-sm text-[var(--text-secondary)]">
+        <p className="mt-1 text-sm text-muted">
           {t('wizard.invoiceSubtitle')}
         </p>
       </div>
 
       {/* Vehicle info */}
-      <div className="rounded-lg bg-[var(--bg-secondary)] p-4">
-        <p className="text-xs font-medium uppercase tracking-wide text-[var(--text-tertiary)]">
+      <div className="rounded-lg bg-secondary p-4">
+        <p className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
           {t('wizard.invoiceFor')}
         </p>
-        <p className="mt-1 font-semibold text-[var(--text-primary)]">
+        <p className="mt-1 font-semibold text-foreground">
           {data.vehicle.brand} {data.vehicle.model} ({data.vehicle.year})
         </p>
         <div className="mt-2 flex justify-between text-sm">
-          <span className="text-[var(--text-secondary)]">{t('wizard.totalPrice')}:</span>
-          <span className="font-semibold text-[var(--text-primary)]">{data.vehicle.price}</span>
+          <span className="text-muted">{t('wizard.totalPrice')}:</span>
+          <span className="font-semibold text-foreground">{data.vehicle.price}</span>
         </div>
         <div className="mt-1 flex justify-between text-sm">
-          <span className="text-[var(--text-secondary)]">{t('wizard.depositRequired')}:</span>
-          <span className="font-bold text-[var(--brand-primary)]">{data.formatted_deposit}</span>
+          <span className="text-muted">{t('wizard.depositRequired')}:</span>
+          <span className="font-bold text-brand">{data.formatted_deposit}</span>
         </div>
       </div>
 
       {/* Bank details */}
-      <div className="rounded-lg bg-[var(--bg-secondary)] p-4">
-        <div className="flex items-center gap-2 text-sm font-medium text-[var(--text-secondary)]">
+      <div className="rounded-lg bg-secondary p-4">
+        <div className="flex items-center gap-2 text-sm font-medium text-muted">
           <CreditCard className="h-4 w-4" />
           {t('paymentInfo')}
         </div>
         <div className="mt-3 space-y-2 text-sm">
           <div className="flex items-center justify-between">
-            <span className="text-[var(--text-secondary)]">{t('reference')}:</span>
+            <span className="text-muted">{t('reference')}:</span>
             <button
               onClick={() => copyReference(data.payment_reference)}
-              className="flex items-center gap-1 font-mono font-bold text-[var(--brand-primary)] hover:text-[var(--brand-primary-hover)]"
+              className="flex items-center gap-1 font-mono font-bold text-brand hover:text-brand-hover"
             >
               {data.payment_reference}
               {copiedRef ? <Check className="h-3.5 w-3.5" /> : <Copy className="h-3.5 w-3.5" />}
             </button>
           </div>
-          <hr className="border-[var(--border-primary)]" />
+          <hr className="border-border" />
           <div className="flex justify-between">
-            <span className="text-[var(--text-secondary)]">{t('accountHolder')}:</span>
-            <span className="text-[var(--text-primary)]">{data.bank_details.account_holder}</span>
+            <span className="text-muted">{t('accountHolder')}:</span>
+            <span className="text-foreground">{data.bank_details.account_holder}</span>
           </div>
           <div className="flex justify-between">
-            <span className="text-[var(--text-secondary)]">{t('bank')}:</span>
-            <span className="text-[var(--text-primary)]">{data.bank_details.bank_name}</span>
+            <span className="text-muted">{t('bank')}:</span>
+            <span className="text-foreground">{data.bank_details.bank_name}</span>
           </div>
           <div className="flex justify-between">
-            <span className="text-[var(--text-secondary)]">IBAN:</span>
-            <span className="font-mono text-[var(--text-primary)]">{data.bank_details.iban}</span>
+            <span className="text-muted">IBAN:</span>
+            <span className="font-mono text-foreground">{data.bank_details.iban}</span>
           </div>
           <div className="flex justify-between">
-            <span className="text-[var(--text-secondary)]">BIC:</span>
-            <span className="font-mono text-[var(--text-primary)]">{data.bank_details.bic}</span>
+            <span className="text-muted">BIC:</span>
+            <span className="font-mono text-foreground">{data.bank_details.bic}</span>
           </div>
           <div className="flex justify-between">
-            <span className="text-[var(--text-secondary)]">{t('amount')}:</span>
-            <span className="font-bold text-[var(--text-primary)]">{data.formatted_deposit}</span>
+            <span className="text-muted">{t('amount')}:</span>
+            <span className="font-bold text-foreground">{data.formatted_deposit}</span>
           </div>
         </div>
       </div>
 
       {/* Payment method info */}
-      <p className="text-xs text-[var(--text-tertiary)]">{t('wizard.paymentMethod')}</p>
+      <p className="text-xs text-muted-foreground">{t('wizard.paymentMethod')}</p>
 
       {/* Expiry notice */}
-      <div className="rounded-lg border border-[var(--status-warning)] bg-[var(--status-warning-bg)] p-3 text-sm text-[var(--status-warning)]">
+      <div className="rounded-lg border border-warning bg-warning-bg p-3 text-sm text-warning">
         <strong>{t('importantNote')}</strong>{' '}
         {t('expiresOn', {
           date: new Date(data.expires_at).toLocaleDateString('de-DE', {
@@ -502,25 +502,25 @@ function StepSignature({
   return (
     <div className="space-y-4">
       <div>
-        <h4 className="text-base font-semibold text-[var(--text-primary)]">
+        <h4 className="text-base font-semibold text-foreground">
           {t('wizard.contractTitle')}
         </h4>
-        <p className="mt-1 text-sm text-[var(--text-secondary)]">
+        <p className="mt-1 text-sm text-muted">
           {t('wizard.contractSubtitle')}
         </p>
       </div>
 
       {/* Step A: Download Contract */}
-      <div className="rounded-xl border-2 border-[var(--border-primary)] bg-[var(--bg-secondary)] p-5">
+      <div className="rounded-xl border-2 border-border bg-secondary p-5">
         <div className="flex items-center gap-3 mb-3">
-          <div className="flex h-8 w-8 items-center justify-center rounded-full bg-[var(--brand-primary)] text-white text-sm font-bold">
+          <div className="flex h-8 w-8 items-center justify-center rounded-full bg-brand text-white text-sm font-bold">
             1
           </div>
-          <h5 className="font-semibold text-[var(--text-primary)]">
+          <h5 className="font-semibold text-foreground">
             {t('wizard.downloadContractTitle')}
           </h5>
         </div>
-        <p className="text-sm text-[var(--text-secondary)] mb-4">
+        <p className="text-sm text-muted mb-4">
           {t('wizard.downloadContractDesc')}
         </p>
         <Button
@@ -537,7 +537,7 @@ function StepSignature({
               : t('wizard.downloadContract')}
         </Button>
         {contractDownloaded && (
-          <p className="mt-2 flex items-center gap-1 text-xs text-[var(--status-success)]">
+          <p className="mt-2 flex items-center gap-1 text-xs text-success">
             <CheckCircle className="h-3.5 w-3.5" />
             {t('wizard.contractDownloadedHint')}
           </p>
@@ -547,22 +547,22 @@ function StepSignature({
       {/* Step B: Upload Signed Contract */}
       <div className={`rounded-xl border-2 p-5 transition-all ${
         contractDownloaded
-          ? 'border-[var(--brand-primary)] bg-[var(--bg-secondary)]'
-          : 'border-[var(--border-primary)] bg-[var(--bg-secondary)] opacity-60'
+          ? 'border-brand bg-secondary'
+          : 'border-border bg-secondary opacity-60'
       }`}>
         <div className="flex items-center gap-3 mb-3">
           <div className={`flex h-8 w-8 items-center justify-center rounded-full text-sm font-bold ${
             contractDownloaded
-              ? 'bg-[var(--brand-primary)] text-white'
-              : 'bg-[var(--border-primary)] text-[var(--text-tertiary)]'
+              ? 'bg-brand text-white'
+              : 'bg-border text-muted-foreground'
           }`}>
             2
           </div>
-          <h5 className="font-semibold text-[var(--text-primary)]">
+          <h5 className="font-semibold text-foreground">
             {t('wizard.uploadSignedTitle')}
           </h5>
         </div>
-        <p className="text-sm text-[var(--text-secondary)] mb-3">
+        <p className="text-sm text-muted mb-3">
           {t('wizard.uploadSignedDesc')}
         </p>
 
@@ -570,7 +570,7 @@ function StepSignature({
           <input type="hidden" name="reference" value={reference} />
 
           {state && !state.success && (
-            <div className="flex items-start gap-2 rounded-lg bg-[var(--status-error-bg)] p-3 text-sm text-[var(--status-error)]">
+            <div className="flex items-start gap-2 rounded-lg bg-error-bg p-3 text-sm text-error">
               <AlertCircle className="mt-0.5 h-4 w-4 shrink-0" />
               <span>{state.message}</span>
             </div>
@@ -583,21 +583,21 @@ function StepSignature({
             onClick={contractDownloaded ? () => fileInputRef.current?.click() : undefined}
             className={`flex flex-col items-center justify-center rounded-xl border-2 border-dashed p-8 transition-colors ${
               contractDownloaded
-                ? 'cursor-pointer border-[var(--border-input)] bg-[var(--input-bg)] hover:border-[var(--brand-primary)] hover:bg-[var(--bg-secondary)]'
-                : 'cursor-not-allowed border-[var(--border-primary)] bg-[var(--bg-secondary)]'
+                ? 'cursor-pointer border-input-border bg-input hover:border-brand hover:bg-secondary'
+                : 'cursor-not-allowed border-border bg-secondary'
             }`}
           >
-            <FileCheck className="mb-3 h-10 w-10 text-[var(--text-tertiary)]" />
+            <FileCheck className="mb-3 h-10 w-10 text-muted-foreground" />
             {fileName ? (
-              <p className="text-sm font-medium text-[var(--brand-primary)]">
+              <p className="text-sm font-medium text-brand">
                 {t('wizard.fileSelected', { name: fileName })}
               </p>
             ) : (
-              <p className="text-sm text-[var(--text-secondary)]">
+              <p className="text-sm text-muted">
                 {t('wizard.dragOrClick')}
               </p>
             )}
-            <p className="mt-2 text-xs text-[var(--text-tertiary)]">
+            <p className="mt-2 text-xs text-muted-foreground">
               {t('wizard.signedContractHint')}
             </p>
             <input
@@ -671,10 +671,10 @@ function StepPayment({
   return (
     <div className="space-y-4">
       <div>
-        <h4 className="text-base font-semibold text-[var(--text-primary)]">
+        <h4 className="text-base font-semibold text-foreground">
           {t('wizard.paymentTitle')}
         </h4>
-        <p className="mt-1 text-sm text-[var(--text-secondary)]">
+        <p className="mt-1 text-sm text-muted">
           {t('wizard.paymentSubtitle')}
         </p>
       </div>
@@ -683,7 +683,7 @@ function StepPayment({
         <input type="hidden" name="reference" value={reference} />
 
         {state && !state.success && (
-          <div className="flex items-start gap-2 rounded-lg bg-[var(--status-error-bg)] p-3 text-sm text-[var(--status-error)]">
+          <div className="flex items-start gap-2 rounded-lg bg-error-bg p-3 text-sm text-error">
             <AlertCircle className="mt-0.5 h-4 w-4 shrink-0" />
             <span>{state.message}</span>
           </div>
@@ -694,19 +694,19 @@ function StepPayment({
           onDragOver={(e) => e.preventDefault()}
           onDrop={handleDrop}
           onClick={() => fileInputRef.current?.click()}
-          className="flex cursor-pointer flex-col items-center justify-center rounded-xl border-2 border-dashed border-[var(--border-input)] bg-[var(--input-bg)] p-8 transition-colors hover:border-[var(--brand-primary)] hover:bg-[var(--bg-secondary)]"
+          className="flex cursor-pointer flex-col items-center justify-center rounded-xl border-2 border-dashed border-input-border bg-input p-8 transition-colors hover:border-brand hover:bg-secondary"
         >
-          <Upload className="mb-3 h-10 w-10 text-[var(--text-tertiary)]" />
+          <Upload className="mb-3 h-10 w-10 text-muted-foreground" />
           {fileName ? (
-            <p className="text-sm font-medium text-[var(--brand-primary)]">
+            <p className="text-sm font-medium text-brand">
               {t('wizard.fileSelected', { name: fileName })}
             </p>
           ) : (
-            <p className="text-sm text-[var(--text-secondary)]">
+            <p className="text-sm text-muted">
               {t('wizard.dragOrClick')}
             </p>
           )}
-          <p className="mt-2 text-xs text-[var(--text-tertiary)]">
+          <p className="mt-2 text-xs text-muted-foreground">
             {t('wizard.paymentHint')}
           </p>
           <input
@@ -745,37 +745,37 @@ function StepCompleted({
 }) {
   return (
     <div className="space-y-4 text-center">
-      <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-[var(--status-success-bg)]">
-        <CheckCircle className="h-10 w-10 text-[var(--status-success)]" />
+      <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-success-bg">
+        <CheckCircle className="h-10 w-10 text-success" />
       </div>
-      <h4 className="text-lg font-bold text-[var(--text-primary)]">
+      <h4 className="text-lg font-bold text-foreground">
         {t('wizard.completedTitle')}
       </h4>
-      <p className="text-sm text-[var(--text-secondary)]">
+      <p className="text-sm text-muted">
         {t('wizard.completedSubtitle')}
       </p>
-      <div className="rounded-lg bg-[var(--bg-secondary)] p-4">
-        <p className="text-sm font-medium text-[var(--text-primary)]">
+      <div className="rounded-lg bg-secondary p-4">
+        <p className="text-sm font-medium text-foreground">
           {t('wizard.completedRef', { reference })}
         </p>
       </div>
 
       {/* Admin confirmation notice */}
-      <div className="rounded-lg border border-[var(--brand-primary)] bg-[var(--bg-secondary)] p-4 text-left">
+      <div className="rounded-lg border border-brand bg-secondary p-4 text-left">
         <div className="flex items-start gap-3">
-          <ShieldCheck className="mt-0.5 h-5 w-5 text-[var(--brand-primary)] shrink-0" />
+          <ShieldCheck className="mt-0.5 h-5 w-5 text-brand shrink-0" />
           <div>
-            <p className="text-sm font-semibold text-[var(--text-primary)]">
+            <p className="text-sm font-semibold text-foreground">
               {t('wizard.adminConfirmTitle')}
             </p>
-            <p className="mt-1 text-xs text-[var(--text-secondary)]">
+            <p className="mt-1 text-xs text-muted">
               {t('wizard.adminConfirmDesc')}
             </p>
           </div>
         </div>
       </div>
 
-      <p className="text-xs text-[var(--text-tertiary)]">
+      <p className="text-xs text-muted-foreground">
         {t('wizard.completedContact')}
       </p>
     </div>
@@ -812,10 +812,10 @@ export function PurchaseWizard({ vehicleId, vehicleName, vehiclePrice }: Purchas
   return (
     <div>
       {/* Title */}
-      <h3 className="mb-1 text-lg font-bold text-[var(--text-primary)]">
+      <h3 className="mb-1 text-lg font-bold text-foreground">
         {t('wizard.title')}
       </h3>
-      <p className="mb-4 text-sm text-[var(--text-secondary)]">{t('subtitle')}</p>
+      <p className="mb-4 text-sm text-muted">{t('subtitle')}</p>
 
       {/* Step indicator */}
       {currentStep !== 'completed' && (

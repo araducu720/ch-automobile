@@ -28,8 +28,8 @@ export default async function ContactPage({ searchParams }: PageProps) {
     <div className="py-8 lg:py-12">
       <div className="container-main">
         <div className="max-w-2xl mx-auto text-center mb-12">
-          <h1 className="text-3xl font-bold text-[var(--text-primary)]">{t('title')}</h1>
-          <p className="mt-3 text-[var(--text-secondary)]">
+          <h1 className="text-3xl font-bold text-foreground">{t('title')}</h1>
+          <p className="mt-3 text-muted">
             {t('subtitle')}
           </p>
         </div>
@@ -48,14 +48,14 @@ export default async function ContactPage({ searchParams }: PageProps) {
           <div className="space-y-6">
             <Card>
               <CardContent className="p-6 space-y-5">
-                <h2 className="text-lg font-semibold text-[var(--text-primary)]">{t('info.title')}</h2>
+                <h2 className="text-lg font-semibold text-foreground">{t('info.title')}</h2>
 
                 <div className="space-y-4">
                   <div className="flex items-start gap-3">
-                    <MapPin className="h-5 w-5 text-[var(--brand-primary)] shrink-0 mt-0.5" />
+                    <MapPin className="h-5 w-5 text-brand shrink-0 mt-0.5" />
                     <div>
-                      <p className="font-medium text-[var(--text-primary)] text-sm">{tc('address')}</p>
-                      <p className="text-sm text-[var(--text-secondary)]">
+                      <p className="font-medium text-foreground text-sm">{tc('address')}</p>
+                      <p className="text-sm text-muted">
                         {COMPANY_INFO.street}<br />
                         {COMPANY_INFO.zip} {COMPANY_INFO.city}
                       </p>
@@ -63,30 +63,30 @@ export default async function ContactPage({ searchParams }: PageProps) {
                   </div>
 
                   <div className="flex items-start gap-3">
-                    <Phone className="h-5 w-5 text-[var(--brand-primary)] shrink-0 mt-0.5" />
+                    <Phone className="h-5 w-5 text-brand shrink-0 mt-0.5" />
                     <div>
-                      <p className="font-medium text-[var(--text-primary)] text-sm">{tc('phone')}</p>
-                      <a href={`tel:${COMPANY_INFO.phone}`} className="text-sm text-[var(--text-link)] hover:underline">
+                      <p className="font-medium text-foreground text-sm">{tc('phone')}</p>
+                      <a href={`tel:${COMPANY_INFO.phone}`} className="text-sm text-link hover:underline">
                         {COMPANY_INFO.phone}
                       </a>
                     </div>
                   </div>
 
                   <div className="flex items-start gap-3">
-                    <Mail className="h-5 w-5 text-[var(--brand-primary)] shrink-0 mt-0.5" />
+                    <Mail className="h-5 w-5 text-brand shrink-0 mt-0.5" />
                     <div>
-                      <p className="font-medium text-[var(--text-primary)] text-sm">{tc('email')}</p>
-                      <a href={`mailto:${COMPANY_INFO.email}`} className="text-sm text-[var(--text-link)] hover:underline">
+                      <p className="font-medium text-foreground text-sm">{tc('email')}</p>
+                      <a href={`mailto:${COMPANY_INFO.email}`} className="text-sm text-link hover:underline">
                         {COMPANY_INFO.email}
                       </a>
                     </div>
                   </div>
 
                   <div className="flex items-start gap-3">
-                    <Clock className="h-5 w-5 text-[var(--brand-primary)] shrink-0 mt-0.5" />
+                    <Clock className="h-5 w-5 text-brand shrink-0 mt-0.5" />
                     <div>
-                      <p className="font-medium text-[var(--text-primary)] text-sm">{tc('openingHours')}</p>
-                      <div className="text-sm text-[var(--text-secondary)]">
+                      <p className="font-medium text-foreground text-sm">{tc('openingHours')}</p>
+                      <div className="text-sm text-muted">
                         <p>{tc('weekdays')}: {COMPANY_INFO.hours.weekdays}</p>
                         <p>Sa: {COMPANY_INFO.hours.saturday}</p>
                         <p>So: {COMPANY_INFO.hours.sunday}</p>
@@ -104,7 +104,7 @@ export default async function ContactPage({ searchParams }: PageProps) {
                   src={`https://www.openstreetmap.org/export/embed.html?bbox=${COMPANY_INFO.coordinates.lng - 0.01}%2C${COMPANY_INFO.coordinates.lat - 0.005}%2C${COMPANY_INFO.coordinates.lng + 0.01}%2C${COMPANY_INFO.coordinates.lat + 0.005}&layer=mapnik&marker=${COMPANY_INFO.coordinates.lat}%2C${COMPANY_INFO.coordinates.lng}`}
                   width="100%"
                   height="250"
-                  style={{ border: 0 }}
+                  className="border-0"
                   allowFullScreen
                   loading="lazy"
                   referrerPolicy="no-referrer-when-downgrade"

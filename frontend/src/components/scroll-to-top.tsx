@@ -20,9 +20,9 @@ export function ScrollToTop() {
       onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
       className={cn(
         'fixed bottom-6 right-6 z-30 flex h-11 w-11 items-center justify-center',
-        'rounded-full bg-[var(--brand-primary)] text-white shadow-lg',
-        'hover:bg-[var(--brand-primary-hover)] transition-all duration-300',
-        'focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--border-focus)]',
+        'rounded-full bg-brand text-white shadow-lg',
+        'hover:bg-brand-hover transition-all duration-300',
+        'focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-border-focus',
         visible
           ? 'opacity-100 translate-y-0 pointer-events-auto'
           : 'opacity-0 translate-y-2 pointer-events-none',

@@ -172,23 +172,50 @@
 
 /* ---------- Tailwind v4 theme inline ---------- */
 @theme inline {
+  /* Backgrounds */
   --color-background: var(--bg-primary);
+  --color-secondary: var(--bg-secondary);
+  --color-tertiary: var(--bg-tertiary);
+  --color-elevated: var(--bg-elevated);
+  --color-card: var(--bg-elevated);
+  --color-overlay: var(--bg-overlay);
+  --color-input: var(--input-bg);
+
+  /* Foreground / text */
   --color-foreground: var(--text-primary);
+  --color-card-foreground: var(--text-primary);
+  --color-muted: var(--text-secondary);
+  --color-muted-foreground: var(--text-tertiary);
+  --color-inverse: var(--text-inverse);
+  --color-link: var(--text-link);
+  --color-link-hover: var(--text-link-hover);
+
+  /* Brand */
   --color-brand: var(--brand-primary);
   --color-brand-hover: var(--brand-primary-hover);
   --color-brand-light: var(--brand-primary-light);
+  --color-brand-secondary: var(--brand-secondary);
   --color-accent: var(--brand-accent);
   --color-accent-hover: var(--brand-accent-hover);
-  --color-muted: var(--text-secondary);
-  --color-muted-foreground: var(--text-tertiary);
+
+  /* Borders */
   --color-border: var(--border-primary);
+  --color-border-secondary: var(--border-secondary);
+  --color-border-focus: var(--border-focus);
+  --color-input-border: var(--border-input);
   --color-ring: var(--ring-color);
-  --color-card: var(--bg-elevated);
-  --color-card-foreground: var(--text-primary);
+
+  /* Status */
   --color-success: var(--status-success);
+  --color-success-bg: var(--status-success-bg);
   --color-warning: var(--status-warning);
+  --color-warning-bg: var(--status-warning-bg);
   --color-error: var(--status-error);
+  --color-error-bg: var(--status-error-bg);
   --color-info: var(--status-info);
+  --color-info-bg: var(--status-info-bg);
+
+  /* Typography */
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
@@ -610,6 +637,13 @@ body {
 .cursor-blink {
   border-right: 2px solid var(--brand-primary);
   animation: blink-cursor 1s step-end infinite;
+}
+
+/* CTA section decorative radial background */
+.cta-radial-bg {
+  background-image:
+    radial-gradient(circle at 20% 80%, rgba(245, 158, 11, 0.3) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(96, 165, 250, 0.3) 0%, transparent 50%);
 }
 
 /* WhatsApp button */

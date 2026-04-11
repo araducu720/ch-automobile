@@ -10,7 +10,7 @@ export default function DatenschutzPage() {
   return (
     <div className="py-8 lg:py-12">
       <div className="container-main max-w-3xl">
-        <h1 className="text-3xl font-bold text-[var(--text-primary)] mb-8">Datenschutzerklärung</h1>
+        <h1 className="text-3xl font-bold text-foreground mb-8">Datenschutzerklärung</h1>
 
         <div className="prose-custom space-y-8">
           <section>

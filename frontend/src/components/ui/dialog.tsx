@@ -69,7 +69,7 @@ function Dialog({
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
       {/* Overlay */}
       <div
-        className="fixed inset-0 bg-[var(--bg-overlay)] backdrop-blur-sm animate-in fade-in-0 duration-200"
+        className="fixed inset-0 bg-overlay backdrop-blur-sm animate-in fade-in-0 duration-200"
         onClick={onClose}
         aria-hidden="true"
       />
@@ -82,7 +82,7 @@ function Dialog({
         aria-describedby={description ? 'dialog-description' : undefined}
         tabIndex={-1}
         className={cn(
-          'relative z-50 w-full rounded-xl border border-[var(--border-primary)] bg-[var(--bg-elevated)] shadow-xl',
+          'relative z-50 w-full rounded-xl border border-border bg-card shadow-xl',
           'animate-in fade-in-0 zoom-in-95 duration-200',
           'max-h-[90vh] overflow-y-auto',
           sizeClasses[size],
@@ -94,8 +94,8 @@ function Dialog({
           onClick={onClose}
           className={cn(
             'absolute right-4 top-4 rounded-md p-1 transition-colors',
-            'text-[var(--text-tertiary)] hover:text-[var(--text-primary)] hover:bg-[var(--bg-secondary)]',
-            'focus-visible:outline-2 focus-visible:outline-[var(--border-focus)]',
+            'text-muted-foreground hover:text-foreground hover:bg-secondary',
+            'focus-visible:outline-2 focus-visible:outline-border-focus',
           )}
           aria-label={t('close')}
         >
@@ -106,7 +106,7 @@ function Dialog({
           {title && (
             <h2
               id="dialog-title"
-              className="text-lg font-semibold text-[var(--text-primary)] pr-8"
+              className="text-lg font-semibold text-foreground pr-8"
             >
               {title}
             </h2>
@@ -114,7 +114,7 @@ function Dialog({
           {description && (
             <p
               id="dialog-description"
-              className="mt-1.5 text-sm text-[var(--text-secondary)]"
+              className="mt-1.5 text-sm text-muted"
             >
               {description}
             </p>

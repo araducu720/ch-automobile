@@ -7,7 +7,7 @@ import { useTranslations } from 'next-intl';
 import { cn } from '@/lib/utils';
 import { ThemeToggle } from '@/components/theme-toggle';
 import { LanguageSwitcher } from '@/components/language-switcher';
-import { Button } from '@/components/ui/button';
+
 import { Sheet } from '@/components/ui/sheet';
 import { COMPANY_INFO } from '@/lib/constants';
 import {
@@ -67,7 +67,7 @@ export function Header() {
         className={cn(
           'fixed top-0 left-0 right-0 z-40 transition-all duration-300',
           scrolled
-            ? 'glass border-b border-[var(--border-primary)] shadow-sm'
+            ? 'glass border-b border-border shadow-sm'
             : 'bg-transparent',
         )}
         role="banner"
@@ -75,16 +75,16 @@ export function Header() {
         {/* Top bar */}
         <div
           className={cn(
-            'hidden lg:block border-b border-[var(--border-primary)] transition-all duration-300',
+            'hidden lg:block border-b border-border transition-all duration-300',
             scrolled ? 'h-0 overflow-hidden opacity-0' : 'h-auto opacity-100',
           )}
         >
-          <div className="container-main flex items-center justify-between py-1.5 text-xs text-[var(--text-secondary)]">
+          <div className="container-main flex items-center justify-between py-1.5 text-xs text-muted">
             <span>{COMPANY_INFO.street}, {COMPANY_INFO.zip} {COMPANY_INFO.city}</span>
             <div className="flex items-center gap-4">
               <a
                 href={`tel:${COMPANY_INFO.phone}`}
-                className="inline-flex items-center gap-1 hover:text-[var(--brand-primary)] transition-colors"
+                className="inline-flex items-center gap-1 hover:text-brand transition-colors"
               >
                 <Phone className="h-3 w-3" />
                 {COMPANY_INFO.phone}
@@ -100,12 +100,12 @@ export function Header() {
             {/* Logo */}
             <Link
               href="/"
-              className="flex items-center gap-2 font-bold text-lg text-[var(--text-primary)] hover:text-[var(--brand-primary)] transition-colors"
+              className="flex items-center gap-2 font-bold text-lg text-foreground hover:text-brand transition-colors"
               aria-label={ta('homeLogo')}
             >
-              <Car className="h-7 w-7 text-[var(--brand-primary)]" />
+              <Car className="h-7 w-7 text-brand" />
               <span className="hidden sm:inline">
-                C-H <span className="text-[var(--brand-primary)]">Automobile</span>
+                C-H <span className="text-brand">Automobile</span>
               </span>
             </Link>
 
@@ -118,8 +118,8 @@ export function Header() {
                   className={cn(
                     'relative px-3 py-2 text-sm font-medium rounded-lg transition-colors',
                     isActive(item.href)
-                      ? 'text-[var(--brand-primary)] bg-[var(--brand-primary-light)]'
-                      : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--bg-secondary)]',
+                      ? 'text-brand bg-brand-light'
+                      : 'text-muted hover:text-foreground hover:bg-secondary',
                   )}
                   aria-current={isActive(item.href) ? 'page' : undefined}
                 >
@@ -137,7 +137,7 @@ export function Header() {
                 href={`tel:${COMPANY_INFO.phone}`}
                 className={cn(
                   'hidden md:flex items-center gap-2 h-9 px-4 rounded-lg text-sm font-medium',
-                  'bg-[var(--brand-primary)] text-white hover:bg-[var(--brand-primary-hover)] transition-colors',
+                  'bg-brand text-white hover:bg-brand-hover transition-colors',
                 )}
               >
                 <Phone className="h-4 w-4" />
@@ -149,13 +149,13 @@ export function Header() {
                 onClick={() => setMobileMenuOpen(true)}
                 className={cn(
                   'lg:hidden flex h-9 w-9 items-center justify-center rounded-lg',
-                  'border border-[var(--border-primary)] bg-[var(--bg-secondary)]',
-                  'hover:bg-[var(--bg-tertiary)] transition-colors',
+                  'border border-border bg-secondary',
+                  'hover:bg-tertiary transition-colors',
                 )}
                 aria-label={ta('openMenu')}
                 aria-expanded={mobileMenuOpen}
               >
-                <Menu className="h-5 w-5 text-[var(--text-primary)]" />
+                <Menu className="h-5 w-5 text-foreground" />
               </button>
             </div>
           </div>
@@ -175,8 +175,8 @@ export function Header() {
                 className={cn(
                   'flex items-center gap-3 rounded-lg px-3 py-3 text-sm font-medium transition-colors',
                   isActive(item.href)
-                    ? 'text-[var(--brand-primary)] bg-[var(--brand-primary-light)]'
-                    : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--bg-secondary)]',
+                    ? 'text-brand bg-brand-light'
+                    : 'text-muted hover:text-foreground hover:bg-secondary',
                 )}
                 aria-current={isActive(item.href) ? 'page' : undefined}
               >
@@ -187,18 +187,18 @@ export function Header() {
           })}
         </nav>
 
-        <div className="mt-6 pt-6 border-t border-[var(--border-primary)] space-y-4">
+        <div className="mt-6 pt-6 border-t border-border space-y-4">
           <a
             href={`tel:${COMPANY_INFO.phone}`}
-            className="flex items-center gap-3 text-sm text-[var(--text-secondary)] hover:text-[var(--brand-primary)]"
+            className="flex items-center gap-3 text-sm text-muted hover:text-brand"
           >
             <Phone className="h-4 w-4" />
             {COMPANY_INFO.phone}
           </a>
-          <p className="text-xs text-[var(--text-tertiary)]">
+          <p className="text-xs text-muted-foreground">
             {COMPANY_INFO.street}, {COMPANY_INFO.zip} {COMPANY_INFO.city}
           </p>
-          <p className="text-xs text-[var(--text-tertiary)]">
+          <p className="text-xs text-muted-foreground">
             {tc('weekdays')}: {COMPANY_INFO.hours.weekdays}<br />
             {tc('saturday').slice(0, 2)}: {COMPANY_INFO.hours.saturday}
           </p>

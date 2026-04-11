@@ -26,7 +26,7 @@ class Inquiry extends Model
     {
         static::creating(function (Inquiry $inquiry) {
             if (empty($inquiry->reference_number)) {
-                $inquiry->reference_number = 'INQ-' . strtoupper(uniqid());
+                $inquiry->reference_number = 'INQ-'.strtoupper(uniqid());
             }
         });
     }

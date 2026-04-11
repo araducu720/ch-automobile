@@ -17,7 +17,7 @@ export default function Loading() {
             {/* Specs grid */}
             <div className="grid grid-cols-2 gap-4 mt-6">
               {Array.from({ length: 8 }).map((_, i) => (
-                <div key={i} className="p-3 rounded-lg border border-[var(--border-primary)]">
+                <div key={i} className="p-3 rounded-lg border border-border">
                   <div className="h-4 w-20 rounded animate-shimmer mb-2" />
                   <div className="h-5 w-28 rounded animate-shimmer" />
                 </div>
@@ -35,7 +35,7 @@ export default function Loading() {
 
           {/* Sidebar */}
           <div className="space-y-4">
-            <div className="rounded-xl border border-[var(--border-primary)] p-6 space-y-4">
+            <div className="rounded-xl border border-border p-6 space-y-4">
               <div className="h-8 w-32 rounded-lg animate-shimmer" />
               <div className="h-10 w-full rounded-lg animate-shimmer" />
               <div className="h-10 w-full rounded-lg animate-shimmer" />

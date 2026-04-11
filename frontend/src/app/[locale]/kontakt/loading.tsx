@@ -17,7 +17,7 @@ export default function Loading() {
 
           {/* Contact info */}
           <div className="space-y-6">
-            <div className="rounded-xl border border-[var(--border-primary)] p-6 space-y-4">
+            <div className="rounded-xl border border-border p-6 space-y-4">
               <div className="h-5 w-40 rounded animate-shimmer" />
               <div className="h-4 w-56 rounded animate-shimmer" />
               <div className="h-4 w-48 rounded animate-shimmer" />

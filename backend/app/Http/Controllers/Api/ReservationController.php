@@ -4,9 +4,9 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreReservationRequest;
+use App\Models\CompanySetting;
 use App\Models\Reservation;
 use App\Models\Vehicle;
-use App\Models\CompanySetting;
 use App\Notifications\NewReservationNotification;
 use App\Notifications\ReservationConfirmationNotification;
 use Barryvdh\DomPDF\Facade\Pdf;
@@ -57,7 +57,7 @@ class ReservationController extends Controller
             return $reservation;
         });
 
-        if (!$reservation) {
+        if (! $reservation) {
             return response()->json([
                 'error' => 'Dieses Fahrzeug ist nicht mehr verfügbar.',
             ], 409);
@@ -86,7 +86,7 @@ class ReservationController extends Controller
             'data' => [
                 'payment_reference' => $reservation->payment_reference,
                 'deposit_amount' => (float) $reservation->deposit_amount,
-                'formatted_deposit' => number_format($reservation->deposit_amount, 2, ',', '.') . ' €',
+                'formatted_deposit' => number_format($reservation->deposit_amount, 2, ',', '.').' €',
                 'expires_at' => $reservation->reservation_expires_at->toIso8601String(),
                 'bank_details' => [
                     'bank_name' => $settings->bank_name,
@@ -94,7 +94,7 @@ class ReservationController extends Controller
                     'bic' => $settings->bank_bic,
                     'account_holder' => $settings->bank_account_holder,
                     'reference' => $reservation->payment_reference,
-                    'amount' => number_format($reservation->deposit_amount, 2, ',', '.') . ' €',
+                    'amount' => number_format($reservation->deposit_amount, 2, ',', '.').' €',
                 ],
                 'vehicle' => [
                     'brand' => $vehicle->brand,
@@ -125,23 +125,23 @@ class ReservationController extends Controller
                 'payment_reference' => $reservation->payment_reference,
                 'purchase_step' => $reservation->purchase_step,
                 'deposit_amount' => (float) $reservation->deposit_amount,
-                'formatted_deposit' => number_format($reservation->deposit_amount, 2, ',', '.') . ' €',
+                'formatted_deposit' => number_format($reservation->deposit_amount, 2, ',', '.').' €',
                 'expires_at' => $reservation->reservation_expires_at->toIso8601String(),
                 'customer_name' => $reservation->customer_name,
                 'customer_email' => $reservation->customer_email,
-                'has_signature' => !empty($reservation->signature_path),
-                'has_payment_proof' => !empty($reservation->payment_proof_path),
-                'has_contract' => !empty($reservation->contract_path),
-                'has_signed_contract' => !empty($reservation->signed_contract_path),
+                'has_signature' => ! empty($reservation->signature_path),
+                'has_payment_proof' => ! empty($reservation->payment_proof_path),
+                'has_contract' => ! empty($reservation->contract_path),
+                'has_signed_contract' => ! empty($reservation->signed_contract_path),
                 'contract_generated_at' => $reservation->contract_generated_at?->toIso8601String(),
-                'admin_confirmed' => !empty($reservation->admin_confirmed_at),
+                'admin_confirmed' => ! empty($reservation->admin_confirmed_at),
                 'bank_details' => [
                     'bank_name' => $settings->bank_name,
                     'iban' => $settings->bank_iban,
                     'bic' => $settings->bank_bic,
                     'account_holder' => $settings->bank_account_holder,
                     'reference' => $reservation->payment_reference,
-                    'amount' => number_format($reservation->deposit_amount, 2, ',', '.') . ' €',
+                    'amount' => number_format($reservation->deposit_amount, 2, ',', '.').' €',
                 ],
                 'vehicle' => [
                     'brand' => $vehicle->brand,
@@ -169,7 +169,7 @@ class ReservationController extends Controller
             ], 410);
         }
 
-        if (!in_array($reservation->purchase_step, ['signature', 'payment', 'completed'])) {
+        if (! in_array($reservation->purchase_step, ['signature', 'payment', 'completed'])) {
             return response()->json([
                 'error' => 'Der Kaufvertrag ist in diesem Schritt noch nicht verfügbar.',
             ], 422);

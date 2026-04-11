@@ -2,8 +2,8 @@
 
 namespace App\Notifications;
 
-use App\Models\Reservation;
 use App\Models\CompanySetting;
+use App\Models\Reservation;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
@@ -25,14 +25,14 @@ class ReservationConfirmationNotification extends Notification implements Should
     public function toMail(object $notifiable): MailMessage
     {
         $vehicle = $this->reservation->vehicle;
-        $deposit = number_format($this->reservation->deposit_amount, 2, ',', '.') . ' €';
+        $deposit = number_format($this->reservation->deposit_amount, 2, ',', '.').' €';
         $settings = CompanySetting::instance();
         $locale = $this->reservation->locale ?? 'de';
 
         $mail = (new MailMessage)
             ->subject("Reservierungsbestätigung — {$this->reservation->payment_reference}")
             ->greeting("Hallo {$this->reservation->customer_name},")
-            ->line("Vielen Dank für Ihre Reservierung bei C-H Automobile & Exclusive Cars.")
+            ->line('Vielen Dank für Ihre Reservierung bei C-H Automobile & Exclusive Cars.')
             ->line("**Fahrzeug:** {$vehicle->full_name}")
             ->line("**Fahrzeugpreis:** {$vehicle->formatted_price}")
             ->line('')

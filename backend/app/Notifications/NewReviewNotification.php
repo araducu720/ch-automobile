@@ -42,7 +42,7 @@ class NewReviewNotification extends Notification implements ShouldQueue
 
         $mail->line('')
             ->line('Die Bewertung muss noch freigeschaltet werden.')
-            ->action('Im Admin-Panel ansehen', url('/admin/reviews/' . $this->review->id . '/edit'))
+            ->action('Im Admin-Panel ansehen', url('/admin/reviews/'.$this->review->id.'/edit'))
             ->salutation('C-H Automobile & Exclusive Cars — System');
 
         return $mail;

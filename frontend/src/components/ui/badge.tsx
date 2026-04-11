@@ -7,14 +7,14 @@ const badgeVariants = cva(
   {
     variants: {
       variant: {
-        default: 'bg-[var(--brand-primary)] text-white',
-        secondary: 'bg-[var(--bg-tertiary)] text-[var(--text-secondary)] border border-[var(--border-primary)]',
-        success: 'bg-[var(--status-success-bg)] text-[var(--status-success)] border border-[var(--status-success)]',
-        warning: 'bg-[var(--status-warning-bg)] text-[var(--status-warning)] border border-[var(--status-warning)]',
-        error: 'bg-[var(--status-error-bg)] text-[var(--status-error)] border border-[var(--status-error)]',
-        info: 'bg-[var(--status-info-bg)] text-[var(--status-info)] border border-[var(--status-info)]',
-        outline: 'border border-[var(--border-primary)] text-[var(--text-primary)]',
-        accent: 'bg-[var(--brand-accent)] text-[var(--brand-secondary)] font-bold',
+        default: 'bg-brand text-white',
+        secondary: 'bg-tertiary text-muted border border-border',
+        success: 'bg-success-bg text-success border border-success',
+        warning: 'bg-warning-bg text-warning border border-warning',
+        error: 'bg-error-bg text-error border border-error',
+        info: 'bg-info-bg text-info border border-info',
+        outline: 'border border-border text-foreground',
+        accent: 'bg-accent text-brand-secondary font-bold',
       },
     },
     defaultVariants: {

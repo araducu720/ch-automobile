@@ -50,6 +50,7 @@ export interface Vehicle {
   main_image: string | null;
   thumbnail: string | null;
   images: MediaItem[];
+  images_count: number;
   created_at: string;
   updated_at: string;
 }

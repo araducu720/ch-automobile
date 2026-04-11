@@ -31,10 +31,10 @@ export default async function TradeInPage() {
             <ArrowLeftRight className="h-3.5 w-3.5 mr-1" />
             {t('badge')}
           </Badge>
-          <h1 className="text-3xl font-bold text-[var(--text-primary)]">
+          <h1 className="text-3xl font-bold text-foreground">
             {t('title')}
           </h1>
-          <p className="mt-3 text-[var(--text-secondary)]">
+          <p className="mt-3 text-muted">
             {t('subtitle')}
           </p>
         </div>
@@ -46,12 +46,12 @@ export default async function TradeInPage() {
             return (
               <Card key={b.title}>
                 <CardContent className="p-5 flex items-start gap-3">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-[var(--brand-primary-light)] shrink-0">
-                    <Icon className="h-5 w-5 text-[var(--brand-primary)]" />
+                  <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-brand-light shrink-0">
+                    <Icon className="h-5 w-5 text-brand" />
                   </div>
                   <div>
-                    <h3 className="font-semibold text-[var(--text-primary)]">{b.title}</h3>
-                    <p className="mt-1 text-sm text-[var(--text-secondary)]">{b.desc}</p>
+                    <h3 className="font-semibold text-foreground">{b.title}</h3>
+                    <p className="mt-1 text-sm text-muted">{b.desc}</p>
                   </div>
                 </CardContent>
               </Card>
@@ -63,7 +63,7 @@ export default async function TradeInPage() {
         <div className="max-w-3xl mx-auto">
           <Card>
             <CardContent className="p-6 lg:p-8">
-              <h2 className="text-xl font-semibold text-[var(--text-primary)] mb-6">
+              <h2 className="text-xl font-semibold text-foreground mb-6">
                 {t('formTitle')}
               </h2>
               <TradeInForm />

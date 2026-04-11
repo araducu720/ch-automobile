@@ -11,12 +11,13 @@ use Filament\Resources\Pages\EditRecord\Concerns\Translatable;
 class ManageCompanySetting extends EditRecord
 {
     use Translatable;
+
     protected static string $resource = CompanySettingResource::class;
 
     /**
      * Always edit the singleton instance (id = 1).
      */
-    public function mount(int|string $record = null): void
+    public function mount(int|string|null $record = null): void
     {
         $this->record = CompanySetting::instance();
 

@@ -219,7 +219,7 @@ export function VehicleGallery({ images, vehicleName }: VehicleGalleryProps) {
 
   if (!images.length) {
     return (
-      <div className="aspect-[16/9] rounded-xl bg-[var(--bg-tertiary)] flex items-center justify-center text-[var(--text-tertiary)]">
+      <div className="aspect-[16/9] rounded-xl bg-tertiary flex items-center justify-center text-muted-foreground">
         <div className="text-center">
           <GalleryHorizontal className="mx-auto h-12 w-12 mb-2 opacity-50" />
           <p>{t('noImages')}</p>
@@ -235,7 +235,7 @@ export function VehicleGallery({ images, vehicleName }: VehicleGalleryProps) {
       {/* View toggle + Image count */}
       {images.length > 1 && (
         <div className="flex items-center justify-between mb-3">
-          <span className="text-sm text-[var(--text-tertiary)]">
+          <span className="text-sm text-muted-foreground">
             {images.length} {images.length === 1 ? 'Foto' : 'Fotos'}
           </span>
           <div className="flex gap-1">
@@ -244,8 +244,8 @@ export function VehicleGallery({ images, vehicleName }: VehicleGalleryProps) {
               className={cn(
                 'rounded-lg p-1.5 transition-colors',
                 view === 'slider'
-                  ? 'bg-[var(--brand-primary)] text-white'
-                  : 'text-[var(--text-tertiary)] hover:bg-[var(--bg-tertiary)]',
+                  ? 'bg-brand text-white'
+                  : 'text-muted-foreground hover:bg-tertiary',
               )}
               aria-label="Slider-Ansicht"
             >
@@ -256,8 +256,8 @@ export function VehicleGallery({ images, vehicleName }: VehicleGalleryProps) {
               className={cn(
                 'rounded-lg p-1.5 transition-colors',
                 view === 'grid'
-                  ? 'bg-[var(--brand-primary)] text-white'
-                  : 'text-[var(--text-tertiary)] hover:bg-[var(--bg-tertiary)]',
+                  ? 'bg-brand text-white'
+                  : 'text-muted-foreground hover:bg-tertiary',
               )}
               aria-label="Raster-Ansicht"
             >
@@ -272,18 +272,18 @@ export function VehicleGallery({ images, vehicleName }: VehicleGalleryProps) {
         <div className="space-y-3">
           {/* Main Image */}
           <div
-            className="relative aspect-[16/9] rounded-xl overflow-hidden bg-[var(--bg-tertiary)] group cursor-pointer"
+            className="relative aspect-[16/9] rounded-xl overflow-hidden bg-tertiary group cursor-pointer"
             onTouchStart={handleTouchStart}
             onTouchEnd={handleTouchEnd}
             onClick={() => openLightbox()}
           >
             {/* Loading skeleton */}
             {isLoading && (
-              <div className="absolute inset-0 z-10 animate-pulse bg-[var(--bg-tertiary)]" />
+              <div className="absolute inset-0 z-10 animate-pulse bg-tertiary" />
             )}
 
             {imgError ? (
-              <div className="absolute inset-0 flex items-center justify-center text-[var(--text-tertiary)]">
+              <div className="absolute inset-0 flex items-center justify-center text-muted-foreground">
                 <div className="text-center">
                   <GalleryHorizontal className="mx-auto h-10 w-10 mb-2 opacity-50" />
                   <p className="text-sm">Bild konnte nicht geladen werden</p>
@@ -370,8 +370,8 @@ export function VehicleGallery({ images, vehicleName }: VehicleGalleryProps) {
                   className={cn(
                     'relative h-16 w-24 flex-shrink-0 rounded-lg overflow-hidden border-2 transition-all duration-200',
                     i === currentIndex
-                      ? 'border-[var(--brand-primary)] ring-1 ring-[var(--brand-primary)] scale-105'
-                      : 'border-transparent hover:border-[var(--border-secondary)] opacity-60 hover:opacity-100',
+                      ? 'border-brand ring-1 ring-brand scale-105'
+                      : 'border-transparent hover:border-border-secondary opacity-60 hover:opacity-100',
                   )}
                   aria-label={t('showImage', { number: i + 1 })}
                   aria-current={i === currentIndex ? 'true' : undefined}
@@ -398,8 +398,8 @@ export function VehicleGallery({ images, vehicleName }: VehicleGalleryProps) {
               key={img.id}
               onClick={() => openLightbox(i)}
               className={cn(
-                'relative aspect-[4/3] rounded-lg overflow-hidden bg-[var(--bg-tertiary)]',
-                'group/grid cursor-pointer transition-all hover:ring-2 hover:ring-[var(--brand-primary)]',
+                'relative aspect-[4/3] rounded-lg overflow-hidden bg-tertiary',
+                'group/grid cursor-pointer transition-all hover:ring-2 hover:ring-brand',
               )}
             >
               <Image

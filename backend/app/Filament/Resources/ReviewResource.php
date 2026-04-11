@@ -13,7 +13,9 @@ use Filament\Tables\Table;
 class ReviewResource extends Resource
 {
     protected static ?string $model = Review::class;
+
     protected static ?string $navigationIcon = 'heroicon-o-star';
+
     protected static ?int $navigationSort = 2;
 
     public static function getNavigationGroup(): ?string
@@ -84,7 +86,7 @@ class ReviewResource extends Resource
                     ->icon('heroicon-o-check')
                     ->color('success')
                     ->action(fn (Review $record) => $record->update(['is_approved' => true]))
-                    ->visible(fn (Review $record) => !$record->is_approved),
+                    ->visible(fn (Review $record) => ! $record->is_approved),
                 Tables\Actions\Action::make('reject')
                     ->label(__('admin.review.action_reject'))
                     ->icon('heroicon-o-x-mark')

@@ -14,23 +14,23 @@ const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
         {label && (
           <label
             htmlFor={inputId}
-            className="block text-sm font-medium text-[var(--text-primary)]"
+            className="block text-sm font-medium text-foreground"
           >
             {label}
-            {props.required && <span className="text-[var(--status-error)] ml-0.5">*</span>}
+            {props.required && <span className="text-error ml-0.5">*</span>}
           </label>
         )}
         <textarea
           id={inputId}
           className={cn(
-            'flex min-h-[100px] w-full rounded-lg border bg-[var(--bg-primary)] px-3.5 py-2.5',
-            'text-sm text-[var(--text-primary)] placeholder:text-[var(--text-tertiary)]',
+            'flex min-h-[100px] w-full rounded-lg border bg-background px-3.5 py-2.5',
+            'text-sm text-foreground placeholder:text-muted-foreground',
             'transition-all duration-200 resize-y',
-            'focus:outline-none focus:ring-2 focus:ring-[var(--border-focus)] focus:border-transparent',
+            'focus:outline-none focus:ring-2 focus:ring-border-focus focus:border-transparent',
             'disabled:cursor-not-allowed disabled:opacity-50',
             error
-              ? 'border-[var(--status-error)] focus:ring-[var(--status-error)]'
-              : 'border-[var(--border-primary)] hover:border-[var(--border-secondary)]',
+              ? 'border-error focus:ring-error'
+              : 'border-border hover:border-border-secondary',
             className,
           )}
           ref={ref}
@@ -39,7 +39,7 @@ const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
           {...props}
         />
         {error && (
-          <p id={`${inputId}-error`} className="text-xs text-[var(--status-error)]" role="alert">
+          <p id={`${inputId}-error`} className="text-xs text-error" role="alert">
             {error}
           </p>
         )}

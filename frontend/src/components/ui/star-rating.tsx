@@ -37,16 +37,16 @@ const StarRating = forwardRef<HTMLDivElement, StarRatingProps>(
               className={cn(
                 sizeClasses[size],
                 filled
-                  ? 'fill-[var(--brand-accent)] text-[var(--brand-accent)]'
+                  ? 'fill-accent text-accent'
                   : half
-                    ? 'fill-[var(--brand-accent)]/50 text-[var(--brand-accent)]'
-                    : 'fill-none text-[var(--text-tertiary)]',
+                    ? 'fill-accent/50 text-accent'
+                    : 'fill-none text-muted-foreground',
               )}
             />
           );
         })}
         {showValue && (
-          <span className="ml-1.5 text-sm font-medium text-[var(--text-secondary)]">
+          <span className="ml-1.5 text-sm font-medium text-muted">
             {rating.toFixed(1)}
           </span>
         )}
@@ -83,7 +83,7 @@ function StarRatingInput({
   return (
     <div className="space-y-1.5">
       {label && (
-        <span className="block text-sm font-medium text-[var(--text-primary)]">
+        <span className="block text-sm font-medium text-foreground">
           {label}
         </span>
       )}
@@ -96,7 +96,7 @@ function StarRatingInput({
               type="button"
               onClick={() => onChange(starValue)}
               className={cn(
-                'transition-transform duration-150 hover:scale-110 focus-visible:outline-2 focus-visible:outline-[var(--border-focus)] rounded-sm',
+                'transition-transform duration-150 hover:scale-110 focus-visible:outline-2 focus-visible:outline-border-focus rounded-sm',
               )}
               role="radio"
               aria-checked={starValue === value}
@@ -106,8 +106,8 @@ function StarRatingInput({
                 className={cn(
                   sizeClasses[size],
                   starValue <= value
-                    ? 'fill-[var(--brand-accent)] text-[var(--brand-accent)]'
-                    : 'fill-none text-[var(--text-tertiary)] hover:text-[var(--brand-accent)]',
+                    ? 'fill-accent text-accent'
+                    : 'fill-none text-muted-foreground hover:text-accent',
                 )}
               />
             </button>
@@ -115,7 +115,7 @@ function StarRatingInput({
         })}
       </div>
       {error && (
-        <p className="text-xs text-[var(--status-error)]" role="alert">
+        <p className="text-xs text-error" role="alert">
           {error}
         </p>
       )}

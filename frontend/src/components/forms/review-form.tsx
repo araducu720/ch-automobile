@@ -60,24 +60,24 @@ export function ReviewForm() {
 
       {/* Privacy */}
       <div className="flex items-start gap-2">
-        <input type="checkbox" id="review_privacy" name="privacy_accepted" value="true" required className="mt-1 h-4 w-4 rounded border-2 border-[var(--border-input)] accent-[var(--brand-primary)]" />
-        <label htmlFor="review_privacy" className="text-sm text-[var(--text-secondary)]">
+        <input type="checkbox" id="review_privacy" name="privacy_accepted" value="true" required className="mt-1 h-4 w-4 rounded border-2 border-input-border accent-brand" />
+        <label htmlFor="review_privacy" className="text-sm text-muted">
           {t.rich('privacy', {
             link: (chunks) => (
-              <Link href="/datenschutz" className="text-[var(--text-link)] hover:underline">{chunks}</Link>
+              <Link href="/datenschutz" className="text-link hover:underline">{chunks}</Link>
             ),
           })}
           {' *'}
         </label>
       </div>
 
-      <p className="text-xs text-[var(--text-tertiary)]">
+      <p className="text-xs text-muted-foreground">
         {t('moderationNote')}
       </p>
 
       {/* Inline validation errors */}
       {state && !state.success && state.errors && (
-        <div className="flex items-start gap-2 rounded-lg bg-[var(--status-error-bg)] p-4 text-sm text-[var(--status-error)]">
+        <div className="flex items-start gap-2 rounded-lg bg-error-bg p-4 text-sm text-error">
           <AlertCircle className="h-5 w-5 shrink-0" />
           {tv('checkInputs')}
         </div>

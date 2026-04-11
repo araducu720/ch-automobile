@@ -6,8 +6,6 @@ use App\Filament\Resources\ReservationResource\Pages;
 use App\Models\Reservation;
 use Filament\Forms;
 use Filament\Forms\Form;
-use Filament\Infolists;
-use Filament\Infolists\Infolist;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
@@ -16,7 +14,9 @@ use Illuminate\Support\Facades\Storage;
 class ReservationResource extends Resource
 {
     protected static ?string $model = Reservation::class;
+
     protected static ?string $navigationIcon = 'heroicon-o-bookmark';
+
     protected static ?int $navigationSort = 2;
 
     public static function getNavigationGroup(): ?string
@@ -83,8 +83,9 @@ class ReservationResource extends Resource
                     ->label('Vertrag (PDF)')
                     ->content(function (Reservation $record): string {
                         if ($record->contract_path && Storage::disk('public')->exists($record->contract_path)) {
-                            return '✅ Vertrag generiert am ' . ($record->contract_generated_at?->format('d.m.Y H:i') ?? '—');
+                            return '✅ Vertrag generiert am '.($record->contract_generated_at?->format('d.m.Y H:i') ?? '—');
                         }
+
                         return '⏳ Noch nicht generiert';
                     }),
                 Forms\Components\Placeholder::make('signed_contract_info')
@@ -101,7 +102,7 @@ class ReservationResource extends Resource
                     ->label('Admin-Bestätigung')
                     ->content(function (Reservation $record): string {
                         return $record->admin_confirmed_at
-                            ? '✅ Bestätigt am ' . $record->admin_confirmed_at->format('d.m.Y H:i')
+                            ? '✅ Bestätigt am '.$record->admin_confirmed_at->format('d.m.Y H:i')
                             : '⏳ Ausstehend';
                     }),
             ]),
@@ -138,14 +139,14 @@ class ReservationResource extends Resource
                     ->falseIcon('heroicon-o-document')
                     ->trueColor('success')
                     ->falseColor('gray')
-                    ->getStateUsing(fn ($record) => !empty($record->signed_contract_path)),
+                    ->getStateUsing(fn ($record) => ! empty($record->signed_contract_path)),
                 Tables\Columns\IconColumn::make('payment_proof_path')->label('Zahlung')
                     ->boolean()
                     ->trueIcon('heroicon-o-banknotes')
                     ->falseIcon('heroicon-o-clock')
                     ->trueColor('success')
                     ->falseColor('gray')
-                    ->getStateUsing(fn ($record) => !empty($record->payment_proof_path)),
+                    ->getStateUsing(fn ($record) => ! empty($record->payment_proof_path)),
                 Tables\Columns\TextColumn::make('reservation_expires_at')->label(__('admin.reservation.expires'))
                     ->dateTime('d.m.Y H:i')->sortable(),
                 Tables\Columns\TextColumn::make('created_at')->label(__('admin.reservation.created'))
@@ -191,7 +192,7 @@ class ReservationResource extends Resource
                         ? Storage::disk('public')->url($record->contract_path)
                         : null)
                     ->openUrlInNewTab()
-                    ->visible(fn (Reservation $record) => !empty($record->contract_path)),
+                    ->visible(fn (Reservation $record) => ! empty($record->contract_path)),
 
                 // Download signed contract
                 Tables\Actions\Action::make('download_signed')
@@ -202,7 +203,7 @@ class ReservationResource extends Resource
                         ? Storage::disk('public')->url($record->signed_contract_path)
                         : null)
                     ->openUrlInNewTab()
-                    ->visible(fn (Reservation $record) => !empty($record->signed_contract_path)),
+                    ->visible(fn (Reservation $record) => ! empty($record->signed_contract_path)),
 
                 // Download payment proof
                 Tables\Actions\Action::make('download_payment_proof')
@@ -213,7 +214,7 @@ class ReservationResource extends Resource
                         ? Storage::disk('public')->url($record->payment_proof_path)
                         : null)
                     ->openUrlInNewTab()
-                    ->visible(fn (Reservation $record) => !empty($record->payment_proof_path)),
+                    ->visible(fn (Reservation $record) => ! empty($record->payment_proof_path)),
 
                 // Admin confirm purchase
                 Tables\Actions\Action::make('admin_confirm')
@@ -234,8 +235,7 @@ class ReservationResource extends Resource
                             $record->vehicle->update(['status' => 'sold']);
                         }
                     })
-                    ->visible(fn (Reservation $record) =>
-                        $record->purchase_step === 'completed'
+                    ->visible(fn (Reservation $record) => $record->purchase_step === 'completed'
                         && $record->isPending()
                         && empty($record->admin_confirmed_at)
                     ),
@@ -247,8 +247,7 @@ class ReservationResource extends Resource
                     ->color('success')
                     ->action(fn (Reservation $record) => $record->confirm())
                     ->requiresConfirmation()
-                    ->visible(fn (Reservation $record) =>
-                        $record->isPending()
+                    ->visible(fn (Reservation $record) => $record->isPending()
                         && $record->purchase_step !== 'completed'
                     ),
 

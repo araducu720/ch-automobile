@@ -18,7 +18,7 @@ export function WhatsAppButton() {
       rel="noopener noreferrer"
       className={cn(
         'fixed bottom-20 right-6 z-30 whatsapp-btn',
-        'focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--border-focus)]',
+        'focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-border-focus',
       )}
       aria-label={t('ariaLabel')}
       title={t('tooltip')}

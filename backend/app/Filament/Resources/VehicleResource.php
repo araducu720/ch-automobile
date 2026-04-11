@@ -6,19 +6,21 @@ use App\Filament\Resources\VehicleResource\Pages;
 use App\Models\Vehicle;
 use Filament\Forms;
 use Filament\Forms\Form;
+use Filament\Resources\Concerns\Translatable;
 use Filament\Resources\Resource;
 use Filament\Tables;
-use Filament\Tables\Table;
-use Filament\Resources\Concerns\Translatable;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Filters\TernaryFilter;
+use Filament\Tables\Table;
 
 class VehicleResource extends Resource
 {
     use Translatable;
 
     protected static ?string $model = Vehicle::class;
+
     protected static ?string $navigationIcon = 'heroicon-o-truck';
+
     protected static ?int $navigationSort = 1;
 
     public static function getNavigationGroup(): ?string
@@ -126,8 +128,7 @@ class VehicleResource extends Resource
                             ]),
                         Forms\Components\TextInput::make('power_hp')
                             ->label(__('admin.vehicle.power_hp'))->numeric()->suffix('PS')
-                            ->reactive()->afterStateUpdated(fn ($state, callable $set) =>
-                                $set('power_kw', $state ? round($state * 0.7355) : null)),
+                            ->reactive()->afterStateUpdated(fn ($state, callable $set) => $set('power_kw', $state ? round($state * 0.7355) : null)),
                         Forms\Components\TextInput::make('power_kw')
                             ->label(__('admin.vehicle.power_kw'))->numeric()->suffix('kW'),
                         Forms\Components\TextInput::make('engine_displacement')
@@ -318,7 +319,7 @@ class VehicleResource extends Resource
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\Action::make('toggle_featured')
                     ->label('⭐')
-                    ->action(fn (Vehicle $record) => $record->update(['is_featured' => !$record->is_featured]))
+                    ->action(fn (Vehicle $record) => $record->update(['is_featured' => ! $record->is_featured]))
                     ->requiresConfirmation(false),
             ])
             ->bulkActions([

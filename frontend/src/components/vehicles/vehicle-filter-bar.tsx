@@ -44,7 +44,6 @@ interface VehicleFilterBarProps {
 
 export function VehicleFilterBar({ brands, totalResults, className }: VehicleFilterBarProps) {
   const t = useTranslations('vehicles');
-  const tc = useTranslations('common');
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -99,9 +98,13 @@ export function VehicleFilterBar({ brands, totalResults, className }: VehicleFil
   const activeFilterCount = Object.values(currentFilters).filter(Boolean).length;
 
   const brandOptions = brands.map((b) => ({ value: b, label: b }));
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const fuelOptions = Object.entries(FUEL_TYPE_KEYS).map(([v, k]) => ({ value: v, label: t(k as any) }));
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const transmissionOptions = Object.entries(TRANSMISSION_KEYS).map(([v, k]) => ({ value: v, label: t(k as any) }));
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const bodyTypeOptions = Object.entries(BODY_TYPE_KEYS).map(([v, k]) => ({ value: v, label: t(k as any) }));
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const sortOptions = SORT_KEYS.map((o) => ({ value: o.value, label: t(o.key as any) }));
 
   // Memoize filter controls JSX to avoid creating a new component identity on each render
@@ -188,17 +191,17 @@ export function VehicleFilterBar({ brands, totalResults, className }: VehicleFil
       <div className={cn('flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between', className)}>
         <div className="flex items-center gap-3 flex-1">
           <div className="relative flex-1 max-w-md">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[var(--text-tertiary)]" />
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
             <input
               type="search"
               placeholder={t('searchPlaceholder')}
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               className={cn(
-                'w-full h-10 rounded-lg border-2 border-[var(--border-input)] bg-[var(--input-bg)] pl-9 pr-3 text-sm',
-                'text-[var(--text-primary)] placeholder:text-[var(--text-tertiary)]',
+                'w-full h-10 rounded-lg border-2 border-input-border bg-input pl-9 pr-3 text-sm',
+                'text-foreground placeholder:text-muted-foreground',
                 'shadow-[var(--input-shadow)]',
-                'focus:outline-none focus:ring-2 focus:ring-[var(--ring-color)] focus:border-[var(--border-focus)] transition-all duration-200',
+                'focus:outline-none focus:ring-2 focus:ring-ring focus:border-border-focus transition-all duration-200',
               )}
             />
           </div>
@@ -206,14 +209,14 @@ export function VehicleFilterBar({ brands, totalResults, className }: VehicleFil
           <button
             onClick={() => setMobileOpen(true)}
             className={cn(
-              'lg:hidden flex items-center gap-2 h-10 px-3 rounded-lg border border-[var(--border-primary)] text-sm',
-              'text-[var(--text-primary)] bg-[var(--bg-primary)] hover:bg-[var(--bg-secondary)]',
+              'lg:hidden flex items-center gap-2 h-10 px-3 rounded-lg border border-border text-sm',
+              'text-foreground bg-background hover:bg-secondary',
             )}
           >
             <SlidersHorizontal className="h-4 w-4" />
             Filter
             {activeFilterCount > 0 && (
-              <span className="flex h-5 w-5 items-center justify-center rounded-full bg-[var(--brand-primary)] text-[10px] text-white">
+              <span className="flex h-5 w-5 items-center justify-center rounded-full bg-brand text-[10px] text-white">
                 {activeFilterCount}
               </span>
             )}
@@ -222,7 +225,7 @@ export function VehicleFilterBar({ brands, totalResults, className }: VehicleFil
 
         <div className="flex items-center gap-3">
           {totalResults !== undefined && (
-            <span className="text-sm text-[var(--text-secondary)]">
+            <span className="text-sm text-muted">
               {t('vehiclesCount', { count: totalResults })}
             </span>
           )}

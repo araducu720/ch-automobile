@@ -35,7 +35,7 @@ class NewInquiryNotification extends Notification implements ShouldQueue
 
         $mail = (new MailMessage)
             ->subject("Neue Anfrage: {$type} — {$this->inquiry->reference_number}")
-            ->greeting("Neue Kundenanfrage eingegangen")
+            ->greeting('Neue Kundenanfrage eingegangen')
             ->line("**Typ:** {$type}")
             ->line("**Referenznummer:** {$this->inquiry->reference_number}")
             ->line("**Name:** {$this->inquiry->name}")
@@ -45,7 +45,7 @@ class NewInquiryNotification extends Notification implements ShouldQueue
             $mail->line("**Telefon:** {$this->inquiry->phone}");
         }
 
-        $mail->line("**Nachricht:**")
+        $mail->line('**Nachricht:**')
             ->line($this->inquiry->message);
 
         if ($this->inquiry->vehicle) {
@@ -56,7 +56,7 @@ class NewInquiryNotification extends Notification implements ShouldQueue
             $mail->line("**Wunschtermin:** {$this->inquiry->preferred_date->format('d.m.Y')} {$this->inquiry->preferred_time}");
         }
 
-        $mail->action('Im Admin-Panel ansehen', url('/admin/inquiries/' . $this->inquiry->id . '/edit'))
+        $mail->action('Im Admin-Panel ansehen', url('/admin/inquiries/'.$this->inquiry->id.'/edit'))
             ->salutation('C-H Automobile & Exclusive Cars — System');
 
         return $mail;

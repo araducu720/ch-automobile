@@ -45,15 +45,15 @@ export function VehicleCard({ vehicle, className, priority = false }: VehicleCar
     <Link
       href={`/fahrzeuge/${vehicle.slug}`}
       className={cn(
-        'group block rounded-xl border border-[var(--border-primary)] bg-[var(--bg-elevated)] overflow-hidden card-hover',
-        'transition-all duration-300 hover:shadow-lg hover:border-[var(--border-secondary)]',
-        'focus-visible:outline-2 focus-visible:outline-[var(--border-focus)] focus-visible:outline-offset-2',
+        'group block rounded-xl border border-border bg-card overflow-hidden card-hover',
+        'transition-all duration-300 hover:shadow-lg hover:border-border-secondary',
+        'focus-visible:outline-2 focus-visible:outline-border-focus focus-visible:outline-offset-2',
         vehicle.status === 'sold' && 'opacity-75',
         className,
       )}
     >
       {/* Image */}
-      <div className="relative aspect-[16/10] overflow-hidden bg-[var(--bg-tertiary)]">
+      <div className="relative aspect-[16/10] overflow-hidden bg-tertiary">
         {vehicle.thumbnail ? (
           <Image
             src={vehicle.thumbnail}
@@ -64,7 +64,7 @@ export function VehicleCard({ vehicle, className, priority = false }: VehicleCar
             priority={priority}
           />
         ) : (
-          <div className="flex h-full items-center justify-center text-[var(--text-tertiary)]">
+          <div className="flex h-full items-center justify-center text-muted-foreground">
             <Gauge className="h-12 w-12" />
           </div>
         )}
@@ -82,10 +82,10 @@ export function VehicleCard({ vehicle, className, priority = false }: VehicleCar
         )}
 
         {/* Image count */}
-        {(vehicle as any).images_count > 1 && (
+        {vehicle.images_count > 1 && (
           <div className="absolute bottom-3 right-3 flex items-center gap-1 rounded-full bg-black/60 px-2.5 py-1 text-xs font-medium text-white backdrop-blur-sm">
             <Camera className="h-3 w-3" />
-            {(vehicle as any).images_count}
+            {vehicle.images_count}
           </div>
         )}
       </div>
@@ -94,16 +94,16 @@ export function VehicleCard({ vehicle, className, priority = false }: VehicleCar
       <div className="p-4 space-y-3">
         {/* Title */}
         <div>
-          <h3 className="text-base font-semibold text-[var(--text-primary)] line-clamp-1 group-hover:text-[var(--brand-primary)] transition-colors">
+          <h3 className="text-base font-semibold text-foreground line-clamp-1 group-hover:text-brand transition-colors">
             {vehicle.full_name}
           </h3>
           {vehicle.variant && (
-            <p className="text-sm text-[var(--text-secondary)] line-clamp-1">{vehicle.variant}</p>
+            <p className="text-sm text-muted line-clamp-1">{vehicle.variant}</p>
           )}
         </div>
 
         {/* Quick specs */}
-        <div className="flex flex-wrap gap-x-4 gap-y-1 text-xs text-[var(--text-secondary)]">
+        <div className="flex flex-wrap gap-x-4 gap-y-1 text-xs text-muted">
           <span className="inline-flex items-center gap-1">
             <Calendar className="h-3.5 w-3.5" />
             {vehicle.year}
@@ -114,6 +114,7 @@ export function VehicleCard({ vehicle, className, priority = false }: VehicleCar
           </span>
           <span className="inline-flex items-center gap-1">
             <FuelIcon className="h-3.5 w-3.5" />
+            {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
             {t(FUEL_KEY[vehicle.fuel_type] as any) || vehicle.fuel_type}
           </span>
           {vehicle.power_hp && (
@@ -125,17 +126,17 @@ export function VehicleCard({ vehicle, className, priority = false }: VehicleCar
         </div>
 
         {/* Price */}
-        <div className="flex items-center justify-between pt-1 border-t border-[var(--border-primary)]">
+        <div className="flex items-center justify-between pt-1 border-t border-border">
           <div>
             {vehicle.price_on_request ? (
-              <span className="text-sm font-medium text-[var(--text-secondary)]">{t('priceOnRequest')}</span>
+              <span className="text-sm font-medium text-muted">{t('priceOnRequest')}</span>
             ) : (
-              <span className="text-lg font-bold text-[var(--brand-primary)]">
+              <span className="text-lg font-bold text-brand">
                 {formatPrice(vehicle.price)}
               </span>
             )}
           </div>
-          <span className="text-xs text-[var(--brand-primary)] font-medium group-hover:underline">
+          <span className="text-xs text-brand font-medium group-hover:underline">
             {t('details')} →
           </span>
         </div>
@@ -147,16 +148,15 @@ export function VehicleCard({ vehicle, className, priority = false }: VehicleCar
               variant="accent"
               size="sm"
               fullWidth
-              asChild
+              onClick={(e) => {
+                e.preventDefault()
+                e.stopPropagation()
+                window.location.href = `/fahrzeuge/${vehicle.slug}/kaufen`
+              }}
               className="pointer-events-auto"
               leftIcon={<ShoppingCart className="h-3.5 w-3.5" />}
             >
-              <Link
-                href={`/fahrzeuge/${vehicle.slug}/kaufen`}
-                onClick={(e) => e.stopPropagation()}
-              >
-                {tc('buyNow')}
-              </Link>
+              {tc('buyNow')}
             </Button>
           </div>
         )}

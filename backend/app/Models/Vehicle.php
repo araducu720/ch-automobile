@@ -5,19 +5,18 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Laravel\Scout\Searchable;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
-use Spatie\Translatable\HasTranslations;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
-use Laravel\Scout\Searchable;
+use Spatie\Translatable\HasTranslations;
 
 class Vehicle extends Model implements HasMedia
 {
-    use HasFactory, SoftDeletes, InteractsWithMedia, HasTranslations, HasSlug, Searchable;
+    use HasFactory, HasSlug, HasTranslations, InteractsWithMedia, Searchable, SoftDeletes;
 
     protected $fillable = [
         'brand', 'model', 'variant', 'year', 'price', 'price_on_request',
@@ -162,15 +161,25 @@ class Vehicle extends Model implements HasMedia
 
     public function scopeFilterByPriceRange($query, ?float $min, ?float $max)
     {
-        if ($min) $query->where('price', '>=', $min);
-        if ($max) $query->where('price', '<=', $max);
+        if ($min) {
+            $query->where('price', '>=', $min);
+        }
+        if ($max) {
+            $query->where('price', '<=', $max);
+        }
+
         return $query;
     }
 
     public function scopeFilterByYearRange($query, ?int $min, ?int $max)
     {
-        if ($min) $query->where('year', '>=', $min);
-        if ($max) $query->where('year', '<=', $max);
+        if ($min) {
+            $query->where('year', '>=', $min);
+        }
+        if ($max) {
+            $query->where('year', '<=', $max);
+        }
+
         return $query;
     }
 
@@ -206,12 +215,13 @@ class Vehicle extends Model implements HasMedia
         if ($this->price_on_request) {
             return 'Preis auf Anfrage';
         }
-        return number_format($this->price, 0, ',', '.') . ' €';
+
+        return number_format($this->price, 0, ',', '.').' €';
     }
 
     public function getFormattedMileageAttribute(): string
     {
-        return number_format($this->mileage, 0, ',', '.') . ' km';
+        return number_format($this->mileage, 0, ',', '.').' km';
     }
 
     public function getMainImageUrlAttribute(): ?string
@@ -221,6 +231,7 @@ class Vehicle extends Model implements HasMedia
             return $media->getUrl('medium');
         }
         $urls = $this->image_urls;
+
         return $urls[0] ?? null;
     }
 
@@ -231,9 +242,10 @@ class Vehicle extends Model implements HasMedia
             return $media->getUrl('thumbnail');
         }
         $urls = $this->image_urls;
-        if (!empty($urls[0])) {
+        if (! empty($urls[0])) {
             return str_replace('/1280x960.webp', '/400x300.webp', $urls[0]);
         }
+
         return null;
     }
 
@@ -252,13 +264,14 @@ class Vehicle extends Model implements HasMedia
         }
 
         $urls = $this->image_urls ?? [];
+
         return collect($urls)->values()->map(fn ($url, $i) => [
             'id' => $i + 1,
             'thumbnail' => str_replace('/1280x960.webp', '/400x300.webp', $url),
             'medium' => str_replace('/1280x960.webp', '/800x600.webp', $url),
             'large' => $url,
             'original' => $url,
-            'alt' => "{$this->brand} {$this->model} {$this->year} - Foto " . ($i + 1),
+            'alt' => "{$this->brand} {$this->model} {$this->year} - Foto ".($i + 1),
         ])->toArray();
     }
 }

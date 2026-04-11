@@ -27,31 +27,31 @@ export async function Footer() {
 
   return (
     <footer
-      className="border-t border-[var(--border-primary)] bg-[var(--bg-secondary)]"
+      className="border-t border-border bg-secondary"
       role="contentinfo"
     >
       <div className="container-main py-12">
         <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
           {/* Brand */}
           <div className="space-y-4">
-            <Link href="/" className="inline-flex items-center gap-2 font-bold text-lg text-[var(--text-primary)]">
-              <Car className="h-6 w-6 text-[var(--brand-primary)]" />
-              C-H <span className="text-[var(--brand-primary)]">Automobile</span>
+            <Link href="/" className="inline-flex items-center gap-2 font-bold text-lg text-foreground">
+              <Car className="h-6 w-6 text-brand" />
+              C-H <span className="text-brand">Automobile</span>
             </Link>
-            <p className="text-sm text-[var(--text-secondary)] leading-relaxed">
+            <p className="text-sm text-muted leading-relaxed">
               {t('about')}
             </p>
           </div>
 
           {/* Quick Links */}
           <div>
-            <h3 className="text-sm font-semibold text-[var(--text-primary)] mb-4">{t('quickLinks')}</h3>
+            <h3 className="text-sm font-semibold text-foreground mb-4">{t('quickLinks')}</h3>
             <ul className="space-y-2.5">
               {quickLinks.map((link) => (
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="text-sm text-[var(--text-secondary)] hover:text-[var(--brand-primary)] transition-colors"
+                    className="text-sm text-muted hover:text-brand transition-colors"
                   >
                     {link.label}
                   </Link>
@@ -62,14 +62,14 @@ export async function Footer() {
 
           {/* Contact */}
           <div>
-            <h3 className="text-sm font-semibold text-[var(--text-primary)] mb-4">{tn('contact')}</h3>
+            <h3 className="text-sm font-semibold text-foreground mb-4">{tn('contact')}</h3>
             <ul className="space-y-3">
               <li>
                 <a
                   href={`https://maps.google.com/?q=${encodeURIComponent(`${COMPANY_INFO.street}, ${COMPANY_INFO.zip} ${COMPANY_INFO.city}`)}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-start gap-2 text-sm text-[var(--text-secondary)] hover:text-[var(--brand-primary)] transition-colors"
+                  className="flex items-start gap-2 text-sm text-muted hover:text-brand transition-colors"
                 >
                   <MapPin className="h-4 w-4 mt-0.5 shrink-0" />
                   <span>
@@ -81,7 +81,7 @@ export async function Footer() {
               <li>
                 <a
                   href={`tel:${COMPANY_INFO.phone}`}
-                  className="flex items-center gap-2 text-sm text-[var(--text-secondary)] hover:text-[var(--brand-primary)] transition-colors"
+                  className="flex items-center gap-2 text-sm text-muted hover:text-brand transition-colors"
                 >
                   <Phone className="h-4 w-4 shrink-0" />
                   {COMPANY_INFO.phone}
@@ -90,7 +90,7 @@ export async function Footer() {
               <li>
                 <a
                   href={`mailto:${COMPANY_INFO.email}`}
-                  className="flex items-center gap-2 text-sm text-[var(--text-secondary)] hover:text-[var(--brand-primary)] transition-colors"
+                  className="flex items-center gap-2 text-sm text-muted hover:text-brand transition-colors"
                 >
                   <Mail className="h-4 w-4 shrink-0" />
                   {COMPANY_INFO.email}
@@ -101,17 +101,17 @@ export async function Footer() {
 
           {/* Opening Hours */}
           <div>
-            <h3 className="text-sm font-semibold text-[var(--text-primary)] mb-4">{tc('openingHours')}</h3>
+            <h3 className="text-sm font-semibold text-foreground mb-4">{tc('openingHours')}</h3>
             <ul className="space-y-2">
-              <li className="flex items-center gap-2 text-sm text-[var(--text-secondary)]">
+              <li className="flex items-center gap-2 text-sm text-muted">
                 <Clock className="h-4 w-4 shrink-0" />
                 <span>{tc('weekdays')}: {COMPANY_INFO.hours.weekdays}</span>
               </li>
-              <li className="flex items-center gap-2 text-sm text-[var(--text-secondary)]">
+              <li className="flex items-center gap-2 text-sm text-muted">
                 <Clock className="h-4 w-4 shrink-0 opacity-0" />
                 <span>Sa: {COMPANY_INFO.hours.saturday}</span>
               </li>
-              <li className="flex items-center gap-2 text-sm text-[var(--text-secondary)]">
+              <li className="flex items-center gap-2 text-sm text-muted">
                 <Clock className="h-4 w-4 shrink-0 opacity-0" />
                 <span>So: {COMPANY_INFO.hours.sunday}</span>
               </li>
@@ -121,9 +121,9 @@ export async function Footer() {
       </div>
 
       {/* Bottom bar */}
-      <div className="border-t border-[var(--border-primary)]">
+      <div className="border-t border-border">
         <div className="container-main flex flex-col items-center justify-between gap-3 py-4 sm:flex-row">
-          <p className="text-xs text-[var(--text-tertiary)]">
+          <p className="text-xs text-muted-foreground">
             {t('copyright', { year: String(year) })}
           </p>
           <div className="flex items-center gap-4">
@@ -131,7 +131,7 @@ export async function Footer() {
               <Link
                 key={link.href}
                 href={link.href}
-                className="text-xs text-[var(--text-tertiary)] hover:text-[var(--text-secondary)] transition-colors"
+                className="text-xs text-muted-foreground hover:text-muted transition-colors"
               >
                 {link.label}
               </Link>

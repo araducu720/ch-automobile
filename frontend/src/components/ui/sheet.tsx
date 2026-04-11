@@ -75,7 +75,7 @@ function Sheet({ open, onClose, children, title, side = 'right', className }: Sh
     <div className="fixed inset-0 z-50">
       {/* Overlay */}
       <div
-        className="fixed inset-0 bg-[var(--bg-overlay)] backdrop-blur-sm"
+        className="fixed inset-0 bg-overlay backdrop-blur-sm"
         onClick={onClose}
         aria-hidden="true"
       />
@@ -88,7 +88,7 @@ function Sheet({ open, onClose, children, title, side = 'right', className }: Sh
         aria-label={title || 'Panel'}
         className={cn(
           'fixed top-0 bottom-0 z-50 w-full max-w-sm',
-          'bg-[var(--bg-elevated)] border-[var(--border-primary)] shadow-xl',
+          'bg-card border-border shadow-xl',
           'flex flex-col',
           'transition-transform duration-300 ease-out',
           side === 'right'
@@ -98,15 +98,15 @@ function Sheet({ open, onClose, children, title, side = 'right', className }: Sh
         )}
       >
         {/* Header */}
-        <div className="flex items-center justify-between border-b border-[var(--border-primary)] px-4 py-3">
+        <div className="flex items-center justify-between border-b border-border px-4 py-3">
           {title && (
-            <h2 className="text-lg font-semibold text-[var(--text-primary)]">{title}</h2>
+            <h2 className="text-lg font-semibold text-foreground">{title}</h2>
           )}
           <button
             onClick={onClose}
             className={cn(
               'rounded-md p-1 ml-auto transition-colors',
-              'text-[var(--text-tertiary)] hover:text-[var(--text-primary)] hover:bg-[var(--bg-secondary)]',
+              'text-muted-foreground hover:text-foreground hover:bg-secondary',
             )}
             aria-label={t('close')}
           >

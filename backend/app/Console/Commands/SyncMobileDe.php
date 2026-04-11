@@ -2,13 +2,14 @@
 
 namespace App\Console\Commands;
 
+use App\Models\Vehicle;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Http;
-use App\Models\Vehicle;
 
 class SyncMobileDe extends Command
 {
     protected $signature = 'mobile-de:sync {--dry-run : Preview changes without saving}';
+
     protected $description = 'Sync vehicle inventory from mobile.de API';
 
     public function handle(): int
@@ -16,8 +17,9 @@ class SyncMobileDe extends Command
         $apiKey = config('services.mobile_de.api_key');
         $dealerId = config('services.mobile_de.dealer_id');
 
-        if (!$apiKey || !$dealerId) {
+        if (! $apiKey || ! $dealerId) {
             $this->error('mobile.de API credentials not configured.');
+
             return self::FAILURE;
         }
 
@@ -27,12 +29,13 @@ class SyncMobileDe extends Command
             $response = Http::withHeaders([
                 'Authorization' => "Bearer {$apiKey}",
                 'Accept' => 'application/json',
-            ])->get("https://services.mobile.de/search-api/search", [
+            ])->get('https://services.mobile.de/search-api/search', [
                 'dealerId' => $dealerId,
             ]);
 
-            if (!$response->successful()) {
-                $this->error('Failed to fetch data from mobile.de: ' . $response->status());
+            if (! $response->successful()) {
+                $this->error('Failed to fetch data from mobile.de: '.$response->status());
+
                 return self::FAILURE;
             }
 
@@ -42,13 +45,16 @@ class SyncMobileDe extends Command
 
             foreach ($listings as $listing) {
                 $mobileDeId = $listing['id'] ?? null;
-                if (!$mobileDeId) continue;
+                if (! $mobileDeId) {
+                    continue;
+                }
 
                 $vehicleData = $this->mapListingToVehicle($listing);
 
                 if ($this->option('dry-run')) {
                     $this->line("[DRY RUN] {$vehicleData['brand']} {$vehicleData['model']} ({$vehicleData['year']}) - €{$vehicleData['price']}");
                     $synced++;
+
                     continue;
                 }
 
@@ -64,10 +70,12 @@ class SyncMobileDe extends Command
             }
 
             $this->info("Sync complete: {$synced} processed, {$created} new vehicles.");
+
             return self::SUCCESS;
 
         } catch (\Exception $e) {
-            $this->error('Sync failed: ' . $e->getMessage());
+            $this->error('Sync failed: '.$e->getMessage());
+
             return self::FAILURE;
         }
     }

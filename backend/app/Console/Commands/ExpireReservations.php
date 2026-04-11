@@ -8,6 +8,7 @@ use Illuminate\Console\Command;
 class ExpireReservations extends Command
 {
     protected $signature = 'reservations:expire';
+
     protected $description = 'Expire overdue reservations and free vehicles';
 
     public function handle(): int
@@ -26,6 +27,7 @@ class ExpireReservations extends Command
         }
 
         $this->info("Expired {$count} reservations.");
+
         return self::SUCCESS;
     }
 }

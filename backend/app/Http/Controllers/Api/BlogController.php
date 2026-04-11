@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\BlogPostResource;
 use App\Http\Resources\BlogPostDetailResource;
-use App\Models\BlogPost;
+use App\Http\Resources\BlogPostResource;
 use App\Models\BlogCategory;
+use App\Models\BlogPost;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 

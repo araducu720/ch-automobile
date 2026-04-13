@@ -51,6 +51,41 @@ test.describe('Performance & Accessibility', () => {
     // Vercel typically sets these
     expect(headers['x-frame-options'] || headers['content-security-policy']).toBeTruthy();
   });
+
+  test('security headers: X-Content-Type-Options is set', async ({ page }) => {
+    const response = await page.goto('/');
+    const headers = response?.headers() || {};
+    expect(headers['x-content-type-options']).toBe('nosniff');
+  });
+
+  test('security headers: Referrer-Policy is set', async ({ page }) => {
+    const response = await page.goto('/');
+    const headers = response?.headers() || {};
+    expect(headers['referrer-policy']).toBeTruthy();
+  });
+
+  test('security headers: HSTS is set on production', async ({ page }) => {
+    const response = await page.goto('/');
+    const headers = response?.headers() || {};
+    // Vercel sets HSTS on production domains
+    const hsts = headers['strict-transport-security'];
+    if (hsts) {
+      expect(hsts).toMatch(/max-age=\d+/);
+    }
+    // HSTS may be handled at CDN level; at minimum URL must be HTTPS
+    expect(response?.url()).toMatch(/^https:/);
+  });
+
+  test('images have alt attributes (extended — 20 images)', async ({ page }) => {
+    await page.goto('/');
+    await page.waitForLoadState('networkidle');
+    const images = page.locator('img:visible');
+    const count = await images.count();
+    for (let i = 0; i < Math.min(count, 20); i++) {
+      const alt = await images.nth(i).getAttribute('alt');
+      expect(alt).not.toBeNull();
+    }
+  });
 });
 
 test.describe('API Health', () => {

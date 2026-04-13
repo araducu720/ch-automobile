@@ -14,10 +14,10 @@ test.describe('Homepage', () => {
         await menuBtn.click();
         await page.waitForTimeout(1000);
       }
-      // Mobile nav is inside a Sheet — check the link is attached (rendered in DOM)
-      await expect(page.locator('nav a[href="/fahrzeuge"]').first()).toBeAttached();
+      // Mobile nav is inside a Sheet — check the link is attached (locale-prefixed href, e.g. /de/fahrzeuge)
+      await expect(page.locator('nav a[href*="/fahrzeuge"]').first()).toBeAttached();
     } else {
-      await expect(page.locator('a[href="/fahrzeuge"]').first()).toBeVisible();
+      await expect(page.locator('a[href*="/fahrzeuge"]').first()).toBeVisible();
     }
   });
 
@@ -31,9 +31,10 @@ test.describe('Homepage', () => {
     await page.goto('/');
     const footer = page.locator('footer');
     await expect(footer).toBeVisible();
-    await expect(page.locator('a[href="/impressum"]').first()).toBeVisible();
-    await expect(page.locator('a[href="/datenschutz"]').first()).toBeVisible();
-    await expect(page.locator('a[href="/agb"]').first()).toBeVisible();
+    // next-intl prefixes hrefs with locale, e.g. /de/impressum
+    await expect(page.locator('a[href*="/impressum"]').first()).toBeVisible();
+    await expect(page.locator('a[href*="/datenschutz"]').first()).toBeVisible();
+    await expect(page.locator('a[href*="/agb"]').first()).toBeVisible();
   });
 
   test('skip-to-content link exists', async ({ page }) => {

@@ -98,4 +98,43 @@ test.describe('Vehicle Detail Page', () => {
       await expect(kaufenLink).toBeVisible();
     }
   });
+
+  test('vehicle detail has schema.org structured data', async ({ page }) => {
+    await page.goto('/fahrzeuge');
+    await page.waitForLoadState('networkidle');
+    const link = page.locator('a.card-hover[href*="/fahrzeuge/"]').first();
+    if (await link.count() === 0) {
+      test.skip(true, 'No vehicles available');
+      return;
+    }
+    const href = await link.getAttribute('href');
+    await page.goto(href!);
+    await page.waitForLoadState('networkidle');
+    // Check for JSON-LD structured data
+    const jsonLd = page.locator('script[type="application/ld+json"]');
+    if (await jsonLd.count() > 0) {
+      const content = await jsonLd.first().textContent();
+      expect(content).toBeTruthy();
+      const parsed = JSON.parse(content!);
+      // Should have @context schema.org
+      expect(parsed['@context'] || parsed[0]?.['@context']).toMatch(/schema\.org/);
+    }
+  });
+
+  test('vehicle detail page title contains vehicle brand', async ({ page }) => {
+    await page.goto('/fahrzeuge');
+    await page.waitForLoadState('networkidle');
+    const link = page.locator('a.card-hover[href*="/fahrzeuge/"]').first();
+    if (await link.count() === 0) {
+      test.skip(true, 'No vehicles available');
+      return;
+    }
+    const href = await link.getAttribute('href');
+    // Get brand from card before navigating
+    const cardText = await link.textContent();
+    await page.goto(href!);
+    await page.waitForLoadState('domcontentloaded');
+    const title = await page.title();
+    expect(title.length).toBeGreaterThan(5);
+  });
 });

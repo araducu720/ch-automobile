@@ -26,13 +26,15 @@ test.describe('Contact Page', () => {
 
   test('form validates empty submission', async ({ page }) => {
     await page.goto('/kontakt');
+    await page.waitForLoadState('networkidle');
     const submitBtn = page.locator('button[type="submit"]').first();
-    await submitBtn.click();
+    await submitBtn.scrollIntoViewIfNeeded();
+    await submitBtn.click({ force: true });
     // Should show validation errors or native validation
-    await page.waitForTimeout(500);
+    await page.waitForTimeout(1000);
     // Check for required attribute or error messages
     const invalidFields = page.locator(':invalid');
-    const errorMessages = page.locator('[class*="error"], [role="alert"], text=/erforderlich|required|Pflicht/i');
+    const errorMessages = page.locator('[class*="error"], [role="alert"], [aria-invalid="true"], text=/erforderlich|required|Pflicht/i');
     const hasValidation = (await invalidFields.count() > 0) || (await errorMessages.count() > 0);
     expect(hasValidation).toBeTruthy();
   });

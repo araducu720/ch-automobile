@@ -9,11 +9,11 @@ test.describe('Navigation & Routing', () => {
         await menuBtn.click();
         await page.waitForTimeout(1000);
       }
-      // Mobile Sheet nav uses the second set of links
-      const mobileLink = page.locator('nav a[href="/fahrzeuge"]').last();
+      // Mobile Sheet nav — locale-prefixed href (e.g. /de/fahrzeuge)
+      const mobileLink = page.locator('nav a[href*="/fahrzeuge"]').last();
       await mobileLink.click();
     } else {
-      await page.locator('a[href="/fahrzeuge"]').first().click();
+      await page.locator('a[href*="/fahrzeuge"]').first().click();
     }
     await expect(page).toHaveURL(/\/fahrzeuge/);
     await expect(page.locator('#main-content')).toBeVisible();
@@ -71,7 +71,8 @@ test.describe('Navigation & Routing', () => {
     await expect(menuBtn).toBeVisible();
     await menuBtn.click();
     await page.waitForTimeout(1000);
-    const navLinks = page.locator('a[href="/fahrzeuge"], a[href="/kontakt"]');
+    // next-intl prefixes hrefs with locale (e.g. /de/fahrzeuge, /de/kontakt)
+    const navLinks = page.locator('a[href*="/fahrzeuge"], a[href*="/kontakt"]');
     expect(await navLinks.count()).toBeGreaterThan(0);
   });
 });
@@ -99,5 +100,45 @@ test.describe('SEO & Meta', () => {
   test('robots.txt is accessible', async ({ page }) => {
     const response = await page.goto('/robots.txt');
     expect(response?.status()).toBe(200);
+  });
+});
+
+test.describe('Locale Persistence', () => {
+  test('switching to English persists on navigation to /fahrzeuge', async ({ page }) => {
+    await page.goto('/');
+    const langSelector = page.locator('button[aria-label="Sprache wählen"]').first();
+    if (await langSelector.count() === 0) {
+      test.skip(true, 'Language selector not found');
+      return;
+    }
+    await langSelector.click();
+    await page.waitForTimeout(500);
+    const enOption = page.locator('a[href*="/en"]').first();
+    if (await enOption.count() === 0) {
+      test.skip(true, '/en link not found in language dropdown');
+      return;
+    }
+    await enOption.click();
+    await page.waitForLoadState('networkidle');
+    // Now navigate to vehicles — should stay in English locale
+    await page.goto('/en/fahrzeuge');
+    await page.waitForLoadState('domcontentloaded');
+    await expect(page).toHaveURL(/\/en\/fahrzeuge/);
+    await expect(page.locator('html')).toHaveAttribute('lang', /en/);
+  });
+
+  test('default locale (de) serves pages without locale prefix', async ({ page }) => {
+    const response = await page.goto('/fahrzeuge');
+    expect(response?.status()).toBe(200);
+    // Should NOT redirect to /de/fahrzeuge (as-needed prefix)
+    await expect(page).not.toHaveURL(/\/de\/fahrzeuge/);
+    await expect(page.locator('#main-content')).toBeVisible();
+  });
+
+  test('non-default locale prefix works for EN', async ({ page }) => {
+    const response = await page.goto('/en/fahrzeuge');
+    expect(response?.status()).toBe(200);
+    await expect(page.locator('#main-content')).toBeVisible();
+    await expect(page.locator('html')).toHaveAttribute('lang', /en/);
   });
 });

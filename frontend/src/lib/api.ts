@@ -50,6 +50,8 @@ function withLocale(params: string): string {
 
 const MAX_RETRIES = 2;
 const RETRY_BASE_DELAY = 500; // ms
+const REQUEST_TIMEOUT = 30_000; // 30s
+const UPLOAD_TIMEOUT = 120_000; // 120s for file uploads
 const RETRYABLE_STATUS_CODES = new Set([408, 429, 500, 502, 503, 504]);
 
 async function sleep(ms: number) {
@@ -71,15 +73,20 @@ class ApiClient {
     let lastError: Error | undefined;
 
     for (let attempt = 0; attempt <= MAX_RETRIES; attempt++) {
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), REQUEST_TIMEOUT);
       try {
         const response = await fetch(url, {
           ...options,
+          signal: options.signal ?? controller.signal,
           headers: {
             'Content-Type': 'application/json',
             Accept: 'application/json',
             ...options.headers,
           },
         });
+
+        clearTimeout(timeoutId);
 
         if (!response.ok) {
           if (attempt < MAX_RETRIES && RETRYABLE_STATUS_CODES.has(response.status)) {
@@ -94,8 +101,12 @@ class ApiClient {
 
         return response.json();
       } catch (e) {
+        clearTimeout(timeoutId);
         lastError = e instanceof Error ? e : new Error(String(e));
         if (e instanceof ApiError) throw e;
+        if (e instanceof DOMException && e.name === 'AbortError') {
+          lastError = new Error('Request timed out');
+        }
         if (attempt < MAX_RETRIES) {
           await sleep(RETRY_BASE_DELAY * Math.pow(2, attempt));
           continue;
@@ -120,24 +131,52 @@ class ApiClient {
 
   async postFormData<T>(endpoint: string, formData: FormData, options?: RequestInit): Promise<T> {
     const url = `${this.baseUrl}${endpoint}`;
-    const response = await fetch(url, {
-      ...options,
-      method: 'POST',
-      body: formData,
-      headers: {
-        Accept: 'application/json',
-        ...options?.headers,
-      },
-    });
+    let lastError: Error | undefined;
 
-    if (!response.ok) {
-      const error = await response.json().catch(() => ({
-        message: 'An unexpected error occurred',
-      }));
-      throw new ApiError(response.status, error.message, error.errors);
+    for (let attempt = 0; attempt <= MAX_RETRIES; attempt++) {
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), UPLOAD_TIMEOUT);
+      try {
+        const response = await fetch(url, {
+          ...options,
+          method: 'POST',
+          body: formData,
+          signal: options?.signal ?? controller.signal,
+          headers: {
+            Accept: 'application/json',
+            ...options?.headers,
+          },
+        });
+
+        clearTimeout(timeoutId);
+
+        if (!response.ok) {
+          if (attempt < MAX_RETRIES && RETRYABLE_STATUS_CODES.has(response.status)) {
+            await sleep(RETRY_BASE_DELAY * Math.pow(2, attempt));
+            continue;
+          }
+          const error = await response.json().catch(() => ({
+            message: 'An unexpected error occurred',
+          }));
+          throw new ApiError(response.status, error.message, error.errors);
+        }
+
+        return response.json();
+      } catch (e) {
+        clearTimeout(timeoutId);
+        lastError = e instanceof Error ? e : new Error(String(e));
+        if (e instanceof ApiError) throw e;
+        if (e instanceof DOMException && e.name === 'AbortError') {
+          lastError = new Error('Upload timed out');
+        }
+        if (attempt < MAX_RETRIES) {
+          await sleep(RETRY_BASE_DELAY * Math.pow(2, attempt));
+          continue;
+        }
+      }
     }
 
-    return response.json();
+    throw lastError ?? new Error('Upload failed after retries');
   }
 }
 

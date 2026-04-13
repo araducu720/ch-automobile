@@ -270,7 +270,8 @@
       "signedContractHint": "Αποδεκτές μορφές: PNG, JPG, WEBP, PDF (μέγ. 15 MB)",
       "uploadSignedContract": "Ανεβάστε υπογεγραμμένο συμβόλαιο",
       "adminConfirmTitle": "Εκκρεμεί επιβεβαίωση ομάδας",
-      "adminConfirmDesc": "Η ομάδα μας θα ελέγξει τα έγγραφά σας και θα επιβεβαιώσει την αγορά. Θα λάβετε email επιβεβαίωσης όταν ολοκληρωθούν όλα."
+      "adminConfirmDesc": "Η ομάδα μας θα ελέγξει τα έγγραφά σας και θα επιβεβαιώσει την αγορά. Θα λάβετε email επιβεβαίωσης όταν ολοκληρωθούν όλα.",
+      "fileTooLarge": "The file is too large. Maximum size: {max}."
     }
   },
   "blog": {

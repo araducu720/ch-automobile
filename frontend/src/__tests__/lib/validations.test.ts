@@ -252,3 +252,113 @@ describe('contactSchema', () => {
     expect(result.success).toBe(false)
   })
 })
+
+/* ============================================
+   Security-focused tests
+   ============================================ */
+
+describe('phone validation security', () => {
+  it('rejects phone with letters', () => {
+    const result = reservationSchema.safeParse({
+      vehicle_id: 1,
+      customer_name: 'Test User',
+      customer_email: 'test@example.com',
+      customer_phone: 'abc123',
+      privacy_accepted: true as const,
+    })
+    expect(result.success).toBe(false)
+  })
+
+  it('rejects phone with script tags', () => {
+    const result = reservationSchema.safeParse({
+      vehicle_id: 1,
+      customer_name: 'Test User',
+      customer_email: 'test@example.com',
+      customer_phone: '<script>alert(1)</script>',
+      privacy_accepted: true as const,
+    })
+    expect(result.success).toBe(false)
+  })
+
+  it('accepts international phone formats', () => {
+    const validPhones = ['+49 170 1234567', '(0170) 123-4567', '+1-800-555-0199', '06031 12345']
+    validPhones.forEach((phone) => {
+      const result = reservationSchema.safeParse({
+        vehicle_id: 1,
+        customer_name: 'Test',
+        customer_email: 'test@example.com',
+        customer_phone: phone,
+        privacy_accepted: true as const,
+      })
+      expect(result.success).toBe(true)
+    })
+  })
+
+  it('rejects phone shorter than 6 chars', () => {
+    const result = reservationSchema.safeParse({
+      vehicle_id: 1,
+      customer_name: 'Test',
+      customer_email: 'test@example.com',
+      customer_phone: '12345',
+      privacy_accepted: true as const,
+    })
+    expect(result.success).toBe(false)
+  })
+})
+
+describe('honeypot fields', () => {
+  it('review rejects filled honeypot', () => {
+    const result = reviewSchema.safeParse({
+      customer_name: 'Bot User',
+      rating: 5,
+      comment: 'This is a spam review from a bot.',
+      privacy_accepted: true as const,
+      website_url: 'http://spam.com',
+    })
+    expect(result.success).toBe(false)
+  })
+
+  it('newsletter rejects filled honeypot', () => {
+    const result = newsletterSchema.safeParse({
+      email: 'spam@test.com',
+      privacy_accepted: true as const,
+      website_url: 'http://spam.com',
+    })
+    expect(result.success).toBe(false)
+  })
+
+  it('review accepts empty honeypot', () => {
+    const result = reviewSchema.safeParse({
+      customer_name: 'Real User',
+      rating: 5,
+      comment: 'Excellent service and great cars!',
+      privacy_accepted: true as const,
+      website_url: '',
+    })
+    expect(result.success).toBe(true)
+  })
+
+  it('newsletter accepts empty honeypot', () => {
+    const result = newsletterSchema.safeParse({
+      email: 'real@test.com',
+      privacy_accepted: true as const,
+      website_url: '',
+    })
+    expect(result.success).toBe(true)
+  })
+})
+
+describe('XSS prevention in text fields', () => {
+  it('accepts script tags in message (backend sanitizes)', () => {
+    // Frontend allows any text — backend handles sanitization
+    const result = inquirySchema.safeParse({
+      type: 'general' as const,
+      name: '<script>alert(1)</script>',
+      email: 'test@example.com',
+      message: '<img onerror=alert(1) src=x> long enough text',
+      privacy_accepted: true as const,
+    })
+    // Name is accepted (min 2 chars) — output encoding handles safety
+    expect(result.success).toBe(true)
+  })
+})

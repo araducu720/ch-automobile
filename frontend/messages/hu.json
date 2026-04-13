@@ -270,7 +270,8 @@
       "signedContractHint": "Elfogadott formátumok: PNG, JPG, WEBP, PDF (max. 15 MB)",
       "uploadSignedContract": "Aláírt szerződés feltöltése",
       "adminConfirmTitle": "Csapat megerősítése függőben",
-      "adminConfirmDesc": "Csapatunk átnézi dokumentumait és megerősíti a vásárlást. A befejezés után megerősítő e-mailt kap."
+      "adminConfirmDesc": "Csapatunk átnézi dokumentumait és megerősíti a vásárlást. A befejezés után megerősítő e-mailt kap.",
+      "fileTooLarge": "The file is too large. Maximum size: {max}."
     }
   },
   "blog": {

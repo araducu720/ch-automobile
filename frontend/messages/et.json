@@ -270,7 +270,8 @@
       "signedContractHint": "Aktsepteeritud vormingud: PNG, JPG, WEBP, PDF (max 15 MB)",
       "uploadSignedContract": "Laadi üles allkirjastatud leping",
       "adminConfirmTitle": "Meeskonna kinnitus ootel",
-      "adminConfirmDesc": "Meie meeskond vaatab teie dokumendid üle ja kinnitab ostu. Saate kinnitusmeili, kui kõik on lõpetatud."
+      "adminConfirmDesc": "Meie meeskond vaatab teie dokumendid üle ja kinnitab ostu. Saate kinnitusmeili, kui kõik on lõpetatud.",
+      "fileTooLarge": "The file is too large. Maximum size: {max}."
     }
   },
   "blog": {

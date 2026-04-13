@@ -150,6 +150,11 @@ export async function submitReviewAction(
     privacy_accepted: raw.privacy_accepted === 'true',
   });
 
+  // Honeypot check
+  if (raw.website_url) {
+    return { success: true, message: ta('reviewSuccess') };
+  }
+
   if (!parsed.success) {
     return {
       success: false,
@@ -184,6 +189,11 @@ export async function submitNewsletterAction(
     ...raw,
     privacy_accepted: raw.privacy_accepted === 'true',
   });
+
+  // Honeypot check
+  if (raw.website_url) {
+    return { success: true, message: ta('newsletterSuccess') };
+  }
 
   if (!parsed.success) {
     return {

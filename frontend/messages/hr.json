@@ -270,7 +270,8 @@
       "signedContractHint": "Prihvaćeni formati: PNG, JPG, WEBP, PDF (maks. 15 MB)",
       "uploadSignedContract": "Učitaj potpisani ugovor",
       "adminConfirmTitle": "Potvrda tima na čekanju",
-      "adminConfirmDesc": "Naš tim će pregledati vaše dokumente i potvrditi kupnju. Primit ćete e-mail s potvrdom kada sve bude završeno."
+      "adminConfirmDesc": "Naš tim će pregledati vaše dokumente i potvrditi kupnju. Primit ćete e-mail s potvrdom kada sve bude završeno.",
+      "fileTooLarge": "The file is too large. Maximum size: {max}."
     }
   },
   "blog": {

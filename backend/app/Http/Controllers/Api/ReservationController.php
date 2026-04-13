@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\Api\Concerns\ValidatesLocale;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreReservationRequest;
 use App\Models\CompanySetting;
@@ -19,7 +20,7 @@ use Illuminate\Support\Facades\Storage;
 
 class ReservationController extends Controller
 {
-    private const ALLOWED_LOCALES = ['de', 'en', 'fr', 'it', 'es', 'pt', 'nl', 'pl', 'cs', 'sk', 'hu', 'ro', 'bg', 'hr', 'sl', 'et', 'lv', 'lt', 'fi', 'sv', 'da', 'el', 'ga', 'mt'];
+    use ValidatesLocale;
 
     public function store(StoreReservationRequest $request): JsonResponse
     {
@@ -44,10 +45,7 @@ class ReservationController extends Controller
             // Deposit = 10% of price, min 500€
             $depositAmount = max(500, $vehicle->price * 0.10);
 
-            $locale = $request->get('locale', 'de');
-            if (! in_array($locale, self::ALLOWED_LOCALES, true)) {
-                $locale = 'de';
-            }
+            $locale = $this->resolveLocale($request);
 
             $reservation = Reservation::create(array_merge(
                 $request->safe()->except(['website_url']),
@@ -367,30 +365,6 @@ class ReservationController extends Controller
                 'purchase_step' => 'signature',
             ],
             'message' => 'Rechnung bestätigt.',
-        ]);
-    }
-
-    /**
-     * Admin confirms the purchase (called from Filament or API).
-     */
-    public function adminConfirm(string $reference): JsonResponse
-    {
-        $reservation = Reservation::where('payment_reference', $reference)->firstOrFail();
-
-        $reservation->update([
-            'bank_transfer_status' => 'confirmed',
-            'payment_confirmed_at' => now(),
-            'admin_confirmed_at' => now(),
-        ]);
-
-        // Mark vehicle as sold
-        if ($reservation->vehicle) {
-            $reservation->vehicle->update(['status' => 'sold']);
-        }
-
-        return response()->json([
-            'success' => true,
-            'message' => 'Kauf bestätigt.',
         ]);
     }
 }

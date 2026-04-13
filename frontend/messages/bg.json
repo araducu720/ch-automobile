@@ -270,7 +270,8 @@
       "signedContractHint": "Приемани формати: PNG, JPG, WEBP, PDF (макс. 15 MB)",
       "uploadSignedContract": "Качете подписания договор",
       "adminConfirmTitle": "Очаква се потвърждение от екипа",
-      "adminConfirmDesc": "Нашият екип ще прегледа вашите документи и ще потвърди покупката. Ще получите имейл за потвърждение след приключване."
+      "adminConfirmDesc": "Нашият екип ще прегледа вашите документи и ще потвърди покупката. Ще получите имейл за потвърждение след приключване.",
+      "fileTooLarge": "The file is too large. Maximum size: {max}."
     }
   },
   "blog": {

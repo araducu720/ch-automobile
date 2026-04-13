@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\Api\Concerns\ValidatesLocale;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreInquiryRequest;
 use App\Http\Requests\StoreTradeInRequest;
 use App\Models\Inquiry;
+use App\Models\PageView;
 use App\Models\TradeInValuation;
 use App\Notifications\InquiryConfirmationNotification;
 use App\Notifications\NewInquiryNotification;
@@ -16,13 +18,7 @@ use Illuminate\Support\Facades\Notification;
 
 class InquiryController extends Controller
 {
-    private const ALLOWED_LOCALES = ['de', 'en', 'fr', 'it', 'es', 'pt', 'nl', 'pl', 'cs', 'sk', 'hu', 'ro', 'bg', 'hr', 'sl', 'et', 'lv', 'lt', 'fi', 'sv', 'da', 'el', 'ga', 'mt'];
-
-    private function resolveLocale($request): string
-    {
-        $locale = $request->get('locale', 'de');
-        return in_array($locale, self::ALLOWED_LOCALES, true) ? $locale : 'de';
-    }
+    use ValidatesLocale;
 
     public function store(StoreInquiryRequest $request): JsonResponse
     {
@@ -35,7 +31,7 @@ class InquiryController extends Controller
             return Inquiry::create(array_merge(
                 $request->safe()->except(['website_url']),
                 [
-                    'ip_address' => $request->ip(),
+                    'ip_address' => PageView::anonymizeIp($request->ip()),
                     'user_agent' => $request->userAgent(),
                     'locale' => $this->resolveLocale($request),
                 ]
@@ -78,7 +74,7 @@ class InquiryController extends Controller
                 'phone' => $request->phone,
                 'message' => "Inzahlungnahme: {$request->trade_brand} {$request->trade_model} ({$request->trade_year})",
                 'preferred_contact_method' => $request->get('preferred_contact_method', 'email'),
-                'ip_address' => $request->ip(),
+                'ip_address' => PageView::anonymizeIp($request->ip()),
                 'user_agent' => $request->userAgent(),
                 'locale' => $this->resolveLocale($request),
             ]);

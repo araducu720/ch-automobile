@@ -4,6 +4,7 @@ import { getReviews } from '@/lib/api';
 import { Card, CardContent } from '@/components/ui/card';
 import { StarRating } from '@/components/ui/star-rating';
 import { ReviewForm } from '@/components/forms/review-form';
+import { FormErrorBoundary } from '@/components/ui/form-error-boundary';
 import { formatDate, getInitials } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import { Link } from '@/i18n/navigation';
@@ -164,7 +165,9 @@ export default async function ReviewsPage({ searchParams }: PageProps) {
                 <p className="text-sm text-muted mb-6">
                   {t('subtitle')}
                 </p>
-                <ReviewForm />
+                <FormErrorBoundary>
+                  <ReviewForm />
+                </FormErrorBoundary>
               </CardContent>
             </Card>
           </div>

@@ -42,7 +42,7 @@ class VehicleFactory extends Factory
             'interior_color' => $this->faker->optional()->randomElement(['Schwarz', 'Beige', 'Braun']),
             'doors' => $this->faker->randomElement([2, 3, 4, 5]),
             'seats' => $this->faker->randomElement([2, 4, 5, 7]),
-            'vin' => strtoupper($this->faker->bothify('WBA########?####')),
+            'vin' => strtoupper($this->faker->unique()->regexify('[A-HJ-NPR-Z0-9]{17}')),
             'registration_date' => $this->faker->dateTimeBetween('-10 years', 'now'),
             'condition' => $this->faker->randomElement($conditions),
             'description' => ['de' => $this->faker->paragraph(3), 'en' => $this->faker->paragraph(3)],

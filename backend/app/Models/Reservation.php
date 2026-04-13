@@ -31,7 +31,7 @@ class Reservation extends Model
     {
         static::creating(function (Reservation $reservation) {
             if (empty($reservation->payment_reference)) {
-                $reservation->payment_reference = 'RES-'.strtoupper(\Illuminate\Support\Str::ulid());
+                $reservation->payment_reference = 'RES-'.strtoupper(\Illuminate\Support\Str::random(24));
             }
             if (empty($reservation->reservation_expires_at)) {
                 $reservation->reservation_expires_at = now()->addDays(7);

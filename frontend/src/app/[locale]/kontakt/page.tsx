@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
 import { ContactForm } from '@/components/forms/contact-form';
+import { FormErrorBoundary } from '@/components/ui/form-error-boundary';
 import { Card, CardContent } from '@/components/ui/card';
 import { COMPANY_INFO } from '@/lib/constants';
 import { MapPin, Phone, Mail, Clock } from 'lucide-react';
@@ -39,7 +40,9 @@ export default async function ContactPage({ searchParams }: PageProps) {
           <div className="lg:col-span-2">
             <Card>
               <CardContent className="p-6 lg:p-8">
-                <ContactForm vehicleId={vehicleId} inquiryType={inquiryType} />
+                <FormErrorBoundary>
+                  <ContactForm vehicleId={vehicleId} inquiryType={inquiryType} />
+                </FormErrorBoundary>
               </CardContent>
             </Card>
           </div>

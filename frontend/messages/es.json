@@ -270,7 +270,8 @@
       "signedContractHint": "Formatos aceptados: PNG, JPG, WEBP, PDF (máx. 15 MB)",
       "uploadSignedContract": "Subir contrato firmado",
       "adminConfirmTitle": "Confirmación del equipo pendiente",
-      "adminConfirmDesc": "Nuestro equipo revisará sus documentos y confirmará la compra. Recibirá un correo de confirmación cuando todo esté completado."
+      "adminConfirmDesc": "Nuestro equipo revisará sus documentos y confirmará la compra. Recibirá un correo de confirmación cuando todo esté completado.",
+      "fileTooLarge": "The file is too large. Maximum size: {max}."
     }
   },
   "blog": {

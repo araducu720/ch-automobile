@@ -270,7 +270,8 @@
       "signedContractHint": "Formati aċċettati: PNG, JPG, WEBP, PDF (mass. 15 MB)",
       "uploadSignedContract": "Ittella' kuntratt iffirmat",
       "adminConfirmTitle": "Konferma tat-tim pendenti",
-      "adminConfirmDesc": "It-tim tagħna se jirrevedi d-dokumenti tiegħek u jikkonferma x-xiri. Tirċievi email ta' konferma meta kollox ikun lest."
+      "adminConfirmDesc": "It-tim tagħna se jirrevedi d-dokumenti tiegħek u jikkonferma x-xiri. Tirċievi email ta' konferma meta kollox ikun lest.",
+      "fileTooLarge": "The file is too large. Maximum size: {max}."
     }
   },
   "blog": {

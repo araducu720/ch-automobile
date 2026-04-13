@@ -31,6 +31,10 @@ class Vehicle extends Model implements HasMedia
         'tuv_until', 'warranty', 'sort_order', 'views_count',
     ];
 
+    protected $hidden = [
+        'vin', 'mobile_de_id', 'autoscout_id', 'sort_order', 'views_count',
+    ];
+
     protected $casts = [
         'price' => 'decimal:2',
         'price_on_request' => 'boolean',

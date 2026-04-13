@@ -270,7 +270,8 @@
       "signedContractHint": "Formate acceptate: PNG, JPG, WEBP, PDF (max. 15 MB)",
       "uploadSignedContract": "Încărcați contractul semnat",
       "adminConfirmTitle": "Confirmare echipă în așteptare",
-      "adminConfirmDesc": "Echipa noastră va verifica documentele dvs. și va confirma achiziția. Veți primi un e-mail de confirmare odată ce totul este finalizat."
+      "adminConfirmDesc": "Echipa noastră va verifica documentele dvs. și va confirma achiziția. Veți primi un e-mail de confirmare odată ce totul este finalizat.",
+      "fileTooLarge": "The file is too large. Maximum size: {max}."
     }
   },
   "blog": {

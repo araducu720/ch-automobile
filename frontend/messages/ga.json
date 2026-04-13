@@ -270,7 +270,8 @@
       "signedContractHint": "Formáidí inghlactha: PNG, JPG, WEBP, PDF (uasmhéid 15 MB)",
       "uploadSignedContract": "Uaslódáil conradh sínithe",
       "adminConfirmTitle": "Deimhniú foirne ar feitheamh",
-      "adminConfirmDesc": "Déanfaidh ár bhfoireann athbhreithniú ar do dhoiciméid agus deimhneoidh siad an ceannachán. Gheobhaidh tú ríomhphost deimhnithe nuair a bheidh gach rud críochnaithe."
+      "adminConfirmDesc": "Déanfaidh ár bhfoireann athbhreithniú ar do dhoiciméid agus deimhneoidh siad an ceannachán. Gheobhaidh tú ríomhphost deimhnithe nuair a bheidh gach rud críochnaithe.",
+      "fileTooLarge": "The file is too large. Maximum size: {max}."
     }
   },
   "blog": {

@@ -270,7 +270,8 @@
       "signedContractHint": "Priimami formatai: PNG, JPG, WEBP, PDF (maks. 15 MB)",
       "uploadSignedContract": "Įkelti pasirašytą sutartį",
       "adminConfirmTitle": "Laukiama komandos patvirtinimo",
-      "adminConfirmDesc": "Mūsų komanda peržiūrės jūsų dokumentus ir patvirtins pirkimą. Gausite patvirtinimo el. laišką, kai viskas bus baigta."
+      "adminConfirmDesc": "Mūsų komanda peržiūrės jūsų dokumentus ir patvirtins pirkimą. Gausite patvirtinimo el. laišką, kai viskas bus baigta.",
+      "fileTooLarge": "The file is too large. Maximum size: {max}."
     }
   },
   "blog": {

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\Api\Concerns\ValidatesLocale;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreReviewRequest;
 use App\Http\Resources\ReviewResource;
@@ -15,7 +16,7 @@ use Illuminate\Support\Facades\Notification;
 
 class ReviewController extends Controller
 {
-    private const ALLOWED_LOCALES = ['de', 'en', 'fr', 'it', 'es', 'pt', 'nl', 'pl', 'cs', 'sk', 'hu', 'ro', 'bg', 'hr', 'sl', 'et', 'lv', 'lt', 'fi', 'sv', 'da', 'el', 'ga', 'mt'];
+    use ValidatesLocale;
 
     public function index(Request $request): JsonResponse
     {
@@ -63,8 +64,8 @@ class ReviewController extends Controller
             return Review::create(array_merge(
                 $request->safe()->except(['website_url']),
                 [
-                    'ip_address' => $request->ip(),
-                    'locale' => in_array($request->get('locale', 'de'), self::ALLOWED_LOCALES, true) ? $request->get('locale', 'de') : 'de',
+                    'ip_address' => \App\Models\PageView::anonymizeIp($request->ip()),
+                    'locale' => $this->resolveLocale($request),
                 ]
             ));
         });

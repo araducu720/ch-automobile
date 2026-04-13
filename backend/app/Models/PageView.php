@@ -26,11 +26,38 @@ class PageView extends Model
     ];
 
     /**
-     * Get the prunable model query — remove page views older than 90 days.
+     * Get the prunable model query — remove page views older than 30 days.
      */
     public function prunable(): Builder
     {
-        return static::where('created_at', '<=', now()->subDays(90));
+        return static::where('created_at', '<=', now()->subDays(30));
+    }
+
+    /**
+     * Anonymize IP address (zero last octet for IPv4, last 80 bits for IPv6).
+     */
+    public static function anonymizeIp(?string $ip): ?string
+    {
+        if (! $ip) {
+            return null;
+        }
+
+        if (filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_IPV4)) {
+            return preg_replace('/\.\d+$/', '.0', $ip);
+        }
+
+        if (filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_IPV6)) {
+            // Zero last 5 groups (80 bits)
+            $parts = explode(':', $ip);
+            $parts = array_pad($parts, 8, '0');
+            for ($i = 3; $i < 8; $i++) {
+                $parts[$i] = '0';
+            }
+
+            return implode(':', $parts);
+        }
+
+        return null;
     }
 
     /**

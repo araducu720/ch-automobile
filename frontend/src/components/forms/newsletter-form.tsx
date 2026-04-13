@@ -25,6 +25,8 @@ export function NewsletterForm() {
 
   return (
     <form action={formAction} className="space-y-3">
+      {/* Honeypot — hidden from real users */}
+      <input type="text" name="website_url" tabIndex={-1} autoComplete="off" className="absolute opacity-0 h-0 w-0 overflow-hidden pointer-events-none" aria-hidden="true" />
       <div className="flex gap-2">
         <div className="relative flex-1">
           <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />

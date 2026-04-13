@@ -270,7 +270,8 @@
       "signedContractHint": "Pieņemtie formāti: PNG, JPG, WEBP, PDF (maks. 15 MB)",
       "uploadSignedContract": "Augšupielādēt parakstīto līgumu",
       "adminConfirmTitle": "Komandas apstiprinājums gaidīšanā",
-      "adminConfirmDesc": "Mūsu komanda pārskatīs jūsu dokumentus un apstiprinās pirkumu. Jūs saņemsiet apstiprinājuma e-pastu, kad viss būs pabeigts."
+      "adminConfirmDesc": "Mūsu komanda pārskatīs jūsu dokumentus un apstiprinās pirkumu. Jūs saņemsiet apstiprinājuma e-pastu, kad viss būs pabeigts.",
+      "fileTooLarge": "The file is too large. Maximum size: {max}."
     }
   },
   "blog": {

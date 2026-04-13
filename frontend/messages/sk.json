@@ -270,7 +270,8 @@
       "signedContractHint": "Akceptované formáty: PNG, JPG, WEBP, PDF (max. 15 MB)",
       "uploadSignedContract": "Nahrať podpísanú zmluvu",
       "adminConfirmTitle": "Čakanie na potvrdenie tímu",
-      "adminConfirmDesc": "Náš tím skontroluje vaše dokumenty a potvrdí nákup. Po dokončení dostanete potvrdzovací e-mail."
+      "adminConfirmDesc": "Náš tím skontroluje vaše dokumenty a potvrdí nákup. Po dokončení dostanete potvrdzovací e-mail.",
+      "fileTooLarge": "The file is too large. Maximum size: {max}."
     }
   },
   "blog": {

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\Api\Concerns\ValidatesLocale;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\SubscribeNewsletterRequest;
 use App\Models\CompanySetting;
@@ -15,15 +16,11 @@ use Illuminate\Support\Str;
 
 class SettingsController extends Controller
 {
-    private const ALLOWED_LOCALES = ['de', 'en', 'fr', 'it', 'es', 'pt', 'nl', 'pl', 'cs', 'sk', 'hu', 'ro', 'bg', 'hr', 'sl', 'et', 'lv', 'lt', 'fi', 'sv', 'da', 'el', 'ga', 'mt'];
+    use ValidatesLocale;
 
     public function index(Request $request): JsonResponse
     {
-        $locale = $request->get('locale', 'de');
-        if (! in_array($locale, self::ALLOWED_LOCALES, true)) {
-            $locale = 'de';
-        }
-        app()->setLocale($locale);
+        $locale = $this->applyLocale($request);
 
         $settings = cache()->remember('company_settings', 3600, function () {
             return CompanySetting::instance();
@@ -65,11 +62,7 @@ class SettingsController extends Controller
 
     public function legal(string $type, Request $request): JsonResponse
     {
-        $locale = $request->get('locale', 'de');
-        if (! in_array($locale, self::ALLOWED_LOCALES, true)) {
-            $locale = 'de';
-        }
-        app()->setLocale($locale);
+        $locale = $this->applyLocale($request);
         $settings = CompanySetting::instance();
 
         $content = match ($type) {
@@ -96,10 +89,7 @@ class SettingsController extends Controller
             ], 201);
         }
 
-        $locale = $request->get('locale', 'de');
-        if (! in_array($locale, self::ALLOWED_LOCALES, true)) {
-            $locale = 'de';
-        }
+        $locale = $this->resolveLocale($request);
 
         $subscriber = NewsletterSubscriber::firstOrCreate(
             ['email' => $request->email],

@@ -10,6 +10,7 @@ import { VehicleActions } from '@/components/vehicles/vehicle-actions';
 import { VehicleCard } from '@/components/vehicles/vehicle-card';
 import { FinancingCalculatorAccordion } from '@/components/vehicles/financing-calculator';
 import { ContactForm } from '@/components/forms/contact-form';
+import { FormErrorBoundary } from '@/components/ui/form-error-boundary';
 import { Button } from '@/components/ui/button';
 import { COMPANY_INFO } from '@/lib/constants';
 import { getTranslations } from 'next-intl/server';
@@ -352,7 +353,9 @@ export default async function VehicleDetailPage({ params }: VehicleDetailPagePro
             {/* Contact Form */}
             <div className="rounded-xl border-2 border-l-4 border-border-secondary border-l-brand bg-secondary p-6 shadow-[var(--shadow-md)]">
               <h3 className="mb-4 font-semibold text-foreground">{t('sendInquiry')}</h3>
-              <ContactForm vehicleId={vehicle.id} inquiryType="price_inquiry" />
+              <FormErrorBoundary>
+                <ContactForm vehicleId={vehicle.id} inquiryType="price_inquiry" />
+              </FormErrorBoundary>
             </div>
           </div>
         </div>

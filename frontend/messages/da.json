@@ -270,7 +270,8 @@
       "signedContractHint": "Accepterede formater: PNG, JPG, WEBP, PDF (maks. 15 MB)",
       "uploadSignedContract": "Upload underskrevet kontrakt",
       "adminConfirmTitle": "Teambekræftelse afventer",
-      "adminConfirmDesc": "Vores team vil gennemgå dine dokumenter og bekræfte købet. Du modtager en bekræftelsesmail, når alt er afsluttet."
+      "adminConfirmDesc": "Vores team vil gennemgå dine dokumenter og bekræfte købet. Du modtager en bekræftelsesmail, når alt er afsluttet.",
+      "fileTooLarge": "The file is too large. Maximum size: {max}."
     }
   },
   "blog": {

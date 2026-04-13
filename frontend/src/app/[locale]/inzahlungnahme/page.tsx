@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
 import { TradeInForm } from '@/components/forms/trade-in-form';
+import { FormErrorBoundary } from '@/components/ui/form-error-boundary';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { ArrowLeftRight, CheckCircle, Clock, Shield } from 'lucide-react';
@@ -66,7 +67,9 @@ export default async function TradeInPage() {
               <h2 className="text-xl font-semibold text-foreground mb-6">
                 {t('formTitle')}
               </h2>
-              <TradeInForm />
+              <FormErrorBoundary>
+                <TradeInForm />
+              </FormErrorBoundary>
             </CardContent>
           </Card>
         </div>

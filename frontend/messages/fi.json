@@ -270,7 +270,8 @@
       "signedContractHint": "Hyväksytyt muodot: PNG, JPG, WEBP, PDF (enint. 15 MB)",
       "uploadSignedContract": "Lataa allekirjoitettu sopimus",
       "adminConfirmTitle": "Tiimin vahvistus odottaa",
-      "adminConfirmDesc": "Tiimimme tarkistaa asiakirjasi ja vahvistaa oston. Saat vahvistussähköpostin, kun kaikki on valmista."
+      "adminConfirmDesc": "Tiimimme tarkistaa asiakirjasi ja vahvistaa oston. Saat vahvistussähköpostin, kun kaikki on valmista.",
+      "fileTooLarge": "The file is too large. Maximum size: {max}."
     }
   },
   "blog": {

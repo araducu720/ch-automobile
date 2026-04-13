@@ -270,7 +270,8 @@
       "signedContractHint": "Godkända format: PNG, JPG, WEBP, PDF (max 15 MB)",
       "uploadSignedContract": "Ladda upp undertecknat avtal",
       "adminConfirmTitle": "Teambekräftelse väntar",
-      "adminConfirmDesc": "Vårt team kommer att granska dina dokument och bekräfta köpet. Du får ett bekräftelsemail när allt är klart."
+      "adminConfirmDesc": "Vårt team kommer att granska dina dokument och bekräfta köpet. Du får ett bekräftelsemail när allt är klart.",
+      "fileTooLarge": "The file is too large. Maximum size: {max}."
     }
   },
   "blog": {

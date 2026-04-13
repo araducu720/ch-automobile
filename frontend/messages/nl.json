@@ -270,7 +270,8 @@
       "signedContractHint": "Geaccepteerde formaten: PNG, JPG, WEBP, PDF (max. 15 MB)",
       "uploadSignedContract": "Ondertekend contract uploaden",
       "adminConfirmTitle": "Teambevestiging in afwachting",
-      "adminConfirmDesc": "Ons team zal uw documenten bekijken en de aankoop bevestigen. U ontvangt een bevestigingsmail zodra alles is afgerond."
+      "adminConfirmDesc": "Ons team zal uw documenten bekijken en de aankoop bevestigen. U ontvangt een bevestigingsmail zodra alles is afgerond.",
+      "fileTooLarge": "The file is too large. Maximum size: {max}."
     }
   },
   "blog": {

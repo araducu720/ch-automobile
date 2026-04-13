@@ -4,6 +4,7 @@ import { Link } from '@/i18n/navigation';
 import { getVehicle } from '@/lib/api';
 import type { Vehicle, ApiResponse } from '@/types';
 import { PurchaseWizard } from '@/components/forms/purchase-wizard';
+import { FormErrorBoundary } from '@/components/ui/form-error-boundary';
 import { getTranslations } from 'next-intl/server';
 import { ChevronLeft, ShieldCheck } from 'lucide-react';
 import Image from 'next/image';
@@ -159,11 +160,13 @@ export default async function PurchasePage({ params }: PurchasePageProps) {
           {/* Right: Purchase wizard */}
           <div className="lg:col-span-3">
             <div className="rounded-xl border-2 border-l-4 border-border-secondary border-l-brand bg-secondary p-6 shadow-[var(--shadow-md)] lg:p-8">
-              <PurchaseWizard
-                vehicleId={vehicle.id}
-                vehicleName={vehicle.full_name}
-                vehiclePrice={vehicle.formatted_price}
-              />
+              <FormErrorBoundary>
+                <PurchaseWizard
+                  vehicleId={vehicle.id}
+                  vehicleName={vehicle.full_name}
+                  vehiclePrice={vehicle.formatted_price}
+                />
+              </FormErrorBoundary>
             </div>
           </div>
         </div>

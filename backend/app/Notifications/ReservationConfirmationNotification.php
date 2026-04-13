@@ -29,6 +29,12 @@ class ReservationConfirmationNotification extends Notification implements Should
         $settings = CompanySetting::instance();
         $locale = $this->reservation->locale ?? 'de';
 
+        // Mask IBAN for email security (show first 4 and last 4 chars)
+        $iban = $settings->bank_iban;
+        $maskedIban = strlen($iban) > 8
+            ? substr($iban, 0, 4).str_repeat('*', strlen($iban) - 8).substr($iban, -4)
+            : $iban;
+
         $mail = (new MailMessage)
             ->subject("Reservierungsbestätigung — {$this->reservation->payment_reference}")
             ->greeting("Hallo {$this->reservation->customer_name},")
@@ -42,7 +48,7 @@ class ReservationConfirmationNotification extends Notification implements Should
             ->line("**Zahlungsreferenz:** {$this->reservation->payment_reference}")
             ->line("**Kontoinhaber:** {$settings->bank_account_holder}")
             ->line("**Bank:** {$settings->bank_name}")
-            ->line("**IBAN:** {$settings->bank_iban}")
+            ->line("**IBAN:** {$maskedIban}")
             ->line("**BIC:** {$settings->bank_bic}")
             ->line('')
             ->line("Bitte überweisen Sie den Betrag innerhalb von 7 Tagen und geben Sie die Zahlungsreferenz **{$this->reservation->payment_reference}** als Verwendungszweck an.")

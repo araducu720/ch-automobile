@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\Api\Concerns\ValidatesLocale;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\VehicleDetailResource;
 use App\Http\Resources\VehicleResource;
@@ -11,18 +12,11 @@ use Illuminate\Http\Request;
 
 class VehicleController extends Controller
 {
-    private const ALLOWED_LOCALES = ['de', 'en', 'fr', 'it', 'es', 'pt', 'nl', 'pl', 'cs', 'sk', 'hu', 'ro', 'bg', 'hr', 'sl', 'et', 'lv', 'lt', 'fi', 'sv', 'da', 'el', 'ga', 'mt'];
-
-    private function resolveLocale(Request $request): string
-    {
-        $locale = $request->get('locale', 'de');
-        return in_array($locale, self::ALLOWED_LOCALES, true) ? $locale : 'de';
-    }
+    use ValidatesLocale;
 
     public function index(Request $request): JsonResponse
     {
-        $locale = $this->resolveLocale($request);
-        app()->setLocale($locale);
+        $locale = $this->applyLocale($request);
 
         $query = Vehicle::published()
             ->with('media')
@@ -70,8 +64,7 @@ class VehicleController extends Controller
 
     public function show(string $slug, Request $request): JsonResponse
     {
-        $locale = $this->resolveLocale($request);
-        app()->setLocale($locale);
+        $locale = $this->applyLocale($request);
 
         $vehicle = Vehicle::published()
             ->with('media')
@@ -95,8 +88,7 @@ class VehicleController extends Controller
 
     public function featured(Request $request): JsonResponse
     {
-        $locale = $this->resolveLocale($request);
-        app()->setLocale($locale);
+        $this->applyLocale($request);
 
         $limit = min((int) $request->get('limit', 8), 20);
 

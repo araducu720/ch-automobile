@@ -452,9 +452,23 @@ function StepSignature({
   );
 
   const [fileName, setFileName] = useState<string | null>(null);
+  const [fileError, setFileError] = useState<string | null>(null);
   const [contractDownloaded, setContractDownloaded] = useState(false);
   const [isDownloading, setIsDownloading] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
+
+  const MAX_FILE_SIZE = 15 * 1024 * 1024; // 15MB
+
+  const validateFile = (file: File): boolean => {
+    if (file.size > MAX_FILE_SIZE) {
+      setFileError(t('wizard.fileTooLarge', { max: '15 MB' }));
+      setFileName(null);
+      if (fileInputRef.current) fileInputRef.current.value = '';
+      return false;
+    }
+    setFileError(null);
+    return true;
+  };
 
   const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000/api/v1';
   const contractUrl = `${apiUrl}/reservations/${reference}/contract`;
@@ -485,6 +499,7 @@ function StepSignature({
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
+    if (file && !validateFile(file)) return;
     setFileName(file ? file.name : null);
   };
 
@@ -492,12 +507,18 @@ function StepSignature({
     e.preventDefault();
     const file = e.dataTransfer.files?.[0];
     if (file && fileInputRef.current) {
+      if (file.size > MAX_FILE_SIZE) {
+        setFileError(t('wizard.fileTooLarge', { max: '15 MB' }));
+        setFileName(null);
+        return;
+      }
+      setFileError(null);
       const dt = new DataTransfer();
       dt.items.add(file);
       fileInputRef.current.files = dt.files;
       setFileName(file.name);
     }
-  }, []);
+  }, [MAX_FILE_SIZE, t]);
 
   return (
     <div className="space-y-4">
@@ -611,6 +632,13 @@ function StepSignature({
             />
           </div>
 
+          {fileError && (
+            <div className="flex items-center gap-2 text-sm text-error">
+              <AlertCircle className="h-4 w-4 shrink-0" />
+              <span>{fileError}</span>
+            </div>
+          )}
+
           <Button
             type="submit"
             className="w-full"
@@ -650,10 +678,20 @@ function StepPayment({
   );
 
   const [fileName, setFileName] = useState<string | null>(null);
+  const [fileError, setFileError] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
+
+  const MAX_FILE_SIZE = 10 * 1024 * 1024; // 10MB
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
+    if (file && file.size > MAX_FILE_SIZE) {
+      setFileError(t('wizard.fileTooLarge', { max: '10 MB' }));
+      setFileName(null);
+      if (fileInputRef.current) fileInputRef.current.value = '';
+      return;
+    }
+    setFileError(null);
     setFileName(file ? file.name : null);
   };
 
@@ -661,12 +699,18 @@ function StepPayment({
     e.preventDefault();
     const file = e.dataTransfer.files?.[0];
     if (file && fileInputRef.current) {
+      if (file.size > MAX_FILE_SIZE) {
+        setFileError(t('wizard.fileTooLarge', { max: '10 MB' }));
+        setFileName(null);
+        return;
+      }
+      setFileError(null);
       const dt = new DataTransfer();
       dt.items.add(file);
       fileInputRef.current.files = dt.files;
       setFileName(file.name);
     }
-  }, []);
+  }, [MAX_FILE_SIZE, t]);
 
   return (
     <div className="space-y-4">
@@ -718,6 +762,13 @@ function StepPayment({
             className="hidden"
           />
         </div>
+
+        {fileError && (
+          <div className="flex items-center gap-2 text-sm text-error">
+            <AlertCircle className="h-4 w-4 shrink-0" />
+            <span>{fileError}</span>
+          </div>
+        )}
 
         <Button
           type="submit"

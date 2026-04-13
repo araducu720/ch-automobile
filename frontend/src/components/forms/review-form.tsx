@@ -33,6 +33,8 @@ export function ReviewForm() {
 
   return (
     <form ref={formRef} action={formAction} className="space-y-5">
+      {/* Honeypot — hidden from real users */}
+      <input type="text" name="website_url" tabIndex={-1} autoComplete="off" className="absolute opacity-0 h-0 w-0 overflow-hidden pointer-events-none" aria-hidden="true" />
       <input type="hidden" name="rating" value={rating} />
 
       <StarRatingInput

@@ -342,7 +342,8 @@
       "signedContractHint": "Akzeptierte Formate: PNG, JPG, WEBP, PDF (max. 15 MB)",
       "uploadSignedContract": "Unterschriebenen Vertrag hochladen",
       "adminConfirmTitle": "Bestätigung durch unser Team ausstehend",
-      "adminConfirmDesc": "Unser Team wird Ihre Dokumente prüfen und den Kauf bestätigen. Sie erhalten eine Bestätigungs-E-Mail, sobald alles abgeschlossen ist."
+      "adminConfirmDesc": "Unser Team wird Ihre Dokumente prüfen und den Kauf bestätigen. Sie erhalten eine Bestätigungs-E-Mail, sobald alles abgeschlossen ist.",
+      "fileTooLarge": "Die Datei ist zu groß. Maximale Größe: {max}."
     }
   },
   "blog": {

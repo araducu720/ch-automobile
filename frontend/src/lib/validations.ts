@@ -89,6 +89,7 @@ export const reviewSchema = z.object({
   vehicle_id: z.number().optional(),
   locale: z.string().max(5).optional(),
   privacy_accepted: privacyField,
+  website_url: z.string().max(0).optional(),
 });
 
 export type ReviewSchemaType = z.infer<typeof reviewSchema>;
@@ -101,6 +102,7 @@ export const newsletterSchema = z.object({
   email: emailField,
   locale: z.string().default('de'),
   privacy_accepted: privacyField,
+  website_url: z.string().max(0).optional(),
 });
 
 export type NewsletterSchemaType = z.infer<typeof newsletterSchema>;

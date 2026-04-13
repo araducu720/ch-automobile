@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\Api\Concerns\ValidatesLocale;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\BlogPostDetailResource;
 use App\Http\Resources\BlogPostResource;
@@ -12,18 +13,11 @@ use Illuminate\Http\Request;
 
 class BlogController extends Controller
 {
-    private const ALLOWED_LOCALES = ['de', 'en', 'fr', 'it', 'es', 'pt', 'nl', 'pl', 'cs', 'sk', 'hu', 'ro', 'bg', 'hr', 'sl', 'et', 'lv', 'lt', 'fi', 'sv', 'da', 'el', 'ga', 'mt'];
-
-    private function resolveLocale(Request $request): string
-    {
-        $locale = $request->get('locale', 'de');
-        return in_array($locale, self::ALLOWED_LOCALES, true) ? $locale : 'de';
-    }
+    use ValidatesLocale;
 
     public function index(Request $request): JsonResponse
     {
-        $locale = $this->resolveLocale($request);
-        app()->setLocale($locale);
+        $locale = $this->applyLocale($request);
 
         $query = BlogPost::published()->recent()->with(['category', 'author', 'media']);
 
@@ -45,8 +39,7 @@ class BlogController extends Controller
 
     public function show(string $slug, Request $request): JsonResponse
     {
-        $locale = $this->resolveLocale($request);
-        app()->setLocale($locale);
+        $locale = $this->applyLocale($request);
 
         $post = BlogPost::published()
             ->with(['category', 'author', 'media'])
@@ -75,8 +68,7 @@ class BlogController extends Controller
 
     public function categories(Request $request): JsonResponse
     {
-        $locale = $this->resolveLocale($request);
-        app()->setLocale($locale);
+        $locale = $this->applyLocale($request);
 
         $categories = BlogCategory::withCount(['posts' => fn ($q) => $q->published()])
             ->orderBy('sort_order')

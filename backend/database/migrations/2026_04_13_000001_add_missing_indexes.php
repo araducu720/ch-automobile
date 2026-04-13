@@ -3,43 +3,59 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\DB;
 
 return new class extends Migration
 {
+    private function indexExists(string $table, string $indexName): bool
+    {
+        $indexes = DB::select("SHOW INDEX FROM `{$table}` WHERE Key_name = ?", [$indexName]);
+        return count($indexes) > 0;
+    }
+
+    private function addIndexIfNotExists(Blueprint $table, string $tableName, array|string $columns, ?string $indexName = null): void
+    {
+        $cols = is_array($columns) ? $columns : [$columns];
+        $name = $indexName ?? ($tableName . '_' . implode('_', $cols) . '_index');
+        if (!$this->indexExists($tableName, $name)) {
+            $table->index($cols, $name);
+        }
+    }
+
     public function up(): void
     {
         Schema::table('vehicles', function (Blueprint $table) {
-            $table->index('brand');
-            $table->index('fuel_type');
-            $table->index('transmission');
-            $table->index('body_type');
-            $table->index(['status', 'is_featured']);
-            $table->index(['brand', 'status']);
-            $table->index('price');
-            $table->index('year');
+            $this->addIndexIfNotExists($table, 'vehicles', 'brand');
+            $this->addIndexIfNotExists($table, 'vehicles', 'fuel_type');
+            $this->addIndexIfNotExists($table, 'vehicles', 'transmission');
+            $this->addIndexIfNotExists($table, 'vehicles', 'body_type');
+            $this->addIndexIfNotExists($table, 'vehicles', ['status', 'is_featured']);
+            $this->addIndexIfNotExists($table, 'vehicles', ['brand', 'status']);
+            $this->addIndexIfNotExists($table, 'vehicles', 'price');
+            $this->addIndexIfNotExists($table, 'vehicles', 'year');
         });
 
         Schema::table('inquiries', function (Blueprint $table) {
-            $table->index('vehicle_id');
-            $table->index('status');
-            $table->index('type');
-            $table->index('created_at');
+            $this->addIndexIfNotExists($table, 'inquiries', 'vehicle_id');
+            $this->addIndexIfNotExists($table, 'inquiries', 'status');
+            $this->addIndexIfNotExists($table, 'inquiries', 'type');
+            $this->addIndexIfNotExists($table, 'inquiries', 'created_at');
         });
 
         Schema::table('reservations', function (Blueprint $table) {
-            $table->index('vehicle_id');
-            $table->index('payment_reference');
-            $table->index('bank_transfer_status');
+            $this->addIndexIfNotExists($table, 'reservations', 'vehicle_id');
+            $this->addIndexIfNotExists($table, 'reservations', 'payment_reference');
+            $this->addIndexIfNotExists($table, 'reservations', 'bank_transfer_status');
         });
 
         Schema::table('reviews', function (Blueprint $table) {
-            $table->index('vehicle_id');
-            $table->index('is_approved');
+            $this->addIndexIfNotExists($table, 'reviews', 'vehicle_id');
+            $this->addIndexIfNotExists($table, 'reviews', 'is_approved');
         });
 
         Schema::table('blog_posts', function (Blueprint $table) {
-            $table->index('author_id');
-            $table->index('is_published');
+            $this->addIndexIfNotExists($table, 'blog_posts', 'author_id');
+            $this->addIndexIfNotExists($table, 'blog_posts', 'is_published');
         });
     }
 

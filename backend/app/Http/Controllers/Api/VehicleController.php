@@ -11,9 +11,17 @@ use Illuminate\Http\Request;
 
 class VehicleController extends Controller
 {
-    public function index(Request $request): JsonResponse
+    private const ALLOWED_LOCALES = ['de', 'en', 'fr', 'it', 'es', 'pt', 'nl', 'pl', 'cs', 'sk', 'hu', 'ro', 'bg', 'hr', 'sl', 'et', 'lv', 'lt', 'fi', 'sv', 'da', 'el', 'ga', 'mt'];
+
+    private function resolveLocale(Request $request): string
     {
         $locale = $request->get('locale', 'de');
+        return in_array($locale, self::ALLOWED_LOCALES, true) ? $locale : 'de';
+    }
+
+    public function index(Request $request): JsonResponse
+    {
+        $locale = $this->resolveLocale($request);
         app()->setLocale($locale);
 
         $query = Vehicle::published()
@@ -31,19 +39,19 @@ class VehicleController extends Controller
         }
 
         if ($request->filled('search')) {
-            $search = str_replace(['%', '_'], ['\\%', '\\_'], $request->get('search'));
+            $search = $request->get('search');
             $query->where(function ($q) use ($search) {
-                $q->where('brand', 'like', "%{$search}%")
-                    ->orWhere('model', 'like', "%{$search}%")
-                    ->orWhere('variant', 'like', "%{$search}%");
+                $q->where('brand', 'like', '%'.addcslashes($search, '%_').'%')
+                    ->orWhere('model', 'like', '%'.addcslashes($search, '%_').'%')
+                    ->orWhere('variant', 'like', '%'.addcslashes($search, '%_').'%');
             });
         }
 
         $sortField = $request->get('sort', 'created_at');
         $sortDir = $request->get('direction', 'desc');
         $allowedSorts = ['price', 'year', 'mileage', 'created_at'];
-        if (in_array($sortField, $allowedSorts)) {
-            $query->orderBy($sortField, $sortDir === 'asc' ? 'asc' : 'desc');
+        if (in_array($sortField, $allowedSorts, true)) {
+            $query->orderBy($sortField, in_array($sortDir, ['asc', 'desc'], true) ? $sortDir : 'desc');
         }
 
         $perPage = min($request->integer('per_page', 12), 48);
@@ -62,7 +70,7 @@ class VehicleController extends Controller
 
     public function show(string $slug, Request $request): JsonResponse
     {
-        $locale = $request->get('locale', 'de');
+        $locale = $this->resolveLocale($request);
         app()->setLocale($locale);
 
         $vehicle = Vehicle::published()
@@ -87,7 +95,7 @@ class VehicleController extends Controller
 
     public function featured(Request $request): JsonResponse
     {
-        $locale = $request->get('locale', 'de');
+        $locale = $this->resolveLocale($request);
         app()->setLocale($locale);
 
         $limit = min((int) $request->get('limit', 8), 20);
@@ -102,9 +110,10 @@ class VehicleController extends Controller
         return response()->json(['data' => VehicleResource::collection($vehicles)]);
     }
 
-    public function brands(): JsonResponse
+    public function brands(Request $request): JsonResponse
     {
-        $brands = cache()->remember('vehicle_brands', 300, function () {
+        $locale = $this->resolveLocale($request);
+        $brands = cache()->remember("vehicle_brands_{$locale}", 300, function () {
             return Vehicle::published()
                 ->select('brand')
                 ->selectRaw('COUNT(*) as count')

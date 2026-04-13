@@ -18,8 +18,8 @@ class StoreReservationRequest extends FormRequest
         return [
             'vehicle_id' => 'required|exists:vehicles,id',
             'customer_name' => 'required|string|max:255',
-            'customer_email' => 'required|email:rfc|max:255',
-            'customer_phone' => 'required|string|max:50',
+            'customer_email' => 'required|email:rfc,dns|max:255',
+            'customer_phone' => 'required|string|min:6|max:50',
             'billing_street' => 'nullable|string|max:255',
             'billing_city' => 'nullable|string|max:255',
             'billing_postal_code' => 'nullable|string|max:20',

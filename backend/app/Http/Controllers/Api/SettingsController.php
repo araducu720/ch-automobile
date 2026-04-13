@@ -15,9 +15,14 @@ use Illuminate\Support\Str;
 
 class SettingsController extends Controller
 {
+    private const ALLOWED_LOCALES = ['de', 'en', 'fr', 'it', 'es', 'pt', 'nl', 'pl', 'cs', 'sk', 'hu', 'ro', 'bg', 'hr', 'sl', 'et', 'lv', 'lt', 'fi', 'sv', 'da', 'el', 'ga', 'mt'];
+
     public function index(Request $request): JsonResponse
     {
         $locale = $request->get('locale', 'de');
+        if (! in_array($locale, self::ALLOWED_LOCALES, true)) {
+            $locale = 'de';
+        }
         app()->setLocale($locale);
 
         $settings = cache()->remember('company_settings', 3600, function () {
@@ -61,6 +66,9 @@ class SettingsController extends Controller
     public function legal(string $type, Request $request): JsonResponse
     {
         $locale = $request->get('locale', 'de');
+        if (! in_array($locale, self::ALLOWED_LOCALES, true)) {
+            $locale = 'de';
+        }
         app()->setLocale($locale);
         $settings = CompanySetting::instance();
 
@@ -88,10 +96,15 @@ class SettingsController extends Controller
             ], 201);
         }
 
+        $locale = $request->get('locale', 'de');
+        if (! in_array($locale, self::ALLOWED_LOCALES, true)) {
+            $locale = 'de';
+        }
+
         $subscriber = NewsletterSubscriber::firstOrCreate(
             ['email' => $request->email],
             [
-                'locale' => $request->get('locale', 'de'),
+                'locale' => $locale,
                 'confirmation_token' => Str::random(64),
             ]
         );
@@ -145,9 +158,11 @@ class SettingsController extends Controller
         $subscriber = NewsletterSubscriber::where('email', $email)->first();
 
         if (! $subscriber) {
+            // Return 200 to prevent email enumeration
             return response()->json([
-                'error' => 'E-Mail-Adresse nicht gefunden.',
-            ], 404);
+                'success' => true,
+                'message' => 'Sie wurden erfolgreich abgemeldet.',
+            ]);
         }
 
         $subscriber->update(['unsubscribed_at' => now()]);

@@ -16,6 +16,14 @@ use Illuminate\Support\Facades\Notification;
 
 class InquiryController extends Controller
 {
+    private const ALLOWED_LOCALES = ['de', 'en', 'fr', 'it', 'es', 'pt', 'nl', 'pl', 'cs', 'sk', 'hu', 'ro', 'bg', 'hr', 'sl', 'et', 'lv', 'lt', 'fi', 'sv', 'da', 'el', 'ga', 'mt'];
+
+    private function resolveLocale($request): string
+    {
+        $locale = $request->get('locale', 'de');
+        return in_array($locale, self::ALLOWED_LOCALES, true) ? $locale : 'de';
+    }
+
     public function store(StoreInquiryRequest $request): JsonResponse
     {
         // Honeypot check
@@ -29,7 +37,7 @@ class InquiryController extends Controller
                 [
                     'ip_address' => $request->ip(),
                     'user_agent' => $request->userAgent(),
-                    'locale' => $request->get('locale', 'de'),
+                    'locale' => $this->resolveLocale($request),
                 ]
             ));
         });
@@ -72,7 +80,7 @@ class InquiryController extends Controller
                 'preferred_contact_method' => $request->get('preferred_contact_method', 'email'),
                 'ip_address' => $request->ip(),
                 'user_agent' => $request->userAgent(),
-                'locale' => $request->get('locale', 'de'),
+                'locale' => $this->resolveLocale($request),
             ]);
 
             $tradeIn = TradeInValuation::create([

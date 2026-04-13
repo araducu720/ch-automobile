@@ -6,8 +6,8 @@ import { z } from 'zod';
 
 const nameField = z.string().min(2, 'Mindestens 2 Zeichen').max(100);
 const emailField = z.string().email('Ungültige E-Mail-Adresse');
-const phoneField = z.string().min(6, 'Ungültige Telefonnummer').max(20).optional().or(z.literal(''));
-const phoneRequiredField = z.string().min(6, 'Ungültige Telefonnummer').max(20);
+const phoneField = z.string().min(6, 'Ungültige Telefonnummer').max(20).regex(/^\+?[\d\s\-().]+$/, 'Ungültiges Format').optional().or(z.literal(''));
+const phoneRequiredField = z.string().min(6, 'Ungültige Telefonnummer').max(20).regex(/^\+?[\d\s\-().]+$/, 'Ungültiges Format');
 const messageField = z.string().min(10, 'Mindestens 10 Zeichen').max(5000);
 const privacyField = z.literal(true, {
   errorMap: () => ({ message: 'Bitte akzeptieren Sie die Datenschutzerklärung' }),

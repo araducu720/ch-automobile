@@ -15,6 +15,8 @@ use Illuminate\Support\Facades\Notification;
 
 class ReviewController extends Controller
 {
+    private const ALLOWED_LOCALES = ['de', 'en', 'fr', 'it', 'es', 'pt', 'nl', 'pl', 'cs', 'sk', 'hu', 'ro', 'bg', 'hr', 'sl', 'et', 'lv', 'lt', 'fi', 'sv', 'da', 'el', 'ga', 'mt'];
+
     public function index(Request $request): JsonResponse
     {
         $reviews = Review::approved()
@@ -24,9 +26,15 @@ class ReviewController extends Controller
 
         $avgRating = Review::approved()->avg('rating');
         $totalCount = Review::approved()->count();
-        $ratingBreakdown = [];
+        $ratingBreakdown = Review::approved()
+            ->selectRaw('rating, COUNT(*) as count')
+            ->groupBy('rating')
+            ->pluck('count', 'rating')
+            ->toArray();
+        // Ensure all ratings 1-5 are present
+        $breakdown = [];
         for ($i = 5; $i >= 1; $i--) {
-            $ratingBreakdown[$i] = Review::approved()->where('rating', $i)->count();
+            $breakdown[$i] = $ratingBreakdown[$i] ?? 0;
         }
 
         return response()->json([
@@ -34,7 +42,7 @@ class ReviewController extends Controller
             'aggregate' => [
                 'average_rating' => round($avgRating ?? 0, 1),
                 'total_count' => $totalCount,
-                'breakdown' => $ratingBreakdown,
+                'breakdown' => $breakdown,
             ],
             'meta' => [
                 'current_page' => $reviews->currentPage(),
@@ -56,7 +64,7 @@ class ReviewController extends Controller
                 $request->safe()->except(['website_url']),
                 [
                     'ip_address' => $request->ip(),
-                    'locale' => $request->get('locale', 'de'),
+                    'locale' => in_array($request->get('locale', 'de'), self::ALLOWED_LOCALES, true) ? $request->get('locale', 'de') : 'de',
                 ]
             ));
         });

@@ -19,10 +19,12 @@ use Illuminate\Support\Facades\Storage;
 
 class ReservationController extends Controller
 {
+    private const ALLOWED_LOCALES = ['de', 'en', 'fr', 'it', 'es', 'pt', 'nl', 'pl', 'cs', 'sk', 'hu', 'ro', 'bg', 'hr', 'sl', 'et', 'lv', 'lt', 'fi', 'sv', 'da', 'el', 'ga', 'mt'];
+
     public function store(StoreReservationRequest $request): JsonResponse
     {
         // Honeypot check
-        if ($request->filled('website_url')) {
+        if ($request->isHoneypotFilled()) {
             return response()->json([
                 'success' => true,
                 'message' => 'Reservierung erfolgreich.',
@@ -42,11 +44,16 @@ class ReservationController extends Controller
             // Deposit = 10% of price, min 500€
             $depositAmount = max(500, $vehicle->price * 0.10);
 
+            $locale = $request->get('locale', 'de');
+            if (! in_array($locale, self::ALLOWED_LOCALES, true)) {
+                $locale = 'de';
+            }
+
             $reservation = Reservation::create(array_merge(
                 $request->safe()->except(['website_url']),
                 [
                     'deposit_amount' => $depositAmount,
-                    'locale' => $request->get('locale', 'de'),
+                    'locale' => $locale,
                     'purchase_step' => 'invoice',
                 ]
             ));

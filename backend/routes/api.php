@@ -59,7 +59,8 @@ Route::prefix('v1')->group(function () {
     Route::get('/legal/{type}', [SettingsController::class, 'legal']);
     Route::post('/newsletter/subscribe', [SettingsController::class, 'subscribeNewsletter'])
         ->middleware('throttle:5,1');
-    Route::get('/newsletter/confirm/{token}', [SettingsController::class, 'confirmNewsletter']);
+    Route::get('/newsletter/confirm/{token}', [SettingsController::class, 'confirmNewsletter'])
+        ->middleware('throttle:10,1');
     Route::post('/newsletter/unsubscribe/{email}', [SettingsController::class, 'unsubscribeNewsletter'])
         ->middleware('throttle:5,1');
 });

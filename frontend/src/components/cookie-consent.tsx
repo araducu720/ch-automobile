@@ -11,7 +11,7 @@ const CONSENT_KEY = 'ch-auto-cookie-consent';
 type ConsentState = 'undecided' | 'accepted' | 'essential-only';
 
 export function CookieConsent() {
-  const [consent, setConsent] = useState<ConsentState>('accepted'); // default hidden
+  const [consent, setConsent] = useState<ConsentState | null>(null);
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {

@@ -67,6 +67,8 @@ export default async function RootLayout({
     <html lang={locale} suppressHydrationWarning>
       <head>
         <link rel="icon" href="/favicon.ico" sizes="any" />
+        <link rel="preconnect" href="https://c-h-automobile.on-forge.com" />
+        <link rel="dns-prefetch" href="https://c-h-automobile.on-forge.com" />
         <meta name="theme-color" content="#1E40AF" />
         <script
           type="application/ld+json"

@@ -12,9 +12,17 @@ use Illuminate\Http\Request;
 
 class BlogController extends Controller
 {
-    public function index(Request $request): JsonResponse
+    private const ALLOWED_LOCALES = ['de', 'en', 'fr', 'it', 'es', 'pt', 'nl', 'pl', 'cs', 'sk', 'hu', 'ro', 'bg', 'hr', 'sl', 'et', 'lv', 'lt', 'fi', 'sv', 'da', 'el', 'ga', 'mt'];
+
+    private function resolveLocale(Request $request): string
     {
         $locale = $request->get('locale', 'de');
+        return in_array($locale, self::ALLOWED_LOCALES, true) ? $locale : 'de';
+    }
+
+    public function index(Request $request): JsonResponse
+    {
+        $locale = $this->resolveLocale($request);
         app()->setLocale($locale);
 
         $query = BlogPost::published()->recent()->with(['category', 'author', 'media']);
@@ -37,7 +45,7 @@ class BlogController extends Controller
 
     public function show(string $slug, Request $request): JsonResponse
     {
-        $locale = $request->get('locale', 'de');
+        $locale = $this->resolveLocale($request);
         app()->setLocale($locale);
 
         $post = BlogPost::published()
@@ -67,7 +75,7 @@ class BlogController extends Controller
 
     public function categories(Request $request): JsonResponse
     {
-        $locale = $request->get('locale', 'de');
+        $locale = $this->resolveLocale($request);
         app()->setLocale($locale);
 
         $categories = BlogCategory::withCount(['posts' => fn ($q) => $q->published()])

@@ -82,9 +82,14 @@ export function VehicleGallery({ images, vehicleName }: VehicleGalleryProps) {
     });
   }, [preloadUrls]);
 
-  // Autoplay slideshow
+  // Autoplay slideshow (respects prefers-reduced-motion)
   useEffect(() => {
     if (autoplay && images.length > 1) {
+      const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (prefersReduced) {
+        setAutoplay(false);
+        return;
+      }
       autoplayRef.current = setInterval(() => {
         setCurrentIndex((prev) => (prev + 1) % images.length);
         setIsLoading(true);

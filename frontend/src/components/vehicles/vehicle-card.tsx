@@ -8,6 +8,7 @@ import { Badge } from '@/components/ui/badge';
 import type { Vehicle } from '@/types';
 import { Fuel, Gauge, Calendar, Zap, Camera, ShoppingCart } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { MonthlyRateBadge } from '@/components/vehicles/financing-calculator';
 
 interface VehicleCardProps {
   vehicle: Vehicle;
@@ -131,9 +132,14 @@ export function VehicleCard({ vehicle, className, priority = false }: VehicleCar
             {vehicle.price_on_request ? (
               <span className="text-sm font-medium text-muted">{t('priceOnRequest')}</span>
             ) : (
-              <span className="text-lg font-bold text-brand">
-                {formatPrice(vehicle.price)}
-              </span>
+              <div>
+                <span className="text-lg font-bold text-brand">
+                  {formatPrice(vehicle.price)}
+                </span>
+                {vehicle.status === 'available' && (
+                  <MonthlyRateBadge price={vehicle.price} className="block mt-0.5" />
+                )}
+              </div>
             )}
           </div>
           <span className="text-xs text-brand font-medium group-hover:underline">

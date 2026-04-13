@@ -8,6 +8,7 @@ import { formatDate } from '@/lib/utils';
 import { VehicleGallery } from '@/components/vehicles/vehicle-gallery';
 import { VehicleActions } from '@/components/vehicles/vehicle-actions';
 import { VehicleCard } from '@/components/vehicles/vehicle-card';
+import { FinancingCalculatorAccordion } from '@/components/vehicles/financing-calculator';
 import { ContactForm } from '@/components/forms/contact-form';
 import { Button } from '@/components/ui/button';
 import { COMPANY_INFO } from '@/lib/constants';
@@ -328,15 +329,24 @@ export default async function VehicleDetailPage({ params }: VehicleDetailPagePro
 
             {/* Buy now CTA (only for available vehicles) */}
             {vehicle.status === 'available' && !vehicle.price_on_request && (
-              <div className="rounded-xl border-2 border-l-4 border-border-secondary border-l-brand bg-secondary p-6 shadow-[var(--shadow-md)]">
-                <h3 className="mb-2 text-lg font-bold text-foreground">{t('buyThisVehicle')}</h3>
-                <p className="mb-4 text-sm text-muted">{t('buyThisVehicleDesc')}</p>
-                <Button variant="accent" size="lg" fullWidth asChild>
-                  <Link href={`/fahrzeuge/${vehicle.slug}/kaufen`}>
-                    {t('buyNowButton')}
-                  </Link>
-                </Button>
-              </div>
+              <>
+                {/* Financing calculator accordion */}
+                <FinancingCalculatorAccordion
+                  vehiclePrice={parseFloat(vehicle.price as unknown as string)}
+                  vehicleName={vehicle.full_name}
+                  vehicleSlug={vehicle.slug}
+                />
+
+                <div className="rounded-xl border-2 border-l-4 border-border-secondary border-l-brand bg-secondary p-6 shadow-[var(--shadow-md)]">
+                  <h3 className="mb-2 text-lg font-bold text-foreground">{t('buyThisVehicle')}</h3>
+                  <p className="mb-4 text-sm text-muted">{t('buyThisVehicleDesc')}</p>
+                  <Button variant="accent" size="lg" fullWidth asChild>
+                    <Link href={`/fahrzeuge/${vehicle.slug}/kaufen`}>
+                      {t('buyNowButton')}
+                    </Link>
+                  </Button>
+                </div>
+              </>
             )}
 
             {/* Contact Form */}

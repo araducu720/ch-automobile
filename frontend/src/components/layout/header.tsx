@@ -20,6 +20,7 @@ import {
   ArrowLeftRight,
   Home,
   Info,
+  Calculator,
 } from 'lucide-react';
 
 export function Header() {
@@ -33,6 +34,7 @@ export function Header() {
   const navigation = [
     { href: '/' as const, label: t('home'), icon: Home },
     { href: '/fahrzeuge' as const, label: t('vehicles'), icon: Car },
+    { href: '/finanzierung' as const, label: t('financing'), icon: Calculator },
     { href: '/ueber-uns' as const, label: t('about'), icon: Info },
     { href: '/inzahlungnahme' as const, label: t('tradeIn'), icon: ArrowLeftRight },
     { href: '/blog' as const, label: t('blog'), icon: FileText },

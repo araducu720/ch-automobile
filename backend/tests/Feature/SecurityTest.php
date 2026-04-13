@@ -310,6 +310,10 @@ class SecurityTest extends TestCase
         $subscriber = NewsletterSubscriber::create([
             'email' => 'expired@example.com',
             'confirmation_token' => 'expired-token-123',
+        ]);
+
+        // Manually backdate timestamps to simulate expired token
+        NewsletterSubscriber::where('id', $subscriber->id)->update([
             'created_at' => now()->subDays(3),
             'updated_at' => now()->subDays(3),
         ]);

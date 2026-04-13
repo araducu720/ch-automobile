@@ -348,5 +348,15 @@
     "draft": "Draft",
     "premium": "Premium",
     "buyNow": "Buy Now"
+  },
+  "gallery": {
+    "sliderView": "Zobrazenie posúvača",
+    "gridView": "Zobrazenie mriežky",
+    "playSlideshow": "Spustiť prezentáciu",
+    "pauseSlideshow": "Pozastaviť prezentáciu",
+    "downloadImage": "Stiahnuť obrázok",
+    "resetZoom": "Obnoviť priblíženie",
+    "imageLoadError": "Obrázok sa nepodarilo načítať",
+    "photos": "Fotografie"
   }
 }

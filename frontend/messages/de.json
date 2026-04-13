@@ -447,6 +447,16 @@
     "zoomIn": "Hineinzoomen",
     "zoomOut": "Herauszoomen"
   },
+  "gallery": {
+    "sliderView": "Slider-Ansicht",
+    "gridView": "Raster-Ansicht",
+    "playSlideshow": "Diashow starten",
+    "pauseSlideshow": "Diashow pausieren",
+    "downloadImage": "Bild herunterladen",
+    "resetZoom": "Zoom zurücksetzen",
+    "imageLoadError": "Bild konnte nicht geladen werden",
+    "photos": "{count, plural, =1 {1 Foto} other {# Fotos}}"
+  },
   "errors": {
     "404": {
       "title": "Seite nicht gefunden",

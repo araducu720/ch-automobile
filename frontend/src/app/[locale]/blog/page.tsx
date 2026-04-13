@@ -78,7 +78,7 @@ export default async function BlogPage({ searchParams }: PageProps) {
         {posts.data.length > 0 ? (
           <>
             <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-              {posts.data.map((post) => (
+              {posts.data.map((post, index) => (
                 <Link key={post.id} href={`/blog/${post.slug}`} className="group">
                   <Card className="overflow-hidden h-full hover:shadow-lg transition-shadow">
                     {post.featured_image_thumbnail && (
@@ -89,6 +89,7 @@ export default async function BlogPage({ searchParams }: PageProps) {
                           fill
                           sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                           className="object-cover transition-transform duration-300 group-hover:scale-105"
+                          priority={index < 3}
                         />
                       </div>
                     )}

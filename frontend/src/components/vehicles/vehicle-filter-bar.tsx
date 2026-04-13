@@ -82,8 +82,17 @@ export function VehicleFilterBar({ brands, totalResults, className }: VehicleFil
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const debouncedSearch = useCallback(
-    debounce((term: string) => updateFilter('search', term || undefined), 400),
-    [updateFilter],
+    debounce((term: string) => {
+      const params = new URLSearchParams(searchParams.toString());
+      if (term) {
+        params.set('search', term);
+      } else {
+        params.delete('search');
+      }
+      params.delete('page');
+      router.push(`${pathname}?${params.toString()}`, { scroll: false });
+    }, 400),
+    [searchParams, pathname, router],
   );
 
   useEffect(() => {
@@ -97,15 +106,15 @@ export function VehicleFilterBar({ brands, totalResults, className }: VehicleFil
 
   const activeFilterCount = Object.values(currentFilters).filter(Boolean).length;
 
-  const brandOptions = brands.map((b) => ({ value: b, label: b }));
+  const brandOptions = useMemo(() => brands.map((b) => ({ value: b, label: b })), [brands]);
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const fuelOptions = Object.entries(FUEL_TYPE_KEYS).map(([v, k]) => ({ value: v, label: t(k as any) }));
+  const fuelOptions = useMemo(() => Object.entries(FUEL_TYPE_KEYS).map(([v, k]) => ({ value: v, label: t(k as any) })), [t]);
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const transmissionOptions = Object.entries(TRANSMISSION_KEYS).map(([v, k]) => ({ value: v, label: t(k as any) }));
+  const transmissionOptions = useMemo(() => Object.entries(TRANSMISSION_KEYS).map(([v, k]) => ({ value: v, label: t(k as any) })), [t]);
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const bodyTypeOptions = Object.entries(BODY_TYPE_KEYS).map(([v, k]) => ({ value: v, label: t(k as any) }));
+  const bodyTypeOptions = useMemo(() => Object.entries(BODY_TYPE_KEYS).map(([v, k]) => ({ value: v, label: t(k as any) })), [t]);
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const sortOptions = SORT_KEYS.map((o) => ({ value: o.value, label: t(o.key as any) }));
+  const sortOptions = useMemo(() => SORT_KEYS.map((o) => ({ value: o.value, label: t(o.key as any) })), [t]);
 
   // Memoize filter controls JSX to avoid creating a new component identity on each render
   const filterControls = useMemo(() => (

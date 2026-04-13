@@ -46,6 +46,7 @@ const mockVehicle: Vehicle = {
   condition: 'used',
   status: 'available',
   is_featured: false,
+  images_count: 0,
   slug: 'bmw-320i-2023',
   thumbnail: '/images/bmw-320i.jpg',
   main_image: '/images/bmw-320i-full.jpg',

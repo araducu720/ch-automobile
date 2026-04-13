@@ -348,5 +348,15 @@
     "draft": "Draft",
     "premium": "Premium",
     "buyNow": "Buy Now"
+  },
+  "gallery": {
+    "sliderView": "Liukuva näkymä",
+    "gridView": "Ruudukkonäkymä",
+    "playSlideshow": "Toista diaesitys",
+    "pauseSlideshow": "Keskeytä diaesitys",
+    "downloadImage": "Lataa kuva",
+    "resetZoom": "Palauta zoom",
+    "imageLoadError": "Kuvaa ei voitu ladata",
+    "photos": "Kuvat"
   }
 }

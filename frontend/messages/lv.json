@@ -348,5 +348,15 @@
     "draft": "Draft",
     "premium": "Premium",
     "buyNow": "Buy Now"
+  },
+  "gallery": {
+    "sliderView": "Slīdņa skats",
+    "gridView": "Režģa skats",
+    "playSlideshow": "Atskaņot slaidrādi",
+    "pauseSlideshow": "Apturēt slaidrādi",
+    "downloadImage": "Lejupielādēt attēlu",
+    "resetZoom": "Atiestatīt tālummaiņu",
+    "imageLoadError": "Attēlu nevarēja ielādēt",
+    "photos": "Fotogrāfijas"
   }
 }

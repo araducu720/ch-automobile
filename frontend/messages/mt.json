@@ -348,5 +348,15 @@
     "draft": "Draft",
     "premium": "Premium",
     "buyNow": "Buy Now"
+  },
+  "gallery": {
+    "sliderView": "Viżjoni tal-islajder",
+    "gridView": "Viżjoni tal-grilja",
+    "playSlideshow": "Ibda preżentazzjoni",
+    "pauseSlideshow": "Waqqaf preżentazzjoni",
+    "downloadImage": "Niżżel stampa",
+    "resetZoom": "Irrisettja ż-żoom",
+    "imageLoadError": "L-istampa ma setgħetx tittella",
+    "photos": "Ritratti"
   }
 }

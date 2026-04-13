@@ -111,11 +111,14 @@ class Vehicle extends Model implements HasMedia
             'variant' => $this->variant,
             'year' => $this->year,
             'price' => (float) $this->price,
+            'mileage' => $this->mileage,
             'fuel_type' => $this->fuel_type,
             'transmission' => $this->transmission,
             'body_type' => $this->body_type,
             'condition' => $this->condition,
             'color' => $this->color,
+            'interior_color' => $this->interior_color,
+            'power_hp' => $this->power_hp,
             'status' => $this->status,
         ];
     }
@@ -251,15 +254,16 @@ class Vehicle extends Model implements HasMedia
 
     public function getImageGalleryAttribute(): array
     {
-        $spatieMedia = $this->getMedia('images');
+        $spatieMedia = $this->getMedia('images')->sortBy('order_column');
         if ($spatieMedia->isNotEmpty()) {
-            return $spatieMedia->map(fn ($media) => [
+            return $spatieMedia->values()->map(fn ($media, $i) => [
                 'id' => $media->id,
                 'thumbnail' => $media->getUrl('thumbnail'),
                 'medium' => $media->getUrl('medium'),
                 'large' => $media->getUrl('large'),
                 'original' => $media->getUrl(),
-                'alt' => "{$this->brand} {$this->model} {$this->year} - Foto",
+                'alt' => "{$this->brand} {$this->model} {$this->year} - Foto ".($i + 1),
+                'order' => $media->order_column ?? $i,
             ])->toArray();
         }
 
@@ -272,6 +276,7 @@ class Vehicle extends Model implements HasMedia
             'large' => $url,
             'original' => $url,
             'alt' => "{$this->brand} {$this->model} {$this->year} - Foto ".($i + 1),
+            'order' => $i,
         ])->toArray();
     }
 }

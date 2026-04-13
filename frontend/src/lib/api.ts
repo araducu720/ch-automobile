@@ -179,9 +179,10 @@ export async function getVehicle(
 }
 
 export async function getFeaturedVehicles(
+  limit = 6,
   options?: { next?: NextFetchRequestConfig },
 ): Promise<ApiResponse<Vehicle[]>> {
-  return api.get<ApiResponse<Vehicle[]>>(`/vehicles/featured${withLocale('')}`, {
+  return api.get<ApiResponse<Vehicle[]>>(`/vehicles/featured${withLocale(`?limit=${limit}`)}`, {
     next: { revalidate: 120, ...options?.next },
   });
 }

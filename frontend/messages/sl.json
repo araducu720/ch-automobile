@@ -348,5 +348,15 @@
     "draft": "Draft",
     "premium": "Premium",
     "buyNow": "Buy Now"
+  },
+  "gallery": {
+    "sliderView": "Drsni pogled",
+    "gridView": "Mrežni pogled",
+    "playSlideshow": "Predvajaj diaprojekcijo",
+    "pauseSlideshow": "Zaustavi diaprojekcijo",
+    "downloadImage": "Prenesi sliko",
+    "resetZoom": "Ponastavi povečavo",
+    "imageLoadError": "Slike ni bilo mogoče naložiti",
+    "photos": "Fotografije"
   }
 }

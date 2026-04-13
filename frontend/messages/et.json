@@ -348,5 +348,15 @@
     "draft": "Draft",
     "premium": "Premium",
     "buyNow": "Buy Now"
+  },
+  "gallery": {
+    "sliderView": "Liuguri vaade",
+    "gridView": "Ruudustiku vaade",
+    "playSlideshow": "Esita slaidiseanss",
+    "pauseSlideshow": "Peata slaidiseanss",
+    "downloadImage": "Laadi pilt alla",
+    "resetZoom": "Lähtesta suum",
+    "imageLoadError": "Pilti ei saanud laadida",
+    "photos": "Fotod"
   }
 }

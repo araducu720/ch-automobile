@@ -447,6 +447,16 @@
     "zoomIn": "Zoom in",
     "zoomOut": "Zoom out"
   },
+  "gallery": {
+    "sliderView": "Slider view",
+    "gridView": "Grid view",
+    "playSlideshow": "Start slideshow",
+    "pauseSlideshow": "Pause slideshow",
+    "downloadImage": "Download image",
+    "resetZoom": "Reset zoom",
+    "imageLoadError": "Failed to load image",
+    "photos": "{count, plural, =1 {1 photo} other {# photos}}"
+  },
   "errors": {
     "404": {
       "title": "Page not found",

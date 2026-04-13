@@ -348,5 +348,15 @@
     "draft": "Draft",
     "premium": "Premium",
     "buyNow": "Buy Now"
+  },
+  "gallery": {
+    "sliderView": "Slankiklio vaizdas",
+    "gridView": "Tinklelio vaizdas",
+    "playSlideshow": "Paleisti skaidrių demonstraciją",
+    "pauseSlideshow": "Pristabdyti skaidrių demonstraciją",
+    "downloadImage": "Atsisiųsti vaizdą",
+    "resetZoom": "Atstatyti mastelį",
+    "imageLoadError": "Nepavyko įkelti vaizdo",
+    "photos": "Nuotraukos"
   }
 }

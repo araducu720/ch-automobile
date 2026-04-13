@@ -29,6 +29,7 @@ class VehicleResource extends JsonResource
             'color' => $this->color,
             'condition' => $this->condition,
             'status' => $this->status,
+            'is_featured' => $this->is_featured,
             'slug' => $this->slug,
             'thumbnail' => $this->thumbnail_url,
             'main_image' => $this->main_image_url,

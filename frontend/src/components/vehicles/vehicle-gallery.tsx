@@ -6,6 +6,7 @@ import { cn } from '@/lib/utils';
 import {
   ChevronLeft, ChevronRight, Maximize2, X,
   Grid3X3, GalleryHorizontal, ZoomIn, ZoomOut,
+  Download, Play, Pause, RotateCcw,
 } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import type { MediaItem } from '@/types';
@@ -19,6 +20,7 @@ type GalleryView = 'slider' | 'grid';
 
 export function VehicleGallery({ images, vehicleName }: VehicleGalleryProps) {
   const t = useTranslations('accessibility');
+  const tg = useTranslations('gallery');
   const [currentIndex, setCurrentIndex] = useState(0);
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [view, setView] = useState<GalleryView>('slider');
@@ -26,6 +28,7 @@ export function VehicleGallery({ images, vehicleName }: VehicleGalleryProps) {
   const [pan, setPan] = useState({ x: 0, y: 0 });
   const [isLoading, setIsLoading] = useState(true);
   const [imgError, setImgError] = useState(false);
+  const [autoplay, setAutoplay] = useState(false);
   const lightboxRef = useRef<HTMLDivElement>(null);
   const previousFocusRef = useRef<HTMLElement | null>(null);
   const touchStartX = useRef<number | null>(null);
@@ -33,6 +36,7 @@ export function VehicleGallery({ images, vehicleName }: VehicleGalleryProps) {
   const thumbnailsRef = useRef<HTMLDivElement>(null);
   const isDragging = useRef(false);
   const lastPanPos = useRef({ x: 0, y: 0 });
+  const autoplayRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
   const goTo = useCallback(
     (index: number) => {
@@ -77,6 +81,45 @@ export function VehicleGallery({ images, vehicleName }: VehicleGalleryProps) {
       }
     });
   }, [preloadUrls]);
+
+  // Autoplay slideshow
+  useEffect(() => {
+    if (autoplay && images.length > 1) {
+      autoplayRef.current = setInterval(() => {
+        setCurrentIndex((prev) => (prev + 1) % images.length);
+        setIsLoading(true);
+        setImgError(false);
+      }, 3500);
+    }
+    return () => {
+      if (autoplayRef.current) clearInterval(autoplayRef.current);
+    };
+  }, [autoplay, images.length]);
+
+  const toggleAutoplay = useCallback(() => {
+    setAutoplay((prev) => !prev);
+  }, []);
+
+  // Download current image
+  const handleDownload = useCallback(async () => {
+    const url = images[currentIndex]?.original || images[currentIndex]?.large;
+    if (!url) return;
+    try {
+      const response = await fetch(url);
+      const blob = await response.blob();
+      const blobUrl = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = blobUrl;
+      link.download = `${vehicleName.replace(/\s+/g, '-')}-${currentIndex + 1}.webp`;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      URL.revokeObjectURL(blobUrl);
+    } catch {
+      // Fallback: open in new tab
+      window.open(url, '_blank');
+    }
+  }, [images, currentIndex, vehicleName]);
 
   // Touch swipe handlers
   const handleTouchStart = useCallback((e: React.TouchEvent) => {
@@ -194,6 +237,8 @@ export function VehicleGallery({ images, vehicleName }: VehicleGalleryProps) {
       if (e.key === '+' || e.key === '=') handleZoomIn();
       if (e.key === '-') handleZoomOut();
       if (e.key === '0') { setZoom(1); setPan({ x: 0, y: 0 }); }
+      if (e.key === ' ') { e.preventDefault(); toggleAutoplay(); }
+      if (e.key === 'd' || e.key === 'D') handleDownload();
       // Focus trap
       if (e.key === 'Tab' && lightboxRef.current) {
         const focusable = lightboxRef.current.querySelectorAll<HTMLElement>('button');
@@ -215,7 +260,7 @@ export function VehicleGallery({ images, vehicleName }: VehicleGalleryProps) {
       document.removeEventListener('keydown', handleKeyDown);
       previousFocusRef.current?.focus();
     };
-  }, [lightboxOpen, goNext, goPrev, closeLightbox, handleZoomIn, handleZoomOut]);
+  }, [lightboxOpen, goNext, goPrev, closeLightbox, handleZoomIn, handleZoomOut, toggleAutoplay, handleDownload]);
 
   if (!images.length) {
     return (
@@ -236,9 +281,24 @@ export function VehicleGallery({ images, vehicleName }: VehicleGalleryProps) {
       {images.length > 1 && (
         <div className="flex items-center justify-between mb-3">
           <span className="text-sm text-muted-foreground">
-            {images.length} {images.length === 1 ? 'Foto' : 'Fotos'}
+            {images.length} {tg('photos')}
           </span>
           <div className="flex gap-1">
+            {images.length > 1 && (
+              <button
+                onClick={toggleAutoplay}
+                className={cn(
+                  'rounded-lg p-1.5 transition-colors',
+                  autoplay
+                    ? 'bg-brand text-white'
+                    : 'text-muted-foreground hover:bg-tertiary',
+                )}
+                aria-label={autoplay ? tg('pauseSlideshow') : tg('playSlideshow')}
+                title={autoplay ? tg('pauseSlideshow') : tg('playSlideshow')}
+              >
+                {autoplay ? <Pause className="h-4 w-4" /> : <Play className="h-4 w-4" />}
+              </button>
+            )}
             <button
               onClick={() => setView('slider')}
               className={cn(
@@ -247,7 +307,7 @@ export function VehicleGallery({ images, vehicleName }: VehicleGalleryProps) {
                   ? 'bg-brand text-white'
                   : 'text-muted-foreground hover:bg-tertiary',
               )}
-              aria-label="Slider-Ansicht"
+              aria-label={tg('sliderView')}
             >
               <GalleryHorizontal className="h-4 w-4" />
             </button>
@@ -259,7 +319,7 @@ export function VehicleGallery({ images, vehicleName }: VehicleGalleryProps) {
                   ? 'bg-brand text-white'
                   : 'text-muted-foreground hover:bg-tertiary',
               )}
-              aria-label="Raster-Ansicht"
+              aria-label={tg('gridView')}
             >
               <Grid3X3 className="h-4 w-4" />
             </button>
@@ -286,7 +346,7 @@ export function VehicleGallery({ images, vehicleName }: VehicleGalleryProps) {
               <div className="absolute inset-0 flex items-center justify-center text-muted-foreground">
                 <div className="text-center">
                   <GalleryHorizontal className="mx-auto h-10 w-10 mb-2 opacity-50" />
-                  <p className="text-sm">Bild konnte nicht geladen werden</p>
+                  <p className="text-sm">{tg('imageLoadError')}</p>
                 </div>
               </div>
             ) : (
@@ -355,6 +415,13 @@ export function VehicleGallery({ images, vehicleName }: VehicleGalleryProps) {
             <div className="absolute left-3 bottom-3 rounded-full bg-black/50 px-3 py-1.5 text-xs font-medium text-white backdrop-blur-sm">
               {currentIndex + 1} / {images.length}
             </div>
+
+            {/* Autoplay progress bar */}
+            {autoplay && (
+              <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-white/20">
+                <div className="h-full bg-brand animate-[progress_3.5s_linear_infinite]" />
+              </div>
+            )}
           </div>
 
           {/* Thumbnails */}
@@ -460,6 +527,38 @@ export function VehicleGallery({ images, vehicleName }: VehicleGalleryProps) {
                 aria-label={t('zoomIn')}
               >
                 <ZoomIn className="h-5 w-5" />
+              </button>
+              <div className="w-px h-6 bg-white/20 mx-2" />
+              <button
+                onClick={handleDownload}
+                className="rounded-full p-2 text-white hover:bg-white/10"
+                aria-label={tg('downloadImage')}
+                title={tg('downloadImage')}
+              >
+                <Download className="h-5 w-5" />
+              </button>
+              {images.length > 1 && (
+                <button
+                  onClick={toggleAutoplay}
+                  className={cn(
+                    'rounded-full p-2 transition-colors',
+                    autoplay ? 'text-brand bg-white/10' : 'text-white hover:bg-white/10',
+                  )}
+                  aria-label={autoplay ? tg('pauseSlideshow') : tg('playSlideshow')}
+                >
+                  {autoplay ? <Pause className="h-5 w-5" /> : <Play className="h-5 w-5" />}
+                </button>
+              )}
+              <button
+                onClick={() => { setZoom(1); setPan({ x: 0, y: 0 }); }}
+                disabled={zoom === 1}
+                className={cn(
+                  'rounded-full p-2 transition-colors',
+                  zoom === 1 ? 'text-white/30' : 'text-white hover:bg-white/10',
+                )}
+                aria-label={tg('resetZoom')}
+              >
+                <RotateCcw className="h-5 w-5" />
               </button>
               <div className="w-px h-6 bg-white/20 mx-2" />
               <button

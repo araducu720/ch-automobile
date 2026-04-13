@@ -348,5 +348,15 @@
     "draft": "Draft",
     "premium": "Premium",
     "buyNow": "Buy Now"
+  },
+  "gallery": {
+    "sliderView": "Προβολή ολίσθησης",
+    "gridView": "Προβολή πλέγματος",
+    "playSlideshow": "Αναπαραγωγή παρουσίασης",
+    "pauseSlideshow": "Παύση παρουσίασης",
+    "downloadImage": "Λήψη εικόνας",
+    "resetZoom": "Επαναφορά ζουμ",
+    "imageLoadError": "Η εικόνα δεν φορτώθηκε",
+    "photos": "Φωτογραφίες"
   }
 }

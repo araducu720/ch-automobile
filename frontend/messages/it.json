@@ -348,5 +348,15 @@
     "draft": "Draft",
     "premium": "Premium",
     "buyNow": "Buy Now"
+  },
+  "gallery": {
+    "sliderView": "Vista a scorrimento",
+    "gridView": "Vista a griglia",
+    "playSlideshow": "Avvia presentazione",
+    "pauseSlideshow": "Metti in pausa la presentazione",
+    "downloadImage": "Scarica immagine",
+    "resetZoom": "Reimposta zoom",
+    "imageLoadError": "Impossibile caricare l'immagine",
+    "photos": "Foto"
   }
 }

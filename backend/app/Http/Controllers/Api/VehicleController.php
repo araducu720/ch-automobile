@@ -90,11 +90,13 @@ class VehicleController extends Controller
         $locale = $request->get('locale', 'de');
         app()->setLocale($locale);
 
+        $limit = min((int) $request->get('limit', 8), 20);
+
         $vehicles = Vehicle::available()
             ->featured()
             ->with('media')
             ->orderBy('sort_order')
-            ->limit(8)
+            ->limit($limit)
             ->get();
 
         return response()->json(['data' => VehicleResource::collection($vehicles)]);
@@ -111,6 +113,10 @@ class VehicleController extends Controller
                 ->get();
         });
 
-        return response()->json(['data' => $brands]);
+        return response()->json([
+            'data' => $brands,
+        ], 200, [
+            'Cache-Control' => 'public, max-age=60, stale-while-revalidate=300',
+        ]);
     }
 }

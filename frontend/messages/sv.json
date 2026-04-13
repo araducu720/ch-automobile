@@ -348,5 +348,15 @@
     "draft": "Draft",
     "premium": "Premium",
     "buyNow": "Buy Now"
+  },
+  "gallery": {
+    "sliderView": "Reglagevy",
+    "gridView": "Rutnätsvy",
+    "playSlideshow": "Spela bildspel",
+    "pauseSlideshow": "Pausa bildspel",
+    "downloadImage": "Ladda ner bild",
+    "resetZoom": "Återställ zoom",
+    "imageLoadError": "Bilden kunde inte laddas",
+    "photos": "Foton"
   }
 }

@@ -348,5 +348,15 @@
     "draft": "Draft",
     "premium": "Premium",
     "buyNow": "Buy Now"
+  },
+  "gallery": {
+    "sliderView": "Amharc sleamhnán",
+    "gridView": "Amharc greille",
+    "playSlideshow": "Seinn taispeántas sleamhnán",
+    "pauseSlideshow": "Cuir sos ar thaispeántas",
+    "downloadImage": "Íoslódáil íomhá",
+    "resetZoom": "Athshocraigh zúmáil",
+    "imageLoadError": "Níorbh fhéidir an íomhá a lódáil",
+    "photos": "Grianghraif"
   }
 }

@@ -348,5 +348,15 @@
     "draft": "Draft",
     "premium": "Premium",
     "buyNow": "Buy Now"
+  },
+  "gallery": {
+    "sliderView": "Слайдер изглед",
+    "gridView": "Мрежов изглед",
+    "playSlideshow": "Стартиране на слайдшоу",
+    "pauseSlideshow": "Пауза на слайдшоу",
+    "downloadImage": "Изтегляне на изображение",
+    "resetZoom": "Нулиране на мащаба",
+    "imageLoadError": "Изображението не можа да бъде заредено",
+    "photos": "Снимки"
   }
 }

@@ -348,5 +348,15 @@
     "draft": "Draft",
     "premium": "Premium",
     "buyNow": "Buy Now"
+  },
+  "gallery": {
+    "sliderView": "Vizualizare slider",
+    "gridView": "Vizualizare grilă",
+    "playSlideshow": "Pornire prezentare",
+    "pauseSlideshow": "Pauză prezentare",
+    "downloadImage": "Descarcă imaginea",
+    "resetZoom": "Resetează zoom",
+    "imageLoadError": "Imaginea nu a putut fi încărcată",
+    "photos": "Fotografii"
   }
 }

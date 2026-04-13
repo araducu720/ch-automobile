@@ -348,5 +348,15 @@
     "draft": "Draft",
     "premium": "Premium",
     "buyNow": "Buy Now"
+  },
+  "gallery": {
+    "sliderView": "Visning af dias",
+    "gridView": "Gittervisning",
+    "playSlideshow": "Afspil diasshow",
+    "pauseSlideshow": "Pause diasshow",
+    "downloadImage": "Download billede",
+    "resetZoom": "Nulstil zoom",
+    "imageLoadError": "Billede kunne ikke indlæses",
+    "photos": "Fotos"
   }
 }

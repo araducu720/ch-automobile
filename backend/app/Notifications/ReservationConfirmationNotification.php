@@ -14,7 +14,7 @@ class ReservationConfirmationNotification extends Notification implements Should
     use Queueable;
 
     public function __construct(
-        public readonly Reservation $reservation,
+        public Reservation $reservation,
     ) {}
 
     public function via(object $notifiable): array

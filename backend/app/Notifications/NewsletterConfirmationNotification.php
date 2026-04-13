@@ -13,7 +13,7 @@ class NewsletterConfirmationNotification extends Notification implements ShouldQ
     use Queueable;
 
     public function __construct(
-        public readonly NewsletterSubscriber $subscriber,
+        public NewsletterSubscriber $subscriber,
     ) {}
 
     public function via(object $notifiable): array

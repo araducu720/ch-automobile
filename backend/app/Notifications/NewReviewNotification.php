@@ -13,7 +13,7 @@ class NewReviewNotification extends Notification implements ShouldQueue
     use Queueable;
 
     public function __construct(
-        public readonly Review $review,
+        public Review $review,
     ) {}
 
     public function via(object $notifiable): array

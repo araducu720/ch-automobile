@@ -13,7 +13,7 @@ class NewInquiryNotification extends Notification implements ShouldQueue
     use Queueable;
 
     public function __construct(
-        public readonly Inquiry $inquiry,
+        public Inquiry $inquiry,
     ) {}
 
     public function via(object $notifiable): array

@@ -13,7 +13,7 @@ class NewReservationNotification extends Notification implements ShouldQueue
     use Queueable;
 
     public function __construct(
-        public readonly Reservation $reservation,
+        public Reservation $reservation,
     ) {}
 
     public function via(object $notifiable): array

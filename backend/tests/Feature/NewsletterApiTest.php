@@ -106,10 +106,12 @@ class NewsletterApiTest extends TestCase
         $this->assertNotNull($subscriber->unsubscribed_at);
     }
 
-    public function test_unsubscribe_nonexistent_email_returns_404(): void
+    public function test_unsubscribe_nonexistent_email_returns_200(): void
     {
+        // Returns 200 to prevent email enumeration
         $response = $this->postJson('/api/v1/newsletter/unsubscribe/nonexistent@example.com');
 
-        $response->assertNotFound();
+        $response->assertOk()
+            ->assertJsonPath('success', true);
     }
 }

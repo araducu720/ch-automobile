@@ -17,7 +17,7 @@ class StoreTradeInRequest extends FormRequest
     {
         return [
             'name' => 'required|string|max:255',
-            'email' => 'required|email:rfc,dns|max:255',
+            'email' => 'required|email:rfc|max:255',
             'phone' => 'required|string|max:50',
             'preferred_contact_method' => 'nullable|in:email,phone,whatsapp',
             'trade_brand' => 'required|string|max:100',

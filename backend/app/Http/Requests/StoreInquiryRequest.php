@@ -19,7 +19,7 @@ class StoreInquiryRequest extends FormRequest
             'type' => 'required|in:general,test_drive,price_inquiry,financing,trade_in',
             'vehicle_id' => 'nullable|exists:vehicles,id',
             'name' => 'required|string|max:255',
-            'email' => 'required|email:rfc,dns|max:255',
+            'email' => 'required|email:rfc|max:255',
             'phone' => 'nullable|string|max:50',
             'message' => 'required|string|min:10|max:5000',
             'preferred_date' => 'nullable|date|after:today',

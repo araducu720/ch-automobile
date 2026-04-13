@@ -17,7 +17,7 @@ class StoreReviewRequest extends FormRequest
     {
         return [
             'customer_name' => 'required|string|max:255',
-            'customer_email' => 'nullable|email:rfc,dns|max:255',
+            'customer_email' => 'nullable|email:rfc|max:255',
             'rating' => 'required|integer|min:1|max:5',
             'title' => 'nullable|string|max:255',
             'comment' => 'required|string|min:20|max:500',

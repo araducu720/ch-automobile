@@ -123,7 +123,7 @@ class SecurityTest extends TestCase
 
     public function test_unsubscribe_nonexistent_email_still_returns_200(): void
     {
-        $response = $this->deleteJson('/api/v1/newsletter/nonexistent@test.com');
+        $response = $this->postJson('/api/v1/newsletter/unsubscribe/nonexistent@test.com');
 
         $response->assertOk()
             ->assertJsonPath('success', true);

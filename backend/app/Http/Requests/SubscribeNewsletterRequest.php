@@ -16,7 +16,7 @@ class SubscribeNewsletterRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'email' => 'required|email:rfc,dns|max:255',
+            'email' => 'required|email:rfc|max:255',
             'locale' => 'nullable|string|max:5',
             'website_url' => 'nullable|string', // honeypot
         ];

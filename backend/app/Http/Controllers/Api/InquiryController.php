@@ -28,8 +28,12 @@ class InquiryController extends Controller
         }
 
         $inquiry = DB::transaction(function () use ($request) {
+            $safe = $request->safe()->except(['website_url']);
+            $safe['name'] = strip_tags($safe['name'] ?? '');
+            $safe['message'] = strip_tags($safe['message'] ?? '');
+
             return Inquiry::create(array_merge(
-                $request->safe()->except(['website_url']),
+                $safe,
                 [
                     'ip_address' => PageView::anonymizeIp($request->ip()),
                     'user_agent' => $request->userAgent(),
@@ -69,10 +73,10 @@ class InquiryController extends Controller
         $inquiry = DB::transaction(function () use ($request) {
             $inquiry = Inquiry::create([
                 'type' => 'trade_in',
-                'name' => $request->name,
+                'name' => strip_tags($request->name),
                 'email' => $request->email,
                 'phone' => $request->phone,
-                'message' => "Inzahlungnahme: {$request->trade_brand} {$request->trade_model} ({$request->trade_year})",
+                'message' => strip_tags("Inzahlungnahme: {$request->trade_brand} {$request->trade_model} ({$request->trade_year})"),
                 'preferred_contact_method' => $request->get('preferred_contact_method', 'email'),
                 'ip_address' => PageView::anonymizeIp($request->ip()),
                 'user_agent' => $request->userAgent(),

@@ -135,6 +135,13 @@ class SettingsController extends Controller
             return redirect($frontendUrl.'/newsletter/bestaetigt?status=invalid');
         }
 
+        // Token expires after 48 hours
+        if ($subscriber->updated_at->diffInHours(now()) > 48) {
+            $subscriber->update(['confirmation_token' => null]);
+
+            return redirect($frontendUrl.'/newsletter/bestaetigt?status=expired');
+        }
+
         $subscriber->update([
             'confirmed_at' => now(),
             'confirmation_token' => null,

@@ -47,8 +47,11 @@ class ReservationController extends Controller
 
             $locale = $this->resolveLocale($request);
 
+            $safe = $request->safe()->except(['website_url']);
+            $safe['customer_name'] = strip_tags($safe['customer_name'] ?? '');
+
             $reservation = Reservation::create(array_merge(
-                $request->safe()->except(['website_url']),
+                $safe,
                 [
                     'deposit_amount' => $depositAmount,
                     'locale' => $locale,
@@ -196,7 +199,7 @@ class ReservationController extends Controller
         $contractFilename = "kaufvertrag-{$reservation->payment_reference}.pdf";
         $contractPath = "{$contractDir}/{$contractFilename}";
 
-        Storage::disk('public')->put($contractPath, $pdf->output());
+        Storage::disk('local')->put($contractPath, $pdf->output());
 
         $reservation->update([
             'contract_path' => $contractPath,
@@ -231,7 +234,7 @@ class ReservationController extends Controller
 
         $path = $request->file('signed_contract')->store(
             'reservations/signed-contracts',
-            'public'
+            'local'
         );
 
         $reservation->update([
@@ -268,7 +271,7 @@ class ReservationController extends Controller
 
         $path = $request->file('signature')->store(
             'reservations/signatures',
-            'public'
+            'local'
         );
 
         $reservation->update([
@@ -310,7 +313,7 @@ class ReservationController extends Controller
 
         $path = $request->file('payment_proof')->store(
             'reservations/payment-proofs',
-            'public'
+            'local'
         );
 
         $reservation->update([

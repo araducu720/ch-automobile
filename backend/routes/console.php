@@ -10,3 +10,6 @@ Schedule::command('mobile-de:sync')->everySixHours();
 
 // Clear old page views monthly
 Schedule::command('model:prune', ['--model' => 'App\\Models\\PageView'])->monthly();
+
+// Prune resolved inquiries older than 1 year
+Schedule::command('model:prune', ['--model' => 'App\\Models\\Inquiry'])->monthly();

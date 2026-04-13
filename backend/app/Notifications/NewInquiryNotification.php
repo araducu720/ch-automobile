@@ -39,14 +39,14 @@ class NewInquiryNotification extends Notification implements ShouldQueue
             ->line("**Typ:** {$type}")
             ->line("**Referenznummer:** {$this->inquiry->reference_number}")
             ->line("**Name:** {$this->inquiry->name}")
-            ->line("**E-Mail:** {$this->inquiry->email}");
+            ->line('**E-Mail:** '.self::maskEmail($this->inquiry->email));
 
         if ($this->inquiry->phone) {
-            $mail->line("**Telefon:** {$this->inquiry->phone}");
+            $mail->line('**Telefon:** '.self::maskPhone($this->inquiry->phone));
         }
 
         $mail->line('**Nachricht:**')
-            ->line($this->inquiry->message);
+            ->line(e($this->inquiry->message));
 
         if ($this->inquiry->vehicle) {
             $mail->line("**Fahrzeug:** {$this->inquiry->vehicle->full_name}");
@@ -60,5 +60,18 @@ class NewInquiryNotification extends Notification implements ShouldQueue
             ->salutation('C-H Automobile & Exclusive Cars — System');
 
         return $mail;
+    }
+
+    private static function maskEmail(string $email): string
+    {
+        [$local, $domain] = explode('@', $email, 2);
+        $masked = substr($local, 0, 2).str_repeat('*', max(1, strlen($local) - 2));
+
+        return $masked.'@'.$domain;
+    }
+
+    private static function maskPhone(string $phone): string
+    {
+        return substr($phone, 0, 4).str_repeat('*', max(1, strlen($phone) - 7)).substr($phone, -3);
     }
 }

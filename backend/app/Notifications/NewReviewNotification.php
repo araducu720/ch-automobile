@@ -30,7 +30,7 @@ class NewReviewNotification extends Notification implements ShouldQueue
             ->greeting('Neue Kundenbewertung eingegangen')
             ->line("**Kunde:** {$this->review->customer_name}")
             ->line("**Bewertung:** {$stars} ({$this->review->rating}/5)")
-            ->line("**Kommentar:** {$this->review->comment}");
+            ->line("**Kommentar:** ".e($this->review->comment));
 
         if ($this->review->title) {
             $mail->line("**Titel:** {$this->review->title}");

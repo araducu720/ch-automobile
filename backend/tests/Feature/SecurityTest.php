@@ -247,4 +247,124 @@ class SecurityTest extends TestCase
         $this->assertEquals(17, strlen($vin));
         $this->assertDoesNotMatchRegularExpression('/[IOQ]/', $vin);
     }
+
+    /* ──────── Input Sanitization (XSS) ──────── */
+
+    public function test_inquiry_strips_html_from_name(): void
+    {
+        \Illuminate\Support\Facades\Notification::fake();
+
+        $response = $this->postJson('/api/v1/inquiries', [
+            'type' => 'general',
+            'name' => '<script>alert("xss")</script>Max',
+            'email' => 'max@example.com',
+            'message' => 'Ich interessiere mich für Ihre Fahrzeuge.',
+        ]);
+
+        $response->assertCreated();
+        $this->assertDatabaseHas('inquiries', [
+            'name' => 'alert("xss")Max',
+        ]);
+    }
+
+    public function test_inquiry_strips_html_from_message(): void
+    {
+        \Illuminate\Support\Facades\Notification::fake();
+
+        $response = $this->postJson('/api/v1/inquiries', [
+            'type' => 'general',
+            'name' => 'Max',
+            'email' => 'max@example.com',
+            'message' => '<img src=x onerror=alert(1)>Echte Nachricht hier.',
+        ]);
+
+        $response->assertCreated();
+        $this->assertDatabaseMissing('inquiries', [
+            'message' => '<img src=x onerror=alert(1)>Echte Nachricht hier.',
+        ]);
+    }
+
+    public function test_review_strips_html_from_comment(): void
+    {
+        \Illuminate\Support\Facades\Notification::fake();
+
+        $response = $this->postJson('/api/v1/reviews', [
+            'customer_name' => '<b>Maria</b>',
+            'rating' => 5,
+            'comment' => '<script>document.cookie</script>Sehr guter Service bei CH Automobile.',
+        ]);
+
+        $response->assertCreated();
+        $this->assertDatabaseHas('reviews', [
+            'customer_name' => 'Maria',
+        ]);
+        $this->assertDatabaseMissing('reviews', [
+            'comment' => '<script>document.cookie</script>Sehr guter Service bei CH Automobile.',
+        ]);
+    }
+
+    /* ──────── Newsletter Token Expiry ──────── */
+
+    public function test_newsletter_expired_token_is_rejected(): void
+    {
+        $subscriber = NewsletterSubscriber::create([
+            'email' => 'expired@example.com',
+            'confirmation_token' => 'expired-token-123',
+            'created_at' => now()->subDays(3),
+            'updated_at' => now()->subDays(3),
+        ]);
+
+        $response = $this->get('/api/v1/newsletter/confirm/expired-token-123');
+
+        $response->assertRedirect();
+        $this->assertStringContainsString('status=expired', $response->headers->get('Location'));
+
+        $subscriber->refresh();
+        $this->assertNull($subscriber->confirmation_token);
+    }
+
+    /* ──────── Inquiry Model $hidden ──────── */
+
+    public function test_inquiry_hides_ip_and_user_agent_in_json(): void
+    {
+        $inquiry = \App\Models\Inquiry::factory()->create([
+            'ip_address' => '1.2.3.0',
+            'user_agent' => 'Mozilla/5.0',
+        ]);
+
+        $json = $inquiry->toArray();
+
+        $this->assertArrayNotHasKey('ip_address', $json);
+        $this->assertArrayNotHasKey('user_agent', $json);
+    }
+
+    /* ──────── Reservation File Storage ──────── */
+
+    public function test_reservation_uploads_use_private_storage(): void
+    {
+        \Illuminate\Support\Facades\Notification::fake();
+        \Illuminate\Support\Facades\Storage::fake('local');
+
+        $vehicle = Vehicle::factory()->available()->create(['price' => 20000]);
+
+        $createResponse = $this->postJson('/api/v1/reservations', [
+            'vehicle_id' => $vehicle->id,
+            'customer_name' => 'Storage Test',
+            'customer_email' => 'storage@example.com',
+            'customer_phone' => '+49 176 1234567',
+        ]);
+        $reference = $createResponse->json('data.payment_reference');
+
+        // Advance to signature step
+        $this->postJson("/api/v1/reservations/{$reference}/confirm-invoice");
+
+        $sigFile = \Illuminate\Http\UploadedFile::fake()->image('sig.png');
+        $this->postJson("/api/v1/reservations/{$reference}/signature", ['signature' => $sigFile]);
+
+        // Verify file was stored on local (private) disk, not public
+        \Illuminate\Support\Facades\Storage::disk('local')->assertExists(
+            collect(\Illuminate\Support\Facades\Storage::disk('local')->allFiles())
+                ->first(fn ($f) => str_contains($f, 'signatures'))
+        );
+    }
 }

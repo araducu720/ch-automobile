@@ -2,19 +2,25 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\MassPrunable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Inquiry extends Model
 {
-    use HasFactory;
+    use HasFactory, MassPrunable;
 
     protected $fillable = [
         'type', 'vehicle_id', 'name', 'email', 'phone', 'message',
         'preferred_date', 'preferred_time', 'preferred_contact_method',
         'status', 'admin_notes', 'reference_number', 'locale',
+        'ip_address', 'user_agent',
+    ];
+
+    protected $hidden = [
         'ip_address', 'user_agent',
     ];
 
@@ -54,5 +60,14 @@ class Inquiry extends Model
     public function scopeByType($query, string $type)
     {
         return $query->where('type', $type);
+    }
+
+    /**
+     * Get the prunable model query — remove resolved inquiries older than 1 year.
+     */
+    public function prunable(): Builder
+    {
+        return static::where('created_at', '<=', now()->subYear())
+            ->where('status', 'resolved');
     }
 }

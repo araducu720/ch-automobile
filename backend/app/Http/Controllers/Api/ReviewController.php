@@ -61,8 +61,15 @@ class ReviewController extends Controller
         }
 
         $review = DB::transaction(function () use ($request) {
+            $safe = $request->safe()->except(['website_url']);
+            $safe['customer_name'] = strip_tags($safe['customer_name'] ?? '');
+            $safe['comment'] = strip_tags($safe['comment'] ?? '');
+            if (isset($safe['title'])) {
+                $safe['title'] = strip_tags($safe['title']);
+            }
+
             return Review::create(array_merge(
-                $request->safe()->except(['website_url']),
+                $safe,
                 [
                     'ip_address' => \App\Models\PageView::anonymizeIp($request->ip()),
                     'locale' => $this->resolveLocale($request),

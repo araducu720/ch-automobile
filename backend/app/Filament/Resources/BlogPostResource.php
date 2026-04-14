@@ -21,6 +21,8 @@ class BlogPostResource extends Resource
 
     protected static ?int $navigationSort = 1;
 
+    protected static ?string $recordTitleAttribute = 'title';
+
     public static function getNavigationGroup(): ?string
     {
         return __('admin.nav.content');
@@ -95,8 +97,42 @@ class BlogPostResource extends Resource
                 Tables\Columns\TextColumn::make('views_count')->label(__('admin.blog_post.views'))->sortable(),
             ])
             ->defaultSort('created_at', 'desc')
-            ->actions([Tables\Actions\EditAction::make()])
-            ->bulkActions([Tables\Actions\BulkActionGroup::make([Tables\Actions\DeleteBulkAction::make()])]);
+            ->actions([
+                Tables\Actions\ViewAction::make(),
+                Tables\Actions\EditAction::make(),
+                Tables\Actions\Action::make('preview')
+                    ->icon('heroicon-o-eye')
+                    ->url(fn (BlogPost $record) => config('app.frontend_url') . '/blog/' . $record->slug)
+                    ->openUrlInNewTab()
+                    ->visible(fn (BlogPost $record) => $record->is_published),
+                Tables\Actions\Action::make('publish')
+                    ->icon('heroicon-o-arrow-up-circle')
+                    ->color('success')
+                    ->action(fn (BlogPost $record) => $record->update(['is_published' => true, 'published_at' => $record->published_at ?? now()]))
+                    ->visible(fn (BlogPost $record) => ! $record->is_published),
+                Tables\Actions\Action::make('unpublish')
+                    ->icon('heroicon-o-arrow-down-circle')
+                    ->color('warning')
+                    ->action(fn (BlogPost $record) => $record->update(['is_published' => false]))
+                    ->visible(fn (BlogPost $record) => $record->is_published)
+                    ->requiresConfirmation(),
+            ])
+            ->bulkActions([
+                Tables\Actions\BulkActionGroup::make([
+                    Tables\Actions\DeleteBulkAction::make(),
+                    Tables\Actions\BulkAction::make('bulk_publish')
+                        ->label('Veröffentlichen')
+                        ->icon('heroicon-o-arrow-up-circle')
+                        ->action(fn ($records) => $records->each(fn (BlogPost $record) => $record->update(['is_published' => true, 'published_at' => $record->published_at ?? now()])))
+                        ->deselectRecordsAfterCompletion(),
+                    Tables\Actions\BulkAction::make('bulk_unpublish')
+                        ->label('Zurückziehen')
+                        ->icon('heroicon-o-arrow-down-circle')
+                        ->action(fn ($records) => $records->each->update(['is_published' => false]))
+                        ->requiresConfirmation()
+                        ->deselectRecordsAfterCompletion(),
+                ]),
+            ]);
     }
 
     public static function getPages(): array

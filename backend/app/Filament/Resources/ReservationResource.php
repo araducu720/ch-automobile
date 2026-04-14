@@ -6,6 +6,7 @@ use App\Filament\Resources\ReservationResource\Pages;
 use App\Models\Reservation;
 use Filament\Forms;
 use Filament\Forms\Form;
+use Filament\Notifications\Notification;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
@@ -18,6 +19,8 @@ class ReservationResource extends Resource
     protected static ?string $navigationIcon = 'heroicon-o-bookmark';
 
     protected static ?int $navigationSort = 2;
+
+    protected static ?string $recordTitleAttribute = 'payment_reference';
 
     public static function getNavigationGroup(): ?string
     {
@@ -52,6 +55,12 @@ class ReservationResource extends Resource
                 Forms\Components\TextInput::make('customer_email')->label('E-Mail')->required()->email(),
                 Forms\Components\TextInput::make('customer_phone')->label(__('admin.reservation.phone'))->required(),
                 Forms\Components\TextInput::make('payment_reference')->label(__('admin.reservation.payment_reference'))->disabled(),
+            ]),
+            Forms\Components\Section::make(__('admin.reservation.section_billing'))->columns(2)->schema([
+                Forms\Components\TextInput::make('billing_street')->label('Straße'),
+                Forms\Components\TextInput::make('billing_city')->label('Stadt'),
+                Forms\Components\TextInput::make('billing_postal_code')->label('PLZ'),
+                Forms\Components\TextInput::make('billing_country')->label('Land'),
             ]),
             Forms\Components\Section::make(__('admin.reservation.section_reservation'))->columns(2)->schema([
                 Forms\Components\Select::make('vehicle_id')->label(__('admin.reservation.vehicle'))
@@ -178,6 +187,9 @@ class ReservationResource extends Resource
                         true: fn ($query) => $query->whereNotNull('signed_contract_path'),
                         false: fn ($query) => $query->whereNull('signed_contract_path'),
                     ),
+                Tables\Filters\Filter::make('expired')
+                    ->label('Abgelaufen')
+                    ->query(fn ($query) => $query->where('reservation_expires_at', '<', now())->where('bank_transfer_status', 'pending')),
             ])
             ->actions([
                 Tables\Actions\ViewAction::make(),
@@ -234,6 +246,10 @@ class ReservationResource extends Resource
                         if ($record->vehicle) {
                             $record->vehicle->update(['status' => 'sold']);
                         }
+                        Notification::make()
+                            ->title('Kauf bestätigt')
+                            ->success()
+                            ->send();
                     })
                     ->visible(fn (Reservation $record) => $record->purchase_step === 'completed'
                         && $record->isPending()
@@ -255,7 +271,13 @@ class ReservationResource extends Resource
                     ->label(__('admin.reservation.action_cancel'))
                     ->icon('heroicon-o-x-circle')
                     ->color('danger')
-                    ->action(fn (Reservation $record) => $record->cancel())
+                    ->action(function (Reservation $record) {
+                        $record->cancel();
+                        Notification::make()
+                            ->title('Reservierung storniert')
+                            ->success()
+                            ->send();
+                    })
                     ->requiresConfirmation()
                     ->visible(fn (Reservation $record) => $record->isPending()),
             ])

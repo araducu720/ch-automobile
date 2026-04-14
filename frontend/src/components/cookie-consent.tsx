@@ -40,15 +40,21 @@ export function CookieConsent() {
   if (!mounted || consent !== 'undecided') return null;
 
   return (
-    <div className="fixed inset-x-0 bottom-0 z-50 p-4">
+    <div
+      className="fixed inset-x-0 bottom-0 z-50 p-4"
+      role="alertdialog"
+      aria-labelledby="cookie-title"
+      aria-describedby="cookie-description"
+      aria-live="polite"
+    >
       <div className="mx-auto max-w-4xl rounded-2xl border border-border bg-card p-6 shadow-2xl">
         <div className="flex items-start gap-4">
-          <Cookie className="mt-0.5 h-6 w-6 shrink-0 text-brand" />
+          <Cookie className="mt-0.5 h-6 w-6 shrink-0 text-brand" aria-hidden="true" />
           <div className="flex-1">
-            <h3 className="font-semibold text-foreground">
+            <h3 id="cookie-title" className="font-semibold text-foreground">
               {t('title')}
             </h3>
-            <p className="mt-1 text-sm text-muted">
+            <p id="cookie-description" className="mt-1 text-sm text-muted">
               {t.rich('description', {
                 link: (chunks) => (
                   <Link href="/datenschutz" className="text-link underline hover:text-link-hover">
@@ -58,7 +64,7 @@ export function CookieConsent() {
               })}
             </p>
             <div className="mt-4 flex flex-wrap gap-3">
-              <Button onClick={acceptAll}>
+              <Button onClick={acceptAll} autoFocus>
                 {t('acceptAll')}
               </Button>
               <Button
@@ -71,7 +77,7 @@ export function CookieConsent() {
           </div>
           <button
             onClick={acceptEssential}
-            className="text-muted-foreground hover:text-foreground transition-colors"
+            className="text-muted-foreground hover:text-foreground transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-brand rounded-md"
             aria-label={tc('close')}
           >
             <X className="h-5 w-5" />

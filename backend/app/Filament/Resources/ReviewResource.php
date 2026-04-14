@@ -8,7 +8,10 @@ use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Filters\TrashedFilter;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class ReviewResource extends Resource
 {
@@ -17,6 +20,8 @@ class ReviewResource extends Resource
     protected static ?string $navigationIcon = 'heroicon-o-star';
 
     protected static ?int $navigationSort = 2;
+
+    protected static ?string $recordTitleAttribute = 'customer_name';
 
     public static function getNavigationGroup(): ?string
     {
@@ -77,9 +82,15 @@ class ReviewResource extends Resource
                 Tables\Columns\IconColumn::make('is_featured')->label('⭐')->boolean(),
                 Tables\Columns\TextColumn::make('created_at')->label(__('admin.review.date'))
                     ->dateTime('d.m.Y')->sortable(),
+                Tables\Columns\TextColumn::make('locale')->label('Sprache')
+                    ->badge(),
             ])
             ->defaultSort('created_at', 'desc')
+            ->filters([
+                TrashedFilter::make(),
+            ])
             ->actions([
+                Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\Action::make('approve')
                     ->label(__('admin.review.action_approve'))
@@ -93,15 +104,27 @@ class ReviewResource extends Resource
                     ->color('danger')
                     ->action(fn (Review $record) => $record->delete())
                     ->requiresConfirmation(),
+                Tables\Actions\RestoreAction::make(),
+                Tables\Actions\ForceDeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
+                    Tables\Actions\RestoreBulkAction::make(),
+                    Tables\Actions\ForceDeleteBulkAction::make(),
                     Tables\Actions\BulkAction::make('approve_all')
                         ->label(__('admin.review.action_approve_all'))
                         ->action(fn ($records) => $records->each->update(['is_approved' => true]))
                         ->deselectRecordsAfterCompletion(),
                 ]),
+            ]);
+    }
+
+    public static function getEloquentQuery(): Builder
+    {
+        return parent::getEloquentQuery()
+            ->withoutGlobalScopes([
+                SoftDeletingScope::class,
             ]);
     }
 

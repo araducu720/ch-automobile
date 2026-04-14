@@ -80,6 +80,40 @@ function StarRatingInput({
     lg: 'h-9 w-9',
   };
 
+  const handleKeyDown = (e: React.KeyboardEvent, starValue: number) => {
+    if (e.key === 'ArrowRight' || e.key === 'ArrowUp') {
+      e.preventDefault();
+      const next = Math.min(starValue + 1, maxRating);
+      onChange(next);
+      const nextButton = e.currentTarget.parentElement?.querySelector(
+        `[data-star="${next}"]`
+      ) as HTMLElement | null;
+      nextButton?.focus();
+    } else if (e.key === 'ArrowLeft' || e.key === 'ArrowDown') {
+      e.preventDefault();
+      const prev = Math.max(starValue - 1, 1);
+      onChange(prev);
+      const prevButton = e.currentTarget.parentElement?.querySelector(
+        `[data-star="${prev}"]`
+      ) as HTMLElement | null;
+      prevButton?.focus();
+    } else if (e.key === 'Home') {
+      e.preventDefault();
+      onChange(1);
+      const firstButton = e.currentTarget.parentElement?.querySelector(
+        '[data-star="1"]'
+      ) as HTMLElement | null;
+      firstButton?.focus();
+    } else if (e.key === 'End') {
+      e.preventDefault();
+      onChange(maxRating);
+      const lastButton = e.currentTarget.parentElement?.querySelector(
+        `[data-star="${maxRating}"]`
+      ) as HTMLElement | null;
+      lastButton?.focus();
+    }
+  };
+
   return (
     <div className="space-y-1.5">
       {label && (
@@ -94,7 +128,10 @@ function StarRatingInput({
             <button
               key={i}
               type="button"
+              data-star={starValue}
               onClick={() => onChange(starValue)}
+              onKeyDown={(e) => handleKeyDown(e, starValue)}
+              tabIndex={starValue === value || (value === 0 && starValue === 1) ? 0 : -1}
               className={cn(
                 'transition-transform duration-150 hover:scale-110 focus-visible:outline-2 focus-visible:outline-border-focus rounded-sm',
               )}

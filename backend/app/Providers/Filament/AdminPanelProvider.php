@@ -34,8 +34,16 @@ class AdminPanelProvider extends PanelProvider
             ->brandName('C-H Automobile')
             ->brandLogo(null)
             ->favicon(null)
+            ->databaseNotifications()
+            ->spa()
+            ->sidebarFullyCollapsibleOnDesktop()
+            ->maxContentWidth('full')
+            ->profile()
+            ->databaseTransactions()
+            ->unsavedChangesAlerts()
+            ->breadcrumbs()
             ->colors([
-                'primary' => Color::Blue,
+                'primary' => Color::Indigo,
                 'danger' => Color::Rose,
                 'gray' => Color::Slate,
                 'info' => Color::Sky,
@@ -50,7 +58,6 @@ class AdminPanelProvider extends PanelProvider
                 NavigationGroup::make()->label(fn () => __('admin.nav.content')),
                 NavigationGroup::make()->label(fn () => __('admin.nav.settings')),
             ])
-            ->sidebarCollapsibleOnDesktop()
             ->globalSearch(true)
             ->globalSearchKeyBindings(['command+k', 'ctrl+k'])
             ->renderHook('panels::user-menu.before', fn () => Livewire::mount(LanguageSwitcher::class))

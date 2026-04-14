@@ -3,15 +3,21 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\VehicleResource\Pages;
+use App\Filament\Resources\VehicleResource\RelationManagers;
 use App\Models\Vehicle;
 use Filament\Forms;
 use Filament\Forms\Form;
+use Filament\Notifications\Notification;
 use Filament\Resources\Concerns\Translatable;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Actions\ActionGroup;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Filters\TernaryFilter;
+use Filament\Tables\Filters\TrashedFilter;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class VehicleResource extends Resource
 {
@@ -286,7 +292,10 @@ class VehicleResource extends Resource
                 Tables\Columns\IconColumn::make('is_featured')->label('⭐')->boolean(),
                 Tables\Columns\TextColumn::make('created_at')->label(__('admin.vehicle.created'))
                     ->dateTime('d.m.Y')->sortable()->toggleable(isToggledHiddenByDefault: true),
+                Tables\Columns\TextColumn::make('views_count')->label(__('admin.vehicle.views'))
+                    ->numeric()->sortable()->toggleable(isToggledHiddenByDefault: true),
             ])
+            ->recordUrl(null)
             ->defaultSort('created_at', 'desc')
             ->filters([
                 SelectFilter::make('status')->label(__('admin.vehicle.status'))
@@ -314,17 +323,26 @@ class VehicleResource extends Resource
                         'van' => __('admin.vehicle.body_van'),
                     ]),
                 TernaryFilter::make('is_featured')->label(__('admin.vehicle.featured')),
+                TrashedFilter::make(),
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+                ActionGroup::make([
+                    Tables\Actions\EditAction::make(),
+                    Tables\Actions\ViewAction::make(),
+                    Tables\Actions\ReplicateAction::make(),
+                ]),
                 Tables\Actions\Action::make('toggle_featured')
                     ->label('⭐')
                     ->action(fn (Vehicle $record) => $record->update(['is_featured' => ! $record->is_featured]))
                     ->requiresConfirmation(false),
+                Tables\Actions\RestoreAction::make(),
+                Tables\Actions\ForceDeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
+                    Tables\Actions\RestoreBulkAction::make(),
+                    Tables\Actions\ForceDeleteBulkAction::make(),
                     Tables\Actions\BulkAction::make('mark_sold')
                         ->label(__('admin.vehicle.action_mark_sold'))
                         ->action(fn ($records) => $records->each->update(['status' => 'sold']))
@@ -338,9 +356,20 @@ class VehicleResource extends Resource
             ]);
     }
 
+    public static function getEloquentQuery(): Builder
+    {
+        return parent::getEloquentQuery()
+            ->withoutGlobalScopes([
+                SoftDeletingScope::class,
+            ]);
+    }
+
     public static function getRelations(): array
     {
-        return [];
+        return [
+            RelationManagers\InquiriesRelationManager::class,
+            RelationManagers\ReservationsRelationManager::class,
+        ];
     }
 
     public static function getPages(): array

@@ -19,6 +19,8 @@ class InquiryResource extends Resource
 
     protected static ?int $navigationSort = 1;
 
+    protected static ?string $recordTitleAttribute = 'reference_number';
+
     public static function getNavigationGroup(): ?string
     {
         return __('admin.nav.customer_service');
@@ -110,6 +112,8 @@ class InquiryResource extends Resource
                         'new' => 'danger', 'in_progress' => 'warning',
                         'completed' => 'success', 'archived' => 'gray', default => 'gray',
                     }),
+                Tables\Columns\TextColumn::make('preferred_contact_method')->label(__('admin.inquiry.contact_method'))
+                    ->badge(),
                 Tables\Columns\TextColumn::make('created_at')->label(__('admin.inquiry.received'))
                     ->dateTime('d.m.Y H:i')->sortable(),
             ])
@@ -130,7 +134,12 @@ class InquiryResource extends Resource
                 ]),
             ])
             ->actions([
+                Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\Action::make('reply_email')
+                    ->icon('heroicon-o-envelope')
+                    ->url(fn (Inquiry $record) => "mailto:{$record->email}?subject=Re: {$record->reference_number}")
+                    ->openUrlInNewTab(),
                 Tables\Actions\Action::make('mark_in_progress')
                     ->label(__('admin.inquiry.action_in_progress'))
                     ->icon('heroicon-o-play')
@@ -145,6 +154,11 @@ class InquiryResource extends Resource
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
+                    Tables\Actions\BulkAction::make('bulk_in_progress')
+                        ->label(__('admin.inquiry.action_in_progress'))
+                        ->icon('heroicon-o-play')
+                        ->action(fn ($records) => $records->each->update(['status' => 'in_progress']))
+                        ->deselectRecordsAfterCompletion(),
                     Tables\Actions\BulkAction::make('archive')
                         ->label(__('admin.inquiry.action_archive'))
                         ->action(fn ($records) => $records->each->update(['status' => 'archived']))

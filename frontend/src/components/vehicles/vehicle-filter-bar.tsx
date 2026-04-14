@@ -200,10 +200,11 @@ export function VehicleFilterBar({ brands, totalResults, className }: VehicleFil
       <div className={cn('flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between', className)}>
         <div className="flex items-center gap-3 flex-1">
           <div className="relative flex-1 max-w-md">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" aria-hidden="true" />
             <input
               type="search"
               placeholder={t('searchPlaceholder')}
+              aria-label={t('searchPlaceholder')}
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               className={cn(

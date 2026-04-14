@@ -8,7 +8,7 @@ return [
         env('CORS_ALLOWED_ORIGINS') ? explode(',', env('CORS_ALLOWED_ORIGINS')) : []
     )),
     'allowed_origins_patterns' => [
-        '#https://ch-automobile.*\.vercel\.app#',
+        '#^https://ch-automobile(-[a-z0-9]+)?\.vercel\.app$#',
     ],
     'allowed_headers' => [
         'Content-Type',

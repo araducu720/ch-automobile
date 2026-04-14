@@ -5,12 +5,12 @@ services:
     container_name: ch-auto-mysql
     restart: unless-stopped
     ports:
-      - '3306:3306'
+      - '127.0.0.1:3306:3306'
     environment:
-      MYSQL_ROOT_PASSWORD: '${DB_PASSWORD:-secret}'
+      MYSQL_ROOT_PASSWORD: '${DB_PASSWORD:?DB_PASSWORD environment variable is required}'
       MYSQL_DATABASE: '${DB_DATABASE:-ch_automobile}'
       MYSQL_USER: '${DB_USERNAME:-ch_auto}'
-      MYSQL_PASSWORD: '${DB_PASSWORD:-secret}'
+      MYSQL_PASSWORD: '${DB_PASSWORD:?DB_PASSWORD environment variable is required}'
     volumes:
       - mysql-data:/var/lib/mysql
     healthcheck:
@@ -25,7 +25,15 @@ services:
     container_name: ch-auto-redis
     restart: unless-stopped
     ports:
-      - '6379:6379'
+      - '127.0.0.1:6379:6379'
+    command: >
+      sh -c "if [ -n \"$$REDIS_PASSWORD\" ]; then
+        redis-server --requirepass \"$$REDIS_PASSWORD\";
+      else
+        redis-server;
+      fi"
+    environment:
+      REDIS_PASSWORD: '${REDIS_PASSWORD:-}'
     volumes:
       - redis-data:/data
     healthcheck:
@@ -40,37 +48,39 @@ services:
     container_name: ch-auto-meilisearch
     restart: unless-stopped
     ports:
-      - '7700:7700'
+      - '127.0.0.1:7700:7700'
     environment:
-      MEILI_MASTER_KEY: '${MEILISEARCH_KEY:-masterKey123}'
+      MEILI_MASTER_KEY: '${MEILISEARCH_KEY:?MEILISEARCH_KEY environment variable is required}'
       MEILI_NO_ANALYTICS: 'true'
     volumes:
       - meilisearch-data:/meili_data
 
-  # Mailpit (local email testing)
+  # Mailpit (local email testing — dev only)
   mailpit:
     image: axllent/mailpit:latest
     container_name: ch-auto-mailpit
     restart: unless-stopped
+    profiles: ['dev']
     ports:
-      - '1025:1025'  # SMTP
-      - '8025:8025'  # Web UI
+      - '127.0.0.1:1025:1025'  # SMTP
+      - '127.0.0.1:8025:8025'  # Web UI
     environment:
       MP_MAX_MESSAGES: 500
       MP_SMTP_AUTH_ACCEPT_ANY: 1
       MP_SMTP_AUTH_ALLOW_INSECURE: 1
 
-  # phpMyAdmin (optional)
+  # phpMyAdmin (dev only — never expose in production)
   phpmyadmin:
     image: phpmyadmin:latest
     container_name: ch-auto-pma
     restart: unless-stopped
+    profiles: ['dev']
     ports:
-      - '8080:80'
+      - '127.0.0.1:8080:80'
     environment:
       PMA_HOST: mysql
       PMA_USER: '${DB_USERNAME:-ch_auto}'
-      PMA_PASSWORD: '${DB_PASSWORD:-secret}'
+      PMA_PASSWORD: '${DB_PASSWORD:?DB_PASSWORD environment variable is required}'
     depends_on:
       - mysql
 

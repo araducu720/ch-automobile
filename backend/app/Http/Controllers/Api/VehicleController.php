@@ -48,7 +48,7 @@ class VehicleController extends Controller
             $query->orderBy($sortField, in_array($sortDir, ['asc', 'desc'], true) ? $sortDir : 'desc');
         }
 
-        $perPage = min($request->integer('per_page', 12), 48);
+        $perPage = min(max($request->integer('per_page', 12), 1), 48);
         $vehicles = $query->paginate($perPage);
 
         return response()->json([

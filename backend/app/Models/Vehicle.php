@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Enums\VehicleStatus;
 use Laravel\Scout\Searchable;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
@@ -61,6 +62,7 @@ class Vehicle extends Model implements HasMedia
         'tuv_until' => 'date',
         'views_count' => 'integer',
         'sort_order' => 'integer',
+        'status' => VehicleStatus::class,
     ];
 
     public array $translatable = ['description'];
@@ -148,7 +150,7 @@ class Vehicle extends Model implements HasMedia
 
     public function scopeAvailable($query)
     {
-        return $query->where('status', 'available');
+        return $query->where('status', VehicleStatus::Available);
     }
 
     public function scopeFeatured($query)
@@ -158,7 +160,7 @@ class Vehicle extends Model implements HasMedia
 
     public function scopePublished($query)
     {
-        return $query->whereIn('status', ['available', 'reserved']);
+        return $query->whereIn('status', VehicleStatus::published());
     }
 
     public function scopeFilterByBrand($query, ?string $brand)

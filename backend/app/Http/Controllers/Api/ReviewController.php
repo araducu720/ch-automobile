@@ -23,7 +23,7 @@ class ReviewController extends Controller
         $reviews = Review::approved()
             ->with('vehicle:id,brand,model')
             ->orderByDesc('created_at')
-            ->paginate($request->integer('per_page', 10));
+            ->paginate(min(max($request->integer('per_page', 10), 1), 50));
 
         $avgRating = Review::approved()->avg('rating');
         $totalCount = Review::approved()->count();

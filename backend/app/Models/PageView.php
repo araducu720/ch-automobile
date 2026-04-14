@@ -47,8 +47,17 @@ class PageView extends Model
         }
 
         if (filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_IPV6)) {
-            // Zero last 5 groups (80 bits)
-            $parts = explode(':', $ip);
+            // Expand IPv6 to full 8-group notation using inet_pton/inet_ntop
+            $packed = @inet_pton($ip);
+            if ($packed === false) {
+                return null;
+            }
+            $expanded = inet_ntop($packed);
+            if ($expanded === false) {
+                return null;
+            }
+            // Zero last 5 groups (80 bits) for privacy
+            $parts = explode(':', $expanded);
             $parts = array_pad($parts, 8, '0');
             for ($i = 3; $i < 8; $i++) {
                 $parts[$i] = '0';

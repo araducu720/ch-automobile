@@ -36,7 +36,7 @@ Route::prefix('v1')->group(function () {
     Route::post('/reservations/{reference}/confirm-invoice', [ReservationController::class, 'confirmInvoice'])
         ->middleware('throttle:10,1');
     Route::get('/reservations/{reference}/contract', [ReservationController::class, 'downloadContract'])
-        ->middleware('throttle:10,1');
+        ->middleware('throttle:3,1');
     Route::post('/reservations/{reference}/signed-contract', [ReservationController::class, 'uploadSignedContract'])
         ->middleware('throttle:10,1');
     Route::post('/reservations/{reference}/signature', [ReservationController::class, 'uploadSignature'])

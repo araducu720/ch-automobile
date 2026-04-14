@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Api\Concerns\ValidatesLocale;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreReservationRequest;
+use App\Enums\VehicleStatus;
 use App\Models\CompanySetting;
 use App\Models\Reservation;
 use App\Models\Vehicle;
@@ -38,7 +39,7 @@ class ReservationController extends Controller
                 ->lockForUpdate()
                 ->firstOrFail();
 
-            if ($vehicle->status !== 'available') {
+            if ($vehicle->status !== VehicleStatus::Available) {
                 return null; // Vehicle no longer available
             }
 
@@ -60,7 +61,7 @@ class ReservationController extends Controller
             ));
 
             // Mark vehicle as reserved immediately
-            $vehicle->update(['status' => 'reserved']);
+            $vehicle->update(['status' => VehicleStatus::Reserved]);
 
             return $reservation;
         });

@@ -1,0 +1,42 @@
+# Dependencies
+backend/vendor/
+frontend/node_modules/
+
+# Environment files
+backend/.env
+frontend/.env.local
+frontend/.env.production
+
+# IDE & OS
+.idea/
+.vscode/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+# Build artifacts
+frontend/.next/
+frontend/out/
+backend/storage/logs/
+backend/storage/framework/cache/
+backend/storage/framework/sessions/
+backend/storage/framework/views/
+backend/bootstrap/cache/*.php
+
+# Test artifacts
+frontend/playwright-report/
+frontend/test-results/
+frontend/coverage/
+backend/.phpunit.result.cache
+
+# Docker volumes (keep configs, exclude data)
+mysql-data/
+
+# Git
+.git/
+.gitignore
+
+# Documentation (not needed in containers)
+*.md
+LICENSE

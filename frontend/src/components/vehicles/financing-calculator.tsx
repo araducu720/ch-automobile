@@ -87,6 +87,7 @@ export function FinancingCalculator({
               onChange={(e) => setDownPaymentPct(Number(e.target.value))}
               className="h-2 w-full cursor-pointer appearance-none rounded-full bg-border accent-brand"
               aria-label={t('downPayment')}
+              aria-valuetext={`${downPaymentPct}% — ${formatPrice(downPaymentEur)}`}
             />
             <div className="mt-0.5 flex justify-between text-[10px] text-muted-foreground">
               <span>0%</span><span>80%</span>
@@ -129,6 +130,7 @@ export function FinancingCalculator({
               onChange={(e) => setInterestRate(Number(e.target.value))}
               className="h-2 w-full cursor-pointer appearance-none rounded-full bg-border accent-brand"
               aria-label={t('interestRate')}
+              aria-valuetext={`${interestRate.toFixed(2)}% p.a.`}
             />
             <div className="mt-0.5 flex justify-between text-[10px] text-muted-foreground">
               <span>1,99%</span><span>12,99%</span>
@@ -201,6 +203,8 @@ export function FinancingCalculator({
                 value={price}
                 onChange={(e) => setPrice(Number(e.target.value))}
                 className="mt-2 h-2 w-full cursor-pointer appearance-none rounded-full bg-border accent-brand"
+                aria-label={t('vehiclePrice')}
+                aria-valuetext={formatPrice(price)}
               />
               <div className="mt-0.5 flex justify-between text-[11px] text-muted-foreground">
                 <span>3.000 €</span><span>500.000 €</span>
@@ -233,6 +237,8 @@ export function FinancingCalculator({
               value={downPaymentPct}
               onChange={(e) => setDownPaymentPct(Number(e.target.value))}
               className="h-2.5 w-full cursor-pointer appearance-none rounded-full bg-border accent-brand"
+              aria-label={t('downPayment')}
+              aria-valuetext={`${downPaymentPct}% — ${formatPrice(downPaymentEur)}`}
             />
             <div className="mt-1 flex justify-between text-xs text-muted-foreground">
               <span>0% (0 €)</span>
@@ -279,6 +285,8 @@ export function FinancingCalculator({
               value={interestRate}
               onChange={(e) => setInterestRate(Number(e.target.value))}
               className="h-2.5 w-full cursor-pointer appearance-none rounded-full bg-border accent-brand"
+              aria-label={t('interestRateLabel')}
+              aria-valuetext={`${interestRate.toFixed(2)}% p.a.`}
             />
             <div className="mt-1 flex justify-between text-xs text-muted-foreground">
               <span>1,99% p.a.</span><span>12,99% p.a.</span>

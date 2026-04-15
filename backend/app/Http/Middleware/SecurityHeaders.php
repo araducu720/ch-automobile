@@ -28,8 +28,20 @@ class SecurityHeaders
         if ($request->is('api/*')) {
             // Strict CSP for API — no scripts/styles needed
             $response->headers->set('Content-Security-Policy', "default-src 'none'; frame-ancestors 'none'");
-        } elseif (! $request->is('admin/*', 'livewire/*')) {
-            // Public web pages (non-admin) — reasonable defaults
+        } elseif ($request->is('admin/*', 'livewire/*')) {
+            // Filament admin panel — needs inline styles, external fonts & avatars
+            $response->headers->set('Content-Security-Policy', implode('; ', [
+                "default-src 'self'",
+                "script-src 'self' 'unsafe-inline' 'unsafe-eval'",
+                "style-src 'self' 'unsafe-inline' https://fonts.bunny.net",
+                "style-src-elem 'self' 'unsafe-inline' https://fonts.bunny.net",
+                "img-src 'self' data: https://ui-avatars.com",
+                "font-src 'self' https://fonts.bunny.net",
+                "connect-src 'self'",
+                "frame-ancestors 'none'",
+            ]));
+        } else {
+            // Public web pages — reasonable defaults
             $response->headers->set('Content-Security-Policy', implode('; ', [
                 "default-src 'self'",
                 "script-src 'self'",
@@ -40,7 +52,6 @@ class SecurityHeaders
                 "frame-ancestors 'none'",
             ]));
         }
-        // Admin/Livewire routes: no CSP set here — Filament manages its own
 
         return $response;
     }

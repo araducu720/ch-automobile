@@ -22,9 +22,13 @@ class InquiryController extends Controller
 
     public function store(StoreInquiryRequest $request): JsonResponse
     {
-        // Honeypot check
+        // Honeypot check — return identical-looking response to avoid detection
         if ($request->isHoneypotFilled()) {
-            return response()->json(['success' => true, 'reference_number' => 'SPAM'], 200);
+            return response()->json([
+                'success' => true,
+                'reference_number' => 'INQ-'.\Illuminate\Support\Str::ulid(),
+                'message' => 'Ihre Anfrage wurde erfolgreich gesendet.',
+            ], 201);
         }
 
         $inquiry = DB::transaction(function () use ($request) {
@@ -65,9 +69,13 @@ class InquiryController extends Controller
 
     public function storeTradeIn(StoreTradeInRequest $request): JsonResponse
     {
-        // Honeypot check
+        // Honeypot check — return identical-looking response to avoid detection
         if ($request->isHoneypotFilled()) {
-            return response()->json(['success' => true, 'reference_number' => 'SPAM'], 200);
+            return response()->json([
+                'success' => true,
+                'reference_number' => 'INQ-'.\Illuminate\Support\Str::ulid(),
+                'message' => 'Ihre Inzahlungnahme-Anfrage wurde erfolgreich gesendet.',
+            ], 201);
         }
 
         $inquiry = DB::transaction(function () use ($request) {

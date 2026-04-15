@@ -8,7 +8,8 @@ return [
         env('CORS_ALLOWED_ORIGINS') ? explode(',', env('CORS_ALLOWED_ORIGINS')) : []
     )),
     'allowed_origins_patterns' => [
-        '#^https://ch-automobile(-[a-z0-9]+)?\.vercel\.app$#',
+        // Only allow the main Vercel deployment and specific previews (owner-verified)
+        '#^https://ch-automobile(-[a-z0-9]+-anemetee)?\.vercel\.app$#',
     ],
     'allowed_headers' => [
         'Content-Type',

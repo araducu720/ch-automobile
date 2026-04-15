@@ -11,7 +11,6 @@ import {
   FileText,
   Handshake,
   Phone,
-  Mail,
   MessageCircle,
   TrendingDown,
   Shield,

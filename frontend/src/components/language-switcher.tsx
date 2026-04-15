@@ -5,7 +5,7 @@ import { usePathname, useRouter } from '@/i18n/navigation';
 import { routing } from '@/i18n/routing';
 import { LOCALE_NAMES, type SupportedLocale } from '@/lib/constants';
 import { Globe } from 'lucide-react';
-import { useState, useRef, useEffect, useCallback } from 'react';
+import { useState, useRef, useEffect, useCallback, useMemo } from 'react';
 import { cn } from '@/lib/utils';
 
 export function LanguageSwitcher() {
@@ -23,7 +23,11 @@ export function LanguageSwitcher() {
   const otherLocales = routing.locales.filter(
     (l) => !popularLocales.includes(l as SupportedLocale)
   ) as SupportedLocale[];
-  const allLocales = [...popularLocales, ...otherLocales];
+  const allLocales = useMemo(
+    () => [...popularLocales, ...otherLocales],
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- static lists
+    [],
+  );
 
   useEffect(() => {
     function handleClickOutside(e: MouseEvent) {

@@ -42,7 +42,7 @@ export async function submitContactAction(
   }
 
   try {
-    const { privacy_accepted, website_url, ...submitData } = parsed.data;
+    const { privacy_accepted: _privacy, website_url: _honeypot, ...submitData } = parsed.data;
     await submitInquiry(submitData as InquiryFormData);
     return {
       success: true,
@@ -82,7 +82,7 @@ export async function submitTradeInAction(
   try {
     // Collect photos if any
     const photos = formData.getAll('photos') as File[];
-    const { privacy_accepted, ...submitData } = parsed.data;
+    const { privacy_accepted: _privacy, ...submitData } = parsed.data;
     const dataWithPhotos: TradeInFormData = {
       ...submitData,
       photos: photos.filter((f) => f.size > 0),
@@ -122,7 +122,7 @@ export async function submitReservationAction(
   }
 
   try {
-    const { privacy_accepted, ...submitData } = parsed.data;
+    const { privacy_accepted: _privacy, ...submitData } = parsed.data;
     const result = await createReservation(submitData as ReservationFormData);
     return {
       success: true,
@@ -164,7 +164,7 @@ export async function submitReviewAction(
   }
 
   try {
-    const { privacy_accepted, ...submitData } = parsed.data;
+    const { privacy_accepted: _privacy, ...submitData } = parsed.data;
     await apiSubmitReview(submitData as ReviewFormData);
     return {
       success: true,
@@ -204,7 +204,7 @@ export async function submitNewsletterAction(
   }
 
   try {
-    const { privacy_accepted, ...submitData } = parsed.data;
+    const { privacy_accepted: _privacy, ...submitData } = parsed.data;
     await subscribeNewsletter(submitData as NewsletterFormData);
     return {
       success: true,

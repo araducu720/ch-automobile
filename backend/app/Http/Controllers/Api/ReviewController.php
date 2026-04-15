@@ -55,9 +55,12 @@ class ReviewController extends Controller
 
     public function store(StoreReviewRequest $request): JsonResponse
     {
-        // Honeypot check
+        // Honeypot check — return identical-looking response to avoid detection
         if ($request->isHoneypotFilled()) {
-            return response()->json(['success' => true], 200);
+            return response()->json([
+                'success' => true,
+                'message' => 'Vielen Dank für Ihre Bewertung! Sie wird nach Prüfung veröffentlicht.',
+            ], 201);
         }
 
         $review = DB::transaction(function () use ($request) {

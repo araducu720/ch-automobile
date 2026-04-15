@@ -17,10 +17,14 @@ use Illuminate\Support\Facades\Route;
 Route::prefix('v1')->group(function () {
 
     // Vehicles
-    Route::get('/vehicles', [VehicleController::class, 'index']);
-    Route::get('/vehicles/featured', [VehicleController::class, 'featured']);
-    Route::get('/vehicles/brands', [VehicleController::class, 'brands']);
-    Route::get('/vehicles/{slug}', [VehicleController::class, 'show']);
+    Route::get('/vehicles', [VehicleController::class, 'index'])
+        ->middleware('throttle:60,1');
+    Route::get('/vehicles/featured', [VehicleController::class, 'featured'])
+        ->middleware('throttle:60,1');
+    Route::get('/vehicles/brands', [VehicleController::class, 'brands'])
+        ->middleware('throttle:60,1');
+    Route::get('/vehicles/{slug}', [VehicleController::class, 'show'])
+        ->middleware('throttle:30,1');
 
     // Inquiries
     Route::post('/inquiries', [InquiryController::class, 'store'])
@@ -45,12 +49,16 @@ Route::prefix('v1')->group(function () {
         ->middleware('throttle:10,1');
 
     // Blog
-    Route::get('/blog/posts', [BlogController::class, 'index']);
-    Route::get('/blog/posts/{slug}', [BlogController::class, 'show']);
-    Route::get('/blog/categories', [BlogController::class, 'categories']);
+    Route::get('/blog/posts', [BlogController::class, 'index'])
+        ->middleware('throttle:60,1');
+    Route::get('/blog/posts/{slug}', [BlogController::class, 'show'])
+        ->middleware('throttle:30,1');
+    Route::get('/blog/categories', [BlogController::class, 'categories'])
+        ->middleware('throttle:60,1');
 
     // Reviews
-    Route::get('/reviews', [ReviewController::class, 'index']);
+    Route::get('/reviews', [ReviewController::class, 'index'])
+        ->middleware('throttle:60,1');
     Route::post('/reviews', [ReviewController::class, 'store'])
         ->middleware('throttle:5,1');
 

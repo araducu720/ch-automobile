@@ -16,21 +16,26 @@ export function CookieConsent() {
 
   useEffect(() => {
     setMounted(true);
-    const stored = localStorage.getItem(CONSENT_KEY);
-    if (!stored) {
+    try {
+      const stored = localStorage.getItem(CONSENT_KEY);
+      if (!stored) {
+        setConsent('undecided');
+      } else {
+        setConsent(stored as ConsentState);
+      }
+    } catch {
+      // localStorage unavailable (private browsing, disabled cookies)
       setConsent('undecided');
-    } else {
-      setConsent(stored as ConsentState);
     }
   }, []);
 
   const acceptAll = () => {
-    localStorage.setItem(CONSENT_KEY, 'accepted');
+    try { localStorage.setItem(CONSENT_KEY, 'accepted'); } catch { /* noop */ }
     setConsent('accepted');
   };
 
   const acceptEssential = () => {
-    localStorage.setItem(CONSENT_KEY, 'essential-only');
+    try { localStorage.setItem(CONSENT_KEY, 'essential-only'); } catch { /* noop */ }
     setConsent('essential-only');
   };
 

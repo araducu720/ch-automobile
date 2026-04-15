@@ -45,7 +45,7 @@ export const tradeInSchema = z.object({
   phone: phoneRequiredField,
   trade_brand: z.string().min(1, 'Pflichtfeld'),
   trade_model: z.string().min(1, 'Pflichtfeld'),
-  trade_year: z.number().min(1960).max(new Date().getFullYear() + 1),
+  trade_year: z.number().min(1960).max(new Date().getFullYear()),
   trade_mileage: z.number().min(0),
   trade_condition: z.enum(['excellent', 'good', 'fair', 'poor']),
   trade_description: z.string().max(5000).optional(),

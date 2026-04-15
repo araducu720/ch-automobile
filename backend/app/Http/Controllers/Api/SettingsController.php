@@ -125,9 +125,18 @@ class SettingsController extends Controller
 
     public function confirmNewsletter(string $token)
     {
-        $subscriber = NewsletterSubscriber::where('confirmation_token', $token)
-            ->whereNull('confirmed_at')
-            ->first();
+        // Validate token format (64 char alphanumeric)
+        if (! preg_match('/^[a-zA-Z0-9]{64}$/', $token)) {
+            $frontendUrl = config('app.frontend_url', 'http://localhost:3000');
+            return redirect($frontendUrl.'/newsletter/bestaetigt?status=invalid');
+        }
+
+        $subscriber = NewsletterSubscriber::whereNull('confirmed_at')
+            ->whereNotNull('confirmation_token')
+            ->get()
+            ->first(function ($sub) use ($token) {
+                return hash_equals($sub->confirmation_token, $token);
+            });
 
         $frontendUrl = config('app.frontend_url', 'http://localhost:3000');
 
@@ -152,6 +161,15 @@ class SettingsController extends Controller
 
     public function unsubscribeNewsletter(string $email): JsonResponse
     {
+        // Validate email format to prevent injection
+        $email = trim($email);
+        if (! filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            return response()->json([
+                'success' => true,
+                'message' => 'Sie wurden erfolgreich abgemeldet.',
+            ]);
+        }
+
         $subscriber = NewsletterSubscriber::where('email', $email)->first();
 
         if (! $subscriber) {

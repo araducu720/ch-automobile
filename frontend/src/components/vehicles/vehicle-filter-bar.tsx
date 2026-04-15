@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useCallback, useMemo } from 'react';
+import { useState, useEffect, useCallback, useMemo, useRef } from 'react';
 import { useRouter, useSearchParams, usePathname } from 'next/navigation';
 import { cn } from '@/lib/utils';
 import { Input } from '@/components/ui/input';
@@ -50,7 +50,7 @@ export function VehicleFilterBar({ brands, totalResults, className }: VehicleFil
   const [mobileOpen, setMobileOpen] = useState(false);
 
   // Current filters from URL
-  const currentFilters: VehicleFilters = {
+  const currentFilters: VehicleFilters = useMemo(() => ({
     brand: searchParams.get('brand') || undefined,
     fuel_type: (searchParams.get('fuel_type') as VehicleFilters['fuel_type']) || undefined,
     transmission: (searchParams.get('transmission') as VehicleFilters['transmission']) || undefined,
@@ -62,7 +62,7 @@ export function VehicleFilterBar({ brands, totalResults, className }: VehicleFil
     mileage_max: searchParams.get('mileage_max') ? Number(searchParams.get('mileage_max')) : undefined,
     search: searchParams.get('search') || undefined,
     sort: searchParams.get('sort') || undefined,
-  };
+  }), [searchParams]);
 
   const [searchTerm, setSearchTerm] = useState(currentFilters.search || '');
 
@@ -80,29 +80,39 @@ export function VehicleFilterBar({ brands, totalResults, className }: VehicleFil
     [searchParams, pathname, router],
   );
 
+  // Use refs to keep the debounced function stable across re-renders
+  const searchParamsRef = useRef(searchParams);
+  const pathnameRef = useRef(pathname);
+  const routerRef = useRef(router);
+  useEffect(() => {
+    searchParamsRef.current = searchParams;
+    pathnameRef.current = pathname;
+    routerRef.current = router;
+  }, [searchParams, pathname, router]);
+
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const debouncedSearch = useCallback(
     debounce((term: string) => {
-      const params = new URLSearchParams(searchParams.toString());
+      const params = new URLSearchParams(searchParamsRef.current.toString());
       if (term) {
         params.set('search', term);
       } else {
         params.delete('search');
       }
       params.delete('page');
-      router.push(`${pathname}?${params.toString()}`, { scroll: false });
+      routerRef.current.push(`${pathnameRef.current}?${params.toString()}`, { scroll: false });
     }, 400),
-    [searchParams, pathname, router],
+    [],
   );
 
   useEffect(() => {
     debouncedSearch(searchTerm);
   }, [searchTerm, debouncedSearch]);
 
-  const resetFilters = () => {
+  const resetFilters = useCallback(() => {
     router.push(pathname);
     setSearchTerm('');
-  };
+  }, [router, pathname]);
 
   const activeFilterCount = Object.values(currentFilters).filter(Boolean).length;
 
@@ -151,6 +161,7 @@ export function VehicleFilterBar({ brands, totalResults, className }: VehicleFil
         <Input
           label={t('priceFrom')}
           type="number"
+          min={0}
           placeholder="€"
           value={currentFilters.price_min || ''}
           onChange={(e) => updateFilter('price_min', e.target.value || undefined)}
@@ -158,6 +169,7 @@ export function VehicleFilterBar({ brands, totalResults, className }: VehicleFil
         <Input
           label={t('priceTo')}
           type="number"
+          min={0}
           placeholder="€"
           value={currentFilters.price_max || ''}
           onChange={(e) => updateFilter('price_max', e.target.value || undefined)}
@@ -182,6 +194,7 @@ export function VehicleFilterBar({ brands, totalResults, className }: VehicleFil
       <Input
         label={t('maxMileage')}
         type="number"
+        min={0}
         placeholder="z.B. 50000"
         value={currentFilters.mileage_max || ''}
         onChange={(e) => updateFilter('mileage_max', e.target.value || undefined)}

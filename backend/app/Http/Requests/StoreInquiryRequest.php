@@ -5,6 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
+use Illuminate\Validation\Rule;
 
 class StoreInquiryRequest extends FormRequest
 {
@@ -17,7 +18,7 @@ class StoreInquiryRequest extends FormRequest
     {
         return [
             'type' => 'required|in:general,test_drive,price_inquiry,financing,trade_in',
-            'vehicle_id' => 'nullable|exists:vehicles,id',
+            'vehicle_id' => ['nullable', Rule::exists('vehicles', 'id')->whereNull('deleted_at')],
             'name' => 'required|string|max:255',
             'email' => 'required|email:rfc|max:255',
             'phone' => 'nullable|string|max:50',
